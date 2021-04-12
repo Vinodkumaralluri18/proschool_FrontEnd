@@ -1,0 +1,64 @@
+<div id="main-content">
+
+    <div class="row">
+        <div class="container-fluid" id="buttonId1">
+            <button routerLink="/main/reports/studentfee" class="button button2 hvr-pop transition">Student Reports</button>
+            <button routerLink="/main/reports/classfee" class="button button2 hvr-pop transition">Class Reports</button>
+            <button routerLink="/main/reports/reportsbyday" class="button button2 hvr-pop transition">Day Reports</button>
+            <button routerLink="/main/reports/reportsbymonth" class="button button2 hvr-pop transition">Month
+                Reports</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="container-fluid dashboard-content">
+            <div class="card selectcard">
+                <div class="searchForm">
+                    <div class="form-group">
+                        <label class="pull-left">Select Month</label>
+                        <select class="form-control" [(ngModel)]="select_month">
+                            <option>select...</option>
+                            <option *ngFor="let mon of months; let i = index" value="{{mon.value}}">{{mon.month}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group pull-right">
+                        <button type="submit" class="button button1 hvr-pop transition" (click)="getMonth_fee()">Select</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card listcard">
+                <div class="searchForm">
+                    <div class="table-responsive">
+                        <table style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Student</th>
+                                    <th>Fee Type</th>
+                                    <th>Fee Paid</th>
+                                    <th>Payment Mode</th>
+                                    <th>Discount</th>
+                                    <th>Fine</th>
+                                    <th>Fee Paid Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let fee of day_fees; let i=index">
+                                    <td>{{ (config.currentPage - 1) * config.itemsPerPage + i +1 }}</td>
+                                    <td>{{fee.student_Name}}</td>
+                                    <td>{{fee.fee_type}}</td>
+                                    <td>{{fee.fee_paid}}</td>
+                                    <td>{{fee.payment_mode}}</td>
+                                    <td>{{fee.discount}}</td>
+                                    <td>{{fee.fine}}</td>
+                                    <td>{{fee.current_date}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

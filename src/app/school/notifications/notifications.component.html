@@ -1,0 +1,50 @@
+<main class="card mt-20 within-viewport new-listing">
+    <section class="page-actions">
+        <div class="_select_div">
+            <div class="dropdown">
+                <button class="dropbtn" (click)="showStatusList = true" (clickOutside)="showStatusList = false">
+                    {{status}}
+                </button>
+                <div class="dropdown-content" [hidden]="!showStatusList">
+                    <a (click)="status = 'all'; getNotificationByStatus()">All</a>
+                    <a (click)="status = 'read'; getNotificationByStatus()">Read</a>
+                    <a (click)=" status = 'unread';getNotificationByStatus()">Unread</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="table-and-pagination -classes-schedule">
+        <div class="table-container" *ngIf="notifications.length !== 0">
+            <table>
+                <thead>
+                    <tr>
+                        <th align="left">#</th>
+                        <th align="left">Name</th>
+                        <th align="left">Subject</th>
+                        <th align="left">Date</th>
+                        <th align="left">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let not of notifications | pagination: pageNo; let i = index">
+                        <td class="_s-no"><span>{{ page_start + i + 1 }}.</span></td>
+                        <td>{{not.notification_to}}</td>
+                        <td>{{not.subject}}</td>
+                        <td>{{not.notification_on}}</td>
+                        <td>{{not.status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="no-data" *ngIf="notifications.length === 0">
+            <img src="../../../assets/images/Nodata.png" alt="">
+            <h1 class="no-data-text">No Notifications Available</h1>
+        </div>
+        <div class="_pagination" *ngIf="notifications.length !== 0">
+            <a class="btn -previous" (click)="previousPage()">Previous</a>
+            <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}"
+                *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+            <a class="btn -next" (click)="nextPage()">Next</a>
+        </div>
+    </section>
+</main>

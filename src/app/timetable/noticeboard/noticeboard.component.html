@@ -1,0 +1,174 @@
+<main class="card mt-20 within-viewport new-listing">
+  <div class="fab" (click)="addNotice()" *ngIf="user.role === 'admin'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
+  
+  <div class="modal fade mymodal" id="myModal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <button type="button" #closebutton class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+        <div class="col-sm-offset-3 col-sm-6 action-list">
+            <ul class="list-group">
+                <li href="#" class="list-group-item justify-content-between list-group-item-color" (click)="editNotice(i)">
+                    <span><i class="fa fa-edit fa-icon-color"></i></span>
+                    EDIT
+                    
+                </li>
+                <li class="list-group-item justify-content-between  list-group-item-color" (click)="deleteNotice(not.announcement_id)">
+                    <span><i class="fa fa-trash fa-icon-color"></i></span>
+                    DELETE
+                </li>
+                <li class="list-group-item justify-content-between   list-group-item-color" (click)="viewNotice(i)">
+                    <span><i class="fa fa-eye fa-icon-color"></i></span>
+                    VIEW
+                </li>
+            </ul>
+        </div>
+    </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+    <section class="page-actions">
+      <div class="_select-or-search">
+        <input type="search" [(ngModel)]="searchText" placeholder="Search by title">
+      </div>
+      <button class="btn -cta" (click)="addNotice()" *ngIf="user.role === 'admin'"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add New</button>
+    </section>
+    <section class="table-and-pagination -classes-schedule">
+      <div class="table-container" *ngIf="notices.length !== 0">
+        <table>
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th align="left">Title</th>
+              <th align="left">Issuing Authority</th>
+              <th align="left">Date</th>
+              <th class="col_5" align="left">Description</th>
+              <th class="col_6" align="left" *ngIf="user.role === 'admin'">Action</th>
+            </tr>
+          </thead>
+          <tbody>          
+            <tr *ngFor="let not of notices | notice : searchText | pagination: pageNo; let i = index" >
+              <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+              <td (click)="viewNotice(i)">{{not.title}}</td>
+              <td>{{not.issuing_Authority}}</td>
+              <td>{{not.date_of_issue}}</td>
+              <td class="col_5">{{not.body}}</td>
+              <td class="_actions col_6" *ngIf="user.role === 'admin'">
+                <button class="btn" (click)="editNotice(i)"><img src="../../../assets/images/pencil-white-outline.svg" alt="Edit" /></button>
+                <button class="btn" (click)="deleteNotice(not.announcement_id)"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+              </td>
+            </tr>
+            <!-- <tr>
+              <td class="_s-no"><span>2</span></td>
+              <td>Admission Process</td>
+              <td>Thursday 11, November</td>
+              <td>8:00 AM</td>
+              <td>Lorem ipsumdoram isat pem, disrotiorum</td>
+              <td class="_actions">
+                <button class="btn"><img src="../../../assets/images/pencil-white-outline.svg" alt="Edit" /></button>
+                <button class="btn"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+              </td>
+            </tr>
+            <tr>
+              <td class="_s-no"><span>3</span></td>
+              <td>Admission Process</td>
+              <td>Thursday 11, November</td>
+              <td>8:00 AM</td>
+              <td>Lorem ipsumdoram isat pem, disrotiorum</td>
+              <td class="_actions">
+                <button class="btn"><img src="../../../assets/images/pencil-white-outline.svg" alt="Edit" /></button>
+                <button class="btn"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+              </td>
+            </tr>
+            <tr>
+              <td class="_s-no"><span>4</span></td>
+              <td>Admission Process</td>
+              <td>Thursday 11, November</td>
+              <td>8:00 AM</td>
+              <td>Lorem ipsumdoram isat pem, disrotiorum</td>
+              <td class="_actions">
+                <button class="btn"><img src="../../../assets/images/pencil-white-outline.svg" alt="Edit" /></button>
+                <button class="btn"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+              </td>
+            </tr>
+            <tr>
+              <td class="_s-no"><span>5</span></td>
+              <td>Admission Process</td>
+              <td>Thursday 11, November</td>
+              <td>8:00 AM</td>
+              <td>Lorem ipsumdoram isat pem, disrotiorum</td>
+              <td class="_actions">
+                <button class="btn"><img src="../../../assets/images/pencil-white-outline.svg" alt="Edit" /></button>
+                <button class="btn"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+              </td>
+            </tr>
+            <tr>
+              <td class="_s-no"><span>6</span></td>
+              <td>Admission Process</td>
+              <td>Thursday 11, November</td>
+              <td>8:00 AM</td>
+              <td>Lorem ipsumdoram isat pem, disrotiorum</td>
+              <td class="_actions">
+                <button class="btn"><img src="../../../assets/images/pencil-white-outline.svg" alt="Edit" /></button>
+                <button class="btn"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+              </td>
+            </tr>
+            <tr>
+              <td class="_s-no"><span>7</span></td>
+              <td>Admission Process</td>
+              <td>Thursday 11, November</td>
+              <td>8:00 AM</td>
+              <td>Lorem ipsumdoram isat pem, disrotiorum</td>
+              <td class="_actions">
+                <button class="btn"><img src="../../../assets/images/pencil-white-outline.svg" alt="Edit" /></button>
+                <button class="btn"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+              </td>
+            </tr>
+            <tr>
+              <td class="_s-no"><span>8</span></td>
+              <td>Admission Process</td>
+              <td>Thursday 11, November</td>
+              <td>8:00 AM</td>
+              <td>Lorem ipsumdoram isat pem, disrotiorum</td>
+              <td class="_actions">
+                <button class="btn"><img src="../../../assets/images/pencil-white-outline.svg" alt="Edit" /></button>
+                <button class="btn"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+              </td>
+            </tr>
+            <tr>
+              <td class="_s-no"><span>9</span></td>
+              <td>Admission Process</td>
+              <td>Thursday 11, November</td>
+              <td>8:00 AM</td>
+              <td>Lorem ipsumdoram isat pem, disrotiorum</td>
+              <td class="_actions">
+                <button class="btn"><img src="../../../assets/images/pencil-white-outline.svg" alt="Edit" /></button>
+                <button class="btn"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+              </td>
+            </tr> -->
+  
+  
+          </tbody>
+        </table>
+      </div>
+      <div class="no-data" *ngIf="notices.length === 0">
+        <img src="../../../assets/images/Nodata.png" alt="">
+        <h1 class="no-data-text">There are No Notices</h1>
+      </div>
+      <div class="_pagination" *ngIf="notices.length !== 0">
+        <a class="btn -previous" (click)="previousPage()">Previous</a>
+        <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+        <a class="btn -next" (click)="nextPage()">Next</a>
+      </div>
+    </section>
+  </main>

@@ -1,0 +1,181 @@
+.new-noticeboard-listing {
+	background-color: transparent;
+}
+
+.new-noticeboard-listing h2 {
+    color: #696969;
+}
+
+.new-noticeboard-listing .search-box {
+    border-radius: 20px;
+    background: transparent;
+    margin-left: 30px;
+    outline: none;
+    border: 1px solid lightgray;
+}
+
+.new-noticeboard-listing thead tr > th {
+	color: #696969;
+}
+
+.new-noticeboard-listing input[type="text"] {
+    border-radius: 20px;
+}
+
+.new-noticeboard-listing .-classes-schedule table {
+	border-collapse: separate !important;
+    border-spacing: 0 10px !important;
+}
+
+.new-noticeboard-listing .-classes-schedule table tr {
+	border-radius: 10px;
+}
+
+.new-noticeboard-listing .-classes-schedule table tr:hover td {
+    border: 0;
+    border-top: 2px solid #5E81F4;
+    border-bottom: 2px solid #5E81F4;
+    cursor: pointer;
+}
+
+.new-noticeboard-listing .-classes-schedule table tr:hover td:first-child {
+    border-left: 2px solid #5E81F4;
+    cursor: pointer;
+}
+
+.new-noticeboard-listing .-classes-schedule table tr:hover td:last-child {
+    border-right: 2px solid #5E81F4;
+    cursor: pointer;
+}
+
+.new-noticeboard-listing .-classes-schedule table tr td:first-child {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.new-noticeboard-listing .-classes-schedule table tr td:last-child {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.new-noticeboard-listing .-classes-schedule table tr td {
+	background: #fff;
+    color: #000;
+    padding: 5px 0;
+    font-weight: bold;
+    border: 0;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+}
+
+.new-noticeboard-listing .-classes-schedule table tr td:first-child {
+    border-left: 2px solid transparent;
+}
+
+.new-noticeboard-listing .-classes-schedule table tr td:last-child {
+    border-right: 2px solid transparent;
+}
+
+.new-noticeboard-listing .-classes-schedule table ._s-no span {
+	background: #fff;
+    color: #000;
+    font-weight: bold;
+}
+
+.new-noticeboard-listing .-classes-schedule table thead tr > th {
+	background: #E9EEF7;
+    padding: 15px 10px;
+}
+
+.new-noticeboard-listing .-classes-schedule table tr:first-child td {
+	padding: 5px 0 !important;
+}
+
+.new-noticeboard-listing .-classes-schedule table ._actions .btn {
+    width: 34px;
+    height: 34px;
+    background: #5E81F4;
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 0 5px;
+    border-radius: 20px;
+}
+
+.page-actions .btn -cta{
+    display: block;
+}
+.fab {
+    display: none;
+}
+.mobile_actions{
+    display: none;
+}
+.web_actions{
+    display: block;
+}
+@media screen and (max-width:1024px){
+    .fab {
+        display: block;
+        width: 50px;
+        height: 50px;
+        background-color: #6382ED;
+        border-radius: 50%;
+        box-shadow: 0 6px 10px 0 #666;
+        font-size: 25px;
+        line-height: 50px;
+        color: white;
+        text-align: center;
+        position: fixed;
+        right: 50px;
+        bottom: 50px;
+        
+       transition: all 0.1s ease-in-out;
+     }
+     .page-actions .btn -cta{
+        display: none;
+    }
+   
+    td.col_5,
+    td.col_6{
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;       
+    } 
+    th.col_6,
+    th.col_5{
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;       
+    } 
+  }
+  .action_list{
+    position: absolute;
+    width: 88px;
+    height: 112px;
+    left: 71px;
+    top: 252px;
+    
+    background: #FFFFFF;
+    border: 0.5px solid rgba(98, 134, 237, 0.5);
+    box-sizing: border-box;
+    border-radius: 3px;
+  }
+  .list-group-item {
+    border-style: none;
+}
+.list-group-item-color{
+    color: #6286ED;
+    font-size: 14px;
+    font-weight: 300;
+}
+.fa-icon-color{
+    color: #6286ED;
+    font-size: 14px;
+    font-weight: 300;
+    padding-right: 30px;
+}

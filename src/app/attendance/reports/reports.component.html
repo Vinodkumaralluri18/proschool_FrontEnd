@@ -1,0 +1,103 @@
+<main id="main-content" class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-class (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-class>
+        <input class="form-control" [(ngModel)]="date" type="date" (click)="getDateAttendance()">
+        <input class="form-control" [(ngModel)]="end_date" type="date" (click)="getRangeAttendance()">
+      </div>
+    </div>
+    <button (click)="getAttendance()" class="btn -cta">Search</button>
+  </section>
+
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="attendance.length !== 0">
+      <table *ngIf="attenBy_date">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Name</th>
+            <th align="left">Roll No</th>
+            <th align="left" *ngFor="let sub of attendance[0].subjects">{{sub.name}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let att of attendance | pagination: pageNo; let i = index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{att.first_name}} {{att.last_name}}</td>
+            <td>{{att.roll_no}}</td>
+            <td *ngFor="let sub of att.subjects">
+              <span class="_chip -class-running"
+                [ngStyle]="{'background-color': (sub.status == 'Present') ? '#5cb85c' : (sub.status == 'Absent') ? '#d9534f' : (sub.status == 'On Leave') ? '#f0ad4e' : '#6186ed', 'color': 'white' }">{{sub.status}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table *ngIf="!attenBy_date">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Name</th>
+            <th align="left">Roll No</th>
+            <th align="left" *ngFor="let sub of attendance[0].subjects">{{sub.name}}
+              <span class="_chip -class-running"
+                [ngStyle]="{'background-color': '#6186ed', 'color': 'white' }">{{sub.present + sub.absent + sub.leave}}</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let att of attendance | pagination: pageNo; let i = index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{att.first_name}} {{att.last_name}}</td>
+            <td>{{att.roll_no}}</td>
+            <td *ngFor="let sub of att.subjects">
+              <span class="_chip -class-running"
+                [ngStyle]="{'background-color': '#5cb85c', 'color': 'white' }">P : {{sub.present}}</span>
+              <span class="_chip -class-running"
+                [ngStyle]="{'background-color': '#d9534f', 'color': 'white' }">A : {{sub.absent}}</span>
+              <span class="_chip -class-running"
+                [ngStyle]="{'background-color': '#f0ad4e', 'color': 'white' }">L : {{sub.leave}}</span>
+            </td>
+            <!-- <td>
+              <div class="hor-progress-wrapper">
+                <div class="hor-progress-track">
+                  <span class="hor-progress-filled" [ngStyle]="{'background-color': '#5cb85c', 'color': 'white', 'width': (att.present / att.count * 100) + '%'}"></span>
+                  {{att.present}} Days
+                </div>
+                <span class="hor-progress-title">{{att.present / att.count * 100}} %</span>
+              </div>
+            </td>
+            <td>
+              <div class="hor-progress-wrapper">
+                <div class="hor-progress-track">
+                  <span class="hor-progress-filled" [ngStyle]="{'background-color': '#d9534f', 'color': 'white', 'width': (att.absent / att.count * 100) + '%'}"></span>
+                  {{att.absent}} Days
+                </div>
+                <span class="hor-progress-title">{{att.absent / att.count * 100}} %</span>
+              </div>
+            </td>
+            <td>
+              <div class="hor-progress-wrapper">
+                <div class="hor-progress-track">
+                  <span class="hor-progress-filled" [ngStyle]="{'background-color': '#f0ad4e', 'color': 'white', 'width': (att.onLeave / att.count * 100) + '%'}"></span>
+                  {{att.onLeave}} Days
+                </div>
+                <span class="hor-progress-title">{{att.onLeave / att.count * 100}} %</span>
+              </div>
+            </td> -->
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="attendance.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Students in this Class</h1>
+    </div>
+    <div class="_pagination" *ngIf="attendance.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,68 @@
+<div id="main-content1" class="new-message-wrapper">
+  <div class="header-wrapper">
+    <p *ngIf="dialog_type === 'add'">Add Task</p>
+    <p *ngIf="dialog_type === 'edit'">Edit Task</p>
+    <button class="btn-close" (click)="close()"></button>
+  </div>
+  <form class="form-inline" [formGroup]="tasksForm" (ngSubmit)="submitTask()">
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Task :
+      </div>
+      <div class="col-full-6">
+        <textarea class="inpbox" formControlName="task" [value]="tasks.task" cols="50" rows="5"></textarea>
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Department :
+      </div>
+      <div class="col-full-3">
+        <select class="form-control" formControlName="department" [value]="tasks.department" (change)="get_employees()">
+          <option>Select...</option>
+          <option value="teaching">Teaching</option>
+          <option value="non-teaching">Non-Teaching</option>
+          <option value="administrative">Administrative</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Assigned To :
+      </div>
+      <div class="col-full-3">
+        <select class="form-control" formControlName="assigned_to" [value]="tasks.assigned_to">
+          <option>Select...</option>
+          <option *ngFor="let emp of employees" value="{{emp.employee_id}}">{{emp.first_name}}
+            {{emp.last_name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Priority :
+      </div>
+      <div class="col-full-3">
+        <select class="form-control" formControlName="priority">
+          <option>Select...</option>
+          <option [defaultSelected]="tasks.priority === 'High'" value="High">High</option>
+          <option [defaultSelected]="tasks.priority === 'Medium'" value="Medium">Medium</option>
+          <option [defaultSelected]="tasks.priority === 'Low'" value="Low">Low</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Due Date :
+      </div>
+      <div class="col-full-3">
+        <input type="date" class="form-control" [value]="tasks.due_date" formControlName="due_date">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 pull-right">
+        <button class="btn -cta active-tab" type="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

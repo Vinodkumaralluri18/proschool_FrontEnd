@@ -1,0 +1,144 @@
+<div id="main-content1" class="new-message-wrapper">
+    <div class="header-wrapper">
+        <p>New Message</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+
+    <div class="row-wrapper">
+        <div class="col-full-3">
+            Category :
+        </div>
+        <div class="col-full-6">
+            <div class="dropdown">
+                <button class="dropbtn" (click)="showCategoryList = true" (clickOutside)="showCategoryList = false">
+                    {{!Selected_Category ? '--Select--' : Selected_Category}}
+                </button>
+                <div class="dropdown-content" [hidden]="!showCategoryList">
+                    <a (click)="Selected_Category = '';">--Select--</a>
+                    <a (click)="Selected_Category = 'Admin'" *ngIf="user.role === 'teacher'">Admin</a>
+                    <a (click)="Selected_Category = 'Employees'; getCategory();">Employees</a>
+                    <a (click)="Selected_Category = 'Parents'; getCategory();">Parents</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-wrapper" *ngIf="selection_parents">
+        <div class="col-full-3">
+            Class :
+        </div>
+        <div class="col-full-3">
+            <div class="dropdown">
+                <button class="dropbtn" (click)="showClassList = true" (clickOutside)="showClassList = false">
+                    {{!Selected_className ? '--Select--' : Selected_className}}
+                </button>
+                <div class="dropdown-content" [hidden]="!showClassList">
+                    <a (click)="Selected_class = ''; Selected_className = ''">--Select--</a>
+                    <a (click)="Selected_class = 'all'; Selected_className = 'All Classes'; getSections();">All Classes</a>
+                    <a *ngFor="let cls of classes"
+                        (click)="Selected_class = cls.class_id; Selected_className = cls.name; getSections();">{{cls.name}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-full-3">
+            Section :
+        </div>
+        <div class="col-full-3" *ngIf="!all_classes">
+            <div class="dropdown">
+                <button class="dropbtn" (click)="showSectionList = true" (clickOutside)="showSectionList = false">
+                    {{!Selected_sectionName ? '--Select--' : Selected_sectionName}}
+                </button>
+                <div class="dropdown-content" [hidden]="!showSectionList">
+                    <a (click)="Selected_section = ''; Selected_sectionName = ''; ">--Select--</a>
+                    <a (click)="Selected_section = 'all'; Selected_sectionName = 'All Sections'; getStudents();">All Sections</a>
+                    <a *ngFor="let sec of sections"
+                        (click)="Selected_section = sec.section_id; Selected_sectionName = sec.name; getStudents();">{{sec.name}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-wrapper" *ngIf="selection_parents">
+        <div class="col-full-3">
+            Students :
+        </div>
+        <div class="col-full-3" *ngIf="!all_sections && !all_classes">
+            <div class="dropdown">
+                <button class="dropbtn" (click)="showStudentList = true" (clickOutside)="showStudentList = false">
+                    {{!Selected_studentName ? '--Select--' : Selected_studentName}}
+                </button>
+                <div class="dropdown-content" [hidden]="!showStudentList">
+                    <a (click)="Selected_student = ''; Selected_studentName = ''">--Select--</a>
+                    <a (click)="Selected_student = 'all'; Selected_studentName = 'All Students'; getSent_to('parents');">All Students</a>
+                    <a *ngFor="let std of students"
+                        (click)="Selected_student = std.student_id; Selected_studentName = std.first_name + ' ' + std.last_name; getSent_to('parents');">{{std.first_name}}
+                        {{std.last_name}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-wrapper" *ngIf="selection_employees">
+        <div class="col-full-3">
+            Employee Type :
+        </div>
+        <div class="col-full-6">
+            <div class="dropdown">
+                <button class="dropbtn" (click)="showEmployeeTypeList = true"
+                    (clickOutside)="showEmployeeTypeList = false">
+                    {{!Selected_employeeType ? '--Select--' : Selected_employeeType}}
+                </button>
+                <div class="dropdown-content" [hidden]="!showEmployeeTypeList">
+                    <a (click)="Selected_employeeType = '';">--Select--</a>
+                    <a (click)="Selected_employeeType = 'all'; get_selectedemployees();">All Employees</a>
+                    <a (click)="Selected_employeeType = 'teaching'; get_selectedemployees();">Teaching</a>
+                    <a (click)="Selected_employeeType = 'non-teaching'; get_selectedemployees();">Non-Teaching</a>
+                    <a (click)="Selected_employeeType = 'administrative'; get_selectedemployees();">Administrative</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-wrapper" *ngIf="selection_employees">
+        <div class="col-full-3">
+            Employees :
+        </div>
+        <div class="col-full-6" *ngIf="!allEmployeeTypes">
+            <div class="dropdown">
+                <button class="dropbtn" (click)="showEmployeeList = true" (clickOutside)="showEmployeeList = false">
+                    {{!Selected_employeeName ? '--Select--' : Selected_employeeName}}
+                </button>
+                <div class="dropdown-content" [hidden]="!showEmployeeList">
+                    <a (click)="Selected_employee = ''; Selected_employeeName = ''">--Select--</a>
+                    <a (click)="Selected_employee = 'all'; Selected_employeeName = 'All Employees'; getSent_to('employees');">All Employees</a>
+                    <a *ngFor="let emp of employees;"
+                        (click)="Selected_employee = emp.employee_id; Selected_employeeName = emp.first_name + ' ' + emp.last_name; getSent_to('employees');">{{emp.first_name}}
+                        {{emp.last_name}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form [formGroup]="messageForm" (ngSubmit)="compose()">
+        <!-- <div class="row-wrapper">
+            <div class="col-full-3">
+                Subject :
+            </div>
+            <div class="col-full-6">
+                <input type="text" class="inpbox" placeholder="Type your Subject here" formControlName="subject">
+            </div>
+        </div> -->
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Message :
+            </div>
+            <div class="col-full-6">
+                <textarea class="inpbox" formControlName="message" placeholder="Type your message here" cols="30"
+                    rows="5"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <!-- <div class="col-md-3 pull-left">
+                 <button class="btn -cta inactive-tab" (click)="close()">Cancel</button>
+             </div> -->
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

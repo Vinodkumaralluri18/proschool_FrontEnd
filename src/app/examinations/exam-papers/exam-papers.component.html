@@ -1,0 +1,56 @@
+<main class="card mt-20 within-viewport new-assignment-list">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-schedule *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (scheduleEvent)="receiveSchedule($event)"></app-schedule>
+        <app-teacher-schedule *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (scheduleEvent)="receiveSchedule($event)"></app-teacher-schedule>
+        <select name="section" [(ngModel)]="selected_schedule" (change)="getExam_papers()" *ngIf="user.role === 'parent'">
+          <option *ngFor="let assp of assessment_patterns[0].assessment" value="{{assp.code}}">{{assp.code}}</option>
+          <option *ngFor="let assp of assessment_patterns[1].assessment" value="{{assp.code}}">{{assp.code}}</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn -cta" (click)="addExamPaper()" *ngIf="user.role === 'admin'">Add ExamPaper</button>
+  </section>
+  <ul class="tab-menu" *ngIf="examsData">
+    <li [ngClass]="{'selected-tab': selected_subject === sub.subject_id}" *ngFor="let sub of exam_papers;" (click)="getSubject_exams(sub.subject_id);">{{sub.subject_name}}</li>
+  </ul>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="subject_exams.length !== 0"> 
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Exam Title</th>
+            <th align="left">Exam Date</th>
+            <th align="left">Start Time</th>
+            <th align="left">End Time</th>
+            <td class="_actions" *ngIf="user.role === 'admin'">
+              <button class="btn" (click)="editExamPaper()"><img src="../../../assets/images/edit-white.svg" alt="Edit" /></button>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let paper of subject_exams[0].exams | pagination: pageNo; let i = index;">
+            <td class="_s-no"><span>{{ i + 1 }}</span></td>
+            <td>{{paper.Assessment}}</td>
+            <td>{{paper.Exam_date}}</td>
+            <td>{{paper.Start_time}}</td>
+            <td>{{paper.End_time}}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="subject_exams.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">No Exams Scheduled for this Class</h1>
+    </div>
+    <!-- <h1 class="schedule_status" *ngIf="!examsData">No Exams Scheduled for this Class & Section</h1> -->
+    <div class="_pagination" *ngIf="subject_exams.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

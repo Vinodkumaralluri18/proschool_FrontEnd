@@ -1,0 +1,53 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-class (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-class>
+      </div>      
+    </div>
+    <div class="add_div">
+      <form *ngIf="user.role === 'admin'" [formGroup]="teachersForm" (ngSubmit)="assignTeachers(teachersForm)">
+        <select name="standard" formControlName="subject_id">
+          <option *ngFor="let sub of subjects" value="{{sub.subject_id}}">{{sub.name}}</option>
+        </select>
+        <select name="standard" formControlName="teacher_id">
+          <option *ngFor="let tch of teachers" value="{{tch.employee_id}}">{{tch.first_name}}</option>
+        </select>
+        <button class="btn -cta" type="submit">Assign</button>
+      </form>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="assigned_teachers.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Subject</th>
+            <th align="left">Teacher</th>
+            <th align="left" *ngIf="user.role === 'admin'">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tch of assigned_teachers | pagination: pageNo; let i = index">
+            <td class="_s-no"><span>{{ i + 1 }}</span></td>
+            <td>{{tch.name}}</td>
+            <td *ngFor="let t of tch.teachers; let j = index">{{t.teacher_name}}</td> 
+            <td class="_actions" *ngIf="user.role === 'admin'">
+              <button class="btn" (click)="deleteConfirmation(tch.teachers[0].teacher_id, tch.subject_id, i, j)"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+            </td>
+          </tr>  
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="assigned_teachers.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Assigned Teachers for Subhects in this Class</h1>
+    </div>
+    <div class="_pagination" *ngIf="assigned_teachers.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

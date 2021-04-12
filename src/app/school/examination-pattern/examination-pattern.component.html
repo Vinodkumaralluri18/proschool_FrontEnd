@@ -1,0 +1,72 @@
+<main class="card mt-20 within-viewport new-listing">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="_select_div">
+                    <div class="btn-bunch">
+                        <button class="btn -cta selected-tab" routerLink="/main/main/admin/examinationPattern">Examination Pattern</button>
+                        <button class="btn -cta" routerLink="/main/main/admin/assessmentPattern">Assessment Pattern</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="add_div">
+                    <button class="btn -cta btn-right" (click)="addExamination_Pattern()">Add Examination Pattern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="dropdown">
+            <button class="dropbtn" (click)="showClassList = true" (clickOutside)="showClassList = false">
+                {{!selected_class.name ? 'select class' : selected_class.name}}
+            </button>
+            <div class="dropdown-content" [hidden]="!showClassList">
+                <a *ngFor="let cls of classes" (click)="selected_class = cls; getExamination_Pattern();">{{cls.name}}</a>
+            </div>
+        </div>
+    </div>
+    <section class="table-and-pagination -classes-schedule">
+        <div class="table-container" *ngIf="examination_patterns.length !== 0">
+            <table>
+                <thead>
+                    <tr>
+                        <th align="left">#</th>
+                        <th align="left" class="mobileview">Class</th>
+                        <th align="left">Examination Title</th>
+                        <th align="left">Assessment Type</th>
+                        <th align="left" class="mobileview">Number of Assessments</th>
+                        <th align="left" class="mobileview">Max Marks</th>
+                        <th align="left" *ngIf="user.role === 'admin'">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let exam of examination_patterns | pagination: pageNo; let i = index">
+                        <td class="_s-no"><span>{{ page_start + i + 1 }}.</span></td>
+                        <td class="mobileview">{{exam.class_name}}</td>
+                        <td>{{exam.examination_title}}</td>
+                        <td>{{exam.assessment_type}}</td>
+                        <td class="mobileview">{{exam.no_of_assessments}}</td>
+                        <td class="mobileview">{{exam.total_marks}}</td>
+                        <td class="_actions" *ngIf="user.role === 'admin'">
+                            <button class="btn" (click)="editAssessment_Types(page_start + i)"><img
+                                    src="../../../assets/images/edit-white.svg" alt="Edit" /></button>
+                            <button class="btn" (click)="deleteConfirmation(exam.examination_pattern_id)"><img
+                                    src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="no-data" *ngIf="examination_patterns.length === 0">
+            <img src="../../../assets/images/Nodata.png" alt="">
+            <h1 class="no-data-text">No Examinations Available</h1>
+        </div>
+        <div class="_pagination" *ngIf="examination_patterns.length !== 0">
+            <a class="btn -previous" (click)="previousPage()">Previous</a>
+            <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}"
+                *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+            <a class="btn -next" (click)="nextPage()">Next</a>
+        </div>
+    </section>
+</main>

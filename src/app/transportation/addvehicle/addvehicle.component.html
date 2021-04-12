@@ -1,0 +1,290 @@
+<div id="main-content">
+
+  <div class="row">
+    <div class="container-fluid" id="buttonId1">
+      <button routerLink="/main/transportation/vehicles" class="button button2 hvr-pop transition"><i
+          class="fa fa-calendar-plus-o" aria-hidden="true"></i>Vehicle List</button>
+      <button routerLink="/main/transportation/addvehicle" class="button button2 hvr-pop transition"><i
+          class="fa fa-calendar-check-o" aria-hidden="true"></i>Add Vehicle</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="container-fluid dashboard-content">
+      <div class="card listcard taskcard">
+        <form class="searchForm" [formGroup]="addvehicleForm" (ngSubmit)="addVehicle()">
+          <div class="row">
+            <div class="vehchd">Vehicle Details</div>
+            <div class="col-md-4">
+              <div class="form-group" [ngClass]="{'has-error' : addvehicleForm.get('vehicle_name').errors 
+                && (addvehicleForm.get('vehicle_name').touched || addvehicleForm.get('vehicle_name').dirty)}">
+                <label class="pull-left">Name</label>
+                <input class="form-control" formControlName="vehicle_name" placeholder="Enter..." type="text">
+                <span class="help-block" *ngIf="addvehicleForm.get('vehicle_name').errors 
+      && (addvehicleForm.get('vehicle_name').touched || addvehicleForm.get('vehicle_name').dirty)">
+                  <span *ngIf="addvehicleForm.get('vehicle_name').errors.required">
+                    Vehicle Name is required
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group" [ngClass]="{'has-error' : addvehicleForm.get('vehicle_number').errors 
+                    && (addvehicleForm.get('vehicle_number').touched || addvehicleForm.get('vehicle_number').dirty)}">
+                <label class="pull-left">Number</label>
+                <input class="form-control" formControlName="vehicle_number" placeholder="Enter..." type="text">
+                <span class="help-block" *ngIf="addvehicleForm.get('vehicle_number').errors 
+          && (addvehicleForm.get('vehicle_number').touched || addvehicleForm.get('vehicle_number').dirty)">
+                  <span *ngIf="addvehicleForm.get('vehicle_number').errors.required">
+                    Vehicle Number is required
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group" [ngClass]="{'has-error' : addvehicleForm.get('chassis_number').errors 
+                    && (addvehicleForm.get('chassis_number').touched || addvehicleForm.get('chassis_number').dirty)}">
+                <label class="pull-left">Chassis No</label>
+                <input class="form-control" formControlName="chassis_number" placeholder="Enter..." type="text">
+                <span class="help-block" *ngIf="addvehicleForm.get('chassis_number').errors 
+          && (addvehicleForm.get('chassis_number').touched || addvehicleForm.get('chassis_number').dirty)">
+                  <span *ngIf="addvehicleForm.get('chassis_number').errors.required">
+                    Chassis Number is required
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group" [ngClass]="{'has-error' : addvehicleForm.get('engine_number').errors 
+                      && (addvehicleForm.get('engine_number').touched || addvehicleForm.get('engine_number').dirty)}">
+                <label class="pull-left">Engine No</label>
+                <input class="form-control" formControlName="engine_number" placeholder="Enter..." type="text">
+                <span class="help-block" *ngIf="addvehicleForm.get('engine_number').errors 
+          && (addvehicleForm.get('engine_number').touched || addvehicleForm.get('engine_number').dirty)">
+                  <span *ngIf="addvehicleForm.get('engine_number').errors.required">
+                    Engine Number is required
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="pull-left">Vehicle Type</label>
+                <select class="form-control" formControlName="vehicle_type">
+                  <option>select...</option>
+                  <option value="diesel">Diesel</option>
+                  <option value="petrol">petrol</option>
+                  <option value="gas">gas</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="vehchd">Finance</div>
+            <div class="pull-left">
+              <input name="new" placeholder="Enter..." type="radio" (change)="getFinanceForm('yes')">
+              <label>Yes</label>
+            </div>
+            <div class="pull-left">
+              <input name="new" placeholder="Enter..." type="radio" (change)="getFinanceForm('no')">
+              <label>No</label>
+            </div><br>
+          </div>
+          <div class="row" *ngIf="vehicle_finance">
+            <div class="col-md-4">
+              <div class="form-group"
+                [ngClass]="{'has-error' : addvehicleForm.get('finance_company_name').errors 
+                    && (addvehicleForm.get('finance_company_name').touched || addvehicleForm.get('finance_company_name').dirty)}">
+                <label class="pull-left">Company Name</label>
+                <input class="form-control" formControlName="finance_company_name" placeholder="Enter..." type="text">
+                <span class="help-block" *ngIf="addvehicleForm.get('finance_company_name').errors 
+          && (addvehicleForm.get('finance_company_name').touched || addvehicleForm.get('finance_company_name').dirty)">
+                  <span *ngIf="addvehicleForm.get('finance_company_name').errors.required">
+                    Finance Company Name is required
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group" [ngClass]="{'has-error' : addvehicleForm.get('finance_amount').errors 
+                    && (addvehicleForm.get('finance_amount').touched || addvehicleForm.get('finance_amount').dirty)}">
+                <label class="pull-left">Amount</label>
+                <input class="form-control" formControlName="finance_amount" placeholder="Enter..." type="text">
+                <span class="help-block" *ngIf="addvehicleForm.get('finance_amount').errors 
+          && (addvehicleForm.get('finance_amount').touched || addvehicleForm.get('finance_amount').dirty)">
+                  <span *ngIf="addvehicleForm.get('finance_amount').errors.required">
+                    Finance Amount is required
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group" [ngClass]="{'has-error' : addvehicleForm.get('finance_from').errors 
+                        && (addvehicleForm.get('finance_from').touched || addvehicleForm.get('finance_from').dirty)}">
+                <label class="pull-left">From Date</label>
+                <input class="form-control" formControlName="finance_from" placeholder="Enter..." type="date">
+                <span class="help-block" *ngIf="addvehicleForm.get('finance_from').errors 
+          && (addvehicleForm.get('finance_from').touched || addvehicleForm.get('finance_from').dirty)">
+                  <span *ngIf="addvehicleForm.get('finance_from').errors.required">
+                    Finance From Date is required
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group" [ngClass]="{'has-error' : addvehicleForm.get('finance_to').errors 
+                        && (addvehicleForm.get('finance_to').touched || addvehicleForm.get('finance_to').dirty)}">
+                <label class="pull-left">To Date</label>
+                <input class="form-control" formControlName="finance_to" placeholder="Enter..." type="date">
+                <span class="help-block" *ngIf="addvehicleForm.get('finance_to').errors 
+          && (addvehicleForm.get('finance_to').touched || addvehicleForm.get('finance_to').dirty)">
+                  <span *ngIf="addvehicleForm.get('finance_to').errors.required">
+                    Finance To Date is required
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group" [ngClass]="{'has-error' : addvehicleForm.get('finance_emi').errors 
+                && (addvehicleForm.get('finance_emi').touched || addvehicleForm.get('finance_emi').dirty)}">
+                <label class="pull-left">EMI</label>
+                <input class="form-control" formControlName="finance_emi" placeholder="Enter..." type="number">
+                <span class="help-block" *ngIf="addvehicleForm.get('finance_emi').errors 
+  && (addvehicleForm.get('finance_emi').touched || addvehicleForm.get('finance_emi').dirty)">
+                  <span *ngIf="addvehicleForm.get('finance_emi').errors.required">
+                    Finance EMI is required
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group" [ngClass]="{'has-error' : addvehicleForm.get('finance_date').errors 
+                        && (addvehicleForm.get('finance_date').touched || addvehicleForm.get('finance_date').dirty)}">
+                <label class="pull-left">Reminder Date</label>
+                <input class="form-control" formControlName="finance_date" placeholder="Enter..." type="date">
+                <span class="help-block" *ngIf="addvehicleForm.get('finance_date').errors 
+          && (addvehicleForm.get('finance_date').touched || addvehicleForm.get('finance_date').dirty)">
+                  <span *ngIf="addvehicleForm.get('finance_date').errors.required">
+                    Reminder Date is required
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="vehchd">Insurance</div>
+            <div class="pull-left">
+              <input name="new" placeholder="Enter..." type="radio" (change)="getInsuranceForm('yes')">
+              <label>Yes</label>
+            </div>
+            <div class="pull-left">
+              <input name="new" placeholder="Enter..." type="radio" (change)="getInsuranceForm('no')">
+              <label>No</label>
+            </div><br>
+          </div>
+          <div class="row" *ngIf="vehicle_insurance">
+            <div class="col-md-4">
+              <div class="form-group"
+                [ngClass]="{'has-error' : addvehicleForm.get('insurance_number').errors 
+                    && (addvehicleForm.get('insurance_number').touched || addvehicleForm.get('insurance_number').dirty)}">
+                <label class="pull-left">Number</label>
+                <input class="form-control" formControlName="insurance_number" placeholder="Enter..." type="text">
+                <span class="help-block" *ngIf="addvehicleForm.get('insurance_number').errors 
+          && (addvehicleForm.get('insurance_number').touched || addvehicleForm.get('insurance_number').dirty)">
+                  <span *ngIf="addvehicleForm.get('insurance_number').errors.required">
+                    Insurance Number is required
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group"
+                [ngClass]="{'has-error' : addvehicleForm.get('insurance_company_name').errors 
+                    && (addvehicleForm.get('insurance_company_name').touched || addvehicleForm.get('insurance_company_name').dirty)}">
+                <label class="pull-left">Company Name</label>
+                <input class="form-control" formControlName="insurance_company_name" placeholder="Enter..." type="text">
+                <span class="help-block"
+                  *ngIf="addvehicleForm.get('insurance_company_name').errors 
+          && (addvehicleForm.get('insurance_company_name').touched || addvehicleForm.get('insurance_company_name').dirty)">
+                  <span *ngIf="addvehicleForm.get('insurance_company_name').errors.required">
+                    Insurance Company Name is required
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group" [ngClass]="{'has-error' : addvehicleForm.get('valid_from').errors 
+                        && (addvehicleForm.get('valid_from').touched || addvehicleForm.get('valid_from').dirty)}">
+                <label class="pull-left">Valid From</label>
+                <input class="form-control" formControlName="valid_from" placeholder="Enter..." type="date">
+                <span class="help-block" *ngIf="addvehicleForm.get('valid_from').errors 
+          && (addvehicleForm.get('valid_from').touched || addvehicleForm.get('valid_from').dirty)">
+                  <span *ngIf="addvehicleForm.get('valid_from').errors.required">
+                    Finance Validation From Date is required
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group" [ngClass]="{'has-error' : addvehicleForm.get('valid_to').errors 
+                        && (addvehicleForm.get('valid_to').touched || addvehicleForm.get('valid_to').dirty)}">
+                <label class="pull-left">Valid To</label>
+                <input class="form-control" formControlName="valid_to" placeholder="Enter..." type="date">
+                <span class="help-block" *ngIf="addvehicleForm.get('valid_to').errors 
+          && (addvehicleForm.get('valid_to').touched || addvehicleForm.get('valid_to').dirty)">
+                  <span *ngIf="addvehicleForm.get('valid_to').errors.required">
+                    Finance Validation To Date is required
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group"
+                [ngClass]="{'has-error' : addvehicleForm.get('insurance_amount').errors 
+                    && (addvehicleForm.get('insurance_amount').touched || addvehicleForm.get('insurance_amount').dirty)}">
+                <label class="pull-left">Amount</label>
+                <input class="form-control" formControlName="insurance_amount" placeholder="Enter..." type="text">
+                <span class="help-block" *ngIf="addvehicleForm.get('insurance_amount').errors 
+          && (addvehicleForm.get('insurance_amount').touched || addvehicleForm.get('insurance_amount').dirty)">
+                  <span *ngIf="addvehicleForm.get('insurance_amount').errors.required">
+                    Insurance Amount is required
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="vehchd">Maintenance</div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="pull-left">Engine Oil</label>
+                <select class="form-control" formControlName="engine_oil">
+                  <option>select...</option>
+                  <option>Castrol</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group" [ngClass]="{'has-error' : addvehicleForm.get('maintenance_reminder').errors 
+                && (addvehicleForm.get('maintenance_reminder').touched || addvehicleForm.get('maintenance_reminder').dirty)}">
+                <label class="pull-left">Reminder</label>
+                <input class="form-control" formControlName="maintenance_reminder" placeholder="Enter..." type="date">
+                <span class="help-block" *ngIf="addvehicleForm.get('maintenance_reminder').errors && (addvehicleForm.get('maintenance_reminder').touched || addvehicleForm.get('remind').dirty)">
+                  <span *ngIf="addvehicleForm.get('maintenance_reminder').errors.required">
+                    Reminder is required
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group pull-right">
+            <button type="submit" class="button button1 hvr-pop transition">Add Vehicle</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

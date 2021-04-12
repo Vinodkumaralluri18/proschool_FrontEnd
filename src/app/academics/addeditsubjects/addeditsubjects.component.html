@@ -1,0 +1,47 @@
+<div id="main-content1" class="new-message-wrapper">
+    <div class="header-wrapper">
+        <p *ngIf="dialog_type == 'add'">Add Subject</p>
+        <p *ngIf="dialog_type == 'edit'">Add Subject</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form class="form-inline" role="form" [formGroup]="subjectForm" (ngSubmit)="submitSubject()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Subject Name:
+            </div>
+            <div class="col-full-6">
+                <input class="form-control" value="{{subject.name}}" formControlName="name" type="text">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                TextBook:
+            </div>
+            <div class="col-full-6">
+                <input class="form-control" value="{{subject.textbook}}" formControlName="textbook" type="text">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Author Name:
+            </div>
+            <div class="col-full-6">
+                <input class="form-control" value="{{subject.author}}" formControlName="author" type="text">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Publisher:
+            </div>
+            <div class="col-full-6">
+                <input class="form-control" value="{{subject.publisher}}" formControlName="publisher" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+

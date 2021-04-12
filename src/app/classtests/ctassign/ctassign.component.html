@@ -1,0 +1,50 @@
+<div id="main-content1" class="new-message-wrapper">
+  <div class="header-wrapper">
+    <p *ngIf="dialog_type == 'add'">Add ClassTest</p>
+    <p *ngIf="dialog_type == 'edit'">Add ClassTest</p>
+    <button class="btn-close" (click)="close()"></button>
+  </div>
+  <form role="form" [formGroup]="classTestForm" (ngSubmit)="submitClassTest()">
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        ClassTest Title:
+      </div>
+      <div class="col-full-6">
+        <input value="{{classtest.classTest_title}}" formControlName="title" Placeholder="Enter the ClassTest Title..." type="text">
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Chapter:
+      </div>
+      <div class="col-full-6">
+        <select class="form-control" formControlName="lession_id" [value]="classtest.lession_id">
+          <option>select...</option>
+          <option *ngFor="let ch of chapters" value="{{ch.lession_id}}">{{ch.title}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Max Marks:
+      </div>
+      <div class="col-full-6">
+        <input class="form-control" value="{{classtest.maxMarks}}" formControlName="maxMarks" placeholder="Enter..."
+        type="number">
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        ClassTest Date:
+      </div>
+      <div class="col-full-6">
+        <input value="{{classtest.test_date}}" formControlName="date" placeholder="Enter..." type="date">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 pull-right">
+          <button class="btn -cta active-tab" type="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

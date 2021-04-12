@@ -1,0 +1,255 @@
+<main class="card mt-20 within-viewport fee-report-page new-listing">
+    <section class="page-actions">
+        <div class="_select-or-search">
+            <div class="_select-group">
+                <app-class *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)"
+                    (sectionEvent)="receiveSection($event)"></app-class>
+                <app-teacher-class *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)"
+                    (sectionEvent)="receiveSection($event)"></app-teacher-class>
+                <div class="dropdown">
+                    <button class="dropbtn" (click)="showStudentList = true" (clickOutside)="showStudentList = false">
+                        {{!selected_student.first_name ? 'select' : selected_student.first_name}}
+                        {{!selected_student.last_name ? 'student' : selected_student.last_name}}
+                    </button>
+                    <div class="dropdown-content" [hidden]="!showStudentList">
+                        <a *ngFor="let std of students"
+                            (click)="selected_student = std; getStudent_fee()">{{std.first_name}} {{std.last_name}}</a>
+                    </div>
+                </div>
+                <div class="dropdown" *ngIf="getTermFilter">
+                  <button class="dropbtn" (click)="showTermList = true" (clickOutside)="showTermList = false">
+                      {{!selected_feeterm.fee_term ? 'select' : selected_student.fee_term}}
+                  </button>
+                  <div class="dropdown-content" [hidden]="!showTermList">
+                      <a *ngFor="let fee of fee_terms"
+                          (click)="selected_feeterm = fee; getTerm_fee(fee.fee_term_id)">{{fee.fee_term}}</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="add_div">
+            <button class="btn -cta" routerLink="/main/reports/studentfee">StudentFee</button>
+            <button class="btn -cta" routerLink="/main/reports/classfee">ClassFee</button>
+        </div>
+    </section>
+    <section class="table-and-pagination -classes-schedule">
+        <div class="table-container">
+            <table *ngIf="!getTypeFee">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th align="left">Fee Term</th>
+                        <th align="left">Total Fee</th>
+                        <th align="left">Paid Fee</th>
+                        <th align="left">Discount</th>
+                        <th align="left">Fine</th>
+                        <th align="left">Balance</th>
+                        <th align="left">Stats</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fee of student_fee[0].TermwiseFee | pagination: pageNo; let i = index">
+                        <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+                        <td><a (click)="getTerm_fee(fee.fee_term_id)">{{fee.FeeTerm}}</a></td>
+                        <td>{{fee.FeeTerm}}</td>
+                        <td>{{fee.TotalTermFees}}</td>
+                        <td>{{fee.PaidTermFees}}</td>
+                        <td>{{fee.TotalDiscount}}</td>
+                        <td>{{fee.TotalFine}}</td>
+                        <td>{{fee.BalanceTermFee}}</td>
+                        <td>
+                            <div>
+                                <div class="hor-progress-track blue-fill">
+                                    <span class="hor-progress-filled" [ngStyle]="{'width': 100 + '%'}">
+                                    </span>
+                                </div>
+                                <div class="hor-progress-track green-fill">
+                                    <span class="hor-progress-filled"
+                                        [ngStyle]="{'width': (fee.PaidTermFees/fee.TotalTermFees) * 100 + '%'}"></span>
+                                </div>
+                                <div class="hor-progress-track red-fill">
+                                    <span class="hor-progress-filled"
+                                        [ngStyle]="{'width': (fee.BalanceTermFee/fee.TotalTermFees) * 100 + '%'}">
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br><br>
+            <table *ngIf="getTypeFee">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th align="left">Fee Type</th>
+                        <th align="left">Total Fee</th>
+                        <th align="left">Paid Fee</th>
+                        <th align="left">Discount</th>
+                        <th align="left">Fine</th>
+                        <th align="left">Balance</th>
+                        <th align="left">Stats</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let fee of student_TermFee | pagination: pageNo; let i = index">
+                        <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+                        <td>{{fee.FeeType}}</td>
+                        <td>{{fee.TotalTypeFees}}</td>
+                        <td>{{fee.PaidTermFees}}</td>
+                        <td>{{fee.TotalDiscount}}</td>
+                        <td>{{fee.TotalFine}}</td>
+                        <td>{{fee.BalanceFee}}</td>
+                        <td>
+                            <div>
+                                <div class="hor-progress-track blue-fill">
+                                    <span class="hor-progress-filled" [ngStyle]="{'width': 100 + '%'}">
+                                    </span>
+                                </div>
+                                <div class="hor-progress-track green-fill">
+                                    <span class="hor-progress-filled"
+                                        [ngStyle]="{'width': (fee.PaidTermFees/fee.TotalTypeFees) * 100 + '%'}"></span>
+                                </div>
+                                <div class="hor-progress-track red-fill">
+                                    <span class="hor-progress-filled"
+                                        [ngStyle]="{'width': (fee.BalanceFee/fee.TotalTypeFees) * 100 + '%'}">
+                                    </span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- <div class="_pagination">
+            <a class="btn -previous">Previous</a>
+            <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}"
+                *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+            <a class="btn -next">Next</a>
+        </div> -->
+    </section>
+</main>
+<!-- 
+<main class="card mt-20 within-viewport fee-report-page">
+    <section class="page-actions">
+      <div class="_select-or-search">
+        <div class="_select-group">
+          <app-class *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-class>
+          <app-teacher-class *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-teacher-class>
+          <select name="section" [(ngModel)]="selected_student" (change)="getCollectedFee()">
+            <option>select...</option>
+            <option *ngFor="let std of students" value="{{std.student_id}}">{{std.first_name}} {{std.last_name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <button class="btn -cta" (click)="getcollected_list(1)" *ngIf="user.role === 'admin'">Collect Fee</button>
+    </section>
+    <section class="table-and-pagination -classes-schedule">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th align="left">Fee Term</th>
+              <th align="left">Total Fee</th>
+              <th align="left">Paid Fee</th>
+              <th align="left">Discount</th>
+              <th align="left">Fine</th>
+              <th align="left">Balance</th>
+              <th align="left" style="width: 400px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let col of collected_fee; let i=index">
+              <td class="_s-no"><span>{{ i + 1 }}</span></td>
+              <td>Term-{{ i + 1 }}</td>
+              <td>10000</td>
+              <td>6000</td>
+              <td>2000</td>
+              <td>1500</td>
+              <td>3500</td>
+              <td>
+                <div class="horizontal-bars-wrapper">
+                  <div class="hor-progress-track blue-fill">
+                    <span class="hor-progress-filled" 
+                    [ngStyle]="{'width': 6000/10000*100 + '%'}">
+                    </span>
+                  </div>
+                  <div class="hor-progress-track green-fill">
+                    <span class="hor-progress-filled"
+                    [ngStyle]="{'width': 3500/10000*100 + '%'}"
+                    ></span>
+                  </div>
+                  <div class="hor-progress-track red-fill">
+                    <span class="hor-progress-filled"
+                    [ngStyle]="{'width': 1500/10000*100 + '%'}">
+                    </span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br><br>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th align="left">Fee Type</th>
+              <th align="left">Total Fee</th>
+              <th align="left">Paid Fee</th>
+              <th align="left">Discount</th>
+              <th align="left">Fine</th>
+              <th align="left">Balance</th>
+              <th align="left" style="width: 400px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let col of collected_fee; let i=index">
+              <td class="_s-no"><span>{{ i + 1 }}</span></td>
+              <td>Type-{{ i + 1 }}</td>
+              <td>10000</td>
+              <td>6000</td>
+              <td>2000</td>
+              <td>1500</td>
+              <td>3500</td>
+              <td>
+                <div>
+                  <div class="hor-progress-track blue-fill">
+                    <span class="hor-progress-filled" 
+                    [ngStyle]="{'width': 6000/10000*100 + '%'}">
+                    </span>
+                  </div>
+                  <div class="hor-progress-track green-fill">
+                    <span class="hor-progress-filled"
+                    [ngStyle]="{'width': 3500/10000*100 + '%'}"
+                    ></span>
+                  </div>
+                  <div class="hor-progress-track red-fill">
+                    <span class="hor-progress-filled"
+                    [ngStyle]="{'width': 1500/10000*100 + '%'}">
+                    </span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="_pagination">
+        <a href="" class="btn -previous">Previous</a>
+        <a href="" class="btn -current">1</a>
+        <a href="" class="btn">2</a>
+        <a href="" class="btn">3</a>
+        <a href="" class="btn">4</a>
+        <a href="" class="btn">5</a>
+        <a href="" class="btn">6</a>
+        <a href="" class="btn">7</a>
+        <a href="" class="btn">8</a>
+        <a href="" class="btn">9</a>
+        <a href="" class="btn">10</a>
+        <a href="" class="btn -next">Next</a>
+      </div>
+    </section>
+  </main> -->

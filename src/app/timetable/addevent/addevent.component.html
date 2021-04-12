@@ -1,0 +1,67 @@
+<div id="main-content1" class="new-message-wrapper">
+    <div class="header-wrapper">
+        <p *ngIf="dialog_type == 'add'">Add Event</p>
+        <p *ngIf="dialog_type == 'edit'">Edit Event</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form class="form-inline" role="form" [formGroup]="eventForm" (ngSubmit)="submitEvent()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Event Title:
+            </div>
+            <div class="col-full-6">
+                <input type="text" id="event_title" formControlName="event_title" value="{{selected_event.event_title}}">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Priority:
+            </div>
+            <div class="col-full-6">
+              <select formControlName="priority" [value]="selected_event.priority">
+                <option>select...</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+          </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Event Date:
+            </div>
+            <div class="col-full-6">
+                <input type="date" id="date" formControlName="date" value="{{selected_event.date}}">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Start Time:
+            </div>
+            <div class="col-full-6">
+                <input type="time" id="start_time" formControlName="start_time" value="{{selected_event.start_time}}">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                End Time:
+            </div>
+            <div class="col-full-6">
+                <input type="time" id="end_time" formControlName="end_time" value="{{selected_event.end_time}}">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Description:
+            </div>
+            <div class="col-full-6">
+                <textarea cols="60" rows="5" formControlName="description" value="{{selected_event.description}}"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

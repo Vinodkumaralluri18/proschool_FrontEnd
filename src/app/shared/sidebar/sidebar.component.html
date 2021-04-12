@@ -1,0 +1,213 @@
+<nav class="app-nav" id="app-nav">
+    <button type="button" class="_nav-trigger" aria-controls="nav-drawer" aria-expanded="false">
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="#fff" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+        </svg>
+    </button>
+    <div class="_drawer" id="nav-drawer">
+        <img src="../../../assets/images/Capture.JPG" alt="Pro School" class="_logo">
+        <ul class="_links">
+            <li role="presentation" *ngIf="user.role === 'admin'">
+                <a routerLink='/main/main/dashboard' class="track_activity_btn" (click)="click_activity('dashboard')" routerLinkActive="router-link-active">
+                    <img src="../../../assets/images/grid-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/grid-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Dashboard
+                </a>
+            </li>
+            <li role="presentation" *ngIf="user.role === 'teacher'">
+                <a routerLink='/main/main/dashboard/teacherdashboard' class="track_activity_btn" routerLinkActive="router-link-active">
+                    <img src="../../../assets/images/grid-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/grid-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Dashboard
+                </a>
+            </li>
+            <li role="presentation" *ngIf="user.role === 'admin'">
+                <button type="button" class="_submenu-trigger" 
+                aria-expanded="false" aria-controls="academics-submenu" 
+                routerLink="/main/main/admin/profile" 
+                [ngClass]="isAnySubMenuActive('Admin') ? 'router-link-active' : ''">
+                    <img src="../../../assets/images/book-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/book-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Admin
+                </button>
+                <ul class="_level-2" id="academics-submenu">
+                    <li><a class="track_activity_btn" routerLink="/main/main/admin/profile" routerLinkActive="-active">School Profile</a></li>
+                    <li><a class="track_activity_btn" routerLink="/main/main/admin/addClass" routerLinkActive="-active">Class & Sections</a></li>
+                    <li><a class="track_activity_btn" routerLink="/main/main/admin/examinationPattern" routerLinkActive="-active">Examination Pattern</a></li>
+                    <li><a routerLink="/main/main/admin/parentinfo" routerLinkActive="-active">Users</a></li>
+                    <li><a routerLink="/main/main/admin/pendingTasks" routerLinkActive="-active">Task Management</a></li>
+                    <li><a routerLink="/main/main/admin/materials" routerLinkActive="-active">Store Management</a></li>
+                    <li><a routerLink="/main/main/admin/payments" routerLinkActive="-active">Payments</a></li>
+                    <li><a routerLink="/main/main/admin/expenses" routerLinkActive="-active">Expenses</a></li>
+                </ul>
+            </li>
+            <li role="presentation" *ngIf="user.role === 'teacher' || user.role === 'parent'">
+                <button type="button" class="_submenu-trigger" aria-expanded="false" aria-controls="academics-submenu" 
+                routerLink="/main/main/admin/profile" 
+                [ngClass]="isAnySubMenuActive('School') ? 'router-link-active' : ''">
+                    <img src="../../../assets/images/book-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/book-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    School
+                </button>
+                <ul class="_level-2" id="academics-submenu">
+                    <li><a routerLink="/main/main/admin/profile" routerLinkActive="-active">School Profile</a></li>
+                    <li><a routerLink="/main/main/admin/messages" routerLinkActive="-active">Communications</a></li>
+                    <li><a routerLink="/main/main/admin/pendingTasks" routerLinkActive="-active">Task Management</a></li>
+                    <li><a routerLink="/main/main/admin/expenses" routerLinkActive="-active">Expenses</a></li>
+                </ul>
+            </li>
+            <li role="presentation" *ngIf="user.role === 'admin'">
+                <button type="button" class="_submenu-trigger" 
+                aria-expanded="false" aria-controls="academics-submenu" 
+                routerLink="/main/main/communications/messages" 
+                [ngClass]="isAnySubMenuActive('Communications') ? 'router-link-active' : ''">
+                    <img src="../../../assets/images/book-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/book-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Communications
+                </button>
+                <ul class="_level-2" id="academics-submenu">
+                    <li><a class="track_activity_btn" routerLink="/main/main/communications/messages" routerLinkActive="-active">Admin Messages</a></li>
+                    <li><a class="track_activity_btn" routerLink="/main/main/communications/employeeMessages" routerLinkActive="-active">Employee Messages</a></li>
+                </ul>
+            </li>
+            <li role="presentation" *ngIf="user.role === 'admin' || user.role === 'teacher'">
+                <a routerLink='/main/main/students/information' routerLinkActive="router-link-active">
+                    <img src="../../../assets/images/student-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/student-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Students
+                </a>
+            </li>
+            <li role="presentation" *ngIf="user.role === 'admin' || user.role === 'teacher'">
+                <a routerLink="/main/main/employees/information" routerLinkActive="router-link-active">
+                    <img src="../../../assets/images/whiteboard-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/whiteboard-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Employees
+                </a>
+            </li>
+            <li role="presentation" *ngIf="user.role === 'admin'">
+                <button type="button" class="_submenu-trigger" aria-expanded="false" aria-controls="attendance-submenu" 
+                routerLink="/main/main/attendance/studentattendance" 
+                [ngClass]="isAnySubMenuActive('Attendance') ? 'router-link-active' : ''">
+                    <img src="../../../assets/images/book-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/book-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Attendance
+                </button>
+                <ul class="_level-2" id="attendance-submenu">
+                    <li><a routerLink="/main/main/attendance/studentattendance" routerLinkActive="-active">Students</a></li>
+                    <li><a routerLink="/main/main/attendance/employeeattendance" routerLinkActive="-active">Employees</a></li>
+                    <li><a routerLink="/main/main/attendance/reports" routerLinkActive="-active">Students  Reports</a></li>
+                    <li><a routerLink="/main/main/attendance/empreports" routerLinkActive="-active">Employee Reports </a></li>
+                </ul>
+            </li>
+            <li role="presentation" *ngIf="user.role === 'teacher'">
+                <button type="button" class="_submenu-trigger" aria-expanded="false" aria-controls="attendance-submenu" 
+                routerLink="/main/main/attendance/studentattendance" 
+                [ngClass]="isAnySubMenuActive('Attendance') ? 'router-link-active' : ''">
+                    <img src="../../../assets/images/book-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/book-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Attendance
+                </button>
+                <ul class="_level-2" id="attendance-submenu">
+                    <li><a routerLink="/main/main/attendance/studentattendance" routerLinkActive="-active">Students</a></li>
+                    <li><a routerLink="/main/main/attendance/reports" routerLinkActive="-active">Students  Reports</a></li>
+                </ul>
+            </li>
+            <li role="presentation">
+                <button type="button" class="_submenu-trigger" aria-expanded="false" aria-controls="academics-submenu" 
+                routerLink="/main/main/academics/subjects" 
+                [ngClass]="isAnySubMenuActive('Academics') ? 'router-link-active' : ''">
+                    <img src="../../../assets/images/book-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/book-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Academics
+                </button>
+                <ul class="_level-2" id="academics-submenu">
+                    <li><a routerLink="/main/main/academics/subjects" routerLinkActive="-active">Subjects</a></li>
+                    <li><a routerLink="/main/main/academics/chapters" routerLinkActive="-active">Chapters</a></li>
+                    <li><a routerLink="/main/main/academics/topics" routerLinkActive="-active">Topics</a></li>
+                    <li><a routerLink="/main/main/academics/assignsubjects" routerLinkActive="-active" *ngIf="user.role === 'admin' || user.role === 'teacher'">Assign Teachers</a></li>
+                    <li><a routerLink="/main/main/academics/planner" routerLinkActive="-active">Planner</a></li>
+                    <!-- <li><a routerLink="/virtualClass" routerLinkActive="-active">Virtual ClassRoom</a></li> -->
+                </ul>
+            </li>
+            <li role="presentation">
+                <button type="button" class="_submenu-trigger" aria-expanded="false" aria-controls="academics-submenu" 
+                routerLink="/main/main/assignments" 
+                [ngClass]="isAnySubMenuActive('Assessments') ? 'router-link-active' : ''">
+                    <img src="../../../assets/images/news-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/news-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Assessments
+                </button>
+                <ul class="_level-2" id="academics-submenu">
+                    <li><a routerLink="/main/main/assignments" routerLinkActive="-active">Assignments</a></li>
+                    <li><a routerLink="/main/main/classtests" routerLinkActive="-active">Class Tests</a></li>
+                    <li><a routerLink="/main/main/projectworks" routerLinkActive="-active">Project Works</a></li>
+                    <li><a routerLink="/main/main/reports/assignmentreports" routerLinkActive="-active">Reports</a></li>
+                </ul>
+            </li>
+            <li role="presentation">
+                <button type="button" class="_submenu-trigger" aria-expanded="false" aria-controls="academics-submenu" 
+                routerLink="/main/main/examinations" 
+                [ngClass]="isAnySubMenuActive('Examinations') ? 'router-link-active' : ''">
+                    <img src="../../../assets/images/paper-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/paper-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Examinations
+                </button>
+                <ul class="_level-2" id="academics-submenu">
+                    <li><a routerLink="/main/main/examinations" routerLinkActive="-active">Schedules</a></li>
+                    <li><a routerLink="/main/main/examinations/listPapers" routerLinkActive="-active">Exam Papers</a></li>
+                    <li><a routerLink="/main/main/evaluations/addMarks" routerLinkActive="-active">Add Exam Marks</a></li>
+                    <li><a routerLink="/main/main/evaluations" routerLinkActive="-active">Evaluations</a></li>
+                    <!-- <li><a routerLink="/main/main/reports/evaluationreports" routerLinkActive="-active">Reports</a></li> -->
+                </ul>
+            </li>
+            <li role="presentation">
+                <button type="button" class="_submenu-trigger" aria-expanded="false" aria-controls="academics-submenu" 
+                routerLink="/main/main/timetable/classwise" 
+                [ngClass]="isAnySubMenuActive('Timetable') ? 'router-link-active' : ''">
+                    <img src="../../../assets/images/abc-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/abc-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Timetable
+                </button>
+                <ul class="_level-2" id="academics-submenu">
+                    <li><a routerLink="/main/main/timetable/classwise" routerLinkActive="-active">ClassWise</a></li>
+                    <li><a routerLink="/main/main/timetable/events" routerLinkActive="-active">Events</a></li>
+                    <li><a routerLink="/main/main/timetable/noticeboard" routerLinkActive="-active">Notice Board</a></li>
+                </ul>
+            </li>
+            <li role="presentation" *ngIf="user.role === 'admin'">
+                <button type="button" class="_submenu-trigger" aria-expanded="false" aria-controls="academics-submenu" 
+                routerLink="/main/main/fee/studentfee" 
+                [ngClass]="isAnySubMenuActive('Fee') ? 'router-link-active' : ''">
+                    <img src="../../../assets/images/calculator-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/calculator-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Fee
+                </button>
+                <ul class="_level-2" id="academics-submenu">
+                    <li><a routerLink="/main/main/fee/studentfee" routerLinkActive="-active">Student Fee</a></li>
+                    <!-- <li><a routerLink="/main/fee/collectfee" routerLinkActive="-active">Collect Fee</a></li> -->
+                    <li><a routerLink="/main/main/fee/feetype" routerLinkActive="-active">Fee Types</a></li>
+                    <li><a routerLink="/main/main/fee/classfee" routerLinkActive="-active">Class Fee</a></li>
+                    <li><a routerLink="/main/main/fee/feestructure" routerLinkActive="-active">Fee Structure</a></li>
+                    <!-- <li><a routerLink="/main/reports/studentfee" routerLinkActive="-active">Reports</a></li> -->
+                </ul>
+            </li>
+            <!-- <li role="presentation">
+                <button type="button" class="_submenu-trigger" aria-expanded="false" aria-controls="academics-submenu" 
+                routerLink="/main/transportation/stations" 
+                [ngClass]="isAnySubMenuActive('Transport') ? 'router-link-active' : ''">
+                    <img src="../../../assets/images/bus-white.svg" aria-hidden="true" class="_icon -inactive">
+                    <img src="../../../assets/images/bus-blue.svg" aria-hidden="true" class="_icon -show-on-hover">
+                    Transport
+                </button>
+                <ul class="_level-2" id="academics-submenu">
+                    <li><a routerLink="/main/transportation/stations" routerLinkActive="-active">Stations</a></li>
+                    <li><a routerLink="/main/transportation/vehicles" routerLinkActive="-active">Vehicles</a></li>
+                    <li><a routerLink="/main/transportation/routes" routerLinkActive="-active">Bus Route</a></li>
+                    <li><a routerLink="/main/transportation/addroute" routerLinkActive="-active">Bus Route</a></li>
+                    <li><a routerLink="/main/transportation/navigation" routerLinkActive="-active">Route Geolocation</a></li>
+                </ul>
+            </li> -->
+        </ul>
+    </div>
+    <div id="menu-scrim"></div>
+</nav>

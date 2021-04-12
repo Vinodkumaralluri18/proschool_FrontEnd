@@ -1,0 +1,55 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select_div">
+      <div class="btn-bunch">
+        <button class="btn -cta" routerLink="/main/main/admin/materials">Material</button>
+        <button class="btn -cta" routerLink="/main/main/admin/vendors">Vendors</button>
+        <button class="btn -cta selected-tab" routerLink="/main/main/admin/materialIn">Material-In</button>
+        <button class="btn -cta" routerLink="/main/main/admin/materialOut">Material-Out</button>
+      </div>
+    </div>
+    <div class="add_div">
+      <button type="submit" class="btn -cta" (click)="addMaterialsIn()">Add Material-In</button>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="materialsIn.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Material</th>
+            <th align="left">Vendor</th>
+            <th align="left">No of Units</th>
+            <th align="left">Price</th>
+            <th align="left">Purchased Date</th>
+            <th align="left">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mat of materialsIn | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{mat.material}}</td>
+            <td>{{mat.vendor}}</td>
+            <td>{{mat.no_of_units}}</td>
+            <td>{{mat.price | currency:'INR'}}</td>
+            <td>{{mat.purchased_date}}</td>
+            <td class="_actions">
+              <button class="btn" (click)="editMaterialIn(i)"><img src="../../../assets/images/edit-white.svg" alt="Edit" /></button>
+              <!-- <button class="btn" (click)="deleteMaterialIn(mat.material_in_id)"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="materialsIn.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Materials Purchased</h1>
+    </div>
+    <div class="_pagination" *ngIf="materialsIn.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

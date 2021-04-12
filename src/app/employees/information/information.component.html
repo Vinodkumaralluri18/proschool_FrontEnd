@@ -1,0 +1,84 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <!-- <select class="form-control" [(ngModel)]="employee_type" (change)="get_selectedemployees()">
+          <option value="all">All</option>
+          <option value="teaching">Teaching</option>
+          <option value="non-teaching">Non-Teaching</option>
+          <option value="administrative">Administrative</option>
+        </select> -->
+        <div class="dropdown">
+          <button class="dropbtn" (click)="showEmployeeTypeList = true" 
+          (clickOutside)="showEmployeeTypeList = false">
+              {{!employee_type ? 'employee type' : employee_type.name}}
+          </button>
+          <div class="dropdown-content" [hidden]="!showEmployeeTypeList">
+            <a *ngFor="let e_type of employee_types"
+              (click)="employee_type = e_type; get_selectedemployees();">{{e_type.name}}</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropbtn" (click)="showStatusList = true" 
+          (clickOutside)="showStatusList = false">
+              {{!status ? 'select status' : status}}
+          </button>
+          <div class="dropdown-content" [hidden]="!showStatusList">
+            <a (click)="status = ''; getEmployeesByStatus();">select...</a>
+            <a (click)="status = 'active'; getEmployeesByStatus();">Active</a>
+            <a (click)="status = 'inactive'; getEmployeesByStatus();">Inactive</a>
+          </div>
+        </div>
+        <!-- <select class="form-control" [(ngModel)]="status" (change)="getEmployeesByStatus()">
+          <option>select...</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select> -->
+      </div>
+      <input type="search" [(ngModel)]="searchText" placeholder="Search for Employee">
+    </div>
+    <div class="add_div" *ngIf="user.role === 'admin'">
+      <input id="file-input" type="file" name="file" placeholder="Upload Bulk Data" (change)="employeesUpload($event.target.files)"/>
+      <button class="btn -cta" (click)="addEmployee()">Add Employee</button>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="employees.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Employee Name</th>
+            <th align="left">Employee Code</th>
+            <th align="left">Designation</th>
+            <th align="left">Contact Number</th>
+            <th align="left">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of employees | search : searchText | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td><a routerLink="/main/main/employeeprofile/profile/{{emp.employee_id}}">{{emp.first_name}} {{emp.last_name}}</a></td>
+            <td>{{emp.employee_code}}</td>
+            <td>{{emp.designation}}</td>
+            <td>{{emp.phone}}</td>
+            <td class="_actions">
+              <button class="btn" *ngIf="status === 'active'" (click)="editEmployee(emp.employee_id)"><img src="../../../assets/images/edit-white.svg" alt="Edit" /></button>
+              <button class="btn" *ngIf="status === 'active'" (click)="deleteConfirmation(emp.employee_id)"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+              <button class="btn" *ngIf="status === 'inactive'" (click)="restoreEmployee(emp.employee_id)"><img src="../../../assets/images/trash-white.svg" alt="Restore" /></button>
+            </td>
+          </tr>   
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="employees.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Employees</h1>
+    </div>
+    <div class="_pagination" *ngIf="employees.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

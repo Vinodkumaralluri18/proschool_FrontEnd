@@ -1,0 +1,52 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-class *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-class>
+        <app-teacher-class *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-teacher-class>
+      </div>
+    </div>
+    <div class="add_div" *ngIf="user.role === 'admin'">
+      <input id="file-input" type="file" name="file" placeholder="Upload Bulk Data" (change)="subjectsUpload($event.target.files)"/>
+      <button class="btn -cta" (click)="addsubject()">Add Subject</button>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="subjects.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Subject Name</th>
+            <th align="left">Book Name</th>
+            <th align="left">Author</th>
+            <th align="left">Publisher</th>
+            <th align="left" *ngIf="user.role === 'admin'">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sub of subjects | pagination: pageNo; let i = index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{sub.name}}</td>
+            <td>{{sub.textbook}}</td>
+            <td>{{sub.author}}</td>
+            <td>{{sub.publisher}}</td>
+            <td class="_actions" *ngIf="user.role === 'admin'">
+              <button class="btn" (click)="editsubject(page_start + i)"><img src="../../../assets/images/edit-white.svg" alt="Edit" /></button>
+              <button class="btn" (click)="deleteConfirmation(sub.subject_id)"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="subjects.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Subjects for this Class</h1>
+    </div>
+    <div class="_pagination" *ngIf="subjects.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

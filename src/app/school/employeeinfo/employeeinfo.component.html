@@ -1,0 +1,60 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+
+    <div class="_select_div">
+      <div class="btn-bunch">
+        <button class="btn -cta" routerLink="/main/main/admin/parentinfo">Parent Info</button>
+        <button class="btn -cta selected-tab" routerLink="/main/main/admin/employeeinfo">Employee Info</button>
+      </div>
+    </div>
+
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <div class="dropdown">
+          <button class="dropbtn" (click)="showEmployeeList = true" (clickOutside)="showEmployeeList = false">
+            {{!employee_type ? 'select class' : employee_type}}
+          </button>
+          <div class="dropdown-content" [hidden]="!showEmployeeList">
+            <a (click)="employee_type = 'teaching'; getEmployeesInfo();">Teaching</a>
+            <a (click)="employee_type = 'non-teaching'; getEmployeesInfo();">Non-Teaching</a>
+            <a (click)="employee_type = 'administrative'; getEmployeesInfo();">Administrative</a>
+          </div>
+        </div>
+      </div>
+      <!-- <input type="search" class="search-box" name="" placeholder="Search"> -->
+      <!-- <input type="search" class="search-box" [(ngModel)]="searchText" placeholder="Search for Student"> -->
+    </div>
+
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="employees.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th align="left">#</th>
+            <th align="left">Employee Name</th>
+            <th align="left">User Name</th>
+            <th align="left">Password</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of employees | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{emp.employee_details[0].first_name}} {{emp.employee_details[0].last_name}}</td>
+            <td>{{emp.login}}</td>
+            <td>{{emp.login | lowercase}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="employees.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">No Employee Login Information Available</h1>
+    </div>
+    <div class="_pagination" *ngIf="employees.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

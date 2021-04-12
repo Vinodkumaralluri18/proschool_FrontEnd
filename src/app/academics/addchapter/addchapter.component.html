@@ -1,0 +1,39 @@
+<div id="main-content1" class="new-message-wrapper">
+    <div class="header-wrapper">
+        <p *ngIf="dialog_type == 'add'">Add Chapter</p>
+        <p *ngIf="dialog_type == 'edit'">Add Chapter</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+  <form role="form" [formGroup]="chapterForm" (ngSubmit)="submitChapter()">
+    <div class="row-wrapper">
+        <div class="col-full-3">
+            Chapter Name:
+        </div>
+        <div class="col-full-6">
+            <input class="form-control" value="{{chapter.title}}" formControlName="title"  placeholder="Enter the Chapter..." type="text">
+        </div>
+    </div>
+    <div class="row-wrapper">
+        <div class="col-full-3">
+            Chapter Code:
+        </div>
+        <div class="col-full-6">
+            <input class="form-control" value="{{chapter.chapter_code}}" formControlName="chapter_code"  placeholder="Enter the Code..." type="text">
+        </div>
+    </div>
+    <div class="row-wrapper">
+        <div class="col-full-3">
+            Description:
+        </div>
+        <div class="col-full-6">
+            <textarea value="{{chapter.description}}" formControlName="description" placeholder="Enter the Description of the Chapter..." cols="50" rows="10"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 pull-right">
+            <button class="btn -cta active-tab" type="submit">Submit</button>
+        </div>
+    </div>
+  </form>
+</div>
+

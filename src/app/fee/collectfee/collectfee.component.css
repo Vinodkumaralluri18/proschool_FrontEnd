@@ -1,0 +1,13 @@
+#list-heading {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#list-heading button {
+    padding: 5px 5px;
+    margin: 0px 0px 0px 10px;
+}
+
+#marks-list {
+    margin: 15px 0px 0px 20px;
+}

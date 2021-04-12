@@ -1,0 +1,13 @@
+.dropdown-margin{
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.dropdown .dropbtn::after {
+    border: solid #ffffff !important;
+    content: none;
+}
+
+.margin-left{
+    margin-left: 10px !important;
+}

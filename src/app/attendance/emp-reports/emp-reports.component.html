@@ -1,0 +1,111 @@
+<main id="main-content" class="card mt-20 within-viewport new-listing">
+    <section class="page-actions">
+      <div class="_select-or-search">
+        <div class="_select-group">
+            <div class="dropdown">
+                <button class="dropbtn" (click)="showEmployeeTypeList = true" (clickOutside)="showEmployeeTypeList = false">
+                    {{!category ? 'employee type' : category}}
+                </button>
+                <div class="dropdown-content" [hidden]="!showEmployeeTypeList">
+                  <a (click)="category = 'teaching'; selectreport('none')">Teaching</a>
+                  <a (click)="category = 'non-teaching'; selectreport('none')">Non-Teaching</a>
+                  <a (click)="category = 'administrative'; selectreport('none')">Administrative</a>
+                </div>
+            </div>
+          <!-- <input class="form-control" [(ngModel)]="date" (change)="getEmployeeAttendance()" type="date">
+          <input class="form-control" [(ngModel)]="end_date" (change)="getRangeAttendance()" type="date"> -->
+
+          <input class="form-control" [(ngModel)]="date" (change)="selectreport('date')" type="date">
+          <input class="form-control" [(ngModel)]="end_date" (change)="selectreport('range')" type="date">
+        </div>
+      </div>
+      <div class="add_div">
+        <button class="btn -cta" (click)="getAttendance()">Search</button>
+      </div>
+    </section>
+  
+    <section class="table-and-pagination -classes-schedule">
+      <div class="table-container" *ngIf="attendance.employeeAttendence.length !== 0 || attendanceRange.length !== 0">
+        <table *ngIf="attenBy_date">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th align="left">Name</th>
+              <th align="left">Employee Code</th>
+              <th align="left">Gender</th>
+              <th align="left">Attendance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let att of attendance.employeeAttendence | pagination: pageNo; let i = index">
+              <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+              <td>{{att.employee_doc[0].first_name}} {{att.employee_doc[0].last_name}}</td>
+              <td>{{att.employee_doc[0].employee_code}}</td>
+              <td>{{att.employee_doc[0].gender}}</td>
+              <td>
+                <span class="_chip -class-running"  [ngStyle]="{'background-color': (att.status == 'Present') ? '#5cb85c' : (att.status == 'Absent') ? '#d9534f' : '#f0ad4e', 'color': 'white' }">{{att.status}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table *ngIf="!attenBy_date">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th align="left">Name</th>
+              <th align="left">Employee Code</th>
+              <th align="left">Present</th>
+              <th align="left">Absent</th>
+              <th align="left">Leave</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let att of attendanceRange | pagination: pageNo; let i = index">
+              <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+              <td>{{att.first_name}} {{att.last_name}}</td>
+              <td>{{att.employee_code}}</td>
+              <td>
+                <div class="hor-progress-wrapper">
+                  <div class="hor-progress-track">
+                    <span class="hor-progress-filled" [ngStyle]="{'background-color': '#5cb85c', 'color': 'white', 'width': (att.present / att.count * 100) + '%'}"></span>
+                    {{att.present}} Days
+                  </div>
+                  <span class="hor-progress-title">{{att.present / att.count * 100}} %</span>
+                </div>
+              </td>
+              <td>
+                <div class="hor-progress-wrapper">
+                  <div class="hor-progress-track">
+                    <span class="hor-progress-filled" [ngStyle]="{'background-color': '#d9534f', 'color': 'white', 'width': (att.absent / att.count * 100) + '%'}"></span>
+                    {{att.absent}} Days
+                  </div>
+                  <span class="hor-progress-title">{{att.absent / att.count * 100}} %</span>
+                </div>
+              </td>
+              <td>
+                <div class="hor-progress-wrapper">
+                  <div class="hor-progress-track">
+                    <span class="hor-progress-filled" [ngStyle]="{'background-color': '#f0ad4e', 'color': 'white', 'width': (att.onLeave / att.count * 100) + '%'}"></span>
+                    {{att.onLeave}} Days
+                  </div>
+                  <span class="hor-progress-title">{{att.onLeave / att.count * 100}} %</span>
+                </div>
+              </td>
+              <!-- <td>
+                <span class="_chip -class-running"  [ngStyle]="{'background-color': (att.status == 'Present') ? '#5cb85c' : (att.status == 'Absent') ? '#d9534f' : '#f0ad4e', 'color': 'white' }">{{att.status}}</span>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="no-data" *ngIf="attendance.employeeAttendence.length === 0 && attendanceRange.length === 0">
+        <img src="../../../assets/images/Nodata.png" alt="">
+        <h1 class="no-data-text">There are No Employee Reports</h1>
+      </div>
+      <div class="_pagination" *ngIf="attendance.employeeAttendence.length !== 0 || attendanceRange.length !== 0">
+        <a class="btn -previous" (click)="previousPage()">Previous</a>
+        <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+        <a class="btn -next" (click)="nextPage()">Next</a>
+      </div>
+    </section>
+</main>

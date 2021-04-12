@@ -1,0 +1,298 @@
+<div id="main-content">
+
+  <div class="row">
+    <div class="container-fluid" id="buttonId1">
+      <button routerLink="/main/admin/addclass" class="button button2 hvr-pop transition">Class & Section</button>
+      <button routerLink="/main/admin/timings" class="button button2 hvr-pop transition">School Timings</button>
+      <button routerLink="/main/admin/patterns" class="button button2 hvr-pop transition">Assessment Patterns</button>
+      <!-- <button routerLink="/main/admin/quote" class="button button2 hvr-pop transition">Quotes</button> -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="container-fluid dashboard-content">
+      <div class="card selectcard">
+        <form class="searchForm" role="form" [formGroup]="classForm" (ngSubmit)="addClass()">
+          <div class="form-group">
+            <input class="form-control" formControlName="name" placeholder="Enter..." type="text">
+          </div>
+          <div class="pull-left">
+            <input name="new" placeholder="Enter..." type="radio">
+            <label>New</label>
+          </div><br><br>
+          <div class="pull-left">
+            <input name="new" placeholder="Enter..." type="radio">
+            <label>Copy</label>
+          </div><br>
+          <div class="form-group pull-right">
+            <button type="submit" class="button button1 hvr-pop transition">Add Pattern</button>
+          </div>
+        </form>
+        <div class="searchForm">
+          <div class="table-responsive">
+            <table style="width:100%;">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Pattern</th>
+                  <th class="pull-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>CCE'18</td>
+                  <td>
+                    <div class="pattrenED">
+                      <div><i class="fa fa-pencil-square" aria-hidden="true"></i></div>
+                      <div><i class="fa fa-trash" aria-hidden="true"></i></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>CCE'18</td>
+                  <td>
+                    <div class="pattrenED">
+                      <div><i class="fa fa-pencil-square" aria-hidden="true"></i></div>
+                      <div><i class="fa fa-trash" aria-hidden="true"></i></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-content">
+        <div class="card listcard">
+          <div class="row">
+            <div class="col-md-12">
+             <h1 class="sdhead">Formtive Assessment</h1> 
+            </div>
+            
+              <div class="col-md-5">
+                <div>
+                <div class="studblock">
+                  <div class="studtxt">No of FA's*</div>
+                  <div class="studinput"><input type="text" placeholder="Enter..."></div>
+                </div>
+                <div class="studblock">
+                  <div class="studtxt">FA's</div>
+                  <div class="studinput1">
+                    <select name="" id="">
+                      <option value="">--Select--</option>
+                      <option value="">Nursery</option>
+                      <option value="">LKG</option>
+                      <option value="">UKG</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              </div>
+        
+              <div class="col-md-5">
+                <div>
+                  <div class="studblock">
+                    <div class="studtxt">Max Marks</div>
+                    <div class="studinput"><input type="text" placeholder="Enter..."></div>
+                  </div>
+                  <div class="studblock">
+                    <div class="studtxt">Individual FA's</div>
+                    <div class="studinput"><input type="text" placeholder="Enter..."></div>
+                  </div>
+              </div>
+              </div>
+  
+              <div class="col-md-2">
+                <div>
+                  <div class="studblock">
+                    <div class="studinput"><div class="button">Submit</div></div>
+                  </div>
+              </div>
+              </div>
+  
+              <div class="col-md-5">
+                <div>
+                <div class="studblock scrollonhover1">
+                  <div class="studtxt">MaxMarks:</div>
+                  <table style="border: solid 1px gray;width: 405px;">
+                    <tr>
+                      <th>Pattern</th>
+                      <th>MaxMarks</th>
+                      <th>Action</th>
+                    </tr>
+                    <tr>
+                      <td>FA-1</td>
+                      <td>empty</td>
+                      <td>
+                      <div class="pattrenED">
+                        <div><i class="fa fa-pencil-square" aria-hidden="true"></i></div>
+                        <div><i class="fa fa-trash" aria-hidden="true"></i></div>
+                      </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>FA-2</td>
+                      <td>empty</td>
+                      <td>
+                        <div class="pattrenED">
+                          <div><i class="fa fa-pencil-square" aria-hidden="true"></i></div>
+                          <div><i class="fa fa-trash" aria-hidden="true"></i></div>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td>FA-3</td>
+                      <td>empty</td>
+                      <td>
+                        <div class="pattrenED">
+                          <div><i class="fa fa-pencil-square" aria-hidden="true"></i></div>
+                          <div><i class="fa fa-trash" aria-hidden="true"></i></div>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td><input type="text" placeholder="Enter FA.."></td>
+                      <td><input type="text" placeholder="Enter MaxMarks.."></td>
+                      <td><input type="button" value="Add"></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              </div>
+            
+          </div>
+  
+          <div class="row">
+            <div class="col-md-12">
+             <h1 class="sdhead">Summative Assessment</h1> 
+            </div>
+            
+              <div class="col-md-5">
+                <div>
+                <div class="studblock">
+                  <div class="studtxt">No of SA's*</div>
+                  <div class="studinput"><input type="text" placeholder="Enter..."></div>
+                </div>
+              </div>
+              </div>
+        
+              <div class="col-md-5">
+                <div>
+                  <div class="studblock">
+                    <div class="studtxt">Max Marks</div>
+                    <div class="studinput"><input type="text" placeholder="Enter..."></div>
+                  </div>
+              </div>
+              </div>
+  
+              <div class="col-md-2">
+                <div>
+                  <div class="studblock">
+                    <div class="studinput"><div class="button">Submit</div></div>
+                  </div>
+              </div>
+              </div>
+  
+              <div class="col-md-5">
+                <div>
+                <div class="studblock scrollonhover1">
+                  <div class="studtxt">MaxMarks:</div>
+                  <table style="border: solid 1px gray;width: 405px;">
+                    <tr>
+                      <th>Pattern</th>
+                      <th>MaxMarks</th>
+                      <th>Action</th>
+                    </tr>
+                    <tr>
+                      <td>SA-1</td>
+                      <td>80</td>
+                      <td>
+                      <div class="pattrenED">
+                        <div><i class="fa fa-pencil-square" aria-hidden="true"></i></div>
+                        <div><i class="fa fa-trash" aria-hidden="true"></i></div>
+                      </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>SA-2</td>
+                      <td>80</td>
+                      <td>
+                        <div class="pattrenED">
+                          <div><i class="fa fa-pencil-square" aria-hidden="true"></i></div>
+                          <div><i class="fa fa-trash" aria-hidden="true"></i></div>
+                        </div>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td><input type="text" placeholder="Enter SA.."></td>
+                      <td><input type="text" placeholder="Enter MaxMarks.."></td>
+                      <td><input type="button" value="Add"></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              </div>
+            
+          </div>
+  
+          <div class="row">
+            <div class="col-md-12">
+             <h1 class="sdhead">Final Grade</h1> 
+            </div>
+            
+              <div class="col-md-5">
+                <div>
+                <div class="studblock">
+                  <div class="studtxt">Weightage</div>
+                  <div class="studinput"><input type="text" placeholder="Enter..."></div>
+                </div>
+                <div class="studblock">
+                  <div class="studtxt">Weightage:</div>
+                  <div class="studinput"><input type="text" placeholder="Enter..."></div>
+                </div>
+              </div>
+              </div>
+        
+              <div class="col-md-5">
+                <div>
+                  <div class="studblock">
+                    <div class="studtxt">Average of 20%</div>
+                    <div class="studinput1">
+                      <select name="" id="">
+                        <option value="">--Select--</option>
+                        <option value="">Section 1A</option>
+                        <option value="">Section 2A</option>
+                        <option value="">Section 3A</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="studblock">
+                    <div class="studtxt">Average of 80%</div>
+                    <div class="studinput1">
+                      <select name="" id="">
+                        <option value="">--Select--</option>
+                        <option value="">Section 1A</option>
+                        <option value="">Section 2A</option>
+                        <option value="">Section 3A</option>
+                      </select>
+                    </div>
+                  </div>
+              </div>
+              </div>
+  
+              <div class="col-md-2">
+                <div>
+                  <div class="studblock">
+                    <div class="studinput"><div class="button">Submit</div></div>
+                  </div>
+              </div>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><br>
+</div>

@@ -1,0 +1,318 @@
+.noticeboard-view {
+    background: #fff;
+    height: 550px;
+    padding: 30px;
+    width: 800px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.noticeboard-view .close-btn {
+    height: 15px;
+    width: 15px;
+    padding: 0;
+}
+
+.noticeboard-view .close-btn img {
+    width: 100%;
+}
+
+.noticeboard-view h2.heading {
+    color: #000 !important;
+    text-transform: uppercase;
+}
+
+.noticeboard-view .notice-date {
+    margin: 20px 0;
+    width: 100%;
+    text-align: left;
+    font-weight: 600;
+    color: #696969;
+}
+
+.noticeboard-view p.notice-text {
+    text-align: left;
+}
+
+.signature-box {
+    position: absolute;
+    margin-top: 15%;
+}
+
+.noticeboard-view .signature-box {
+    font-weight: 600;
+    color: #696969;
+    font-size: 16px;
+}
+
+.noticeboard-view p.sign-auth-title {
+    margin: 5px 0;
+}
+
+.noticeboard-view p.sign-name-designation {
+    margin: 15px 0;
+}
+
+
+/*view pop-up end*/
+   
+
+
+
+/* add notice pop-up */
+
+.noticeboard-add {
+    background: #fff;
+    height: 500px;
+    padding: 30px;
+    width: 800px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.noticeboard-add .close-btn {
+    height: 15px;
+    width: 15px;
+    padding: 0;
+}
+
+.noticeboard-add .close-btn img {
+    width: 100%;
+}
+
+.noticeboard-add .heading {
+    color: #696969;
+    margin: 15px 0;
+}
+
+.two-input-box-wrapper {
+    display: flex;
+    width: 100%;
+    text-align: left;
+}
+
+.two-input-box-wrapper div {
+    width: 45%;
+    margin: 0 auto;
+}
+
+.one-input-box-wrapper {
+    text-align: left;
+    padding: 20px;
+}
+
+.two-input-box-wrapper label,
+.one-input-box-wrapper label {
+    display: block;
+    padding: 10px 0;
+    color: #696969;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.noticeboard-add .two-input-box-wrapper input, 
+.noticeboard-add .one-input-box-wrapper textarea  {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #D2D2D2;
+    line-height: 25px;
+    color: #000000;
+    font-style: Gilroy-Medium;
+    font-size: 14px;
+    font-weight: 200;
+    background-color: #fff;
+}
+
+.noticeboard-add .confirm-btn {
+    border-radius: 30px;
+    margin: 20px 0px;
+}
+
+/* add notice pop-up end */
+
+
+/* edit notice pop-up */
+
+.noticeboard-edit {
+    background: #fff;
+    height: 500px;
+    padding: 30px;
+    width: 800px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.noticeboard-edit .close-btn {
+    height: 15px;
+    width: 15px;
+    padding: 0;
+}
+
+.noticeboard-edit .close-btn img {
+    width: 100%;
+}
+
+.noticeboard-edit .heading {
+    color: #696969;
+    margin: 15px 0;
+}
+
+.two-input-box-wrapper {
+    display: flex;
+    width: 100%;
+    text-align: left;
+}
+
+.two-input-box-wrapper div {
+    width: 45%;
+    margin: 0 auto;
+}
+
+.one-input-box-wrapper {
+    text-align: left;
+    padding: 20px;
+}
+
+.two-input-box-wrapper label,
+.one-input-box-wrapper label {
+    display: block;
+    padding: 10px 0;
+    color: #696969;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.noticeboard-edit .two-input-box-wrapper input, 
+.noticeboard-edit .one-input-box-wrapper textarea  {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.noticeboard-edit .confirm-btn {
+    border-radius: 30px;
+    margin: 20px 0px;
+}
+
+.noticeboard-edit .cancel-btn {
+    background: #fff;
+    color: #5E81F4;
+    border: 2px solid #5E81F4;
+    border-radius: 30px;
+    margin: 20px;
+    padding: 5px 20px 5px 20px;
+}
+
+.noticeboard-edit .cancel-btn:hover {
+    padding: 5px 20px 5px 20px;
+}
+
+.add_notice_dialog_school_name{
+    text-align: center;
+    color:#000000;
+    font-weight: 600;line-height: 17px;
+}
+.add_notice_doi{
+    color:#616161;
+    font-weight: 400;
+}
+.add_notice_desc{
+    font-weight: 600;
+    color: #000000;
+    line-height: 17px;
+    font-style: normal;
+}
+.vertical-space2{
+    padding-top: 20px;
+}
+.vertical-space3{
+    padding-top: 30px;
+}
+.vertical-space4{
+    padding-top: 40px;
+}
+.mat-close-button{
+    float: right;
+    top:-24px;
+    right:-24px;
+  }
+  
+  .close-icon {
+    transition: 1s ease-in-out;
+  }
+  
+  .close-icon:hover {
+    transform: rotate(180deg);
+  }
+  
+  ::ng-deep .icon-outside .mat-close-button{
+    float: right;
+    top:-52px;
+    right:-52px;
+  }
+  
+  
+.add_notice_signatory_name{
+    color: #616161;
+    line-height: 12px;
+    font-weight: 400px;
+}
+.add_notice_heading{
+    text-align: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 23px;
+    
+    color: #616161;
+}
+.add_notice_input{
+    border: 1px solid #D2D2D2;
+filter: drop-shadow(0px 4px 30px rgba(0, 85, 255, 0.1));
+border-radius: 10px;
+}
+.add-notice-label_name{
+    font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 21px;
+color: #616161;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    position: relative;
+    opacity: 1;
+    cursor: pointer;
+  }
+  .view_notice_doi{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 21px;
+    /* identical to box height */
+    
+    
+    color: #616161;
+  }
+  .add-notice-subject{
+    font-family: Gilroy-SemiBold;
+    font-size: 16px;
+    line-height: 19px;
+    
+    color: #000000;
+  }
+  .text-color-blue{
+    font-family: Proxima Nova;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 12px;
+    /* identical to box height */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #6286ED;
+  }

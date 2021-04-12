@@ -1,0 +1,72 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="dropdown" >
+      <button class="dropbtn" (click)="showVendorList = true" (clickOutside)="showVendorList = false">
+          {{!vendor.vendor_name ? 'select vendor' : vendor.vendor_name}}
+       </button>
+      <div class="dropdown-content" [hidden]="!showVendorList">
+        <a *ngFor="let ven of vendors" (click)="vendor = ven; getVendor_Payments();">{{ven.vendor_name}}</a>
+      </div>
+    </div>
+    <div class="dropdown" >
+      <button class="dropbtn" (click)="showMaterialList = true" (clickOutside)="showMaterialList = false">
+          {{!material.material ? 'select material' : material.material}}
+       </button>
+      <div class="dropdown-content" [hidden]="!showMaterialList">
+        <a *ngFor="let mat of materials" (click)="material = mat; getMaterial_payments();">{{mat.material}}</a>
+      </div>
+    </div>
+    <!-- <div class="add_div">
+      <button class="btn -cta" routerLink="/main/admin/payments">Payments</button>
+      <button class="btn -cta" routerLink="/main/admin/addpayments">Add Payments</button>
+    </div> -->
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="payments.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th align="left">#</th>
+            <th align="left">Vendor</th>
+            <th align="left">Material</th>
+            <th align="left">Payment to Pay</th>
+            <th align="left">Paid</th>
+            <th align="left">Balance</th>
+            <th align="left">Payment Status</th>
+            <th align="left">Due Date</th>
+            <!-- <th align="left">Payment List</th> -->
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pay of payments | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{pay.vendor_name}}</td>
+            <td>{{pay.material}}</td>
+            <td>{{pay.payment_toPay | currency:'INR'}}</td>
+            <td>{{pay.payment_paid | currency:'INR'}}</td>
+            <td>{{pay.payment_balance | currency:'INR'}}</td>
+            <!-- <td>{{pay.payment_status}}</td> -->
+            <td>
+              <span class="_chip -class-running" [ngStyle]="{'background-color': (pay.payment_status == 'Paid') ? '#77c284' : (pay.payment_status == 'Partially Paid') ? '#e5a900' : '#d9534f', 'color': 'white' }">{{pay.payment_status}}</span>
+            </td>
+            <td>{{pay.payment_dueDate}}</td>
+            <td><button class="btn -cta btn-list" (click)="view_payments(pay.payment_id)">View</button></td>
+            <td><button class="btn -cta btn-list" (click)="add_payments(pay.payment_id)">Add Payment</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="payments.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Payments</h1>
+    </div>
+    <div class="_pagination" *ngIf="payments.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>
+

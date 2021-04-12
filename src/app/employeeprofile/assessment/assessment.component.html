@@ -1,0 +1,83 @@
+<div id="main-content" class="assessment-wrapper new-listing">
+    <div class="row">
+        <div class="menu-bar">
+            <button routerLink="/main/main/employeeprofile/profile/{{employee_id}}"
+                routerLinkActive="active">Profile</button>
+            <button routerLink="/main/main/employeeprofile/attendance/{{employee_id}}"
+                routerLinkActive="active">Attendance</button>
+            <button routerLink="/main/main/employeeprofile/academics/{{employee_id}}"
+                class="button button2 hvr-pop transition" routerLinkActive="active">Academics</button>
+            <button routerLink="/main/main/employeeprofile/assessment/{{employee_id}}"
+                routerLinkActive="active">Assessment</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="page-content-wrapper">
+            <div class="student-info-wrapper">
+                <div class="student-details-tablist-wrapper">
+                    <section class="student-task-section">
+                        <section class="page-actions">
+                            <div class="dropdown">
+                                <button class="dropbtn" (click)="showClassList = true" (clickOutside)="showClassList = false">
+                                    {{!selected_class.name ? 'Select Class' : selected_class.name}}
+                                </button>
+                                <div class="dropdown-content" [hidden]="!showClassList">
+                                    <a *ngFor="let class of classes"
+                                        (click)="selected_class = class; getTeacherSections();">{{class.name}}</a>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <button class="dropbtn" (click)="showSectionList = true" (clickOutside)="showSectionList = false">
+                                    {{!selected_section.name ? 'Select Section' : selected_section.name}}
+                                </button>
+                                <div class="dropdown-content" [hidden]="!showSectionList">
+                                    <a *ngFor="let sec of sections"
+                                        (click)="selected_section = sec; getTeachingAssessment(); getCourseAssessment();">{{sec.name}}</a>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="table-and-pagination -classes-schedule">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th align="left">#</th>
+                                            <th align="left">Subject</th>
+                                            <th align="left">Teaching</th>
+                                            <th align="left">Course Delivery</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let teach of teaching_assessments; let i = index; let course of delivery_assessments">
+                                            <td>{{i+1}}</td>
+                                            <td>{{teach.subject_name}}</td>
+                                            <td (click)="View(i, 'teaching')">
+                                                <div class="hor-progress-wrapper">
+                                                    <div class="hor-progress-track">
+                                                        <span class="hor-progress-filled" 
+                                                        [ngStyle]="{'width': teach.totalEfficiency + '%'}"></span>
+                                                    </div>
+                                                    <span class="hor-progress-title">{{teach.totalEfficiency}}%</span>
+                                                </div>
+                                            </td>
+                                            <td (click)="View(i, 'course')">
+                                                <div class="hor-progress-wrapper">
+                                                    <div class="hor-progress-track">
+                                                        <span class="hor-progress-filled" 
+                                                        [ngStyle]="{'width': delivery_assessments[i].totalEfficiency + '%'}"></span>
+                                                    </div>
+                                                    <span class="hor-progress-title">{{delivery_assessments[i].totalEfficiency}}%</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

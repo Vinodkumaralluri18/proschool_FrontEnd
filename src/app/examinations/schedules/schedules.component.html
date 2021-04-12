@@ -1,0 +1,56 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+
+      </div>
+    </div>
+    <div class="add_div">
+      <button class="btn -cta" (click)="addSchedule()" *ngIf="user.role === 'admin'">Add Schedule</button>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="exam_schedules.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Examination Title</th>
+            <th align="left">Start Date</th>
+            <th align="left">End Date</th>
+            <th align="left" *ngIf="user.role === 'admin'">Action</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let exam of exam_schedules | pagination: pageNo; let i=index">
+          <tr>
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{exam.exam_title}}   
+              <span *ngFor="let cl of exam.classes" class="_chip">{{cl.name}}</span>
+            </td>
+            <td>{{exam.from_date}}</td>
+            <td>{{exam.end_date}}</td>
+            <td class="_actions" *ngIf="user.role === 'admin'">
+              <button class="btn" (click)="editSchedules(i)"><img src="../../../assets/images/edit-white.svg"
+                  alt="Edit" /></button>
+              <button class="btn" (click)="deleteConfirmation(exam.exam_sch_id)"><img
+                  src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+            </td>
+          </tr>
+          <!-- <div class="class_div">
+            Classes: 
+            <p *ngFor="let cl of exam.classes" class="class_div">{{cl.name}}</p>
+          </div> -->
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="exam_schedules.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Exam TimeTable</h1>
+    </div>
+    <div class="_pagination" *ngIf="exam_schedules.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

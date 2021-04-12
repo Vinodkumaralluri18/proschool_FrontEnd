@@ -1,0 +1,48 @@
+<div id="main-content">
+
+  <div class="row">
+    <div class="container-fluid" id="buttonId1">
+      <button routerLink="/main/quiz/questions" class="button button2 hvr-pop transition">Questions</button>
+      <button routerLink="/main/quiz/addquestions" class="button button2 hvr-pop transition">Add Questions</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="container-fluid dashboard-content">
+      <div class="card selectcard">
+        <app-chapter (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"
+          (subjectEvent)="receiveSubject($event)" (chapterEvent)="receiveChapter($event)"></app-chapter>
+      </div>
+      <div class="card listcard">
+        <div class="pull-left">
+          <h4>Questions</h4>
+        </div>
+        <div class="searchForm">
+          <div class="table-responsive">
+            <table style="width:100%;">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Question</th>
+                  <th>Answer</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let qs of questions | paginate: { itemsPerPage: count, currentPage: p }; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{qs.question}}</td>
+                  <td>{{qs.answer}}</td>
+                  <td>Action-1</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="paginationdiv">
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

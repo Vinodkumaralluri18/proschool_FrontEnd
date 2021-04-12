@@ -1,0 +1,68 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select_div">
+      <div class="btn-bunch">
+        <button class="btn -cta" routerLink="/main/main/admin/pendingTasks">Pending Tasks</button>
+        <button class="btn -cta selected-tab" routerLink="/main/main/admin/completedTasks">Completed Tasks</button>
+      </div>
+    </div>
+    <!-- <div class="add_div">
+      <button class="btn -cta" (click)="addTask()">Add Task</button>
+    </div> -->
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="tasks.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th align="left">#</th>
+            <th align="left">Task</th>
+            <th align="left" *ngIf="user.role === 'admin'">Department</th>
+            <th align="left" *ngIf="user.role === 'admin'">Assigned To</th>
+            <th align="left">Priority</th>
+            <th align="left">Assigned On</th>
+            <th align="left">Due Date</th>
+            <th align="left">Completion Date</th>
+            <th align="left">Status</th>
+            <th align="left"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{task.task}}</td>
+            <td *ngIf="user.role === 'admin'">{{task.department}}</td>
+            <td *ngIf="user.role === 'admin'">{{task.employee_name}}</td>
+            <td><span class="_chip -class-running"
+                [ngStyle]="{'background-color': (task.priority === 'High') ? '#e56761' : (task.priority === 'Medium') ? '#77c284' : '#5e81f4', 'color': 'white' }">
+                {{task.priority}}</span>
+            </td>
+            <td>{{task.assigned_on}}</td>
+            <td>{{task.due_date}}</td>
+            <td>{{task.completion_date}}</td>
+            <td><span class="_chip -class-running"
+                [ngStyle]="{'background-color': (task.task_status == 'pending') ? '#d9534f' : '#77c284', 'color': 'white' }">{{task.task_status}}</span>
+            </td>
+            <td *ngIf="user.role === 'admin'">
+              <label class="switch">
+                <input type="checkbox" value="1" [checked]="task.task_status !== 'pending'"
+                  (click)="update_status(task.task_status, i)" />
+                <span class="slider end round"></span>
+              </label>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="tasks.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Completed Tasks</h1>
+    </div>
+    <div class="_pagination" *ngIf="tasks.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index'
+        (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

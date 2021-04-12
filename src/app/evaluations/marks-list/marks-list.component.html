@@ -1,0 +1,78 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select_div">
+      <div class="btn-bunch">
+        <button class="btn -cta" routerLink="/main/main/evaluations/subjectMarks">Subject Marks</button>
+        <button class="btn -cta selected-tab" routerLink="/main/main/evaluations/marksList">Exam Marks</button>
+        <button class="btn -cta" routerLink="/main/main/evaluations/cumulativeMarks">Cumulative Marks</button>
+      </div>
+    </div>
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-schedule *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)"
+          (sectionEvent)="receiveSection($event)" (scheduleEvent)="receiveSchedule($event)"></app-schedule>
+        <app-teacher-schedule *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)"
+          (sectionEvent)="receiveSection($event)" (scheduleEvent)="receiveSchedule($event)"></app-teacher-schedule>
+        <div class="dropdown" *ngIf="user.role === 'parent'">
+          <button class="dropbtn" (click)="showScheduleList = true" (clickOutside)="showScheduleList = false">
+            {{!parent_schedule.code ? 'select schedule' : parent_schedule.code}}
+          </button>
+          <div class="dropdown-content" [hidden]="!showScheduleList">
+            <a *ngFor="let assp of assessment_patterns[0].assessment"
+              (click)="parent_schedule = assp; getSubjects();">{{assp.code}}</a>
+            <a *ngFor="let assp of assessment_patterns[1].assessment"
+              (click)="parent_schedule = assp; getSubjects();">{{assp.code}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="marks.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th align="left">#</th>
+            <th align="left">Student</th>
+            <th align="left">Roll</th>
+            <th align="left">Percentage</th>
+            <th align="left">Marks</th>
+            <th align="left">Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let std of marks | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{std.student_name}}</td>
+            <td>{{std.roll_no}}</td>
+            <td>
+              <div class="hor-progress-wrapper">
+                <div class="hor-progress-track">
+                  <span class="hor-progress-filled"
+                    [ngStyle]="{'background-color': (std.Percentage >= 80) ? '#5e81f4' : (std.Percentage < 80 && std.Percentage >= 60) ? '#77c284' : '#e56761', 'width': std.Percentage + '%', 'color': '#FFFFFF'}">{{std.Percentage}}%</span>
+                </div>
+                <span class="hor-progress-title"></span>
+              </div>
+            </td>
+            <td>{{std.exam_totalMarks}}</td>
+            <td>
+              <div class="_progress"
+                [ngStyle]="{'background-color': (std.Percentage >= 80) ? '#5e81f4' : (std.Percentage < 80 && std.Percentage >= 60) ? '#77c284' : '#e56761'}">
+                {{std.Grade}}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="marks.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Exam Reports for this Class</h1>
+    </div>
+    <div class="_pagination" *ngIf="marks.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index'
+        (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

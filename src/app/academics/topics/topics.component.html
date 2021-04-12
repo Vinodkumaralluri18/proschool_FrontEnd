@@ -1,0 +1,66 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-chapter *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)"
+          (sectionEvent)="receiveSection($event)" (subjectEvent)="receiveSubject($event)"
+          (chapterEvent)="receiveChapter($event)"></app-chapter>
+        <app-teacher-chapter *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)"
+          (sectionEvent)="receiveSection($event)" (subjectEvent)="receiveSubject($event)"
+          (chapterEvent)="receiveChapter($event)"></app-teacher-chapter>
+      </div>
+    </div>
+    <div class="add_div" *ngIf="user.role === 'admin' || user.role === 'teacher'">
+      <input id="file-input" type="file" name="file" placeholder="Upload Bulk Data" (change)="topicsUpload($event.target.files)"/>
+      <button class="btn -cta" (click)="addTopic()">Add Topic</button>
+    </div>
+  </section>
+
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="topics.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Topic Name</th>
+            <th align="left">Status</th>
+            <th align="left"></th>
+            <th align="left" *ngIf="user.role === 'admin' || user.role === 'teacher'">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ts of topics | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{ts.topic_name}}</td>
+            <td><span class="_chip" [ngClass]="{'-class-pending': ts.topic_status === 'Pending', '-class-running': ts.topic_status === 'Completed'}">{{ts.topic_status}}</span></td>
+            <td *ngIf="user.role === 'admin' || user.role === 'teacher'">
+              <label class="switch" *ngIf="ts.topic_status === 'Pending'">
+                <input type="checkbox" value="1" [checked]="ts.topic_status !== 'Pending'" (click)="update_status(ts.topic_status, i)" />
+                <span class="slider start round"></span>
+              </label>
+              <label class="switch" *ngIf="ts.topic_status === 'Completed'">
+                <input type="checkbox" value="1" [checked]="ts.topic_status === 'Completed'" (click)="update_status(ts.topic_status, i)" />
+                <span class="slider end round"></span>
+              </label>
+            </td>
+            <td class="_actions" *ngIf="user.role === 'admin' || user.role === 'teacher'">
+              <button class="btn" (click)="editTopic(page_start + i)"><img src="../../../assets/images/edit-white.svg"
+                  alt="Edit" /></button>
+              <button class="btn" (click)="deleteConfirmation(ts.topic_id)"><img src="../../../assets/images/trash-white.svg"
+                  alt="Delete" /></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="topics.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Topics for this Chapter</h1>
+    </div>
+    <div class="_pagination" *ngIf="topics.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

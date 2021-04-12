@@ -1,0 +1,154 @@
+<div id="main-content">
+    <div class="row">
+        <div class="menu-bar">
+            <button routerLink="/main/main/studentprofile/profile/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Profile</button>
+            <button routerLink="/main/main/studentprofile/attendance/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Attendance</button>
+            <button routerLink="/main/main/studentprofile/academics/{{student_id}}/{{section_id}}"
+                class="button button2 hvr-pop transition"
+                routerLinkActive="active">Academics</button>
+            <button routerLink="/main/main/studentprofile/assessment/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Assessment</button>
+            <button routerLink="/main/main/studentprofile/fees/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Fee Collection</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="page-content-wrapper">
+            <div class="student-info-wrapper">
+                <div class="student-details">
+                    <div class="student-img-wrapper">
+                        <img src="{{profileImage}}" />
+                    </div>
+                    <div class="image-upload iconF" *ngIf="user.role === 'admin'">
+                        <label for="file-input-studProfPic">
+                            <div class="pattrenI">
+                                <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                            </div>
+                        </label>
+                        <input id="file-input-studProfPic" type="file" name="image"
+                            (change)="studentProfPic($event.target.files)" />
+                    </div>
+                    <p class="student-basic-info">
+                        Name: <span>{{student_details.first_name}} {{student_details.last_name}}</span>
+                        <br><br>
+                        Class: <span>{{student_details.school_classes[0].name}}</span>
+                        <br><br>
+                        Roll No: <span>{{student_details.roll_no}}</span>
+                    </p>
+                </div>
+                <div class="student-details-tablist-wrapper">
+                    <ul class="tab-menu">
+                        <li [ngClass]="[profilePannel ? 'selected-tab' : '']" (click)="profile_info('profile')">Student Profile
+                        </li>
+                        <li [ngClass]="[pgPannel ? 'selected-tab' : '']" (click)="profile_info('pgdetails')">Parent/Guardian Details
+                        </li>
+                        <li [ngClass]="[addrPannel ? 'selected-tab' : '']" (click)="profile_info('stuaddress')">Student Address
+                        </li>
+                    </ul>
+                    <div *ngIf="profilePannel" class="student-profile">
+                        <table class="student-details-table" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td class="heading">First Name:</td>
+                                <td>{{student_details.first_name}}</td>
+                                <td class="heading">Gender:</td>
+                                <td>{{student_details.gender}}</td>
+                                <td class="heading">Adhar No:</td>
+                                <td>{{student_details.aadhar_no}}</td>
+                            </tr>
+                             <tr>
+                                <td class="heading">Surname:</td>
+                                <td>{{student_details.last_name}}</td>
+                                <td class="heading">Contact:</td>
+                                <td>{{student_details.phone}}</td>
+                                <td class="heading">Category:</td>
+                                <td>{{student_details.category}}</td>
+                            </tr>
+                             <tr>
+                                <td class="heading">Class:</td>
+                                <td>{{student_details.school_classes[0].name}}</td>
+                                <td class="heading">DOB:</td>
+                                <td>{{student_details.dob}}</td>
+                                <td class="heading">Nationality:</td>
+                                <td>{{student_details.nationality}}</td>
+                            </tr>
+                             <tr>
+                                <td class="heading">Section:</td>
+                                <td>{{student_details.sections[0].name}}</td>
+                                <td class="heading">Date of Admission:</td>
+                                <td>{{student_details.admission_date}}</td>
+                                <!-- <td class="heading">Email Id:</td>
+                                <td>{{student_details.email}}</td> -->
+                            </tr>
+                            <tr>
+                                <td class="heading">Admission Number:</td>
+                                <td>{{student_details.admission_no}}</td>
+                                <td class="heading">Blood Group:</td>
+                                <td>{{student_details.blood_group}}</td>
+                                <!-- <td class="heading">Bus Route:</td>
+                                <td>{{student_details.bus_route_id}}</td> -->
+                            </tr>
+                        </table>
+                        <button class="edit-info-btn" (click)="editStudent()" *ngIf="user.role === 'admin'">Edit</button>
+                    </div>
+
+                    <div *ngIf="pgPannel" class="student-profile">
+                        <table class="student-details-table" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td class="heading">Father Name:</td>
+                                <td>{{student_details.parents[0].parent_name}}</td>
+                                <td class="heading">Father Contact:</td>
+                                <td>{{student_details.parents[0].parent_contact}}</td>
+                                <td class="heading">Guardian Name:</td>
+                                <td>{{student_details.parents[2].parent_name}}</td>
+                            </tr>
+                             <tr>
+                                <td class="heading">Father Occupation:</td>
+                                <td>{{student_details.parents[0].occupation}}</td>
+                                <td class="heading">Mother Contact:</td>
+                                <td>{{student_details.parents[1].parent_contact}}</td>
+                                <td class="heading">Guardian Occupation:</td>
+                                <td>{{student_details.parents[2].occupation}}</td>
+                            </tr>
+                             <tr>
+                                <td class="heading">Mother Name:</td>
+                                <td>{{student_details.parents[1].parent_name}}</td>
+                                <td class="heading">Guardian Contact:</td>
+                                <td>{{student_details.parents[2].parent_contact}}</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                             <tr>
+                                <td class="heading">Mother Occupation:</td>
+                                <td>{{student_details.parents[1].occupation}}</td>
+                                <td class="heading">Guardian Relation:</td>
+                                <td>{{student_details.parents[2].parent_relation}}</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
+                        <button class="edit-info-btn" (click)="editStudent()" *ngIf="user.role === 'admin'">Edit</button>
+                    </div>
+
+                    <div *ngIf="addrPannel" class="student-profile">
+                        <table class="student-details-table" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td class="heading long">Current Address:</td>
+                                <td>{{student_details.current_address[0].cur_address}}</td>
+                                
+                            </tr>
+                             <tr>
+                                <td class="heading long">Permanent Address:</td>
+                                <td>{{student_details.permanent_address[0].perm_address}}</td>
+                                
+                            </tr>
+                        </table>
+                        <button class="edit-info-btn" (click)="editStudent()" *ngIf="user.role === 'admin'">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<main class="card mt-20 within-viewport mailbox">
+
+    <div class="mail-setcion-wrapper">
+        <div class="mails-list-wrapper">
+            <input type="text" class="search-box" name="mailSearchCriteria" placeholder="Search message">
+            <div class="compose-wrapper">
+
+            </div>
+            <div class="mail-list">
+                <div *ngFor="let mail of chats" (click)="selectedChat = mail; messageStatus(mail.chat_id)" 
+                class="mail-short-detail-wrapper"
+                [ngClass]="{'selected-mail': selectedChat.chat_id === mail.chat_id, 
+                'mail-read': mail.unread === 0,
+                'mail-unread': mail.unread !== 0}">
+                    <p class="mail-from" >{{mail.first_name}} {{mail.last_name}}</p>
+                    <p class="mail-content-short">{{mail.messages[mail.totalMessages - 1].message}}</p>
+                    <p class="mail-day">Tuesday</p>
+                    <p class="mail-date-time">{{mail.messages[mail.totalMessages - 1].timestamp}}</p>
+                    <span class="mail-read-flag" [ngClass]="mail.unread === 0 ? 'mail-read' : 'mail-unread'"></span>
+                </div>
+            </div>
+            <button (click)="addMessage()" class="compose-btn">Compose</button>
+        </div>
+
+        <div class="mail-content-wrapper">
+            <!-- <div class="inbox-outbox-btn-wrapper">
+                <button class="box-selection-btn" 
+                [ngClass]="isInbox ? 'selected': ''" 
+                (click)="getInbox(); isInbox = true;">Inbox</button>
+
+                <button class="box-selection-btn" 
+                [ngClass]="!isInbox ? 'selected': ''" 
+                (click)="getOutbox(); isInbox = false;">Outbox</button>
+
+                <div class="compose-wrapper">
+                    <button (click)="addMessage()" class="compose-btn">Compose</button>
+                </div>
+
+            </div> -->
+            <div class="mail-body-wrapper">
+                <div class="mail-content" *ngIf="selectedChat">
+                    <span class="mail-body-icon">
+                        <img _ngcontent-ttv-c6="" src="../../../assets/images/man2.jpg">
+                    </span>
+                    <span class="mail-body-from-name">{{selectedChat.first_name}} {{selectedChat.last_name}}</span>
+                    <!-- <span class="mail-body-from-name">To : {{selectedChat.sender_name}}</span> -->
+                    <p class="mail-body-day">Tuesday</p>
+                    <p class="mail-body-date-time">{{selectedChat.messages[selectedChat.totalMessages - 1].timestamp}}</p>
+                    <div class="mail-box">
+                        <div *ngFor="let msg of selectedChat.messages">
+                            <p [ngClass]="msg.receiver === sent_to ? 'mail-body' : 'mail-body2'">{{msg.message}}</p>
+                        </div>
+                    </div>
+                    <span class="mail-body-read-flag" *ngIf="!isInbox"
+                    [ngClass]="selectedChat.status === 1 ? 'mail-sent' : 'mail-unsent'"></span>
+                </div>
+            </div>
+            <div class="reply-div">
+                <input type="text" class="search-box mail-body-reply-btn" name="mailSearchCriteria" [(ngModel)]="reply" placeholder="Click here to reply">
+                <button class="btn send-btn" (click)="sendReply()">send</button>
+            </div>
+        </div>
+    </div>
+</main>

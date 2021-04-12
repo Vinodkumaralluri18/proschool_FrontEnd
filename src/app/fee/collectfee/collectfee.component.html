@@ -1,0 +1,69 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <!-- <div class="_select-group">
+        <app-class *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)"
+          (sectionEvent)="receiveSection($event)"></app-class>
+        <app-teacher-class *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)"
+          (sectionEvent)="receiveSection($event)"></app-teacher-class>
+        <div class="dropdown">
+          <button class="dropbtn" (click)="showStudentList = true" (clickOutside)="showStudentList = false">
+            {{!selected_student.first_name ? 'select' : selected_student.first_name}} {{!selected_student.last_name ? 'student' : selected_student.last_name}}
+          </button>
+          <div class="dropdown-content" [hidden]="!showStudentList">
+            <a *ngFor="let std of students" (click)="selected_student = std; getCollectedFee()">{{std.first_name}} {{std.last_name}}</a>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <button class="btn -cta" (click)="addStudentFee()">Add StudentFee</button>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="collected_fee.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Fee Type</th>
+            <th align="left">Installment</th>
+            <th align="left">Total Fee</th>
+            <th align="left">Paid Fee</th>
+            <th align="left">Balance Fee</th>
+            <th align="left">Discount</th>
+            <th align="left"></th>
+            <th align="left"></th>
+            <th align="left">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let col of collected_fee | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{col.fee_type}}</td>
+            <td>{{col.payment_mode}}</td>
+            <td>{{col.total_fee}}</td>
+            <td>{{col.paid_fee}}</td>
+            <td>{{col.balance_fee}}</td>
+            <td>{{col.discount}}</td>
+            <td><button class="btn -cta btn-list" (click)="viewPayments(col.fee_types_id)">View Payments</button></td>
+            <td><button class="btn -cta btn-list" (click)="addCollectedFee(page_start + i, col.fee_types_id, col.fee)">Collect Fee</button></td>
+            <td class="_actions">
+              <button class="btn" (click)="editStudentFee(col.studentFee_id)"><img
+                      src="../../../assets/images/edit-white.svg" alt="Edit" /></button>
+              <button class="btn" (click)="deleteStudentFee(col.studentFee_id)"><img
+                      src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="collected_fee.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Student Fees</h1>
+    </div>
+    <div class="_pagination" *ngIf="collected_fee.length !== 0">
+      <a class="btn -previous">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next">Next</a>
+    </div>
+  </section>
+</main>

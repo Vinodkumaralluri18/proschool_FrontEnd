@@ -1,0 +1,11 @@
+._chip {
+    background-color: #5E81F4;
+    color: #FFFFFF;
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 2px;
+}
+
+#class_chip {
+    display: inline-flex;
+}

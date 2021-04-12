@@ -1,0 +1,280 @@
+<div id="main-content" class="academic-wrapper new-listing">
+    <div class="row">
+        <div class="menu-bar">
+            <button routerLink="/main/main/employeeprofile/profile/{{employee_id}}"
+                routerLinkActive="active">Profile</button>
+            <button routerLink="/main/main/employeeprofile/attendance/{{employee_id}}"
+                routerLinkActive="active">Attendance</button>
+            <button routerLink="/main/main/employeeprofile/academics/{{employee_id}}"
+                class="button button2 hvr-pop transition" routerLinkActive="active">Academics</button>
+            <button routerLink="/main/main/employeeprofile/assessment/{{employee_id}}"
+                routerLinkActive="active">Assessment</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="page-content-wrapper">
+            <div class="student-info-wrapper">
+                <div class="student-details-tablist-wrapper">
+                    <section class="student-task-section">
+                        <section class="page-actions">
+                            <div class="dropdown">
+                                <button class="dropbtn" (click)="showClassList = true" (clickOutside)="showClassList = false">
+                                    {{!selected_class.name ? 'Select Class' : selected_class.name}}
+                                </button>
+                                <div class="dropdown-content" [hidden]="!showClassList">
+                                    <a *ngFor="let class of classes"
+                                        (click)="selected_class = class; getTeacherSections();">{{class.name}}</a>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <button class="dropbtn" (click)="showSectionList = true" (clickOutside)="showSectionList = false">
+                                    {{!selected_section.name ? 'Select Section' : selected_section.name}}
+                                </button>
+                                <div class="dropdown-content" [hidden]="!showSectionList">
+                                    <a *ngFor="let sec of sections"
+                                        (click)="selected_section = sec; getTeacherSubjects();">{{sec.name}}</a>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <button class="dropbtn" (click)="showSubjectList = true" (clickOutside)="showSubjectList = false">
+                                    {{!selected_subject.name ? 'Select Subject' : selected_subject.name}}
+                                </button>
+                                <div class="dropdown-content" [hidden]="!showSubjectList">
+                                    <a *ngFor="let sub of subjects"
+                                        (click)="selected_subject = sub; getAcademicEvaluation();">{{sub.name}}</a>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="table-and-pagination -classes-schedule">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th align="left">Examination</th>
+                                            <th align="left" *ngFor="let grade of academics[0].data">{{grade.grade}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let exam of academics; let i = index">
+                                            <td class="_s-no"><span>{{ i + 1 }}</span></td>
+                                            <td>{{exam.exam_title}}</td>
+                                            <!-- <td *ngFor="let grade of academics[i].data">{{grade.count}}</td> -->
+                                            <td *ngFor="let grade of academics[i].data">
+                                                <div class="hor-progress-wrapper">
+                                                    <div class="hor-progress-track">
+                                                        <span class="hor-progress-filled"
+                                                            [ngStyle]="{'background-color': '#5E81F4', 'width': (exam.totalCount == 0) ? exam.totalCount + '%' : (grade.count / exam.totalCount * 100) + '%', 'color': '#FFFFFF'}">
+                                                        </span>
+                                                        {{grade.count}}
+                                                    </div>
+                                                    <span class="hor-progress-title"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <main class="card mt-20 within-viewport" style="height: auto;">
+    <div class="page-actions">
+        <section class="student-intro">
+            <img src="/assets/images/student.png">
+            <h4>Vinod Kumar Alluri</h4>
+            <h4>Class X - A</h4>
+            <h4>Roll No : 1</h4>
+
+            <div class="col-wrapper">
+                <button routerLink="/main/main/employeeprofile/profile/{{employee_id}}"
+                    class="btn -cta active-tab">Profile</button>
+                <button routerLink="/main/main/employeeprofile/attendance/{{employee_id}}"
+                    class="btn -cta active-tab">Attendance</button>
+                <button routerLink="/main/main/employeeprofile/academics/{{employee_id}}"
+                    class="btn -cta active-tab">Academics</button>
+                <button routerLink="/main/main/employeeprofile/assessment/{{employee_id}}"
+                    class="btn -cta active-tab">Assessment</button>
+            </div>
+
+        </section>
+        <section class="student-task-section">
+            <section class="page-actions">
+                <div class="dropdown">
+                    <button class="dropbtn" (click)="showClassList = true" (clickOutside)="showClassList = false">
+                        {{!selected_class.name ? 'Select Class' : selected_class.name}}
+                    </button>
+                    <div class="dropdown-content" [hidden]="!showClassList">
+                        <a *ngFor="let class of classes"
+                            (click)="selected_class = class; getTeacherSections();">{{class.name}}</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn" (click)="showSectionList = true" (clickOutside)="showSectionList = false">
+                        {{!selected_section.name ? 'Select Section' : selected_section.name}}
+                    </button>
+                    <div class="dropdown-content" [hidden]="!showSectionList">
+                        <a *ngFor="let sec of sections"
+                            (click)="selected_section = sec; getTeacherSubjects();">{{sec.name}}</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn" (click)="showSubjectList = true" (clickOutside)="showSubjectList = false">
+                        {{!selected_subject.name ? 'Select Subject' : selected_subject.name}}
+                    </button>
+                    <div class="dropdown-content" [hidden]="!showSubjectList">
+                        <a *ngFor="let sub of subjects"
+                            (click)="selected_subject = sub; getAcademicEvaluation();">{{sub.name}}</a>
+                    </div>
+                </div>
+            </section>
+            <section class="table-and-pagination -classes-schedule">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th align="left">Examination</th>
+                                <th align="left" *ngFor="let grade of academics[0].data">{{grade.grade}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let exam of academics; let i = index">
+                                <td class="_s-no"><span>{{ i + 1 }}</span></td>
+                                <td>{{exam.exam_title}}</td>
+                                <td *ngFor="let grade of academics[i].data">{{grade.count}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="subject-color-spes">
+                    <div class="subject-child">
+                        <span class="subject-dot _d_blue"></span>
+                        <span class="subject-name">A1</span>
+                    </div>
+                     <div class="subject-child">
+                        <span class="subject-dot _d_green"></span>
+                        <span class="subject-name">A2</span>
+                    </div>
+                     <div class="subject-child">
+                        <span class="subject-dot _d_yellow"></span>
+                        <span class="subject-name">B1</span>
+                    </div>
+                     <div class="subject-child">
+                        <span class="subject-dot _d_pink"></span>
+                        <span class="subject-name">B2</span>
+                    </div>
+                     <div class="subject-child">
+                        <span class="subject-dot _d_darkgreen"></span>
+                        <span class="subject-name">C1</span>
+                    </div>
+                     <div class="subject-child">
+                        <span class="subject-dot _d_violet"></span>
+                        <span class="subject-name">C2</span>
+                    </div>
+                     <div class="subject-child">
+                        <span class="subject-dot _d_skyblue"></span>
+                        <span class="subject-name">D</span>
+                    </div>
+                     <div class="subject-child">
+                        <span class="subject-dot _d_red"></span>
+                        <span class="subject-name">E</span>
+                    </div>
+                </div>
+                <div class="_attendance-box dynamic-bar-graph">
+                    <section role="tabpanel">
+                        <div class="bar-8-group" *ngFor="let exam of academics; let i = index;">
+                            <div class=" _metric -total">
+                                <div class="_bar" [attr.title]="(academics[i].data[0].count / academics[i].totalCount * 100) + '%'">
+                                    <span class="_bar_progress"
+                                        [ngStyle]="{'height': (academics[i].data[0].count / academics[i].totalCount * 100) + '%'}">
+                                    </span>
+                                </div>
+                                <div class="_name">
+                                    <span class="_legend"></span>
+                                </div>
+                            </div>
+                            <div class="_metric -due">
+                                <div class="_bar" [attr.title]="(academics[i].data[1].count / academics[i].totalCount * 100) + '%'">
+                                    <span class="_bar_progress"
+                                        [ngStyle]="{'height': (academics[i].data[1].count / academics[i].totalCount * 100) + '%'}">
+                                    </span>
+                                </div>
+                                <div class="_name">
+                                    <span class="_legend"></span>
+                                </div>
+                            </div>
+                            <div class="_metric -Leave">
+                                <div class="_bar" [attr.title]="(academics[i].data[2].count / academics[i].totalCount * 100) +'%'">
+                                    <span class="_bar_progress"
+                                        [ngStyle]="{'height': (academics[i].data[2].count / academics[i].totalCount * 100) +'%'}">
+                                    </span>
+                                </div>
+                                <div class="_name">
+                                    <span class="_legend"></span>
+                                </div>
+                            </div>
+                            <div class="_metric -FifthColor">
+                                <div class="_bar" [attr.title]="(academics[i].data[3].count / academics[i].totalCount * 100) +'%'">
+                                    <span class="_bar_progress"
+                                        [ngStyle]="{'height': (academics[i].data[3].count / academics[i].totalCount * 100) +'%'}">
+                                    </span>
+                                </div>
+                                <div class="_name">
+                                    <span class="_legend"></span>
+                                </div>
+                            </div>
+                            <div class="_metric -SixthColor">
+                                <div class="_bar" [attr.title]="(academics[i].data[4].count / academics[i].totalCount * 100) +'%'">
+                                    <span class="_bar_progress"
+                                        [ngStyle]="{'height': (academics[i].data[4].count / academics[i].totalCount * 100) +'%'}">
+                                    </span>
+                                </div>
+                                <div class="_name">
+                                    <span class="_legend"></span>
+                                </div>
+                            </div>
+                            <div class="_metric -SeventhColor">
+                                <div class="_bar" [attr.title]="(academics[i].data[5].count / academics[i].totalCount * 100) +'%'">
+                                    <span class="_bar_progress"
+                                        [ngStyle]="{'height': (academics[i].data[5].count / academics[i].totalCount * 100) +'%'}">
+                                    </span>
+                                </div>
+                                <div class="_name">
+                                    <span class="_legend"></span>
+                                </div>
+                            </div>
+                            <div class="_metric -EighthColor">
+                                <div class="_bar" [attr.title]="(academics[i].data[6].count / academics[i].totalCount * 100) +'%'">
+                                    <span class="_bar_progress"
+                                        [ngStyle]="{'height': (academics[i].data[6].count / academics[i].totalCount * 100) +'%'}">
+                                    </span>
+                                </div>
+                                <div class="_name">
+                                    <span class="_legend"></span>
+                                </div>
+                            </div>
+                            <div class="_metric -attend">
+                                <div class="_bar" [attr.title]="(academics[i].data[7].count / academics[i].totalCount * 100) +'%'">
+                                    <span class="_bar_progress"
+                                        [ngStyle]="{'height': (academics[i].data[7].count / academics[i].totalCount * 100) +'%'}">
+                                    </span>
+                                </div>
+                                <div class="_name">
+                                    <span class="_legend"></span>
+                                </div>
+                            </div>
+                            <p class="group-title">{{academics[i].exam_title}}</p>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </section>
+    </div>
+</main> -->

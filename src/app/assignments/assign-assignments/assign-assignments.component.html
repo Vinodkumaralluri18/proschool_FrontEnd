@@ -1,0 +1,79 @@
+<div id="main-content1" class="new-message-wrapper">
+  <div class="header-wrapper">
+    <p *ngIf="dialog_type == 'add'">Add Assignment</p>
+    <p *ngIf="dialog_type == 'edit'">Add Assignment</p>
+    <button class="btn-close" (click)="close()"></button>
+  </div>
+  <form role="form" [formGroup]="assignmentForm" (ngSubmit)="assignAssignment()">
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Assignment Title:
+      </div>
+      <div class="col-full-6">
+        <input value="{{assignment.assignment_title}}" formControlName="assignment_title" Placeholder="Enter the Code..." type="text">
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Max Marks:
+      </div>
+      <div class="col-full-6">
+        <input value="{{assignment.maxMarks}}" formControlName="maxMarks" Placeholder="Enter Max Marks..." type="number">
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Subject:
+      </div>
+      <div class="col-full-6">
+        <select formControlName="subject_id" [value]="assignment.subject_id" (change)="getChapters()">
+          <option>select...</option>
+          <option *ngFor="let sub of subjects" value="{{sub.subject_id}}">{{sub.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Chapter:
+      </div>
+      <div class="col-full-6">
+        <select class="form-control" formControlName="lession_id" [value]="assignment.lession_id">
+          <option>select...</option>
+          <option *ngFor="let ch of chapters" value="{{ch.lession_id}}">{{ch.title}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Assignment Date:
+      </div>
+      <div class="col-full-6">
+        <input class="form-control" value="{{assignment.assign_date}}" formControlName="assign_date"
+        placeholder="Enter..." type="date">
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Due Date:
+      </div>
+      <div class="col-full-6">
+        <input class="form-control" value="{{assignment.due_date}}" formControlName="due_date" placeholder="Enter..."
+        type="date">
+      </div>
+    </div>
+    <div class="row-wrapper">
+      <div class="col-full-3">
+        Description:
+      </div>
+      <div class="col-full-6">
+        <textarea value="{{assignment.description}}" formControlName="description"
+        placeholder="Enter the Description of the Assignment..." cols="50" rows="5"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 pull-right">
+          <button class="btn -cta active-tab" type="submit">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>

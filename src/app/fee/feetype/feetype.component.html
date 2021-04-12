@@ -1,0 +1,44 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <!-- <form role="form" [formGroup]="feetypeForm" (ngSubmit)="addFeeTypes()">
+        <input class="standard" formControlName="fee_type" placeholder="Enter..." type="text">
+        <button type="submit" class="btn -cta">Add Type</button>
+      </form> -->
+    </div>
+    <button class="btn -cta" (click)="addFeeType()">Add FeeType</button>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+
+    <div class="table-container" *ngIf="fee_types.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th align="left">#</th>
+            <th align="left">Type</th>
+            <th align="left">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let fee of fee_types | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{fee.fee_type}}</td>
+            <td class="_actions">
+              <button class="btn" (click)="editFeeType(i)"><img src="../../../assets/images/edit-white.svg" alt="Edit" /></button>
+              <button class="btn" (click)="deleteConfirmation(fee.fee_types_id)"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="fee_types.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Fee Types</h1>
+    </div>
+    <div class="_pagination" *ngIf="fee_types.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

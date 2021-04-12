@@ -1,0 +1,24 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.edit_profile_input{
+  border: 1px solid #D2D2D2;
+filter: drop-shadow(0px 4px 30px rgba(0, 85, 255, 0.1));
+}
+
+.edit-profile-label_name{
+  font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 12px;
+line-height: 21px;
+color: #616161;
+}

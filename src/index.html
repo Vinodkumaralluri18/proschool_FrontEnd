@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PROSchool Management System</title>
+  <meta name="description"
+    content="ProSchool, the Best Administration and Management solution providers in Hyderabad.">
+  <meta name="keywords" content="School Management, Parent-Teacher Communication tool">
+  <link rel="shortcut icon" href="assets/img/Pencil.png">
+  <base href="/">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,
+  500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" 
+  rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body class="main-dashboard">
+
+  <app-root></app-root>
+
+  <script>
+    (function () {
+      var trigger = document.querySelector('.app-nav ._nav-trigger'),
+        menuSection = document.querySelector('.app-nav ._drawer'),
+        menuScrim = document.getElementById('menu-scrim'),
+        accountActionsMenu = document.querySelector('.account ._profile-and-actions');;
+
+      document.body.addEventListener('click', function (e) {
+        var t = e.target;
+        if (t.matches('.app-nav ._nav-trigger')) {
+          if (t.getAttribute('aria-expanded') == 'true') {
+            hideMenuDrawer(); return;
+          }
+          if (t.getAttribute('aria-expanded') == 'false') {
+            showMenuDrawer(t); return;
+          }
+        }
+        if (t.matches('#menu-scrim')) {
+          hideMenuDrawer(); return;
+        }
+        if (t.matches('.app-nav ._submenu-trigger')) {
+          if (t.getAttribute('aria-expanded') == 'true') {
+            hideSubMenu(t); return;
+          }
+          if (t.getAttribute('aria-expanded') == 'false') {
+            showSubMenu(t); return;
+          }
+        }
+        if (t.matches('.account ._actions-trigger')) {
+          if (t.getAttribute('aria-expanded') == 'true') {
+            hideAccountActions(t); return;
+          }
+          if (t.getAttribute('aria-expanded') == 'false') {
+            showAccountActions(t); return;
+          }
+        }
+      });
+
+      accountActionsMenu.addEventListener('click', function (e) {
+        e.stopPropagation();
+      })
+
+      function showMenuDrawer(t) {
+        menuSection.classList.add('-show');
+        t.setAttribute('aria-expanded', 'true');
+      }
+
+      function hideMenuDrawer() {
+        menuSection.addEventListener('transitionend', function a() {
+          this.classList.remove('-hiding');
+          this.classList.remove('-show');
+          this.removeEventListener('transitionend', a);
+        });
+        menuSection.classList.add('-hiding');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+
+      function showSubMenu(t) {
+        var submenu = t.nextElementSibling;
+        submenu.addEventListener('animationend', function a(e) {
+          this.style.height = submenu.scrollHeight + "px";
+          this.removeEventListener('animationend', a);
+        });
+        submenu.classList.add('-show');
+        t.setAttribute('aria-expanded', 'true');
+      }
+
+      function hideSubMenu(t) {
+        var submenu = t.nextElementSibling;
+        submenu.addEventListener('transitionend', function a() {
+          this.classList.remove('-hiding');
+          this.classList.remove('-show');
+          this.style.height = 'auto';
+          this.removeEventListener('transitionend', a);
+        });
+        submenu.classList.add('-hiding');
+        t.setAttribute('aria-expanded', 'false');
+      }
+
+      function showAccountActions(t) {
+        accountActionsMenu.classList.add('-show');
+        document.body.addEventListener('click', hideAccountActions);
+      }
+
+      function hideAccountActions(t) {
+        accountActionsMenu.classList.remove('-show');
+        document.body.removeEventListener('click', hideAccountActions);
+      }
+    })();
+
+    (function () {
+      function setupTabbedContent(tabbed) {
+        var tablist = tabbed.querySelector('[role=tablist]'),
+          tabs = tabbed.querySelectorAll('[role=tab]'),
+          panels = tabbed.querySelectorAll('[role=tabpanel]'),
+          activeTab = tablist.querySelector('[aria-selected=true]');
+
+        function switchTabTo(newTab) {
+          if (newTab === activeTab || newTab === undefined) {
+            return;
+          }
+
+          // Indices of the new and old tabs within their parent list
+          var newTabIndex = Array.prototype.indexOf.call(tabs, newTab),
+            activeTabIndex = Array.prototype.indexOf.call(tabs, activeTab);
+
+          activeTab.removeAttribute('aria-selected');
+          activeTab.setAttribute('tabindex', '-1');
+          panels[activeTabIndex].hidden = true;
+
+          newTab.focus();
+          newTab.removeAttribute('tabindex');
+          newTab.setAttribute('aria-selected', 'true');
+          panels[newTabIndex].hidden = false;
+
+          activeTab = newTab;
+        }
+
+        tablist.addEventListener('click', function (e) {
+          var t = e.target;
+          if (t.matches('[role=tab]')) {
+            e.preventDefault();
+            switchTabTo(t);
+          }
+        });
+
+        tablist.addEventListener('keydown', function (e) {
+          var t = e.target,
+            keyCode = e.keyCode;
+
+          if ((!t.matches('[role=tab]')) || (keyCode !== 37 && keyCode !== 39)) {
+            return
+          }
+          var change;
+          switch (keyCode) {
+            case 37:
+              change = -1;
+              break;
+            case 39:
+              change = 1;
+              break;
+          }
+
+          var index = Array.prototype.indexOf.call(tabs, t);
+          switchTabTo(tabs[index + change]);
+        });
+      }
+
+      var tabbed = document.querySelectorAll('.tabbed');
+      Array.prototype.forEach.call(tabbed, setupTabbedContent);
+    })()
+  </script>
+
+  <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:1926104,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+
+</body>
+
+</html>

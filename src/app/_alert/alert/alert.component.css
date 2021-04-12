@@ -1,0 +1,28 @@
+.container {
+    text-align: center;
+}
+.alert-center {
+    display: inline-block;
+}
+
+.alert-wrapper {
+	text-align: center;
+}
+
+.alert-wrapper h1 {
+	color: #60CF6E;
+    padding: 20px 0 0;
+}
+
+.small-underline {
+	width: 100px;
+	height: 5px;
+	border-radius: 5px;
+	background-color: #60CF6E;
+    margin: 0 auto 30px;
+}
+
+.alert-wrapper .btn.active-tab {
+    border-radius: 20px;
+    width: 80px;
+}

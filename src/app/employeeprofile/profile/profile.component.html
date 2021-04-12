@@ -1,0 +1,108 @@
+<div id="main-content">
+    <div class="row">
+        <div class="menu-bar">
+            <button routerLink="/main/main/employeeprofile/profile/{{employee_id}}" routerLinkActive="active">Profile</button>
+            <button routerLink="/main/main/employeeprofile/attendance/{{employee_id}}" routerLinkActive="active">Attendance</button>
+            <button routerLink="/main/main/employeeprofile/academics/{{employee_id}}" routerLinkActive="active">Academics</button>
+            <button routerLink="/main/main/employeeprofile/assessment/{{employee_id}}" routerLinkActive="active">Assessment</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="page-content-wrapper">
+            <div class="student-info-wrapper">
+                <div class="student-details">
+                    <div class="student-img-wrapper">
+                        <img src="{{service.profileImage}}" />
+                    </div>
+                    <div class="image-upload iconF" *ngIf="user.role === 'admin'">
+                        <label for="file-input-studProfPic">
+                            <div class="pattrenI">
+                                <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                            </div>
+                        </label>
+                        <input id="file-input-studProfPic" type="file" name="image"
+                            (change)="employeProfPic($event.target.files)" />
+                    </div>
+                    <p class="student-basic-info">
+                        Name: <span>{{employee_details.first_name}} {{employee_details.last_name}}</span>
+                        <br><br>
+                        Designation: <span>{{employee_details.designation}}</span>
+                        <br><br>
+                        Employee Code: <span>{{employee_details.employee_code}}</span>
+                    </p>
+                </div>
+                <div class="student-details-tablist-wrapper">
+                    <ul class="tab-menu">
+                        <li [ngClass]="[profInfoPannel ? 'selected-tab' : '']" (click)="profile_info('profile')">Employee Profile
+                        </li>
+                        <li [ngClass]="[addrPannel ? 'selected-tab' : '']" (click)="profile_info('empaddress')">Employee Address
+                        </li>
+                    </ul>
+                    <div *ngIf="profInfoPannel" class="student-profile">
+                        <table class="student-details-table" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td class="heading">First Name:</td>
+                                <td>{{employee_details.first_name}}</td>
+                                <td class="heading">Gender:</td>
+                                <td>{{employee_details.gender}}</td>
+                                <td class="heading">Email Id:</td>
+                                <td>{{employee_details.email}}</td>
+                            </tr>
+                             <tr>
+                                <td class="heading">Surname:</td>
+                                <td>{{employee_details.last_name}}</td>
+                                <td class="heading">Contact:</td>
+                                <td>{{employee_details.phone}}</td>
+                                <td class="heading">Category:</td>
+                                <td>{{employee_details.job_category}}</td>
+                            </tr>
+                             <tr>
+                                <td class="heading">Employee Code:</td>
+                                <td>{{employee_details.employee_code}}</td>
+                                <td class="heading">DOB:</td>
+                                <td>{{employee_details.dob}}</td>
+                                <td class="heading">Marital Status:</td>
+                                <td>{{employee_details.marital_status}}</td>
+                            </tr>
+                             <tr>
+                                <td class="heading">Blood Group:</td>
+                                <td>{{employee_details.blood_group}}</td>
+                                <td class="heading">Date of Admission:</td>
+                                <td>{{employee_details.joined_on}}</td>
+                                <td class="heading">Qualification:</td>
+                                <td>{{employee_details.qualification}}</td>
+                            </tr>
+                            <tr>
+                                <td class="heading">aadhar_no:</td>
+                                <td>{{employee_details.aadhar_no}}</td>
+                                <td class="heading">Passport No:</td>
+                                <td>{{employee_details.passport_no}}</td>
+                                <td class="heading">PAN No:</td>
+                                <td>{{employee_details.pan_no}}</td>
+                            </tr>
+                        </table>
+                        <button class="edit-info-btn" (click)="editEmployee()" *ngIf="user.role === 'admin'">Edit</button>
+                    </div>
+
+                    <div *ngIf="addrPannel" class="student-profile">
+                        <table class="student-details-table" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td class="heading long">Current Address:</td>
+                                <td>{{employee_details.current_address[0].cur_address}}</td>
+                                
+                            </tr>
+                             <tr>
+                                <td class="heading long">Permanent Address:</td>
+                                <td>{{employee_details.permanent_address[0].perm_address}}</td>
+                                
+                            </tr>
+                        </table>
+                        <button class="edit-info-btn" (click)="editEmployee()" *ngIf="user.role === 'admin'">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

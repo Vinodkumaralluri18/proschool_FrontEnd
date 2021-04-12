@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="text-center">
+            <h3 id="heading">{{title}}</h3>
+        </div>
+    </div>
+    <h4 class="alert-center" *ngIf="title === 'Inbox Messages'"><b>From:</b> {{message[0].sender_name}}</h4>
+    <h4 class="alert-center" *ngIf="title === 'Outbox Messages'"><b>To:</b> {{message[0].receiver}}</h4>
+    <h4 class="alert-center"><b>Subject:</b> {{message[0].subject}}</h4>
+    <h4 class="alert-center"><b>Message:</b> {{message[0].message}}</h4>
+    <div class="form-group text-center">
+        <button (click)="close()" class="button button1 hvr-pop transition">Ok</button>
+    </div>
+</div>

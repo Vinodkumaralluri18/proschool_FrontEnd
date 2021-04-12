@@ -1,0 +1,52 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+
+    <div class="_select_div">
+      <div class="btn-bunch">
+        <button class="btn -cta selected-tab" routerLink="/main/main/admin/parentinfo">Parent Info</button>
+        <button class="btn -cta" routerLink="/main/main/admin/employeeinfo">Employee Info</button>
+      </div>
+    </div>
+
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-class (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-class>
+      </div>
+      <!-- <input type="search" class="search-box" [(ngModel)]="searchText" placeholder="Search for Student"> -->
+    </div>
+
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="parents.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th align="left">#</th>
+            <th align="left">Student Name</th>
+            <th align="left">Parent Name</th>
+            <th align="left">User Name</th>
+            <th align="left">Password</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let par of parents | search : searchText | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{par.student_doc.first_name}} {{par.student_doc.last_name}}</td>
+            <td>{{par.student_doc.parents[0].parent_name}}</td>
+            <td>{{par.parent_id}}</td>
+            <td>{{par.parent_id | lowercase}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="parents.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">No Parent Login Information Available</h1>
+    </div>
+    <div class="_pagination" *ngIf="parents.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

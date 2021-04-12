@@ -1,0 +1,125 @@
+<div id="main-content" class="fees-wrapper new-listing">
+    <div class="row">
+        <div class="menu-bar">
+            <button routerLink="/main/main/studentprofile/profile/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Profile</button>
+            <button routerLink="/main/main/studentprofile/attendance/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Attendance</button>
+            <button routerLink="/main/main/studentprofile/academics/{{student_id}}/{{section_id}}"
+                class="button button2 hvr-pop transition"
+                routerLinkActive="active">Academics</button>
+            <button routerLink="/main/main/studentprofile/assessment/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Assessment</button>
+            <button routerLink="/main/main/studentprofile/fees/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Fee Collection</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="page-content-wrapper">
+            <div class="student-info-wrapper">
+                <div class="student-details-tablist-wrapper">
+                    <section class="student-task-section">
+                        <section class="page-actions">
+                            <div class="dropdown">
+                                <button class="dropbtn" (click)="showFeeList = true" (clickOutside)="showFeeList = false">
+                                    {{!selected_Feetype.fee_type ? 'Select FeeType' : selected_Feetype.fee_type}}
+                                </button>
+                                <div class="dropdown-content" [hidden]="!showFeeList">
+                                    <a (click)="selected_Feetype = 'All Feetypes'; getPayments();">All Fee Types</a>
+                                    <a *ngFor="let fee of fees" (click)="selected_Feetype = fee; getPayments();">{{fee.fee_type}}</a>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="table-and-pagination -classes-schedule" *ngIf="allFees else allFeeTypes">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="width-10-per">S. No</th>
+                                            <th align="left">Fee Type</th>
+                                            <th align="left">Total Fee</th>
+                                            <th align="left">Paid Fee</th>
+                                            <th align="left">Balance Fee</th>
+                                            <th align="left">Discount</th>
+                                            <th align="left">Graphical Representation</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let fee of fees; let i = index">
+                                            <td class="_s-no"><span>{{ i + 1 }}</span></td>
+                                            <td>{{fee.fee_type}}</td>
+                                            <td>{{fee.total_fee | currency:'INR'}}</td>
+                                            <td>{{fee.paid_fee | currency:'INR'}}</td>
+                                            <td>{{fee.balance_fee | currency:'INR'}}</td>
+                                            <td>{{fee.discount | currency:'INR'}}</td>
+                                            <td>
+                                                <div class="hor-progress-wrapper">
+                                                    <div class="hor-progress-track">
+                                                        <span class="hor-progress-filled" *ngIf="fee.paid_fee !== 0"
+                                                            [ngStyle]="{'background-color': '#5CB85C', 'width': ((fee.paid_fee / (fee.total_fee - fee.discount)) * 100) + '%', 'color': '#FFFFFF', 'border-radius': '10px 0px 0px 10px'}">
+                                                            {{fee.paid_fee | currency:'INR'}}
+                                                        </span>
+                                                        <span class="hor-progress-filled" *ngIf="fee.balance_fee !== 0"
+                                                            [ngStyle]="{'background-color': '#F47458', 'width': ((fee.balance_fee / (fee.total_fee - fee.discount)) * 100) + '%', 'color': '#FFFFFF', 'border-radius': '0px 10px 10px 0px'}">
+                                                            {{fee.balance_fee | currency:'INR'}}
+                                                        </span>
+                                                    </div>
+                                                    <span class="hor-progress-title"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+            
+                        <ng-template #allFeeTypes>
+                            <section class="table-and-pagination -classes-schedule">
+                                <div class="table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th align="left">Installment</th>
+                                                <th align="left">Total Fee</th>
+                                                <th align="left">Paid Fee</th>
+                                                <th align="left">Balance Fee</th>
+                                                <th align="left">Graphical Representation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let fee of payments; let i = index">
+                                                <td class="_s-no"><span>{{ i + 1 }}</span></td>
+                                                <td>{{fee.payment_instalment}}</td>
+                                                <td>{{fee.fee_amount | currency:'INR'}}</td>
+                                                <td>{{fee.fee_paid | currency:'INR'}}</td>
+                                                <td>{{fee.balance_fee | currency:'INR'}}</td>
+                                                <td>{{fee.discount | currency:'INR'}}</td>
+                                                <td>
+                                                    <div class="hor-progress-wrapper">
+                                                        <div class="hor-progress-track">
+                                                            <span class="hor-progress-filled" *ngIf="fee.PaidTermFees !== 0"
+                                                                [ngStyle]="{'background-color': '#5CB85C', 'width': ((fee.fee_paid / (fee.fee_amount - fee.discount)) * 100) + '%', 'color': '#FFFFFF', 'border-radius': '10px 0px 0px 10px'}">
+                                                                {{fee.fee_paid | currency:'INR'}}
+                                                            </span>
+                                                            <span class="hor-progress-filled" *ngIf="fee.BalanceTermFee !== 0"
+                                                                [ngStyle]="{'background-color': '#F47458', 'width': ((fee.balance_fee / (fee.fee_amount - fee.discount)) * 100) + '%', 'color': '#FFFFFF', 'border-radius': '0px 10px 10px 0px'}">
+                                                                {{fee.balance_fee | currency:'INR'}}
+                                                            </span>
+                                                        </div>
+                                                        <span class="hor-progress-title"></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </ng-template>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

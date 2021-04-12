@@ -1,0 +1,170 @@
+/* body{
+  background: #FFFFFF !important;
+  padding: 0;
+  margin: 0;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+}
+.container{
+  margin: 10px;
+}
+.logodiv{
+  width: 100%;
+  display: flex;
+}
+.logocontainer{
+  width: 80%;
+}
+.logo{
+  width: 10%;
+  height: 40px;
+}
+.zoombtn{
+  width: 100px;
+  height: 45px;
+  background-color: #5F87ED;
+  margin-right: 10px;
+  display: flex;
+}
+.closebtn{
+  width: 120px;
+  height: 45px;
+  background-color: #5F87ED;
+  margin-right: 10px;
+  border-radius: 5px;
+  display: flex;
+}
+.zmico{
+  font-size: 20px;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 10px 0px 0px 12px;
+}
+.zmicoplus{
+  font-size: 25px;
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 10px 0px 0px 10px;
+}
+.zmicotext{
+  font-size: 10px;
+  color: #FFFFFF;
+  font-weight: normal;
+  padding: 18px 0px 0px 10px;
+}
+.closeicon{
+  font-size: 20px;
+  color: #FFFFFF;
+  font-weight: normal;
+  padding: 12px 0px 0px 20px;
+}
+.closetxt{
+  font-size: 20px;
+  color: #FFFFFF;
+  font-weight: normal;
+  padding: 12px 0px 0px 10px;
+}
+.bodycontainer{
+  display: flex;
+  width: 100%;
+  height: 500px;
+}
+.leftmicons{
+  width: 4%;
+}
+.micons{
+  margin-top: 20px;
+  border-radius: 5px;
+  background-color: #5F87ED;
+  height: 450px;
+  padding-top: 2px;
+}
+.rightbody{
+  width: 96%;
+}
+.pagebtn{
+  width: 100px;
+  height: 45px;
+  background-color: #5F87ED;
+  margin-right: 10px;
+  border-radius: 5px;
+  display: flex;
+}
+.itemicon{
+  height: 9%;
+  margin: 8px 6px 4px 6px;
+  text-align: center;
+  border-radius: 5px;
+}
+.itemicon:hover{
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+.itemicon .fa{
+  padding-top: 10px;
+  font-size: 20px;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+.itemicon .fa:hover{
+  color: #5F87ED;
+  cursor: pointer;
+}
+.zmicoleft{
+  font-size: 20px;
+  color: #FFFFFF;
+  font-weight: bold;
+  padding: 12px 2px 0px 18px;
+}
+.zmicoplusicon{
+  font-size: 18px;
+  color: #FFFFFF;
+  font-weight: bold;
+  padding: 14px 0px 0px 14px;
+} */
+
+
+
+/**
+ * Fix user-agent
+ */
+
+ * {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Canvas
+ */
+
+.whiteboard {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.colors {
+  position: fixed;
+}
+
+.color {
+  display: inline-block;
+  height: 48px;
+  width: 48px;
+}
+
+.color.black { background-color: black; }
+.color.red { background-color: red; }
+.color.green { background-color: green; }
+.color.blue { background-color: blue; }
+.color.yellow { background-color: yellow; }

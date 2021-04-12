@@ -1,0 +1,66 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select_div">
+      <div class="btn-bunch">
+        <button class="btn -cta" routerLink="/main/main/evaluations/subjectMarks">Subject Marks</button>
+        <button class="btn -cta" routerLink="/main/main/evaluations/marksList">Exam Marks</button>
+        <button class="btn -cta selected-tab" routerLink="/main/main/evaluations/cumulativeMarks">Cumulative Marks</button>
+      </div>
+    </div>
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-class *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)"
+          (sectionEvent)="receiveSection($event)"></app-class>
+        <app-teacher-class *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)"
+          (sectionEvent)="receiveSection($event)"></app-teacher-class>
+      </div>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="marks.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th align="left">#</th>
+            <th align="left">Student</th>
+            <th align="left">Roll</th>
+            <th align="left">Percentage</th>
+            <th align="left">Marks</th>
+            <th align="left">Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let std of marks | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{std.student_name}}</td>
+            <td>{{std.roll_no}}</td>
+            <td>
+              <div class="hor-progress-wrapper">
+                <div class="hor-progress-track">
+                  <span class="hor-progress-filled"
+                    [ngStyle]="{'background-color': (std.tillDatePercentage >= 80) ? '#5e81f4' : (std.tillDatePercentage < 80 && std.tillDatePercentage >= 60) ? '#77c284' : '#e56761', 'width': std.tillDatePercentage + '%', 'color': '#FFFFFF'}">{{std.tillDatePercentage}}%</span>
+                </div>
+                <span class="hor-progress-title"></span>
+              </div>
+            </td>
+            <td>{{std.tillDateMarks}}</td>
+            <td>
+              <div class="_progress"
+                [ngStyle]="{'background-color': (std.tillDatePercentage >= 80) ? '#5e81f4' : (std.tillDatePercentage < 80 && std.tillDatePercentage >= 60) ? '#77c284' : '#e56761'}">
+                {{std.Grade}}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="marks.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Cumulative Exam Reports</h1>
+    </div>
+    <div class="_pagination" *ngIf="marks.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

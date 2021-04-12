@@ -1,0 +1,57 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select_div">
+      <div class="btn-bunch">
+        <button class="btn -cta" routerLink="/main/main/admin/materials">Material</button>
+        <button class="btn -cta selected-tab" routerLink="/main/main/admin/vendors">Vendors</button>
+        <button class="btn -cta" routerLink="/main/main/admin/materialIn">Material-In</button>
+        <button class="btn -cta" routerLink="/main/main/admin/materialOut">Material-Out</button>
+      </div>
+    </div>
+    <div class="add_div">
+      <button type="submit" class="btn -cta" (click)="addVendor()">Add Vendor</button>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="vendors.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Vendor Name</th>
+            <th align="left">Material</th>
+            <th align="left">Contact Number</th>
+            <th align="left">Email</th>
+            <th align="left">Location</th>
+            <th align="left">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ven of vendors | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{ven.vendor_name}}</td>
+            <td>{{ven.material}}</td>
+            <td>{{ven.contact_no}}</td>
+            <td>{{ven.email}}</td>
+            <td>{{ven.location}}</td>
+            <td class="_actions">
+              <button class="btn" (click)="editVendor(i)"><img src="../../../assets/images/edit-white.svg"
+                  alt="Edit" /></button>
+              <button class="btn" (click)="deleteConfirmation(ven.vendor_id)"><img
+                  src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="vendors.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Vendors</h1>
+    </div>
+    <div class="_pagination" *ngIf="vendors.length !== 0">
+      <a class="btn -previous">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next">Next</a>
+    </div>
+  </section>
+</main>

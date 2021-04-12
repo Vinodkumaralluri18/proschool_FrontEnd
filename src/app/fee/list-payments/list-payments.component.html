@@ -1,0 +1,31 @@
+<div id="main-content1" class="new-message-wrapper">
+    <div class="header-wrapper">
+        <p>Payment List</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th align="left">Fee Type</th>
+                    <th align="left">Payment Paid</th>
+                    <th align="left">Payment Date</th>
+                    <th align="left">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pay of FeePayments.payments; let i=index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{FeePayments.fee_type}}</td>
+                    <td>{{pay.fee_paid}}</td>
+                    <td>{{pay.payment_date}}</td>
+                    <td class="_actions">
+                        <button class="btn" (click)="deletePayment(i)"><img src="../../../assets/images/trash-white.svg"
+                                alt="Delete" /></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div id="main-content">
+
+  <div class="row">
+    <div class="container-fluid dashboard-content">
+      <div class="card selectcard">
+        <app-subject *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (subjectEvent)="receiveSubject($event)"></app-subject>
+        <app-teacher-subject *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (subjectEvent)="receiveSubject($event)"></app-teacher-subject>
+        <div class="searchForm" *ngIf="user.role === 'parent'">
+          <div class="form-group">
+            <label class="pull-left">Subject</label>
+            <select class="form-control" [(ngModel)]="selected_subject" (change)="getChapters()">
+              <option>select...</option>
+              <option *ngFor="let sub of subjects; let i = index" value="{{sub.subject_id}}">{{sub.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="card listcard">
+        <div class="pull-left">
+          <h4>Lesson Tracker</h4>
+        </div>
+        <div class="searchForm">
+          <div class="table-responsive">
+            <table style="width:100%;">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Chapter</th>
+                  <th>Status</th>
+                  <th>Completion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let chap of chapters; let i=index">
+                  <td>{{ (config.currentPage - 1) * config.itemsPerPage + i +1 }}</td>
+                  <td>{{chap.title}}</td>
+                  <td>
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
+                        aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': (chap.completion_percentage) + '%'}">
+                        {{chap.completion_percentage}} %
+                      </div>
+                    </div>
+                  </td>
+                  <td>{{chap.completed_topics}} / {{chap.no_of_topics}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

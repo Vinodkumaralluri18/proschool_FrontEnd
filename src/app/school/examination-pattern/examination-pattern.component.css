@@ -1,0 +1,4 @@
+.dropdown .dropbtn::after {
+    border: solid #ffffff !important;
+    content: none;
+}

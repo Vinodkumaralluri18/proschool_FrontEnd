@@ -1,0 +1,123 @@
+<div id="main-content1" class="new-message-wrapper">
+    <div class="header-wrapper">
+        <p *ngIf="dialog_type == 'add'">Add Student Fee</p>
+        <p *ngIf="dialog_type == 'edit'">Edit Student Fee</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form role="form" [formGroup]="collectfeeForm" (ngSubmit)="addCollectedFee()">
+        <!-- <div class="row-wrapper">
+            <div class="col-full-3">
+                Fee Type:
+            </div>
+            <div class="col-full-6">
+                <select class="form-control" formControlName="fee_types_id" (change)="getFeeStructure()">
+                    <option>select...</option>
+                    <option *ngFor="let fee of fee_types" value="{{fee.fee_types_id}}">{{fee.fee_type}}</option>
+                  </select>
+            </div>
+        </div> -->
+        <div class="row-wrapper" *ngIf="fee === 'general'">
+            <div class="col-full-3">
+                Fee Installments:
+            </div>
+            <div class="col-full-6">
+                <select class="form-control" formControlName="installment" (change)="getStudent_installmentFees()">
+                    <option>select...</option>
+                    <option *ngFor="let fee of feestructure" value="{{fee.payment_instalment}}">
+                        {{fee.payment_instalment}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Total Fee:
+            </div>
+            <div class="col-full-6">
+                Rs. {{feeDetails.totalFee}}
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Total Paid Fee:
+            </div>
+            <div class="col-full-6">
+                Rs. {{feeDetails.totalStudentFee}}
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Discount:
+            </div>
+            <div class="col-full-6">
+                Rs. {{feeDetails.totalDiscount}}
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Balance Fee:
+            </div>
+            <div class="col-full-6">
+                Rs. {{feeDetails.totalBalanceFee}}
+            </div>
+        </div>
+        <!-- <div class="row-wrapper">
+            <div class="col-full-3">
+                Total Fee: {{total_fee}}
+            </div>
+            <div class="col-full-3">
+                Total Paid Fee: {{paid_fee}}
+            </div>
+            <div class="col-full-3">
+                Balance Fee: {{balance_fee}}
+            </div>
+        </div> -->
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Fee Paid:
+            </div>
+            <div class="col-full-6">
+                <input formControlName="fee_paid" placeholder="Enter..." max="{{feeDetails.totalBalanceFee}}" type="number" *ngIf="feeDetails.totalBalanceFee !== 0">
+                <input [value]="feeDetails.totalBalanceFee" placeholder="Enter..." type="number" disabled *ngIf="feeDetails.totalBalanceFee === 0">
+            </div>
+        </div>
+        <!-- <div class="row-wrapper">
+            <div class="col-full-3">
+                Discount:
+            </div>
+            <div class="col-full-6">
+                <input formControlName="discount" placeholder="Enter..." type="number" *ngIf="student_fee.totalBalanceFee !== 0">
+                <input [value]="student_fee.totalBalanceFee" type="number" disabled *ngIf="student_fee.totalBalanceFee === 0">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Fine:
+            </div>
+            <div class="col-full-6">
+                <input formControlName="fine" placeholder="Enter..." type="number" *ngIf="student_fee.totalBalanceFee !== 0">
+                <input [value]="student_fee.totalBalanceFee" type="number" disabled *ngIf="student_fee.totalBalanceFee === 0">
+            </div>
+        </div> -->
+        <div class="row-wrapper" *ngIf="feeDetails.totalBalanceFee !== 0">
+            <div class="col-full-3">
+                Payment Mode:
+            </div>
+            <div class="col-full-6">
+                <select formControlName="payment_mode" id="sel1">
+                    <option>select...</option>
+                    <option value="cash" *ngIf="student_fee.totalBalanceFee !== 0">Cash</option>
+                    <option value="cheque" *ngIf="student_fee.totalBalanceFee !== 0">Cheque</option>
+                    <option value="online" *ngIf="student_fee.totalBalanceFee !== 0">Online</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" *ngIf="feeDetails.totalBalanceFee !== 0">
+            <div class="col-md-3 pull-right">
+                <button type="submit" class="btn -cta active-tab" *ngIf="student_fee.totalBalanceFee !== 0">Collect
+                    Fee</button>
+                <button type="submit" class="btn -cta active-tab" disabled
+                    *ngIf="student_fee.totalBalanceFee === 0">Collect Fee</button>
+            </div>
+        </div>
+    </form>
+</div>

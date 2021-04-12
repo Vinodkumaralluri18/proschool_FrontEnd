@@ -1,0 +1,71 @@
+<main class="card mt-20 within-viewport new-listing">
+    <section class="page-actions">
+        <div class="_select_div">
+            <div class="btn-bunch">
+                <button class="btn -cta selected-tab" routerLink="/main/main/admin/pendingTasks">Pending Tasks</button>
+                <button class="btn -cta" routerLink="/main/main/admin/completedTasks">Completed Tasks</button>
+            </div>
+        </div>
+        <div class="add_div">
+            <button class="btn -cta" (click)="addTask()" *ngIf="user.role === 'admin'">Add Task</button>
+        </div>
+    </section>
+    <section class="table-and-pagination -classes-schedule">
+        <div class="table-container" *ngIf="tasks.length !== 0">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th align="left">Task</th>
+                        <th align="left" *ngIf="user.role === 'admin'">Department</th>
+                        <th align="left" *ngIf="user.role === 'admin'">Assigned To</th>
+                        <th align="left">Priority</th>
+                        <th align="left">Due Date</th>
+                        <th align="left">Status</th>
+                        <th align="left"></th>
+                        <th align="left" *ngIf="user.role === 'admin'">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let task of tasks | pagination: pageNo; let i=index">
+                        <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+                        <td (click)="taskDetails(i)">{{task.task}}</td>
+                        <td *ngIf="user.role === 'admin'">{{task.department}}</td>
+                        <td *ngIf="user.role === 'admin'">{{task.employee_name}}</td>
+                        <td><span class="_chip -class-running"
+                                [ngStyle]="{'background-color': (task.priority === 'High') ? '#e56761' : (task.priority === 'Medium') ? '#77c284' : '#5e81f4', 'color': 'white' }">
+                                {{task.priority}}</span>
+                        </td>
+                        <td>{{task.due_date}}</td>
+                        <td><span class="_chip -class-running"
+                                [ngStyle]="{'background-color': (task.task_status == 'pending') ? '#d9534f' : '#5cb85c', 'color': 'white' }">{{task.task_status}}</span>
+                        </td>
+                        <td>
+                            <label class="switch">
+                                <input type="checkbox" value="1" [checked]="task.task_status !== 'pending'"
+                                    (click)="update_status(task.task_status, i)" />
+                                <span class="slider start round"></span>
+                            </label>
+                        </td>
+                        <td class="_actions" *ngIf="user.role === 'admin'">
+                            <button class="btn" (click)="editTask(i)"><img src="../../../assets/images/edit-white.svg"
+                                    alt="Edit" /></button>
+                            <button class="btn" (click)="deleteConfirmation(task.task_id)"><img
+                                    src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="no-data" *ngIf="tasks.length === 0">
+            <img src="../../../assets/images/Nodata.png" alt="">
+            <h1 class="no-data-text">There are No Pending Tasks</h1>
+        </div>
+        <div class="_pagination" *ngIf="tasks.length !== 0">
+            <a class="btn -previous" (click)="previousPage()">Previous</a>
+            <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}"
+                *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+            <a class="btn -next" (click)="nextPage()">Next</a>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,14 @@
+.table-responsive td, .table-responsive th {
+    height: 28px;
+}
+.actionth{
+    margin-left: 10px;
+}
+
+#section-table {
+    margin-left: 28px;
+}
+
+.table-responsive {
+    width: 100%;
+}

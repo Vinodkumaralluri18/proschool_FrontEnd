@@ -1,0 +1,391 @@
+<!-- <form role="form" [formGroup]="schoolprofileForm" (ngSubmit)="editSchool()">
+    <div *ngIf="schoolDetails">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 id="heading">Edit School Profile</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">School Name</label>
+                    <input class="form-control" value="{{schoolprofile.name}}" formControlName="name" 
+                        type="text">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Medium</label>
+                    <input class="form-control" value="{{schoolprofile.medium}}" formControlName="medium" 
+                        type="text">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Timings</label>
+                    <input class="form-control" value="{{schoolprofile.timings}}" formControlName="timings" 
+                        type="text">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Class From</label>
+                    <input class="form-control" value="{{schoolprofile.class_from}}" formControlName="class_from" 
+                        type="text">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Affiliation</label>
+                    <input class="form-control" value="{{schoolprofile.affiliation}}" formControlName="affiliation" 
+                        type="text">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Extra Curricular Activities</label>
+                    <input class="form-control" value="{{schoolprofile.extra_curricular_activites}}" formControlName="extra_curricular_activites" 
+                        type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="button button1 hvr-pop transition pull-right">Submit</button>
+            <div (click)="showForm('managementDetails')" class="button button2 hvr-pop transition pull-right">Next</div>
+            <div (click)="close()" class="button button1 hvr-pop transition pull-left">Close</div>
+        </div>
+    </div>
+
+    <div *ngIf="managementDetails">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 id="heading">Management Details</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Founder</label>
+                    <input class="form-control" value="{{schoolprofile.founder}}" formControlName="name" 
+                        type="text">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Coordinator</label>
+                    <input class="form-control" value="{{schoolprofile.coordinator}}" formControlName="coordinator" 
+                        type="text">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Vice Principal</label>
+                    <input class="form-control" value="{{schoolprofile.vice_principal}}" formControlName="vice_principal" 
+                        type="text">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Chairman</label>
+                    <input class="form-control" value="{{schoolprofile.chairman}}" formControlName="chairman" 
+                        type="text">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Principal</label>
+                    <input class="form-control" value="{{schoolprofile.principal}}" formControlName="principal" 
+                        type="text">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Established</label>
+                    <input class="form-control" value="{{schoolprofile.est_on}}" formControlName="est_on" 
+                        type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="button button1 hvr-pop transition pull-right">Submit</button>
+            <div (click)="showForm('contactDetails')" class="button button2 hvr-pop transition pull-right">Next</div>
+            <div (click)="close()" class="button button1 hvr-pop transition pull-left">Close</div>
+            <div (click)="showForm('schoolDetails')" class="button button2 hvr-pop transition pull-left">Previous</div>
+        </div>
+    </div>
+
+    <div *ngIf="contactDetails">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 id="heading">Contact Details</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Address</label>
+                    <input class="form-control" value="{{schoolprofile.address}}" formControlName="name"
+                        type="text">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Alternate Phone</label>
+                    <input class="form-control" value="{{schoolprofile.alternate_phone}}" formControlName="name"
+                        type="text">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Email</label>
+                    <input class="form-control" value="{{schoolprofile.email}}" formControlName="email" 
+                        type="text">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Contact No</label>
+                    <input class="form-control" value="{{schoolprofile.phone}}" formControlName="phone" 
+                        type="text">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="pull-left">Website</label>
+                    <input class="form-control" value="{{schoolprofile.website}}" formControlName="website" 
+                        type="text">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="button button1 hvr-pop transition pull-right">Submit</button>
+            <div (click)="showForm('about')" class="button button2 hvr-pop transition pull-right">Next</div>
+            <div (click)="close()" class="button button1 hvr-pop transition pull-left">Close</div>
+            <div (click)="showForm('managementDetails')" class="button button2 hvr-pop transition pull-left">Previous</div>        
+        </div>
+    </div>
+
+    <div *ngIf="about">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="pull-left">About School:</label>
+                    <textarea class="form-control" formControlName="about" value="{{schoolprofile.about}}" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="button button1 hvr-pop transition pull-right">Submit</button>
+            <div (click)="showForm('chairman_note')" class="button button2 hvr-pop transition pull-right">Next</div>
+            <div (click)="close()" class="button button1 hvr-pop transition pull-left">Close</div>
+            <div (click)="showForm('contactDetails')" class="button button2 hvr-pop transition pull-left">Previous</div>        
+        </div>
+    </div>
+
+    <div *ngIf="chairman_note">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="pull-left">Chairman Note:</label>
+                    <textarea class="form-control" formControlName="chairman_note" value="{{schoolprofile.chairman_note}}" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="button button1 hvr-pop transition pull-right">Submit</button>
+            <div (click)="close()" class="button button1 hvr-pop transition pull-left">Close</div>
+            <div (click)="showForm('about')" class="button button2 hvr-pop transition pull-left">Previous</div>        
+        </div>
+    </div>
+
+</form> -->
+
+<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type === 'schoolDetails'">
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    <h3 class="add_notice_heading">Edit School Details</h3>
+    <form class="scroll" [formGroup]="schooldetailsForm" (ngSubmit)="schoolSubmit()">
+        <div class="vertical-space4"></div>
+        <div class="row">
+              <div class="form-group col-md-6">
+                <label class="edit-profile-label_name" for="school-name-input">Name:</label>
+                <input class="form-control edit_profile_input" type="text" id="school-name-input" value="{{schoolprofile.name}}" formControlName="name">
+              </div>
+
+              <div class="form-group col-md-6">
+                <label class="edit-profile-label_name" for="class-from">Class From</label>
+                <input  class="form-control edit_profile_input" type="text" id="class-from" value="{{schoolprofile.class_from}}" formControlName="class_from">
+              </div>
+        </div>
+
+        <div class="vertical-space2"></div>
+        <div class="row">
+          <div class="form-group col-md-6 col-sm-6">
+            <label class="edit-profile-label_name" for="medium">Medium:</label>
+            <input type="text" class="form-control edit_profile_input"   id="medium" value="{{schoolprofile.medium}}" formControlName="medium">
+          </div>
+
+          <div class="form-group col-md-6 col-sm-6">
+            <label class="edit-profile-label_name" for="affilition">Affilition:</label>
+            <input type="text" class="form-control edit_profile_input"  id="affilition" value="{{schoolprofile.affiliation}}" formControlName="affiliation">
+          </div>
+        </div>
+
+        <div class="vertical-space2"></div>
+        <div class="row">
+          <div class="form-group col-md-6 col-sm-6">
+            <label class="edit-profile-label_name" for="timings">Tiings:</label>
+            <input type="text" class="form-control edit_profile_input"  value="{{schoolprofile.timings}}" formControlName="timings">
+          </div>
+
+          <div class="form-group col-md-6 col-sm-6">
+            <label class="edit-profile-label_name" for="affilition">Extra Curricular Activities:</label>
+            <input type="text" class="form-control edit_profile_input"   id="affilition" value="{{schoolprofile.extra_curricular_activites}}"
+            formControlName="extra_curricular_activites">
+          </div>
+        </div>
+        <div class="pull-right">
+            <button type="submit" class="btn-primary btn-lg">Submit</button>
+            </div>
+      </form>
+</div>
+
+<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type === 'managementDetails'">
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    <h3 class="add_notice_heading">Edit Management Details</h3>
+    <form class="scroll" [formGroup]="managementdetailsForm" (ngSubmit)="managementSubmit()">
+        <div class="vertical-space4"></div>
+        <div class="row">
+              <div class="form-group col-md-12">
+                <label class="edit-profile-label_name" for="founder">Founder:</label>
+                <input class="form-control edit_profile_input" type="text" id="founder" value="{{schoolprofile.founder}}" formControlName="name">
+              </div>
+        </div>
+
+        <div class="vertical-space2"></div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="edit-profile-label_name" for="chairman">Chairman:</label>
+                <input class="form-control edit_profile_input" type="text" id="chairman" value="{{schoolprofile.chairman}}" formControlName="chairman" >
+            </div>
+        </div>
+
+        <div class="vertical-space2"></div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="edit-profile-label_name" for="coordinator">Coordinator:</label>
+                <input class="form-control edit_profile_input" type="text" id="coordinator" value="{{schoolprofile.coordinator}}" formControlName="coordinator" >
+            </div>
+        </div>
+
+        <div class="vertical-space2"></div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="edit-profile-label_name" for="principal">Principal:</label>
+                <input class="form-control edit_profile_input" type="text" id="principal" value="{{schoolprofile.principal}}" formControlName="principal" >
+            </div>
+        </div>
+        <div class="vertical-space2"></div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="edit-profile-label_name" for="viceprincipal">Vice Principal:</label>
+                <input class="form-control edit_profile_input" type="text" id="viceprincipal" value="{{schoolprofile.vice_principal}}" formControlName="vice_principal"  >
+            </div>
+        </div>
+        <div class="vertical-space2"></div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="edit-profile-label_name" for="estb">Established:</label>
+                <input class="form-control edit_profile_input" type="text" id="estb" value="{{schoolprofile.est_on}}" formControlName="est_on"  >
+            </div>
+        </div>
+
+        <div class="pull-right">
+            <button type="submit" class="btn-primary btn-lg">Submit</button>
+            </div>
+      </form>
+</div>
+
+<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type === 'contactDetails'">
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    <h3 class="add_notice_heading">Edit Contact Details</h3>
+    <form class="scroll" [formGroup]="contactdetailsForm" (ngSubmit)="contactSubmit()">
+        <div class="vertical-space4"></div>
+        <div class="row">
+              <div class="form-group col-md-12">
+                <label class="edit-profile-label_name" for="adress">Address:</label>
+                <textarea rows="10"  cols="30" class="form-control edit_profile_input" type="text" id="adress" value="{{schoolprofile.address}}"
+                formControlName="address"></textarea>
+              </div>
+        </div>
+
+        <div class="vertical-space2"></div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="edit-profile-label_name" for="contact">Contact No:</label>
+                <input class="form-control edit_profile_input" type="text" id="contact" value="{{schoolprofile.phone}}" formControlName="phone" maxlength="10"
+                type="number" pattern="^\d{10}$" required >
+                <div *ngIf="contactdetailsForm.get('phone').invalid && 
+                contactdetailsForm.get('phone').errors && 
+                (contactdetailsForm.get('phone').dirty || contactdetailsForm.get('phone').touched)">
+                    <small class="text-danger" *ngIf="contactdetailsForm.get('phone').hasError('pattern')">
+                        Please Enter correct Number
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="vertical-space2"></div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="edit-profile-label_name" for="altcontact">Alternate Contact No:</label>
+                <input class="form-control edit_profile_input" type="text" id="altcontact" value="{{schoolprofile.alternate_phone}}" formControlName="alternate_phone"
+                maxlength="10" type="number" pattern="^\d{10}$" required >
+                <div *ngIf="contactdetailsForm.get('alternate_phone').invalid && 
+                contactdetailsForm.get('alternate_phone').errors && 
+                (contactdetailsForm.get('alternate_phone').dirty || contactdetailsForm.get('alternate_phone').touched)">
+                    <small class="text-danger" *ngIf="contactdetailsForm.get('alternate_phone').hasError('pattern')">
+                        Please Enter correct Number
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="vertical-space2"></div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="edit-profile-label_name" for="website">Website:</label>
+                <input class="form-control edit_profile_input" type="text" id="website" value="{{schoolprofile.website}}" formControlName="website" >
+            </div>
+        </div>
+        <div class="vertical-space2"></div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="edit-profile-label_name" for="email">Email:</label>
+                <input class="form-control edit_profile_input" type="text" id="email" value="{{schoolprofile.email}}" formControlName="email"  >
+            </div>
+        </div>
+        
+
+        <div class="pull-right">
+            <button type="submit" class="btn-primary btn-lg">Submit</button>
+            </div>
+      </form>
+</div>

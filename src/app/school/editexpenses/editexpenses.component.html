@@ -1,0 +1,76 @@
+<div id="main-content1" class="new-message-wrapper">
+    <div class="header-wrapper">
+        <p *ngIf="dialog_type === 'add'">Add Claim</p>
+        <p *ngIf="dialog_type === 'edit'">Edit Claim</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form class="form-inline" role="form" [formGroup]="claimForm" (ngSubmit)="submit()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Employee Type:
+            </div>
+            <div class="col-full-6">
+                <select name="section" formControlName="employee_type" [value]="claims.employee_type" (change)="get_selectedemployees()">
+                    <option value="teaching">Teaching</option>
+                    <option value="non-teaching">Non-Teaching</option>
+                    <option value="administrative">Administrative</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Claim By:
+            </div>
+            <div class="col-full-6">
+                <select name="section" formControlName="employee_id" [value]="claims.employee_id">
+                    <option>select...</option>
+                    <option *ngFor="let emp of employees" value="{{emp.employee_id}}">{{emp.first_name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Payment:
+            </div>
+            <div class="col-full-6">
+                <select name="section" formControlName="category" [value]="claims.category">
+                    <option>select...</option>
+                    <option value="Food">Food</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Stationary">Stationary</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Miscellaneous">Miscellaneous</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Amount:
+            </div>
+            <div class="col-full-6">
+                <input value="{{claims.amount}}" formControlName="amount" type="number">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Claim Date:
+            </div>
+            <div class="col-full-6">
+                <input value="{{claims.date}}" formControlName="date" type="date">
+            </div>
+        </div>
+        <!-- <div class="row-wrapper">
+            <div class="col-full-3">
+                Approved Date:
+            </div>
+            <div class="col-full-6">
+                <input value="{{claims.approved_date}}" formControlName="approved_date" type="date">
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

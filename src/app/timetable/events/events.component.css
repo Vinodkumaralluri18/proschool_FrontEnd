@@ -1,0 +1,517 @@
+.new-events-listing.card {
+	background-color: transparent;
+}
+
+.month-nav-wrapper {
+    display: flex;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.previous-month-btn, .next-month-btn {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: #D4DDF6;
+    color: #fff;
+    font-size: 20px;
+    margin: 0 15px 0 0;
+    font-weight: 600;
+}
+
+.next-month-btn {
+	margin: 0 0 0 15px;
+}
+
+.date-highlight {
+    background-color: #5e81f4;
+    color: white;
+    padding: 5px;
+}
+
+
+.timetable-chart {
+    margin: 30px 0;
+    /*background-color: #fff;*/
+}
+
+.timetable-chart table {
+    border-collapse: inherit;
+}
+
+.timetable-chart table tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+    
+}
+
+.timetable-chart table tr:first-child th:last-child { 
+    border-top-right-radius: 10px;
+}
+
+.timetable-chart table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+    
+}
+
+.timetable-chart table tr:last-child td:last-child { 
+    border-bottom-right-radius: 10px;
+}
+
+.timetable-chart thead th {
+    color: #000;
+    text-align: left;
+}
+
+.timetable-chart thead th
+{
+    border: 1px solid #eee;
+    padding: 10px;
+    position: relative;
+    width: 150px;
+    background: #fff;
+}
+
+.timetable-chart tbody td {
+    border: 1px solid #eee;
+    padding: 15px;
+    position: relative;
+    height: 50px;
+    color: #696969;
+    font-weight: 600;
+    text-align: right;
+    background: #fff;
+    vertical-align: sub;
+}
+
+td.special-day {
+	background: #6381ED !important;
+	color: #fff !important;
+}
+
+.plus-btn {
+	display: none;
+}
+
+td:hover .plus-btn {
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	color: #FFFFFF;
+	background: #6381ED;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	display: block;
+}
+
+td.special-day .day-special-info {
+    position: absolute;
+    color: #fff;
+    font-size: 13px;
+    margin: 0;
+    width: 120px;
+    bottom: 10px;
+    text-align: left;
+    left: 10px;
+    display: block;
+}
+
+td.special-day:hover .plus-btn {
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	color: #6381ED;
+	background: #fff;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	display: block;
+}
+
+td.current-day {
+    border: 2px solid #6381ED !important;
+}
+
+.row-event-detail {
+    font-size: 12px;
+}
+
+.row-content-detail .heading {
+	color: #888;
+	font-weight: 600;
+	font-size: 12px;
+	width: 80px;
+	display: inline-block;
+}
+
+.row-content-detail .value {
+	color: #000;
+	font-weight: 600;
+	font-size: 12px;
+    display: inline-block;
+    width: 200px;
+    vertical-align: text-top;
+}
+
+.timetable-chart tbody tr:first-child > td {
+    padding-top: 10px;
+}
+
+td.time-specifiation span {
+    font-weight: 600;
+    display: inline-block;
+    width: 90px;
+}
+
+.edit-time-row-btn {
+    position: absolute;
+    right: 10px;
+    font-size: 14px;
+    color: #888;
+}
+
+.edit-time-row-btn:before {
+    content: url('../../../assets/images/edit-pencil.svg');
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.subject-spec, .class-section-spec {
+    margin: 0;
+}
+
+.row-content-title {
+    color: #888;
+    font-size: 11px;
+    font-weight: 400;
+    display: block;
+}
+
+.row-content-value {
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+}
+
+.row-content-detail {
+    position: absolute;
+    visibility: hidden;
+    height: 250px;
+    width: 300px;
+    background: #fff;
+    top: 15%;
+    left: 105%;
+    z-index: 90;
+    border-radius: 10px;
+    text-align: left;
+    -webkit-box-shadow: 0px 0px 20px 1px rgba(224,224,224,1);
+    -moz-box-shadow: 0px 0px 20px 1px rgba(224,224,224,1);
+    box-shadow: 0px 0px 20px 1px rgba(224,224,224,1);
+}
+
+.row-content-detail:before {
+	width: 0; 
+	height: 0; 
+	content: "";
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-right: 20px solid #fff;
+	position: absolute;
+	left: -20px;
+	top: 20px;
+}
+
+.row-content-detail p {
+    margin: 10px;
+}
+
+.row-content-detail-title {
+    margin: 0 !important;
+    padding: 10px;
+    color: #888;
+    border-bottom: 0.5px solid #888;
+}
+
+.teacher-spec {
+    padding: 10px;
+}
+
+.teacher-spec-text {
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
+}
+
+.teacher-img-wrapper {
+    height: 50px;
+    display: inline-block;
+    width: 50px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.teacher-img-wrapper img {
+    width: 100%;
+}
+
+.delete-schedule-btn {
+    float: right;
+    font-size: 12px;
+    color: red;
+    outline: none;
+}
+
+.delete-schedule-btn:before {
+    content: url('../../../assets/images/trash-red.svg');
+    margin-right: 5px;
+    display: inline-block;
+}
+
+td.time-specifiation {
+    width: 150px;
+}
+
+.schedule-box,
+.empty-schedule-box {
+    cursor: pointer;
+    width: 130px;
+}
+
+.calendar td:hover {
+    border: 2px solid #5E81F4 !important;
+}
+
+td.schedule-box:hover:before,
+td.empty-schedule-box:hover:before {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 15px solid #5E81F4;
+    border-right: 15px solid transparent;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    content: " ";
+}
+
+.schedule-box:hover,
+.empty-schedule-box:hover {
+    border: 1px solid blue !important;
+    background: rgba(94, 129, 244, 0.2)
+}
+
+.schedule-box:hover .row-content-detail {
+    visibility: visible;
+}
+
+.add-in-empty-schedule-wrapper {
+    visibility: hidden;
+}
+
+.empty-schedule-box {
+    text-align: center;
+}
+
+.empty-schedule-box:hover .add-in-empty-schedule-wrapper {
+    visibility: visible;
+}
+
+.empty-schedule-box button {
+    border: 1px solid #5E81F4;
+    font-size: 12px;
+    border-radius: 5px;
+    color: #5E81F4;
+    background-color: #fff;
+}
+
+.empty-schedule-box button:first-child {
+    margin-bottom: 5px;
+}
+
+main.card.mt-20.within-viewport {
+    height: auto;
+}
+
+.last-row-time-specifiation {
+    font-weight: 600;
+    position: relative;
+}
+
+.last-row-time-specifiation p {
+    margin: 0;
+}
+
+.last-row-timestamp {
+    display: inline-block;
+    padding: 3px;
+    color: #000;
+    font-weight: 600;
+    border: 1px solid #888;
+    border-radius: 3px;
+    line-height: 13px;
+    font-size: 13px;
+    width: 40px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.blue-arrow {
+    color: #5E81F4;
+}
+
+.last-row-save-btn {
+    position: absolute;
+    right: 5px;
+    top: 35%;
+    width: 45px;
+    height: 20px;
+    font-size: 12px;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #5E81F4;
+}
+
+.hollow-btn, 
+.solid-btn {
+    height: 35px;
+    border: 1px solid #5E81F4;
+    color: #5E81F4;
+    font-size: 14px;
+    border-radius: 18px;
+    padding: 5px 20px;
+    margin-right: 20px;
+}
+
+.solid-btn {
+    color: #fff !important;
+    background-color: #5E81F4 !important;
+    width: 100px;
+    font-weight: 600;
+}
+
+.btn-plus-icon:before {
+    display: inline-block;
+    content: url('../../../assets/images/plus.svg');
+    height: 18px;
+    vertical-align: text-bottom;
+}
+
+.table-section thead tr > th {
+	background: transparent;
+}
+
+
+.row.table-section {
+	position: relative;
+	height: 300px;
+}
+
+.row.table-section .table-and-pagination {
+	top: 50px;
+	padding-bottom: 20px;
+}
+
+.new-events-listing h2 {
+    color: #696969;
+}
+
+.new-events-listing .search-box {
+    border-radius: 20px;
+    background: transparent;
+    margin-left: 30px;
+    outline: none;
+    border: 1px solid lightgray;
+}
+
+.new-events-listing thead tr > th {
+	color: #696969;
+}
+
+.new-events-listing input[type="text"] {
+    border-radius: 20px;
+}
+
+.new-events-listing .-classes-schedule table {
+	border-collapse: separate !important;
+    border-spacing: 0 10px !important;
+}
+
+.new-events-listing .-classes-schedule table tr {
+	border-radius: 10px;
+}
+
+.new-events-listing .-classes-schedule table tr:hover td {
+    border: 0;
+    border-top: 2px solid #5E81F4;
+    border-bottom: 2px solid #5E81F4;
+    cursor: pointer;
+}
+
+.new-events-listing .-classes-schedule table tr:hover td:first-child {
+    border-left: 2px solid #5E81F4;
+    cursor: pointer;
+}
+
+.new-events-listing .-classes-schedule table tr:hover td:last-child {
+    border-right: 2px solid #5E81F4;
+    cursor: pointer;
+}
+
+.new-events-listing .-classes-schedule table tr td:first-child {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.new-events-listing .-classes-schedule table tr td:last-child {
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.new-events-listing .-classes-schedule table tr td {
+	background: #fff;
+    color: #000;
+    padding: 10px 0;
+    font-weight: bold;
+    border: 0;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+}
+
+.new-events-listing .-classes-schedule table tr td:first-child {
+    border-left: 2px solid transparent;
+}
+
+.new-events-listing .-classes-schedule table tr td:last-child {
+    border-right: 2px solid transparent;
+}
+
+.new-events-listing .-classes-schedule table ._s-no span {
+	background: #fff;
+    color: #000;
+    font-weight: bold;
+}
+
+.new-events-listing .-classes-schedule table thead tr > th {
+	background: #E9EEF7;
+    padding: 15px 10px;
+}
+
+.new-events-listing .-classes-schedule table tr:first-child td {
+	padding: 10px 0 !important;
+}
+
+.new-events-listing .-classes-schedule table ._actions .btn {
+    width: 34px;
+    height: 34px;
+    background: #5E81F4;
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    margin: 0 5px;
+    border-radius: 20px;
+}

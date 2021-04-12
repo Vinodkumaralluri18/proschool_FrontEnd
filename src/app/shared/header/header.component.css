@@ -1,0 +1,196 @@
+.header-content {
+    display: flex;
+}
+
+.account ._actions {
+	position: relative;
+}
+
+.notification-box-wrapper, 
+.mail-box-wrapper {
+    background: #fff;
+    position: absolute;
+    width: 300px;
+    height: 405px;
+    right: 50px;
+    top: 40px;
+    border-radius: 4px;
+    padding: 0;
+    box-shadow: 0px 0px 15px 2px lightgrey;
+}
+
+.mails-group,
+.notification-group {
+	height: 360px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.notification, 
+.mail {
+    padding: 10px 10px;
+    border-bottom: 1px solid #eee;
+    min-height: 35px;
+    position: relative;
+}
+
+.mail:hover,
+.notification:hover {
+	cursor: pointer;
+	background: #F7F7F7;
+}
+
+.notification-icon,
+.mail-sender-icon {
+    height: 30px;
+    border-radius: 50%;
+    width: 30px;
+    position: absolute;
+    overflow: hidden;
+    text-align: center;
+}
+
+.red-alert .notification-icon {
+	background: rgba(255, 0, 0, 0.1);
+}
+
+.green-alert .notification-icon {
+	background: rgba(0,255,0, 0.1);
+}
+
+.notification-icon img,
+.mail-sender-icon img {
+	width: 100%;
+}
+
+.red-alert .notification-icon img,
+.green-alert .notification-icon img {
+    width: auto;
+    padding-top: 5px;
+}
+
+.notification-timespan {
+    margin: 0;
+    color: #ccc;
+    font-size: 11px;
+    font-weight: 600;
+    padding-left: 40px;
+}
+
+.notification-title {
+    color: #000;
+    margin: 0;
+    font-size: 12px;
+    padding-left: 40px;
+    display: block;
+}
+
+.red-alert .notification-title {
+	color: red;
+}
+
+.notification-view-all-btn,
+.message-view-all-btn {
+	padding: 15px 10px;
+    font-size: 12px;
+    color: #5E81F4;
+    outline: none;
+}
+
+.mail-sender-name {
+	margin: 0;
+    color: #000;
+    font-size: 14px;
+    font-weight: 400;
+    padding-left: 40px;
+}
+
+.mail:hover .mail-sender-name,
+.mail:hover .mail-content,
+.notification:hover .notification-timespan,
+.notification:hover .notification-title {
+	font-weight: 600;
+}
+
+.you-sender-title {
+    color: #888;
+    font-weight: 600;
+}
+
+.mail-content {
+    margin: 0;
+    color: #000;
+    font-size: 12px;
+    font-weight: 400;
+    padding-left: 40px;
+    width: 190px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mail-reply-btn {
+    position: absolute;
+    right: 5px;
+    top: 32px;
+    font-size: 12px;
+    color: #5E81F4;
+}
+
+.sender-online::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    background-color: #77C385;
+    bottom: 20px;
+    left: 30px;
+    z-index: 99;
+    border: 2px solid #fff;
+}
+
+._item {
+    position: relative;
+    cursor: pointer;
+}
+
+.message-count-bubble,
+.notification-count-bubble {
+	display: inline-block;
+    background: #fff;
+    color: #5E81F4;
+    height: 15px;
+    width: 15px;
+    font-size: 11px;
+    border-radius: 50%;
+    text-align: center;
+    position: absolute;
+    right: -7px;
+}
+
+.message-count-bubble {
+	right: -9px;
+}
+
+
+.mails-group,
+.notification-group {
+    scrollbar-width: thin; 
+    scrollbar-color: #d8e1ff transparent;
+  }
+  .mails-group::-webkit-scrollbar,
+  .notification-group::-webkit-scrollbar {
+    width: 4px;
+  }
+  .mails-group::-webkit-scrollbar-track,
+  .notification-group::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .mails-group::-webkit-scrollbar-thumb,
+  .notification-group::-webkit-scrollbar-thumb {
+    background-color: #d8e1ff;
+    border-radius: 6px;
+    border: 3px solid transparent;
+  }

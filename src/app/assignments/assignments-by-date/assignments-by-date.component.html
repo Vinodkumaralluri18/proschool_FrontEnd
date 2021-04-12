@@ -1,0 +1,62 @@
+<main class="card mt-20 within-viewport new-assignment-list">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-class *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-class>
+        <app-teacher-class *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-teacher-class>
+        <input type="date" [(ngModel)]="selected_date" (change)="getAssignments_byDate()">
+      </div>
+    </div>
+    <button class="btn -cta" (click)="addAssignment()">Add Assignments</button>
+  </section>
+  <ul class="tab-menu">
+    <li [ngClass]="{'selected-tab': selected_subject === sub.subject_id}" *ngFor="let sub of assignments;" (click)="getAssignmentsBySubject(sub.subject_id);">{{sub.name}}</li>
+  </ul>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="assignments.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th class="_s-no-header">Sr. no</th>
+            <th align="left">Assignment Title</th>
+            <th align="left">Chapter Name</th>
+            <th align="left">Assign Date</th>
+            <th align="left">Due Date</th>
+            <th align="left">Description</th>
+            <th align="left" *ngIf="user.role === 'admin' || user.role === 'teacher'">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ass of subject_assignments | pagination: pageNo; let j = index">
+            <td class="_s-no"><span>{{ j + 1 }}</span></td>
+            <td>{{ass.assignment_title}}</td>
+            <td>{{ass.chapter_name}}</td>
+            <td>{{ass.assign_date}}</td>
+            <td>{{ass.due_date}}</td>
+            <td><p class="description-short">{{ass.description}}</p></td>
+            <td *ngIf="ass.submission === 'pending'">
+              <button class="btn -cta btn-list" routerLink="/main/main/assignments/assignmentsMarks/add/{{ass.section_id}}/{{ass.subject_id}}/{{ass.lession_id}}/{{ass.assignment_id}}">Add Marks</button>
+            </td>
+            <td *ngIf="ass.submission === 'completed'">
+              <button class="btn -cta btn-list" routerLink="/main/main/assignments/assignmentsMarks/view/{{ass.section_id}}/{{ass.subject_id}}/{{ass.lession_id}}/{{ass.assignment_id}}">View Marks</button>
+            </td>
+            <td *ngIf="(user.role === 'admin' || user.role === 'teacher') && ass.assignment_title === 'No Recent Assignments'"></td>
+            <td class="_actions" *ngIf="(user.role === 'admin' || user.role === 'teacher') && ass.assignment_title !== 'No Recent Assignments'">
+              <button class="btn" (click)="editAssignment(j)"><img src="../../../assets/images/edit-white.svg" alt="Edit" /></button>
+              <button class="btn" (click)="deleteConfirmation(ass.assignment_id, i)"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="assignments.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Assignments for this Subject</h1>
+    </div>
+    <div class="_pagination" *ngIf="assignments.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

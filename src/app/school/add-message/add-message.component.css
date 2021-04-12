@@ -1,0 +1,48 @@
+.header-wrapper {
+	text-align: center;
+	position: relative;
+}
+
+.header-wrapper p {
+	font-weight: 600;
+	margin: 10px 0;
+	color: #585858;
+}
+
+.header-wrapper .btn-close {
+	position: absolute;
+	right: 15px;
+	top: 1px;
+	background: url('../../../assets/images/x.svg') no-repeat;
+	height: 20px;
+	width: 20px;
+	outline: none;
+}
+
+.new-message-wrapper .dropbtn {
+	border-radius: 20px;
+	padding: 4px 15px;
+	font-weight: normal;
+}
+
+.new-message-wrapper .row-wrapper {
+	padding: 20px 0;
+}
+
+.new-message-wrapper .row-wrapper .col-full-3 {
+	color: #585858;
+	font-weight: 600;
+}
+
+.new-message-wrapper input[type="text"], .new-message-wrapper textarea {
+    padding: 15px 8px;
+    border: 1.5px solid #ddd;
+    border-radius: 10px;
+}
+
+.new-message-wrapper .btn.active-tab {
+	background-color: #5E81F4;
+	border-radius: 20px;
+	width: 100px;
+    font-size: 13px;
+}

@@ -1,0 +1,73 @@
+<main class="card mt-20 within-viewport new-listing">
+    <section class="page-actions">
+        <div class="_select_div">
+            <div class="btn-bunch">
+                <button class="btn -cta" [ngClass]="{'selected-tab': selected_assessment === 'Assignments'}"
+                    (click)="select_assessment('Assignments')">Assignments Reports</button>
+                <button class="btn -cta" [ngClass]="{'selected-tab': selected_assessment === 'Class Tests'}"
+                    (click)="select_assessment('Class Tests')">ClassTests Reports</button>
+                <button class="btn -cta" [ngClass]="{'selected-tab': selected_assessment === 'Project Works'}"
+                    (click)="select_assessment('Project Works')">ProjectWorks Reports</button>
+            </div>
+        </div>
+        <div class="_select-or-search">
+            <div class="_select-group">
+                <app-class *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)"
+                    (sectionEvent)="receiveSection($event)"></app-class>
+                <app-teacher-class *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)"
+                    (sectionEvent)="receiveSection($event)"></app-teacher-class>
+            </div>
+            <input type="search" [(ngModel)]="searchText" placeholder="Search for Student">
+        </div>
+    </section>
+    <section class="table-and-pagination -classes-schedule">
+        <div class="table-container" *ngIf="academics.length !== 0">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th align="left">Student</th>
+                        <th align="left" *ngFor="let sub of academics[0].subjects">{{sub.subject_name}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ass of academics | search : searchText | pagination: pageNo; let i = index">
+                        <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+                        <td>{{ass.student_name}}</td>
+                        <td *ngFor="let sub of ass.subjects; let j = index">
+                            <div class="hor-progress-wrapper">
+                                <div class="hor-progress-track">
+                                    <span class="hor-progress-filled"
+                                        [ngStyle]="{'background-color': (sub.subjectpercentage >= 80) ? '#5e81f4' : (sub.subjectpercentage < 80 && sub.subjectpercentage >= 60) ? '#77c284' : '#e56761', 'width': sub.subjectpercentage + '%', 'color': '#FFFFFF'}">{{sub.subjectpercentage}}%</span>
+                                </div>
+                                <span class="hor-progress-title"></span>
+                            </div>
+                        </td>
+                        <!-- <td *ngFor="let sub of ass.subjects; let j = index">
+                            <span class="_chip -class-closed">{{sub.subjectpercentage}} %</span>
+                        </td> -->
+                        <!-- <td *ngFor="let sub of ass.subjects; let j = index">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" role="progressbar"
+                                    aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                    [ngStyle]="{'width': (sub.subjectpercentage) + '%'}">
+                                    {{sub.subjectpercentage}} %
+                                </div>
+                            </div>
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="no-data" *ngIf="academics.length === 0">
+            <img src="../../../assets/images/Nodata.png" alt="">
+            <h1 class="no-data-text">There are No Assessment Reports for this Class</h1>
+          </div>
+        <div class="_pagination" *ngIf="academics.length !== 0">
+            <a class="btn -previous" (click)="previousPage()">Previous</a>
+            <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}"
+                *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+            <a class="btn -next" (click)="nextPage()">Next</a>
+        </div>
+    </section>
+</main>

@@ -1,0 +1,32 @@
+.alignrow{
+    margin-left: 12%;
+}
+.excelimg{
+    margin-top: 20px;
+}
+.fileup{
+    margin-top: 5px;
+}
+.inpbox{
+    width: 100%;
+    height: 30px;
+    border-radius: 3px;
+    border: none;
+    border: solid 1px #cccccc;
+    text-indent: 10px;
+}
+
+.help-block {
+	color: red;
+	font-size: 12px;
+	opacity: 0.7;
+}
+
+.dropdown-error-msg {
+    padding-top: 5px;
+    display: inline-block;
+}
+
+.tab-btn {
+    cursor: pointer;
+}

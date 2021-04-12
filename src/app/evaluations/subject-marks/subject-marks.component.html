@@ -1,0 +1,97 @@
+<main class="card mt-20 within-viewport new-listing">
+    <section class="page-actions">
+        <div class="_select_div">
+            <div class="btn-bunch">
+                <button class="btn -cta selected-tab" routerLink="/main/main/evaluations/subjectMarks">Subject
+                    Marks</button>
+                <button class="btn -cta" routerLink="/main/main/evaluations/marksList">Exam Marks</button>
+                <button class="btn -cta" routerLink="/main/main/evaluations/cumulativeMarks">Cumulative Marks</button>
+            </div>
+        </div>
+        <div class="_select-or-search">
+            <div class="_select-group">
+                <app-schedule *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)"
+                    (sectionEvent)="receiveSection($event)" (scheduleEvent)="receiveSchedule($event)"></app-schedule>
+                <app-teacher-schedule *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)"
+                    (sectionEvent)="receiveSection($event)" (scheduleEvent)="receiveSchedule($event)">
+                </app-teacher-schedule>
+                <div class="dropdown" *ngIf="user.role === 'parent'">
+                    <button class="dropbtn" (click)="showScheduleList = true" (clickOutside)="showScheduleList = false">
+                        {{!parent_schedule.code ? 'select schedule' : parent_schedule.code}}
+                    </button>
+                    <div class="dropdown-content" [hidden]="!showScheduleList">
+                        <a *ngFor="let assp of assessment_patterns[0].assessment"
+                            (click)="parent_schedule = assp; getSubjects();">{{assp.code}}</a>
+                        <a *ngFor="let assp of assessment_patterns[1].assessment"
+                            (click)="parent_schedule = assp; getSubjects();">{{assp.code}}</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn" (click)="showSubjectList = true" (clickOutside)="showSubjectList = false">
+                        {{!selected_subject.name ? 'select subject' : selected_subject.name}}
+                    </button>
+                    <div class="dropdown-content" [hidden]="!showSubjectList">
+                        <a *ngFor="let sub of subjects; let i = index"
+                            (click)="selected_subject = sub; getSubjectEvaluations()">{{sub.name}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="add_div">
+
+            <!-- <button class="btn -cta" routerLink="/main/evaluations/addMarks" *ngIf="user.role === 'admin' || user.role === 'teacher'">Add Marks</button> -->
+        </div>
+    </section>
+    <section class="table-and-pagination -classes-schedule">
+        <div class="table-container" *ngIf="subjectMarks.length !== 0">
+            <table>
+                <thead>
+                    <tr>
+                        <th align="left">#</th>
+                        <th align="left">Student</th>
+                        <th align="left">Roll</th>
+                        <th align="left">Percentage</th>
+                        <th align="left">Marks</th>
+                        <th align="left">Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let std of subjectMarks | pagination: pageNo; let i=index">
+                        <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+                        <td>{{std.first_name}} {{std.last_name}}</td>
+                        <td>{{std.roll_no}}</td>
+                        <td>
+                            <div class="hor-progress-wrapper">
+                                <div class="hor-progress-track">
+                                    <span class="hor-progress-filled" [ngStyle]="{'background-color': 
+                                        (std.subjects.percentage >= 80) ? '#5e81f4' : 
+                                        (std.subjects.percentage < 80 && std.subjects.percentage >= 60) ? '#5CB85C' : 
+                                        '#e56761', 'width': std.subjects.percentage + '%', 'color': '#FFFFFF'}">
+                                        <!-- {{std.subjects.percentage}}% -->
+                                    </span>
+                                </div>
+                                <span class="hor-progress-title"></span>
+                            </div>
+                        </td>
+                        <td>{{std.subjects.Total_marks}}</td>
+                        <td>
+                            <div class="_progress"
+                                [ngStyle]="{'background-color': (std.subjects.percentage >= 80) ? '#5e81f4' : (std.subjects.percentage < 80 && std.subjects.percentage >= 60) ? '#5CB85C' : '#e56761'}">
+                                {{std.subjects.Grade}}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="no-data" *ngIf="subjectMarks.length === 0">
+            <img src="../../../assets/images/Nodata.png" alt="">
+            <h1 class="no-data-text">There are No Exam Reports for this Subject</h1>
+        </div>
+        <div class="_pagination" *ngIf="subjectMarks.length !== 0">
+            <a class="btn -previous" (click)="previousPage()">Previous</a>
+            <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}"
+                *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+            <a class="btn -next" (click)="nextPage()">Next</a>
+        </div>
+    </section>
+</main>

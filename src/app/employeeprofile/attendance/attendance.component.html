@@ -1,0 +1,215 @@
+<!-- <main class="card mt-20 within-viewport" style="height: auto;">
+    <div class="page-actions">
+        <section class="student-intro">
+            <img src="/assets/images/student.png">
+            <h4>Vinod Kumar Alluri</h4>
+            <h4>Class X - A</h4>
+            <h4>Roll No : 1</h4>
+
+            <div class="col-wrapper">
+                <button routerLink="/main/main/employeeprofile/profile/{{employee_id}}"
+                    class="btn -cta active-tab">Profile</button>
+                <button routerLink="/main/main/employeeprofile/attendance/{{employee_id}}"
+                    class="btn -cta active-tab">Attendance</button>
+                <button routerLink="/main/main/employeeprofile/academics/{{employee_id}}"
+                    class="btn -cta active-tab">Academics</button>
+                <button routerLink="/main/main/employeeprofile/assessment/{{employee_id}}"
+                    class="btn -cta active-tab">Assessment</button>
+            </div>
+
+        </section>
+        <section class="student-task-section">
+            <section class="page-actions">
+                <div class="dropdown">
+                    <button class="dropbtn" (click)="showMonthList = true" (clickOutside)="showMonthList = false">
+                        {{!month.month ? 'select month' : month.month}}
+                    </button>
+                    <div class="dropdown-content" [hidden]="!showMonthList">
+                        <a *ngFor="let mon of months"
+                            (click)="month = mon; getEmployeeMonthlyAttendance();">{{mon.month}}</a>
+                    </div>
+                </div>
+            </section>
+            <section class="table-and-pagination -classes-schedule">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th align="left">Date</th>
+                                <th align="left">Attendance Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let att of attendance[0].attendance_data; let i = index">
+                                <td class="_s-no"><span>{{ i + 1 }}</span></td>
+                                <td>{{att.date}}</td>
+                                <td>
+                                    <button [ngClass]="{'status-btn approved-btn': att.status === 'Present', 'color': 'white', 'status-btn rejected-btn': att.status === 'Absent', 'status-btn pending-btn': att.status === 'On Leave', 'color': 'white' }" >{{att.status}}</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+    </div>
+</main>
+
+<div id="main-content">
+    <div class="row">
+        <div class="menu-bar">
+            <button routerLink="/main/main/studentprofile/profile/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Profile</button>
+            <button routerLink="/main/main/studentprofile/attendance/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Attendance</button>
+            <button routerLink="/main/main/studentprofile/academics/{{student_id}}/{{section_id}}"
+                class="button button2 hvr-pop transition" routerLinkActive="active">Academics</button>
+            <button routerLink="/main/main/studentprofile/assessment/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Assessment</button>
+            <button routerLink="/main/main/studentprofile/fees/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Fee Collection</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="page-content-wrapper">
+            <div class="student-info-wrapper">
+                <div class="student-details-tablist-wrapper">
+                    <section class="student-task-section">
+                        <section class="page-actions">
+                            <div class="dropdown">
+                                <button class="dropbtn" (click)="showMonthList = true"
+                                    (clickOutside)="showMonthList = false">
+                                    {{!selected_month.month ? 'select Month' : selected_month.month}}
+                                </button>
+                                <div class="dropdown-content" [hidden]="!showMonthList">
+                                    <a *ngFor="let month of months"
+                                        (click)="selected_month = month; getstudentMonthAttendance();">{{ month.month}}</a>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="table-container timetable-chart">
+                            <table cellspacing="0" class="_task-list">
+                                <thead>
+                                    <tr>
+                                        <th align="left">Mo</th>
+                                        <th align="left">Tu</th>
+                                        <th align="left">We</th>
+                                        <th align="left">Th</th>
+                                        <th align="left">Fr</th>
+                                        <th align="left">Sa</th>
+                                        <th align="left">Su</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="calendar">
+                                    <tr *ngFor="let days of dayslist; let i = index">
+                                        <td *ngFor="let att of days; let j = index">
+                                            <span [ngClass]="{'special-day present': att.status === 'Present', 'special-day absent': att.status === 'Absent', 'special-day leave': att.status === 'On Leave'}">
+                                                {{att.day}}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                        <div class="special-day-spec-wrapper">
+                            <div class="present">
+                                <span class="special-day-spec-box"></span>
+                                <span class="special-day-spec-title">Present</span>
+                            </div>
+                            <div class="leave">
+                                <span class="special-day-spec-box"></span>
+                                <span class="special-day-spec-title">On leave</span>
+                            </div>
+                            <div class="absent">
+                                <span class="special-day-spec-box"></span>
+                                <span class="special-day-spec-title">Absent</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div id="main-content">
+    <div class="row">
+        <div class="menu-bar">
+            <button routerLink="/main/main/employeeprofile/profile/{{employee_id}}"
+                routerLinkActive="active">Profile</button>
+            <button routerLink="/main/main/employeeprofile/attendance/{{employee_id}}"
+                routerLinkActive="active">Attendance</button>
+            <button routerLink="/main/main/employeeprofile/academics/{{employee_id}}"
+                class="button button2 hvr-pop transition" routerLinkActive="active">Academics</button>
+            <button routerLink="/main/main/employeeprofile/assessment/{{employee_id}}"
+                routerLinkActive="active">Assessment</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="page-content-wrapper">
+            <div class="student-info-wrapper">
+                <div class="student-details-tablist-wrapper">
+                    <section class="student-task-section">
+                        <section class="page-actions">
+                            <div class="dropdown">
+                                <button class="dropbtn" (click)="showMonthList = true"
+                                    (clickOutside)="showMonthList = false">
+                                    {{!selected_month.month ? 'select Month' : selected_month.month}}
+                                </button>
+                                <div class="dropdown-content" [hidden]="!showMonthList">
+                                    <a *ngFor="let month of months"
+                                        (click)="selected_month = month; getEmployeeMonthlyAttendance();">{{ month.month}}</a>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="table-container timetable-chart">
+                            <table cellspacing="0" class="_task-list">
+                                <thead>
+                                    <tr>
+                                        <th align="left">Mo</th>
+                                        <th align="left">Tu</th>
+                                        <th align="left">We</th>
+                                        <th align="left">Th</th>
+                                        <th align="left">Fr</th>
+                                        <th align="left">Sa</th>
+                                        <th align="left">Su</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="calendar">
+                                    <tr *ngFor="let days of dayslist; let i = index">
+                                        <td *ngFor="let att of days; let j = index">
+                                            <span class="special-day" [ngClass]="{'present': att.status === 'Present', 'absent': att.status === 'Absent', 'leave': att.status === 'On Leave'}">
+                                                {{att.day}}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                        <div class="special-day-spec-wrapper">
+                            <div>
+                                <span class="special-day-spec-box"></span>
+                                <span class="special-day-spec-title">Total Days: {{attendance_data.count}}</span>
+                            </div>
+                            <div class="present">
+                                <span class="special-day-spec-box"></span>
+                                <span class="special-day-spec-title">Present: {{attendance_data.present}}</span>
+                            </div>
+                            <div class="leave">
+                                <span class="special-day-spec-box"></span>
+                                <span class="special-day-spec-title">On leave: {{attendance_data.onleave}}</span>
+                            </div>
+                            <div class="absent">
+                                <span class="special-day-spec-box"></span>
+                                <span class="special-day-spec-title">Absent: {{attendance_data.absent}}</span>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

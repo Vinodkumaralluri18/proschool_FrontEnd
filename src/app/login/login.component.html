@@ -1,0 +1,44 @@
+<div class="login">
+    <div class="side-image">
+        <img src="../../assets/images/new-login-img.png" alt="ProSchool">
+    </div>
+    <div class="login-form-wrapper">
+        <div class="wrap-login100">
+            <img src="../../assets/images/new-login-logo.png" alt="ProSchool">
+            <h1 class="login-heading"><b>Welcome Back,</b> Please login to your account</h1>
+
+            <form class="login100-form validate-form" [formGroup]="loginForm" (ngSubmit)="login()">
+                <input class="login-fields" type="email" id="loginEmailId" formControlName="email" placeholder="Username">
+                <span class="help-block" *ngIf="!is_email_valid">Please enter user name</span>
+
+                <div class="space-row"></div>
+
+                <input class="login-fields" type="password" id="loginPassword" formControlName="password" placeholder="Password">
+                <span class="help-block" *ngIf="!is_password_valid">Please enter password</span>
+
+                <div class="space-row"></div>
+                <span class="help-block" *ngIf="loading">Please enter valid Login Credentials</span>
+
+                <button type="submit" class="login-btn">
+                    sign in
+                </button>
+
+            </form>
+
+            <div class="container-login100-form-btn">
+
+                <label class="switch remember-me">
+                    <input type="checkbox" [(ngModel)]="isRememberMe">
+                    <span class="slider start round"></span>
+                </label>
+                <span class="remember-me-title" (click)="isRememberMe = !isRememberMe">Remember me</span>
+
+                <a class="forgot-pwd-link" routerLink='/forgot'>
+                    Forgot Password
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+.hor-progress-wrapper {
+  display: flex;
+}
+  
+.hor-progress-track {
+  height: 20px;
+  width: 800px;
+  margin: 0;
+  border-radius: 3px;
+  background-color: #f2f5fe;
+}
+  
+.hor-progress-filled {
+  content: "";
+  height: 100%;
+  display: block;
+  margin-top: auto;
+  background-color: #6186ed;
+  border-radius: 3px 0 0 3px;
+}
+  
+.hor-progress-title{
+  display: inline-block;
+}
+
+._progress {
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+}
+
+._progress-blue {
+  background: #5E81F4;
+}
+
+._progress-green {
+  background: #77c284;
+}
+
+._progress-red {
+  background: #e56761;
+}

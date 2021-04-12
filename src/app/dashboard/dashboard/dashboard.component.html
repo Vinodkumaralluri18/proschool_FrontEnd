@@ -1,0 +1,266 @@
+<main>
+  <div class="main-dashboard-section-1">
+    <div class="tasks-events-notices-expenses card tabbed">
+      <div class="_tab-group" role="tablist">
+        <button role="tab" id="tasks-tab" [ngClass]="[selectedTab === 'tasks' ? 'selected-tab' : '']" 
+        (click)="selectedTab = 'tasks'">Tasks</button>
+        <button role="tab" id="notices-tab" [ngClass]="[selectedTab === 'notice' ? 'selected-tab' : '']"
+        (click)="selectedTab = 'notice'">Payments</button>
+        <button role="tab" id="expenses-tab" [ngClass]="[selectedTab === 'expenses' ? 'selected-tab' : '']"
+        (click)="selectedTab = 'expenses'">Expenses</button>
+        <button role="tab" id="events-tab" [ngClass]="[selectedTab === 'events' ? 'selected-tab' : '']" 
+        (click)="selectedTab = 'events'">Events</button>
+      </div>
+      <div class="_tab-panel-group">
+        <section role="tabpanel" tabindex="-1" *ngIf="selectedTab === 'tasks'" class="table-container">
+          <table cellspacing="0" class="_task-list">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th align="left">Priority</th>
+                <th align="left">Task</th>
+                <th align="left">Assigned to</th>
+                <th align="left">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let task of tasks; let i = index;">
+                <td class="_s-no"><span>{{i+1}}</span></td>
+                <td
+                  [ngStyle]="{'color': (task.priority === 'High') ? '#e56761' : (task.priority === 'Medium') ? '#77c284' : '#5e81f4'}">
+                  {{task.priority}}</td>
+                <td>{{task.task}}</td>
+                <td>{{task.employee_name}}</td>
+                <td>
+                  <!-- <div [ngClass]="{'_progress-text -rejected':task.task_status === 'completed', '_progress-text -pending':task.task_status === 'pending'}">{{task.task_status}}</div> -->
+                  <div class="_progress-text -rejected" *ngIf="task.task_status === 'completed'">{{task.task_status}}
+                  </div>
+                  <div class="_progress-text -pending" *ngIf="task.task_status === 'pending'">{{task.task_status}}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section role="tabpanel" tabindex="-1" *ngIf="selectedTab === 'events'" class="table-container">
+          <div class="event-content" *ngFor="let event of events">
+            <p class="event-title">{{event.event_title}}</p>
+            <p class="event-date">{{event.start_time}} - {{event.end_time}}</p>
+            <p class="event-desc">
+              {{event.description}}
+            </p>
+          </div>
+        </section>
+        <section role="tabpanel" tabindex="-1" *ngIf="selectedTab === 'notice'">
+          <table cellspacing="0" class="_task-list">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th align="left">Vendor Name</th>
+                <th align="left">Material</th>
+                <th align="left">Total Payment</th>
+                <th align="left">Paid</th>
+                <th align="left">Balance</th>
+                <th align="left">Payment Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pay of payments.payments; let i = index;">
+                <td class="_s-no"><span>{{i+1}}</span></td>
+                <td>{{pay.vendor_name}}</td>
+                <td>{{pay.material}}</td>
+                <td>{{pay.payment_toPay | currency:'INR'}}</td>
+                <td>{{pay.payment_paid | currency:'INR'}}</td>
+                <td>{{pay.payment_balance | currency:'INR'}}</td>
+                <td>
+                  <div class="_progress-text -rejected" *ngIf="pay.payment_status === 'Paid'">{{pay.payment_status}}</div>
+                  <div class="_progress-text -partial" *ngIf="pay.payment_status === 'Partially Paid'">{{pay.payment_status}}</div>
+                  <div class="_progress-text -pending" *ngIf="pay.payment_status === 'Not Paid'">{{pay.payment_status}}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section role="tabpanel" tabindex="-1" *ngIf="selectedTab === 'expenses'">
+          <table cellspacing="0" class="_task-list">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th align="left">Name</th>
+                <th align="left">Amount</th>
+                <th align="left">Category</th>
+                <th align="left">Payment Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let exp of expenses.expenses; let i = index;">
+                <td class="_s-no"><span>{{i+1}}</span></td>
+                <td>{{exp.first_name}}</td>
+                <td>{{exp.amount | currency:'INR'}}</td>
+                <td>{{exp.category}}</td>
+                <td>
+                  <div class="_progress-text -rejected" *ngIf="exp.payment_status === 'completed'">{{exp.payment_status}}
+                  </div>
+                  <div class="_progress-text -pending" *ngIf="exp.payment_status === 'pending'">{{exp.payment_status}}</div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+    <div class="_attendance-and-history">
+      <div class="_attendance-box card">
+        <h2>Attendance</h2>
+        <!-- <button type="button" class="_date-picker"><input type="date" [(ngModel)]="date" (change)="getDate()"><i class="fa fa-angle-down"></i></button>
+        <button type="button" class="_date-picker"><i class="fa fa-angle-down"></i></button> -->
+        <div class="tabbed">
+          <div role="tablist">
+            <button role="tab" id="students-attendance-tab" aria-selected="true" class="attntablink" (click)="getAttendance('students')">Students</button>
+            <button role="tab" id="employees-attendance-tab" class="attntablink" tabindex="-1" (click)="getAttendance('employees')">Employees</button>
+          </div>
+          <section role="tabpanel" aria-labelledby="students-attendance-tab" tabindex="-1">
+            <div class="_metrics dynamic-bar-graph">
+              <div class="_metric -total">
+                <div class="_bar">
+                  <span class="_bar_progress" [ngStyle]="{'height': attendance_data.presentPercentage +'%'}">
+                  </span>
+                </div>
+                <div class="_name">
+                  <span class="_legend">Present</span> {{attendance_data.present}}
+                </div>
+              </div>
+              <div class="_metric -attend">
+                <div class="_bar">
+                  <span class="_bar_progress" [ngStyle]="{'height': attendance_data.absentPercent +'%'}">
+                  </span>
+                </div>
+                <div class="_name">
+                  <span class="_legend">Absent</span> {{attendance_data.absent}}
+                </div>
+              </div>
+              <div class="_metric -due">
+                <div class="_bar">
+                  <span class="_bar_progress" [ngStyle]="{'height': attendance_data.onLeavePercent +'%'}">
+                  </span>
+                </div>
+                <div class="_name">
+                  <span class="_legend">Leave</span> {{attendance_data.onLeave}}
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="_history-box card">
+        <h2>Finances</h2>
+        <!-- <button type="button" class="_date-picker">Month<i class="fa fa-angle-down"></i></button> -->
+        <div class="tabbed">
+          <div role="tablist">
+            <button role="tab" id="payment-history-tab" aria-selected="true" class="attntablink" (click)="getFinance('payments')">Payments</button>
+            <button role="tab" id="expenses-history-tab" class="attntablink" tabindex="-1" (click)="getFinance('expenses')">Expenses</button>
+          </div>
+          <section role="tabpanel" aria-labelledby="payment-history-tab" tabindex="-1">
+            <div class="_metrics dynamic-bar-graph">
+              <div class="_metric -earned">
+                <div class="_bar">
+                  <span class="_bar_progress" [ngStyle]="{'height': finances.total_percentage +'%'}">
+                  </span>
+                </div>
+                <div class="_name">
+                  <span class="_legend">Total</span> {{finances.total_payment | currency:'INR'}}
+                </div>
+              </div>
+              <div class="_metric -due">
+                <div class="_bar">
+                  <span class="_bar_progress" [ngStyle]="{'height': finances.paid_percentage +'%'}">
+                  </span>
+                </div>
+                <div class="_name">
+                  <span class="_legend">Paid</span> {{finances.paid_payment | currency:'INR'}}
+                </div>
+              </div>
+              <div class="_metric -cost">
+                <div class="_bar">
+                  <span class="_bar_progress" [ngStyle]="{'height': finances.balance_percentage +'%'}">
+                  </span>
+                </div>
+                <div class="_name">
+                  <span class="_legend">Balance</span> {{finances.total_payment - finances.paid_payment | currency:'INR'}}
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="main-dashboard-section-2">
+    <div class="_fee-collection-box card">
+      <!-- <button type="button" class="_date-picker"><i class="fa fa-calendar"></i>Year<i class="fa fa-angle-down"></i></button> -->
+      <div class="_filters_fee">
+        <h2>Fee Collection</h2>
+        <select class="_filters_fee_select" [(ngModel)]="selected_class" (change)="getFeeCollection()">
+          <option value="all">All Classes</option>
+          <option *ngFor="let cls of classes" value="{{cls.class_id}}">{{cls.name}}</option>
+        </select>
+      </div>
+      <div class="_chart">
+        <div class="_metrics -horizontal">
+          <div class="_metric -earned">
+            <div class="_name">Total</div>
+            <div class="_bar" [ngStyle]="{'width': fees.totalpercentage + '%'}">
+              <span>{{fees.totalFees | currency:'INR'}}</span>
+            </div>
+          </div>
+          <div class="_metric -due">
+            <div class="_name">Collected</div>
+            <div class="_bar" [ngStyle]="{'width': fees.paidpercentage + '%'}">
+              <span>{{fees.paidFees | currency:'INR'}}</span>
+            </div>
+          </div>
+          <div class="_metric -cost" [ngStyle]="{'width': fees.balancepercentage + '%'}">
+            <div class="_name">Balance</div>
+            <div class="_bar">
+              <span>{{fees.balanceFees | currency:'INR'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="_time-table-box card">
+      <div class="_filters">
+        <select name="" [(ngModel)]="selected_class" (change)="getSchedules()">
+          <option *ngFor="let cls of classes" value="{{cls.class_id}}">{{cls.name}}</option>
+        </select>
+        <select name="" [(ngModel)]="selected_section" (change)="getSectionSchedule()">
+          <option *ngFor="let sec of sections" value="{{sec.section_id}}">{{sec.name}}</option>
+        </select>
+        <div class="_teacher-name">Class Teacher : <span> {{class_teacher}}</span></div>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th align="left">Time</th>
+              <th align="left">Subject</th>
+              <th align="left">Teacher</th>
+              <th align="left">Class Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let sch of section_schedule; let i = index;">
+              <td>{{sch.start_time}} - {{sch.end_time}}</td>
+              <td>{{sch.subject_name}}</td>
+              <td>
+                <div class="_chip -class-running" [ngStyle]="{'background-color': sch.employee_attendance === 'Present' ? '#5cb85c' : sch.employee_attendance === 'Absent' ? '#d9534f' : sch.employee_attendance === 'On Leave' ? '#f0ad4e' : '#6186ed', 'color': '#FFFFFF' }">{{sch.teacher_name}}</div>
+              </td>
+              <td>
+                <div class="_chip -class-running" [ngStyle]="{'background-color': sch.class_attendance === 'Class Taken' ? '#5cb85c' : '#d9534f' , 'color': '#FFFFFF'}">{{sch.class_attendance}}</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,27 @@
+<div class="dropdown">
+  <button class="dropbtn" (click)="showClassList = true" (clickOutside)="showClassList = false">
+    {{!selected_class.name ? 'select class' : selected_class.name}}
+  </button>
+  <div class="dropdown-content" [hidden]="!showClassList">
+    <a *ngFor="let cls of classes" (click)="selected_class = cls; getSections();">{{cls.name}}</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="dropbtn" (click)="showSectionList = true" (clickOutside)="showSectionList = false">
+    {{!selected_section.name ? 'select section' : selected_section.name}}
+  </button>
+  <div class="dropdown-content" [hidden]="!showSectionList">
+    <a *ngFor="let sec of class_sections; let i = index" (click)="selected_section = sec; getExam_schedules() ">{{sec.name}}</a>
+  </div>
+</div>
+
+<div class="dropdown">
+  <button class="dropbtn" (click)="showScheduleList = true" (clickOutside)="showScheduleList = false">
+    {{!selected_schedule.exam_title ? 'select schedule' : selected_schedule.exam_title}}
+  </button>
+  <div class="dropdown-content" [hidden]="!showScheduleList">
+    <a *ngFor="let exam of exam_schedules"
+      (click)="selected_schedule = exam; get_sch();">{{exam.exam_title}}</a>
+  </div>
+</div>

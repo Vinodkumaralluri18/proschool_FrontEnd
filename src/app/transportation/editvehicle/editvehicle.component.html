@@ -1,0 +1,158 @@
+<div class="row">
+    <div class="container-fluid" id="buttonId1">
+      <button class="button button2 hvr-pop transition" (click)="getVehicleForm('Vehicle')">Vehicle Details</button>
+      <button class="button button2 hvr-pop transition" (click)="getVehicleForm('Finance')">Finance</button>
+      <button class="button button2 hvr-pop transition" (click)="getVehicleForm('Insurance')">Insurance</button>
+      <button class="button button2 hvr-pop transition" (click)="getVehicleForm('Maintenance')">Maintenance</button>
+    </div>
+  </div>
+<!-- <div class="row">
+    <div class="pull-left">
+        <input name="new" placeholder="Enter..." type="radio" (change)="getVehicleForm('Vehicle')">
+        <label>Vehicle Details</label>
+    </div>
+    <div class="pull-left">
+        <input name="new" placeholder="Enter..." type="radio" (change)="getVehicleForm('Finance')">
+        <label>Finance</label>
+    </div>
+    <div class="pull-left">
+        <input name="new" placeholder="Enter..." type="radio" (change)="getVehicleForm('Insurance')">
+        <label>Insurance</label>
+    </div>
+    <div class="pull-left">
+        <input name="new" placeholder="Enter..." type="radio" (change)="getVehicleForm('Maintenance')">
+        <label>Maintenance</label>
+    </div>
+</div> -->
+<form class="searchForm" [formGroup]="vehicleForm" (ngSubmit)="submitVehicle()">
+    <div class="row" *ngIf="vehicle_details">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Name</label>
+                <input class="form-control" value="{{vehicle.vehicle_name}}" formControlName="vehicle_name" placeholder="Enter..." type="text">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Number</label>
+                <input class="form-control" value="{{vehicle.vehicle_number}}" formControlName="vehicle_number" placeholder="Enter..." type="text">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Chassis No</label>
+                <input class="form-control" value="{{vehicle.chassis_number}}" formControlName="chassis_number" placeholder="Enter..." type="text">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Engine No</label>
+                <input class="form-control" value="{{vehicle.engine_number}}" formControlName="engine_number" placeholder="Enter..." type="text">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Vehicle Type</label>
+                <select class="form-control" formControlName="vehicle_type">
+                    <option>select...</option>
+                    <option value="diesel">Diesel</option>
+                    <option value="petrol">petrol</option>
+                    <option value="gas">gas</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="finance">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Company Name</label>
+                <input class="form-control" value="{{vehicle.Finance[0].finance_company_name}}" formControlName="finance_company_name" placeholder="Enter..." type="text">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Amount</label>
+                <input class="form-control" value="{{vehicle.Finance[0].finance_amount}}" formControlName="finance_amount" placeholder="Enter..." type="text">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">From Date</label>
+                <input class="form-control" value="{{vehicle.Finance[0].finance_from}}" formControlName="finance_from" placeholder="Enter..." type="date">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">To Date</label>
+                <input class="form-control" value="{{vehicle.Finance[0].finance_to}}" formControlName="finance_to" placeholder="Enter..." type="date">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">EMI</label>
+                <input class="form-control" value="{{vehicle.Finance[0].finance_emi}}" formControlName="finance_emi" placeholder="Enter..." type="number">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Reminder Date</label>
+                <input class="form-control" value="{{vehicle.Finance[0].finance_date}}" formControlName="finance_date" placeholder="Enter..." type="date">
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="insurance">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Number</label>
+                <input class="form-control" value="{{vehicle.Insurance[0].insurance_number}}" formControlName="insurance_number" placeholder="Enter..." type="text">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Company Name</label>
+                <input class="form-control" value="{{vehicle.Insurance[0].insurance_company_name}}" formControlName="insurance_company_name" placeholder="Enter..." type="text">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Valid From</label>
+                <input class="form-control" value="{{vehicle.Insurance[0].valid_from}}" formControlName="valid_from" placeholder="Enter..." type="date">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Valid To</label>
+                <input class="form-control" value="{{vehicle.Insurance[0].valid_to}}" formControlName="valid_to" placeholder="Enter..." type="date">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="pull-left">Amount</label>
+                <input class="form-control" value="{{vehicle.Insurance[0].insurance_amount}}" formControlName="insurance_amount" placeholder="Enter..." type="text">
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="maintenance">
+        <div class="vehchd">Maintenance</div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="pull-left">Engine Oil</label>
+                <select class="form-control" formControlName="engine_oil">
+                    <option>select...</option>
+                    <option>Castrol</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="pull-left">Remind</label>
+                <input class="form-control" value="{{vehicle.Maintenance[0].maintenance_reminder}}" formControlName="maintenance_reminder" placeholder="Enter..." type="date">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="button button1 hvr-pop transition pull-right">Submit</button>
+        <div (click)="close()" class="button button1 hvr-pop transition pull-left">Close</div>
+    </div>
+</form>

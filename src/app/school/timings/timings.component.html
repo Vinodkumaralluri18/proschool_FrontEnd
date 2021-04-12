@@ -1,0 +1,74 @@
+<div id="main-content">
+
+  <div class="row" *ngIf="user.role === 'admin' || user.role === 'teacher'">
+    <div class="container-fluid" id="buttonId1">
+      <button routerLink="/main/admin/addclass" class="button button2 hvr-pop transition">Class & Section</button>
+      <button routerLink="/main/admin/timings" class="button button2 hvr-pop transition">School Timings</button>
+      <button routerLink="/main/admin/patterns" class="button button2 hvr-pop transition" *ngIf="user.role === 'admin'">Assessment Patterns</button>
+      <!-- <button routerLink="/main/admin/quote" class="button button2 hvr-pop transition">Quotes</button> -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="container-fluid dashboard-content">
+      <div class="card selectcard" *ngIf="user.role === 'admin'">
+        <app-class *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)"
+        (sectionEvent)="receiveSection($event)"></app-class>
+        <form class="searchForm" role="form" [formGroup]="timingsForm" (ngSubmit)="addTimings()">
+          <div class="form-group">
+            <label class="pull-left">Session</label>
+            <input class="form-control" formControlName="session" placeholder="Enter..." type="text">
+          </div>
+          <div class="form-group">
+            <label class="pull-left">Start Time</label>
+            <input class="form-control" formControlName="start_time" placeholder="Enter..." type="time">
+          </div>
+          <div class="form-group">
+            <label class="pull-left">End Time</label>
+            <input class="form-control" formControlName="end_time" placeholder="Enter..." type="time">
+          </div>
+          <div class="pull-right">
+            <button type="submit" class="button button1 hvr-pop transition">Add Session</button>
+          </div>
+        </form>
+      </div>
+      <div class="card listcard">
+        <div class="searchForm scrollonhover">
+          <div class="pull-left">
+            <h4>School Timings</h4>
+          </div>
+          <div class="table-responsive">
+            <table style="width:100%;">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th style="padding-right: 20px !important;">Session</th>
+                  <th>Class</th>
+                  <th>Section</th>
+                  <th>Start Time</th>
+                  <th>End Time</th>
+                  <th *ngIf="user.role === 'admin'">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let tim of timings; let i=index">
+                  <td>{{ i +1 }}</td>
+                  <td style="padding-right: 20px !important;">{{tim.session}}</td>
+                  <td>{{tim.class_name}}</td>
+                  <td>{{tim.section_name}}</td>
+                  <td>{{tim.start_time}}</td>
+                  <td>{{tim.end_time}}</td>
+                  <td *ngIf="user.role === 'admin'">
+                    <div class="pattrenED">
+                      <div><i class="fa fa-trash" aria-hidden="true" (click)="deleteTimings(tim.session_id)"></i></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
