@@ -1,0 +1,71 @@
+<!-- <div class="col-full-3"> -->
+<div
+  class="form-group"
+  [ngClass]="{
+    'has-error':
+      form.get(control).errors &&
+      (form.get(control).touched || form.get(control).dirty)
+  }"
+  [formGroup]="form"
+>
+  <label class="heading">{{ labelTitle }}</label>
+  <!-- dropdown -->
+  <div *ngIf="inputType === 'DropDown'">
+    <select name="standard" [formControlName]="control">
+      <option *ngFor="let option of options" [value]="option.value">
+        {{ option.viewValue }}
+      </option>
+    </select>
+    <app-print-error
+      [control]="form.controls[control]"
+      [fieldName]="fieldName"
+    ></app-print-error>
+  </div>
+  <!-- normal input -->
+  <div *ngIf="inputType === 'input'">
+    <input
+      class="inpbox"
+      type="text"
+      (blur)="onBlur(form, control)"
+      [formControlName]="control"
+    />
+    <app-print-error
+      [control]="form.controls[control]"
+      [fieldName]="fieldName"
+    ></app-print-error>
+  </div>
+  <!-- number input -->
+  <div *ngIf="inputType === 'number'">
+    <input
+      class="inpbox"
+      type="number"
+      [formControlName]="control"
+      [maxLength]="maxLength"
+      inputmode="numeric"
+      (blur)="onBlur(form, control)"
+      autocomplete="off"
+      class="form-control"
+      pattern="^\d{10}$"
+      required
+    />
+    <app-print-error
+      [control]="form.controls[control]"
+      [fieldName]="fieldName"
+    ></app-print-error>
+  </div>
+  <!-- email -->
+  <div *ngIf="inputType === 'email'">
+    <input
+      class="inpbox"
+      type="email"
+      [formControlName]="control"
+      [pattern]="emailPattern"
+      (blur)="onBlur(form, control)"
+    />
+    <app-print-error
+      [control]="form.controls[control]"
+      [fieldName]="fieldName"
+    ></app-print-error>
+  </div>
+</div>
+<!-- </div> -->

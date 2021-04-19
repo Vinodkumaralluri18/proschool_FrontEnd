@@ -1,34 +1,33 @@
-.alignrow{
-    margin-left: 12%;
+.alignrow {
+  margin-left: 12%;
 }
-.excelimg{
-    margin-top: 20px;
+.excelimg {
+  margin-top: 20px;
 }
-.fileup{
-    margin-top: 5px;
+.fileup {
+  margin-top: 5px;
 }
-.inpbox{
-    width: 100%;
-    height: 30px;
-    border-radius: 3px;
-    border: none;
-    border: solid 1px #cccccc;
-    text-indent: 10px;
+.inpbox {
+  width: 100%;
+  height: 30px;
+  border-radius: 3px;
+  border: none;
+  border: solid 1px #cccccc;
+  text-indent: 10px;
 }
-
 .help-block {
-	color: red;
-	font-size: 12px;
-	opacity: 0.7;
+  color: red;
+  font-size: 12px;
+  opacity: 0.7;
 }
 
 .dropdown-error-msg {
-    padding-top: 5px;
-    display: inline-block;
+  padding-top: 5px;
+  display: inline-block;
 }
 
 .tab-btn {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 input::-webkit-outer-spin-button,
@@ -36,29 +35,63 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
+.close {
+  position: absolute;
+  top: 8%;
+  right: 23%;
+  display: block;
+  width: 32px;
+  height: 32px;
+  font-size: 0;
+}
+.close:before, 
+.close:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 20px;
+  background-color: #fff;
+  transform: rotate(45deg) translate(-50%, -50%);
+  transform-origin: top left;
+  content: '';
+}
+.close:after {
+  transform: rotate(-45deg) translate(-50%, -50%);
+}
+.close:before, 
+.close:after {
+    height: 24px;
+}
+.close:before, 
+.close:after {
+    width: 2px;
+}
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
-
-@media screen and (max-width:734px) {
-    .tab-fonts{
-        font-size:8px
-    }
+.main-flex {
+  display: flex;
+  justify-content: space-between;
 }
 
-.tab-content>.tab-pane {
-    display: none;
-}
-.tab-content>.active in {
-    display: block;
-}
-
-.hide-display{
-display: none;
-}
-.visible-display{
-display:block;
+@media screen and (max-width: 734px) {
+  .tab-fonts {
+    font-size: 8px;
+  }
 }
 
+.tab-content > .tab-pane {
+  display: none;
+}
+.tab-content > .active in {
+  display: block;
+}
+
+.hide-display {
+  display: none;
+}
+.visible-display {
+  display: block;
+}

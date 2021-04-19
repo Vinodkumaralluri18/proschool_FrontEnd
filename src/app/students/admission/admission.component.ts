@@ -22,12 +22,6 @@ export class AdmissionComponent implements OnInit {
   dialog_type: string;
   studentphoto: File;
 
-  date_of_birth = new FormControl(new Date);
-  date_of_admission = new FormControl(new Date);
-
-  selectedGender: any;
-  showGenderList: boolean = false;
-
   studentImagee;
   private url = appConfig.apiUrl;
 
@@ -99,7 +93,7 @@ export class AdmissionComponent implements OnInit {
   studentdetails: boolean = true;
   parentdetails: boolean = false;
   address: boolean = false;
-
+  title: string = 'Add Student';
   constructor(
     private fb: FormBuilder,
     private service: ServicesService,
@@ -122,38 +116,50 @@ export class AdmissionComponent implements OnInit {
   }
 
   studentadmissionForm: FormGroup = this.fb.group({
-    admission_no: ['', Validators.required],
-    first_name: ['', Validators.required],
-    category: ['', Validators.required],
-    blood_group: ['', Validators.required],
-    roll_no: ['', Validators.required],
-    last_name: ['', Validators.required],
-    nationality: ['', Validators.required],
-    admission_date: ['', Validators.required],
+    // studentForm
+    studentForm : this.fb.group({
+      admission_no: ['', Validators.required],
+      roll_no: ['', Validators.required],
+      first_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      last_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      gender: ['', Validators.required],
+      dob: ['', Validators.required],
+      category: ['', Validators.required],
+      nationality: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      phone: ['', [Validators.required, Validators.pattern('[0-9]\\d{9}')]],
+      aadhar_no: ['', Validators.required],
+      blood_group: [''],
+      admission_date: ['', Validators.required],
+    }),
+    // parentGroup
+    fatherForm:this.fb.group({
+      father_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      father_contact: ['', Validators.required],
+      father_email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+      father_occupation: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+    }),
+    motherForm:this.fb.group({
+      mother_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      mother_contact: ['', Validators.required],
+      mother_email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+      mother_occupation: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+    }),
+    gaurdianForm:this.fb.group({
+      gaurdian_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      gaurdian_contact: ['', Validators.required],
+      gaurdian_email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+      gaurdian_occupation: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+      gaurdian_relation: [''],
+    }),
+    // address
+    cur_address: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+    perm_address: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
+    // not sure where these are used
     class_id: ['', Validators.required],
-    gender: ['', Validators.required],
-    phone: ['', Validators.required],
     bus_route_id: ['', Validators.required],
     section_id: ['', Validators.required],
-    dob: ['', Validators.required],
-    aadhar_no: ['', Validators.required],
     email: ['', Validators.required],
     //exceluploadfile: ['', Validators.required],
-    father_name: ['', Validators.required],
-    mother_name: ['', Validators.required],
-    gaurdian_name: ['', Validators.required],
-    gaurdian_relation: ['', Validators.required],
-    father_contact: ['', Validators.required],
-    mother_contact: ['', Validators.required],
-    gaurdian_contact: ['', Validators.required],
-    father_email: ['', Validators.required, Validators.pattern(this.emailPattern)],
-    mother_email: ['', Validators.required],
-    gaurdian_email: ['', Validators.required],
-    father_occupation: ['', Validators.required],
-    mother_occupation: ['', Validators.required],
-    gaurdian_occupation: ['', Validators.required],
-    cur_address: ['', Validators.required],
-    perm_address: ['', Validators.required],
     file: [''],
     //parent_account_new: ['', Validators.required],
     //parent_account_create: ['', Validators.required],
@@ -163,102 +169,115 @@ export class AdmissionComponent implements OnInit {
   ngOnInit() {
     this.getClasses();
     if (this.dialog_type === 'edit') {
+      this.title = 'Edit Student';
       this.patchData()
     }
   }
 
   patchData() {
-    this.studentadmissionForm.patchValue({
+  
+    this.studentadmissionForm.controls.studentForm.patchValue({
       admission_no: this.student.admission_no,
-      first_name: this.student.first_name,
-      category: this.student.category,
-      blood_group: this.student.blood_group,
-      roll_no: this.student.roll_no,
-      last_name: this.student.last_name,
-      nationality: this.student.nationality,
-      admission_date: this.student.admission_date,
+      roll_no:this.student.roll_no,
+      first_name:this.student.first_name,
+      last_name:this.student.last_name,
+      gender:this.student.gender,
+      dob:this.student.dob,
       class_id: this.student.school_classes[0].class_id,
-      gender: this.student.gender,
-      phone: this.student.phone,
       bus_route_id: this.student.bus_route_id,
       section_id: this.student.sections[0].section_id,
-      dob: this.student.dob,
-      aadhar_no: this.student.aadhar_no,
-      email: this.student.email,
-      //exceluploadfile: ['', Validators.required],
-      father_name: this.student.father_name,
-      mother_name: this.student.parents[1].parent_name,
-      gaurdian_name: this.student.parents[2].parent_name,
-      gaurdian_relation: this.student.parents[2].parent_relation,
-      father_contact: this.student.parents[0].parent_contact,
-      mother_contact: this.student.parents[1].parent_contact,
-      gaurdian_contact: this.student.parents[2].parent_contact,
-      father_email: this.student.parents[0].parent_email,
-      mother_email: this.student.parents[1].parent_email,
-      gaurdian_email: this.student.parents[2].parent_email,
-      father_occupation: this.student.parents[0].occupation,
-      mother_occupation: this.student.parents[1].occupation,
-      gaurdian_occupation: this.student.parents[2].occupation,
-      cur_address: this.student.cur_address,
-      perm_address: this.student.perm_address,
-      file: [''],
-      //parent_account_new: ['', Validators.required],
-      //parent_account_create: ['', Validators.required],
-      //docupload: ['', Validators.required]
+      category:this.student.category,
+      nationality:this.student.nationality,
+      phone:this.student.phone,
+      aadhar_no:this.student.aadhar_no,
+      blood_group:this.student.blood_group,
+      admission_date:this.student.admission_date
     });
+    this.studentadmissionForm.controls.fatherForm.patchValue({
+      father_name: this.student.parents[0].parent_name,
+      father_contact:this.student.parents[0].parent_contact,
+      father_email:this.student.parents[0].parent_email,
+      father_occupation:this.student.parents[0].occupation,
+    });
+    this.studentadmissionForm.controls.motherForm.patchValue({
+      mother_name:this.student.parents[1].parent_name,
+      mother_contact:this.student.parents[1].parent_contact,
+      mother_email:this.student.parents[1].parent_email,
+      mother_occupation:this.student.parents[1].occupation,
+    });
+    this.studentadmissionForm.controls.gaurdianForm.patchValue({
+      gaurdian_name:this.student.parents[2].parent_name,
+      gaurdian_contact:this.student.parents[2].parent_contact,
+      gaurdian_email:this.student.parents[2].parent_email,
+      gaurdian_occupation:this.student.parents[2].occupation,
+      gaurdian_relation:this.student.parents[2].parent_relation,
+    });
+    console.log({studentadmissionForm: this.studentadmissionForm})
+    console.log({parentForm: this.studentadmissionForm})
   }
 
-  get_studentForm(select) {
-
-    if (select === 'studentdetails') {
-      this.studentdetails = true;
-      this.parentdetails = false;
-      this.address = false;
+  formSubmitted(event) {
+    if(event === 'close') {
+      return this.close()
     }
-    else if (select === 'parentdetails') {
-      if (this.studentdetails) {
-        this.studentadmissionForm.value.class_id = this.class;
-        this.studentadmissionForm.value.section_id = this.section;
-        this.stepOneVerification();
-        if (this.is_step_one_valid) {
-          this.studentdetails = false;
-          this.parentdetails = true;
-          this.address = false;
+    this.parentdetails = true;
+    this.studentdetails = false;
+    this.address = false;
+    if(event && event.type === 'student')
+      this.setTabDetails(false, true, false);
+    if(event === 'student')
+      this.setTabDetails(true, false, false);
+    else if(event && event.type === 'parent')
+      this.setTabDetails(false, false, true);
+  }
+
+  setTabDetails(student, parent, address, tab = false) {
+    if (parent && !this.studentadmissionForm.controls.studentForm.valid) {
+      this.showValidationMsg(
+        this.studentadmissionForm.controls.studentForm as FormGroup
+      );
+      return;
+    }
+    if (address) {
+      if(!this.studentadmissionForm.controls.studentForm.valid) {
+        this.showValidationMsg(
+          this.studentadmissionForm.controls.studentForm as FormGroup
+        );
+      }
+      let formList = [
+        this.studentadmissionForm.controls.fatherForm,
+        this.studentadmissionForm.controls.motherForm,
+        this.studentadmissionForm.controls.gaurdianForm,
+      ];
+      let inValidForm = [];
+      for (let form of formList) {
+        if (form.valid) {
+          this.studentdetails = student;
+          this.parentdetails = parent;
+          this.address = address;
+          return;
         } else {
-          return true;
-        }
-      } else if (this.address) {
-        this.stepThreeVerification();
-        if (this.is_step_three_valid) {
-          this.studentdetails = false;
-          this.parentdetails = true;
-          this.address = false;
-        } else {
-          return true;
+          inValidForm.push(form);
         }
       }
+      if(inValidForm.length) return this.showValidationMsg(inValidForm[0]);
     }
-    else if (select === 'address') {
-      if (this.parentdetails) {
-        this.studentadmissionForm.value.class_id = this.class;
-        this.studentadmissionForm.value.section_id = this.section;
-       // this.stepOneVerification();
-        this.stepTwoVerification();
-        if (this.is_step_one_valid && this.is_father_name_valid) {
-          this.studentdetails = false;
-          this.parentdetails = false;
-          this.address = true;
-        } else {
-          return true;
+    this.studentdetails = student;
+    this.parentdetails = parent;
+    this.address = address;
+  }
+  showValidationMsg(formGroup: FormGroup) {
+    for (const key in formGroup.controls) {
+      if (formGroup.controls.hasOwnProperty(key)) {
+        const control: FormControl = <FormControl>formGroup.controls[key];
+        if (Object.keys(control).includes("controls")) {
+          const formGroupChild: FormGroup = <FormGroup>formGroup.controls[key];
+          this.showValidationMsg(formGroupChild);
         }
-      } else {
-        this.studentdetails = false;
-        this.parentdetails = false;
-        this.address = true;
+        control.markAsTouched();
       }
     }
   }
-
   fileProgress(event) {
     this.studentphoto = <File>event.target.files[0];
     this.studentadmissionForm.patchValue({ file: this.studentphoto });
@@ -276,41 +295,58 @@ export class AdmissionComponent implements OnInit {
   studentDocuments(fileDocs: any) {
     this.documents = fileDocs;
   }
+  formStudentDetails() {
+    let {bus_route_id, cur_address, file, perm_address, student_id, email} = this.studentadmissionForm.value, class_id = this.class, section_id = this.section;
+    let studentFormValue = {bus_route_id, class_id, cur_address, file, perm_address, section_id, student_id, email};
+    let studentValue = {...this.studentadmissionForm.value.fatherForm, ...this.studentadmissionForm.value.motherForm, ...this.studentadmissionForm.value.gaurdianForm, ...this.studentadmissionForm.value.studentForm, ...studentFormValue};
+    console.log({studentValue});
+    return studentValue;
+  }
 
   submitStudent() {
     this.studentadmissionForm.value.student_id = this.student.student_id;
-    if (this.dialog_type == 'add') {
-      this.studentservice.addStudentadmission(this.section, this.studentadmissionForm.value)
-        .subscribe(
-          res => {
-            if (res.status == 'true') {
+    let studentValue = this.formStudentDetails();
+    // checking if all forms are valid before api call
+    if (
+      this.studentadmissionForm.controls.studentForm &&
+      (this.studentadmissionForm.controls.fatherForm.valid ||
+        this.studentadmissionForm.controls.motherForm.valid ||
+        this.studentadmissionForm.controls.gaurdianForm.valid)
+    ) {
+      if (this.dialog_type == "add") {
+        this.studentservice
+          .addStudentadmission(this.section, studentValue)
+          .subscribe((res) => {
+            if (res.status == "true") {
               this.dialogRef.close();
               this.alert_message = "Student Added Successfully";
-              this.openAlert(this.alert_message)
+              this.openAlert(this.alert_message);
               this.onSubmitPic(res.id);
               // this.onSubmitDoc(res.id);
             } else {
               this.alert_message = "Student Not Added";
-              this.openAlert(this.alert_message)
+              this.openAlert(this.alert_message);
             }
-          }
-        )
-    } else if (this.dialog_type == 'edit') {
-      this.studentservice.editStudent(this.studentadmissionForm.value.student_id, this.studentadmissionForm.value)
-        .subscribe(
-          res => {
+          });
+      } else if (this.dialog_type == "edit") {
+        this.studentservice
+          .editStudent(this.studentadmissionForm.value.student_id, studentValue)
+          .subscribe((res) => {
             if (res == true) {
               this.dialogRef.close();
               this.alert_message = "Student Edited Successfully";
-              this.openAlert(this.alert_message)
+              this.openAlert(this.alert_message);
               this.onSubmitPic(this.studentadmissionForm.value.student_id);
               // this.onSubmitDoc(this.studentadmissionForm.value.student_id);
             } else {
               this.alert_message = "Student Not Edited";
-              this.openAlert(this.alert_message)
+              this.openAlert(this.alert_message);
             }
-          }
-        )
+          });
+      }
+    } else {
+      this.alert_message = "Please Input all Mandatory Fields!!";
+      this.openAlert(this.alert_message);
     }
   }
 
@@ -388,336 +424,14 @@ export class AdmissionComponent implements OnInit {
 
   }
 
-  isDOBValid: boolean = true;
-  isDOfAdmissionValid: boolean = true;
-
-  validateDate(date, dateName) {
-    var input = date;
-    var re = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
-    // var is_date_valid = re.test(date);
-    // var is_date_valid = true;
-    console.log(date)
-    var dateArray = date.split("/");
-
-    if (dateArray.length > 1) {
-      console.log('Hello-1')
-      if (parseInt(dateArray[0]) > 31 || parseInt(dateArray[0]) < 1 || (parseInt(dateArray[1]) === 2
-        && parseInt(dateArray[0]) > 29) || parseInt(dateArray[1]) > 12 || parseInt(dateArray[1]) < 1) {
-        var is_date_valid = false;
-      } else {
-        var is_date_valid = true;
-      }
-    } else {
-      console.log('Hello-2')
-      var is_date_valid = false;
-    }
-
-    console.log(is_date_valid)
-
-    switch (dateName) {
-      case "dob":
-        this.isDOBValid = is_date_valid;
-        break;
-
-      case "dateOfAdmission":
-        this.isDOfAdmissionValid = is_date_valid;
-        break;
-
-      default:
-        // code...
-        break;
-    }
-  }
-
-  addSlashToDOB(e) {
-    if (e.keyCode != 8) {
-      if (this.student.dob.length == 2) {
-        this.student.dob = this.student.dob + "/";
-      } else if (this.student.dob.length == 5) {
-        this.student.dob = this.student.dob + "/";
-      } else {
-        return true;
-      }
-    }
-    return true;
-  }
-
-  addSlashToDOfAdmission(e) {
-    if (e.keyCode != 8) {
-      if (this.student.admission_date.length == 2) {
-        this.student.admission_date = this.student.admission_date + "/";
-      } else if (this.student.admission_date.length == 5) {
-        this.student.admission_date = this.student.admission_date + "/";
-      } else {
-        return true;
-      }
-    }
-    return true;
-  }
-
-  is_student_mobile_valid: boolean = true;
-  is_father_mobile_valid: boolean = true;
-  is_mother_mobile_valid: boolean = true;
-  is_guardian_mobile_valid: boolean = true;
-
-  isMobileValid(person) {
-    var re = /^[6789]\d{9}$/;
-    switch (person) {
-      case "student":
-        this.is_student_mobile_valid = re.test(this.student.phone);
-        break;
-      case "father":
-        this.is_father_mobile_valid = re.test(this.student.parents[1].parent_contact);
-        break;
-      case "mother":
-        this.is_mother_mobile_valid = re.test(this.student.parents[0].parent_contact);
-        break;
-      case "guardian":
-        this.is_guardian_mobile_valid = re.test(this.student.parents[2].parent_contact);
-        break;
-
-      default:
-        // code...
-        break;
-    }
-  }
-
-  validFirstName: boolean = true;
-  validLastName: boolean = true;
-  validNationality: boolean = true;
-
-  is_father_name_valid: boolean = true;
-  is_mother_name_valid: boolean = true;
-  is_guardian_name_valid: boolean = true;
-  is_father_occ_valid: boolean = true;
-  is_mother_occ_valid: boolean = true;
-  is_guardian_occ_valid: boolean = true;
-  is_guardian_relation_valid: boolean = true;
   is_current_address_valid: boolean = true;
   is_perm_address_valid: boolean = true;
-
-  validateText(textString, stringName) {
-    debugger;
-    var re = /^([a-zA-Z]+\s)*[a-zA-Z]+$/i;
-    switch (stringName) {
-      case "first-name":
-        this.validFirstName = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "last-name":
-        this.validLastName = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "nationality":
-        this.validNationality = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "father-name":
-        this.is_father_name_valid = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "mother-name":
-        this.is_mother_name_valid = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "guardian-name":
-        this.is_guardian_name_valid = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "father-occ":
-        this.is_father_occ_valid = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "mother-occ":
-        this.is_mother_occ_valid = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "guardian-occ":
-        this.is_guardian_occ_valid = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "guardian-relation":
-        this.is_guardian_relation_valid = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "current-address":
-        this.is_current_address_valid = re.test(textString.replace(/\s/g, ''));
-        alert(this.is_current_address_valid)
-        break;
-
-      case "perm-address":
-        this.is_perm_address_valid = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      default:
-        // code...
-        break;
-    }
-  }
-
-  isValidClassDD: boolean = true;
-  isValidSectionDD: boolean = true;
-  isValidGenderDD: boolean = true;
-  isValidCategoryDD: boolean = true;
-  isValidBloodDD: boolean = true;
-  isValidBusRouteDD: boolean = true;
-
-  validateDropdown(dropDownName) {
-    switch (dropDownName) {
-      // case "class-dd":
-      //   this.isValidClassDD = !this.selectedClass  ? false : true;
-      //   break;
-
-      // case "section-dd":
-      //   this.isValidSectionDD = !this.selectedSection  ? false : true;
-      //   break;
-
-      // case "gender-dd":
-      //   this.isValidGenderDD = !this.selectedGender ? false : true;
-      //   break;
-
-      // case "category-dd":
-      //   this.isValidCategoryDD = !this.selectedCategory ? false : true;
-      //   break;
-
-      // case "blood-dd":
-      //   this.isValidBloodDD = !this.selectedBloodGroup ? false : true;
-      //   break;
-
-      case "gender-dd":
-        this.isValidGenderDD = (this.studentadmissionForm.value.gender == '' || this.studentadmissionForm.value.gender == undefined) ? false : true;
-        break;
-
-      case "category-dd":
-        this.isValidCategoryDD = (this.studentadmissionForm.value.category == '' || this.studentadmissionForm.value.category == undefined) ? false : true;
-        break;
-
-      case "blood-dd":
-        this.isValidBloodDD = this.selectedBloodGroup == '' ? false : true;
-        break;
-
-      // case "bus-route-dd":
-      //   this.isValidBusRouteDD = !this.selectedBusRoute ? false : true;
-      //   break;
-
-      default:
-        // code...
-        break;
-    }
-  }
-
-  // is_student_email_valid:boolean = true;
-  is_father_email_valid: boolean = true;
-  is_mother_email_valid: boolean = true;
-  is_guardian_email_valid: boolean = true;
-
-  verifyEmailId(emailId, emailName) {
-    var re = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    switch (emailName) {
-      // case "student-email":
-      //   this.is_student_email_valid = re.test(emailId);
-      //   break;
-
-      case "father-email":
-        this.is_father_email_valid = re.test(emailId);
-        break;
-
-      case "mother-email":
-        this.is_mother_email_valid = re.test(emailId);
-        break;
-
-      case "guardian-email":
-        this.is_guardian_email_valid = re.test(emailId);
-        break;
-
-      default:
-        // code...
-        break;
-    }
-  }
-
-  is_admission_no_valid: boolean = true;
-  is_roll_no_valid: boolean = true;
-  is_adhar_no_valid: boolean = true;
-
-  is_step_one_valid: boolean = true;
-
-  stepOneVerification() {
-
-    this.is_admission_no_valid = this.student.admission_no == '' ? false : true;
-    this.is_roll_no_valid = this.student.roll_no == '' ? false : true;
-    this.is_adhar_no_valid = this.student.aadhar_no == '' ? false : true;
-
-    this.validateText(this.student.first_name, 'first-name');
-    this.validateText(this.student.last_name, 'last-name');
-    this.validateText(this.student.nationality, 'nationality');
-
-    // this.validateDropdown('class-dd');
-    // this.validateDropdown('section-dd');
-    this.validateDropdown('gender-dd');
-    this.validateDropdown('category-dd');
-
-    this.validateDate(this.student.dob, 'dob');
-    this.validateDate(this.student.admission_date, 'dateOfAdmission');
-
-    this.isMobileValid('student');
-
-    // if (this.student.email !== '') {
-    //   this.verifyEmailId(this.student.email, 'student-email');
-    // }
-
-    if (this.is_admission_no_valid && this.is_roll_no_valid && this.is_adhar_no_valid
-      && this.validFirstName && this.validLastName && this.validNationality
-      && this.isValidGenderDD && this.isValidCategoryDD && this.isDOBValid && this.isDOfAdmissionValid && this.is_student_mobile_valid) {
-      this.is_step_one_valid = true;
-    } else {
-      this.is_step_one_valid = false;
-    }
-  }
-
-  
-
-  is_step_two_valid: boolean = true;
-
-  stepTwoVerification() {
-    this.is_father_name_valid = this.student.father_name == '' ? false : true;
-    this.validateText(this.student.father_name, 'father-name');
-   // this.validateText(this.student.parents[1].occupation, 'father-occ');
-   // this.isMobileValid('father');
-
-
-    // this.student.parents[0].parent_name !== '' ? this.validateText(this.student.parents[0].parent_name, 'mother-name') : true;
-    // this.student.parents[2].parent_name !== '' ? this.validateText(this.student.parents[2].parent_name, 'guardian-name') : true;
-    // this.student.parents[0].occupation !== '' ? this.validateText(this.student.parents[0].occupation, 'mother-occ') : true;
-    // this.student.parents[2].occupation !== '' ? this.validateText(this.student.parents[2].occupation, 'guardian-occ') : true;
-    // this.student.parents[2].parent_relation !== '' ? this.validateText(this.student.parents[2].parent_relation, 'guardian-relation') : true;
-
-    // this.student.parents[0].parent_contact !== '' ? this.isMobileValid('mother') : true;
-    // this.student.parents[2].parent_contact !== '' ? this.isMobileValid('guardian') : true;
-
-    // if (this.student.parents[1].parent_email !== '') {
-    //   this.verifyEmailId(this.student.parents[1].parent_email, 'father-email');
-    // }
-
-    // if (this.student.parents[0].parent_email !== '') {
-    //   this.verifyEmailId(this.student.parents[0].parent_email, 'mother-email');
-    // }
-
-    // if (this.student.parents[2].parent_email !== '') {
-    //   this.verifyEmailId(this.student.parents[2].parent_email, 'guardian-email');
-    // }
-
-    if (this.is_father_name_valid) {
-      this.is_step_two_valid = true;
-    }
-    this.is_step_two_valid = false;
-  }
 
   is_step_three_valid: boolean = true;
 
   stepThreeVerification() {
     this.is_current_address_valid =  this.student.current_address[0].cur_address == '' ? false : true
-     this.validateText(this.student.current_address[0].cur_address, 'current-address');
+    //  this.validateText(this.student.current_address[0].cur_address, 'current-address');
     // this.student.permanent_address[0].perm_address !== '' ? this.validateText(this.student.permanent_address[0].perm_address, 'perm-address') : true;
      
     if (this.is_current_address_valid) {
@@ -741,3 +455,43 @@ export class AdmissionComponent implements OnInit {
     alertRef.afterClosed().subscribe()
   }
 }
+
+// patchData() {
+    //   this.studentadmissionForm.patchValue({
+    //     admission_no: this.student.admission_no,
+    //     first_name: this.student.first_name,
+    //     category: this.student.category,
+    //     blood_group: this.student.blood_group,
+    //     roll_no: this.student.roll_no,
+    //     last_name: this.student.last_name,
+    //     nationality: this.student.nationality,
+    //     admission_date: this.student.admission_date,
+    //     class_id: this.student.school_classes[0].class_id,
+    //     gender: this.student.gender,
+    //     phone: this.student.phone,
+    //     bus_route_id: this.student.bus_route_id,
+    //     section_id: this.student.sections[0].section_id,
+    //     dob: this.student.dob,
+    //     aadhar_no: this.student.aadhar_no,
+    //     email: this.student.email,
+    //     //exceluploadfile: ['', Validators.required],
+    //     father_name: this.student.father_name,
+    //     mother_name: this.student.parents[1].parent_name,
+    //     gaurdian_name: this.student.parents[2].parent_name,
+    //     gaurdian_relation: this.student.parents[2].parent_relation,
+    //     father_contact: this.student.parents[0].parent_contact,
+    //     mother_contact: this.student.parents[1].parent_contact,
+    //     gaurdian_contact: this.student.parents[2].parent_contact,
+    //     father_email: this.student.parents[0].parent_email,
+    //     mother_email: this.student.parents[1].parent_email,
+    //     gaurdian_email: this.student.parents[2].parent_email,
+    //     father_occupation: this.student.parents[0].occupation,
+    //     mother_occupation: this.student.parents[1].occupation,
+    //     gaurdian_occupation: this.student.parents[2].occupation,
+    //     cur_address: this.student.cur_address,
+    //     perm_address: this.student.perm_address,
+    //     file: [''],
+    //     //parent_account_new: ['', Validators.required],
+    //     //parent_account_create: ['', Validators.required],
+    //     //docupload: ['', Validators.required]
+    //   });

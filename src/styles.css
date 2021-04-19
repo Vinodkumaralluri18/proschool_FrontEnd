@@ -1399,6 +1399,10 @@ position: fixed;
   height: 60px;
   background: #6286ED;
   margin: -24px -24px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
 }
 
 .btn.-cta.inactive-tab {

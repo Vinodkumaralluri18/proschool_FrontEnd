@@ -7,8 +7,10 @@
         <input class="form-control" [(ngModel)]="end_date" type="date" (click)="getRangeAttendance()">
       </div>
     </div>
-    <button (click)="getAttendance()" class="btn -cta">Search</button>
-  </section>
+      <div class="add_div">
+        <button (click)="getAttendance()" class="btn -cta">Search</button>
+      </div>
+    </section>
 
   <section class="table-and-pagination -classes-schedule">
     <div class="table-container" *ngIf="attendance.length !== 0">
