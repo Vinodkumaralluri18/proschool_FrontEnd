@@ -335,6 +335,10 @@ main{
 .account ._pic{
   width: 30px; height: 30px; border-radius: 50px; display: block;
 }
+.account ._pic:hover{
+  cursor: pointer;
+  transform: scale(1.3);
+}
 .account ._profile{
   display: flex; align-items: center;
 }
@@ -1399,6 +1403,10 @@ position: fixed;
   height: 60px;
   background: #6286ED;
   margin: -24px -24px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
 }
 
 .btn.-cta.inactive-tab {

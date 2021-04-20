@@ -12,8 +12,8 @@
     </button>
     <div class="_profile-and-actions">
       <div class="_profile">
-        <img *ngIf="user.role === 'teacher'" src="{{employeeservice.profileImage}}" alt="" class="_pic">
-        <img *ngIf="user.role === 'admin'" src="{{employeeservice.schoolprofileImage}}" alt="" class="_pic">
+        <img *ngIf="user.role === 'teacher'" src="{{employeeservice.profileImage}}" alt="" class="_pic" (click) = "goToProfile('teacher')">
+        <img *ngIf="user.role === 'admin'" src="{{employeeservice.schoolprofileImage}}" alt="" class="_pic" (click) = "goToProfile('admin')">
         <div *ngIf="user.role === 'teacher'" class="_name">{{employeeservice.profile_name}}</div>
         <div *ngIf="user.role === 'admin'" class="_name">{{employeeservice.schoolprofile_name}}</div>
       </div>

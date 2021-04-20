@@ -75,6 +75,12 @@ export class HeaderComponent implements OnInit {
 		this.getAllTeacherMessages();
 	}
 
+	goToProfile(profile: string) {
+		profile === "admin"
+		  ? this.router.navigate(["main/main/admin/profile"])
+		  : this.router.navigate([`main/main/employeeprofile/${this.user.employee_id}`]);
+	  }
+
 	time_calculator() {
 
 		setInterval(function () {
