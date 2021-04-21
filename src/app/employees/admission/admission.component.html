@@ -1,228 +1,48 @@
 <div id="main-content1">
   <div class="blue-top-bar"></div>
   <div class="row-wrapper center-content">
-    <button class="btn -cta" [ngClass]="[singleemployeedetails ? 'active-tab': 'inactive-tab']"
-      (click)="get_employeeForm('singleemployeedetails')">Single
-      Employee Admission</button>
-    <button class="btn -cta" [ngClass]="[employeeaddress ? 'active-tab': 'inactive-tab']"
-      (click)="get_employeeForm('employeeaddress')">Employee
-      Address</button>
+    <button
+      class="btn -cta"
+      [ngClass]="[singleemployeedetails ? 'active-tab' : 'inactive-tab']"
+      (click)="setTabDetails(true, false)"
+    >
+      Single Employee Admission
+    </button>
+    <button
+      class="btn -cta"
+      [ngClass]="[employeeaddress ? 'active-tab' : 'inactive-tab']"
+      (click)="setTabDetails(false, true)"
+    >
+      Employee Address {{singleemployeedetails}}
+    </button>
+  </div>
+  <div *ngIf="singleemployeedetails">
+    <pro-school-employee-admission
+      [employee]="employee"
+      [employeeForm]="employeeadmissionForm.controls.admissionForm"
+      (employeeDetailsSubmitted)="get_employeeForm($event)"
+    ></pro-school-employee-admission>
+  </div>
+  <div *ngIf="employeeaddress">
+    <pro-school-employee-address
+      [employee]="employee"
+      [employeeAddressForm]="employeeadmissionForm.controls.addressForm"
+    ></pro-school-employee-address>
   </div>
 
-  <form [formGroup]="employeeadmissionForm" (submit)="submitEmployee()">
-    <div *ngIf="singleemployeedetails">
-      <div class="row-wrapper">
-        <div class="col-full-3">
-          <div class="form-group" [ngClass]="{'has-error' : employeeadmissionForm.get('title').errors 
-          && (employeeadmissionForm.get('title').touched || employeeadmissionForm.get('title').dirty)}">
-            <label class="heading">Title*</label>
-            <div>
-              <select class="inpbox" formControlName="title" >
-                <option value="">--Select--</option>
-                <option value="Mr">Mr</option>
-                <option value="Ms">Ms</option>
-                <option value="Mrs">Mrs</option>
-              </select>
-              <span class="help-block" *ngIf="!is_title_valid">Please select valid Title.</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-full-3">
-          <div class="form-group" [ngClass]="{'has-error' : employeeadmissionForm.get('first_name').errors 
-            && (employeeadmissionForm.get('first_name').touched || employeeadmissionForm.get('first_name').dirty)}">
-            <label class="heading">First Name*</label>
-            <div>
-              <input class="inpbox" type="text" formControlName="first_name" >
-              <span class="help-block" *ngIf="!is_first_name_valid">Please enter valid first name.</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-full-3">
-          <div class="form-group" [ngClass]="{'has-error' : employeeadmissionForm.get('last_name').errors 
-            && (employeeadmissionForm.get('last_name').touched || employeeadmissionForm.get('last_name').dirty)}">
-            <label class="heading">Surname*</label>
-            <div>
-              <input class="inpbox" type="text" formControlName="last_name" >
-              <span class="help-block" *ngIf="!is_last_name_valid">Please enter valid last name.</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-full-3">
-          <div class="form-group" [ngClass]="{'has-error' : employeeadmissionForm.get('phone').errors 
-            && (employeeadmissionForm.get('phone').touched || employeeadmissionForm.get('phone').dirty)}">
-            <label class="heading">Phone Number*</label>
-            <div>
-              <input type="number" formControlName="phone" >
-              <span class="help-block" *ngIf="!is_phone_valid">Please enter valid Phone Number.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row-wrapper">
-        <div class="col-full-3">
-          <div class="form-group" [ngClass]="{'has-error' : employeeadmissionForm.get('employee_code').errors 
-            && (employeeadmissionForm.get('employee_code').touched || employeeadmissionForm.get('employee_code').dirty)}">
-            <label class="heading">Employee Code*</label>
-            <div>
-              <input class="inpbox" type="text" formControlName="employee_code" >
-              <span class="help-block" *ngIf="!is_employee_code_valid">Please enter valid Employee Code.</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-full-3">
-          <div class="form-group">
-            <label class="heading">Designation</label>
-            <div>
-              <input class="inpbox" type="text" formControlName="designation">
-            </div>
-          </div>
-        </div>
-        <div class="col-full-3">
-          <div class="form-group">
-            <label class="heading">Email</label>
-            <input class="inpbox" type="email" formControlName="email">
-          </div>
-        </div>
-        <div class="col-full-3">
-          <div class="form-group" [ngClass]="{'has-error' : employeeadmissionForm.get('joined_on').errors 
-        && (employeeadmissionForm.get('joined_on').touched || employeeadmissionForm.get('joined_on').dirty)}">
-            <label class="heading">Date of Joining*</label>
-            <div>
-              <input class="inpbox" type="date" formControlName="joined_on">
-              <span class="help-block" *ngIf="!is_joined_on_valid">Please enter valid Joining Date.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row-wrapper">
-        <div class="col-full-3">
-          <div class="form-group" [ngClass]="{'has-error' : employeeadmissionForm.get('dob').errors 
-        && (employeeadmissionForm.get('dob').touched || employeeadmissionForm.get('dob').dirty)}">
-            <label class="heading">Date of Birth*</label>
-            <div>
-              <input class="inpbox" type="date" formControlName="dob">
-              <span class="help-block" *ngIf="!is_dob_valid">Please enter valid Date of Birth.</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-full-3">
-          <div class="form-group" [ngClass]="{'has-error' : employeeadmissionForm.get('gender').errors 
-          && (employeeadmissionForm.get('gender').touched || employeeadmissionForm.get('gender').dirty)}">
-            <label class="heading">Gender*</label>
-            <div>
-              <select class="inpbox" formControlName="gender">
-                <option value="">--Select--</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-              <span class="help-block" *ngIf="!is_gender_valid">Please select a gender.</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-full-3">
-          <div class="form-group">
-            <label class="heading">Blood Group</label>
-            <select class="inpbox" formControlName="blood_group">
-              <option value="">--Select--</option>
-              <option value="O+">O+</option>
-              <option value="O-">O-</option>
-              <option value="A+">A+</option>
-              <option value="A-">A-</option>
-              <option value="B+">B+</option>
-              <option value="B-">B-</option>
-              <option value="AB+">AB+</option>
-              <option value="AB-">AB-</option>
-              <option value="NA">NA</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-full-3">
-          <div class="form-group" [ngClass]="{'has-error' : employeeadmissionForm.get('marital_status').errors 
-          && (employeeadmissionForm.get('marital_status').touched || employeeadmissionForm.get('marital_status').dirty)}">
-            <label class="heading">Marital Status*</label>
-            <div>
-              <select class="inpbox" formControlName="marital_status">
-                <option value="">--Select--</option>
-                <option value="Married">Married</option>
-                <option value="Unmarried">Unmarried</option>
-              </select>
-              <span class="help-block" *ngIf="!is_marital_status_valid">Please select Marital Status.</span>
-            </div>
-          </div>
-        </div>
-        <!-- <div class="col-full-3">
-          <div class="form-group">
-            <label class="heading">Experience</label>
-            <input class="inpbox" type="text" formControlName="experience">
-          </div>
-        </div>
-        <div class="col-full-3">
-          <div class="form-group">
-            <label class="heading">Salary Band</label>
-            <input class="inpbox" type="text" formControlName="salary_band">
-          </div>
-        </div> -->
-      </div>
-
-      <div class="row-wrapper">
-
-        <div class="col-full-3">
-          <div class="form-group" [ngClass]="{'has-error' : employeeadmissionForm.get('job_category').errors 
-          && (employeeadmissionForm.get('job_category').touched || employeeadmissionForm.get('job_category').dirty)}">
-            <label class="heading">Employee Type*</label>
-            <div>
-              <select class="inpbox" formControlName="job_category">
-                <option value="">--Select--</option>
-                <option value="teaching">Teaching</option>
-                <option value="non-teaching">Non-Teaching</option>
-                <option value="administrative">Administrative</option>
-              </select>
-              <span class="help-block" *ngIf="!is_job_category_valid">Please select Job Category.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-full-3">
-          <div class="form-group">
-            <label class="heading">Pasport No</label>
-            <input class="inpbox" type="text" formControlName="passport_no">
-          </div>
-        </div>
-
-        <div class="col-full-3">
-          <div class="form-group">
-            <label class="heading">Aadhaar No</label>
-            <div>
-              <input class="inpbox" type="text" formControlName="aadhar_no">
-            </div>
-          </div>
-        </div>
-
-        <div class="col-full-3">
-          <div class="form-group">
-            <label class="heading">Pan No</label>
-            <div>
-              <input class="inpbox" type="text" formControlName="pan_no">
-            </div>
-          </div>
-        </div>
-
-      </div>    
-
-      <div class="row">
+  <!-- 
+      <div>
         <div class="col-md-3 pull-left tab-btn">
           <div class="btn -cta inactive-tab" (click)="close()">Close</div>
-          <!-- <button class="button button1 hvr-pop transition" (click)="get_employeeForm('employeedetails')">Previous</button> -->
+          <div class="btn -cta inactive-tab" (click)="get_employeeForm('singleemployeedetails')">Previous</div>
         </div>
         <div class="col-md-3 pull-right tab-btn">
-          <div class="btn -cta active-tab" (click)="get_employeeForm('employeeaddress')">Next</div>
+          <button class="btn -cta active-tab" type="submit">Submit</button>
         </div>
-      </div>
-    </div>
+      </div> -->
+</div>
 
-    <div *ngIf="employeeaddress">
+<!-- <div *ngIf="employeeaddress">
 
       <div class="row-wrapper">
         <div class="col-full-3">
@@ -234,7 +54,7 @@
         <div class="col-full-3">
           <div class="form-group">
             <label class="heading">Country</label>
-            <div><input class="inpbox" type="text" formControlName="country"></div>
+            <div><input class="inpbox" type="text" formControlName=""></div>
           </div>
         </div>
         <div class="col-full-3">
@@ -287,19 +107,11 @@
           <div class="form-group">
             <label class="heading">Upload Photo :</label>
             <input id="file-input-studProfPic" type="file" name="image" (change)="employeeProfPic($event.target.files)" />
-            <!-- <label>{{employeephoto == '' ? employeephoto : 'No file chosen'}}</label> -->
           </div>
         </div>
         <div>
           <img  src="{{employeeImagee}}" alt="" class="_pic" width="50">
         </div>
-        <!-- <div class="col-full-6">
-          <div class="form-group">
-            <input id="file-input-studDoc" type="file" name="image" (change)="employeeDocuments($event.target.files)" />
-            <label class="heading">Upload Documents :</label>
-            <label>{{documents == '' ? documents : 'No file chosen'}}</label>
-          </div>
-        </div> -->
       </div>
 
       <div>
@@ -312,5 +124,4 @@
         </div>
       </div>
 
-    </div>
-  </form>
+    </div> -->

@@ -11,6 +11,11 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+.date-control {
+  height: 30px;
+  color: #5E81F4;
+  font-size: 12px;
+}
 label {
   white-space: nowrap;
 }

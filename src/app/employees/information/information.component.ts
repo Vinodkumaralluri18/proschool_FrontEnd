@@ -193,11 +193,12 @@ export class InformationComponent implements OnInit {
 
   openDialog(selected_employee, dialog_type): void {
 
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '80%';
-
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig = {
+      autoFocus:true,
+      width: '60vw',
+      maxHeight: '100vh',
+    };
     dialogConfig.data = {
       employee: selected_employee,
       dialog_type: dialog_type,

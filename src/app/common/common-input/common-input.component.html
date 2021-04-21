@@ -67,5 +67,26 @@
       [fieldName]="fieldName"
     ></app-print-error>
   </div>
+  <!-- date field -->
+  <div *ngIf="inputType === 'date'">
+    <input
+      [formControlName]="control"
+      placeholder="DD/MM/YYYY"
+      class="form-control date-control"
+      type="date"
+    />
+    <app-print-error
+      [control]="form.controls[control]"
+      [fieldName]="fieldName"
+    ></app-print-error>
+  </div>
+  <!-- Text Area -->
+  <div *ngIf="inputType === 'textArea'">
+    <textarea [formControlName]="control" cols="45" rows="5"></textarea>
+    <app-print-error
+      [control]="form.controls[control]"
+      [fieldName]="fieldName"
+    ></app-print-error>
+  </div>
 </div>
 <!-- </div> -->

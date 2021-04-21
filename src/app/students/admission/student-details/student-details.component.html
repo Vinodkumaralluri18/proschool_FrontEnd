@@ -39,39 +39,14 @@
       [inputType]="'DropDown'"
     >
     </pro-school-common-input>
-    <div class="col-full-3">
-      <div
-        class="form-group"
-        [ngClass]="{
-          'has-error':
-            studentForm.get('dob').errors &&
-            (studentForm.get('dob').touched || studentForm.get('dob').dirty)
-        }"
-      >
-        <label class="heading">Date of Birth*</label>
-        <input
-          type="text"
-          formControlName="dob"
-          placeholder="DD/MM/YYYY"
-          inputmode="numeric"
-          autocomplete="off"
-          class="form-control date-control"
-          type="date"
-        />
-        <span
-          *ngIf="
-            !isDOBValid ||
-            (studentForm.get('dob') &&
-              studentForm.get('dob').errors &&
-              (studentForm.get('dob').dirty ||
-                studentForm.get('dob').touched) &&
-              studentForm.get('dob').errors.required)
-          "
-          class="help-block"
-          >Please enter valid DOB.</span
-        >
-      </div>
-    </div>
+    <pro-school-common-input
+      [form]="studentForm"
+      [control]="'dob'"
+      [fieldName]="'Date of Birth'"
+      [labelTitle]="'Date of Birth*'"
+      [inputType]="'date'"
+    >
+    </pro-school-common-input>
     <pro-school-common-input
       [form]="studentForm"
       [control]="'category'"
@@ -115,37 +90,14 @@
       [inputType]="'DropDown'"
     >
     </pro-school-common-input>
-    <div class="col-full-3">
-      <div
-        class="form-group"
-        [ngClass]="{
-          'has-error':
-            studentForm.get('admission_date').errors &&
-            (studentForm.get('admission_date').touched ||
-              studentForm.get('admission_date').dirty)
-        }"
-      >
-        <label class="heading">Admission Date*</label>
-        <input
-          type="text"
-          formControlName="admission_date"
-          class="form-control date-control"
-          type="date"
-        />
-        <span
-          class="help-block"
-          *ngIf="
-            !isDOfAdmissionValid ||
-            (studentForm.get('admission_date') &&
-              studentForm.get('admission_date').errors &&
-              (studentForm.get('admission_date').dirty ||
-                studentForm.get('admission_date').touched) &&
-              studentForm.get('admission_date').errors.required)
-          "
-          >Please enter valid date of admission.</span
-        >
-      </div>
-    </div>
+    <pro-school-common-input
+      [form]="studentForm"
+      [control]="'admission_date'"
+      [fieldName]="'Admission Date'"
+      [labelTitle]="'Admission Date*'"
+      [inputType]="'date'"
+    >
+    </pro-school-common-input>
   </div>
 
   <div class="row">
