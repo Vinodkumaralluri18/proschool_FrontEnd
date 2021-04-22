@@ -1,0 +1,81 @@
+<div id="main-content new-listing">
+
+  <div class="row">
+    <div class="container-fluid" id="buttonId1">
+      <button routerLink="/main/examinations/listPapers" class="button button2 hvr-pop transition">ExamPapers List</button>
+      <button routerLink="/main/examinations/addPapers" class="button button2 hvr-pop transition">Add ExamPapers</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="container-fluid dashboard-content">
+      <div class="card selectcard">
+        <app-schedule (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"
+          (scheduleEvent)="receiveSchedule($event)"></app-schedule>
+      </div>
+      <div class="card listcard">
+        <div class="pull-left">
+          <h4>Exam Papers</h4>
+        </div>
+        <div class="pull-right">
+          <div class="form-group">
+            <label class="pull-left">Class</label>
+            <select class="form-control" [(ngModel)]="selected_subject">
+              <option>select...</option>
+              <option *ngFor="let sub of subjects" value="{{sub.subject_id}}">{{sub.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="searchForm">
+          <div class="table-responsive">
+            <table style="width:100%;">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Assessment</th>
+                  <th>Exam Date</th>
+                  <th>Start Time</th>
+                  <th>End Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let inass of inner_assessments; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{inass.Assessment}}</td>
+                  <td>
+                    <div class="form-group">
+                      <label class="pull-left">Exam Date</label>
+                      <input class="form-control" placeholder="Enter..." [(ngModel)]="inass.Exam_date" type="date">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <label class="pull-left">Start Time</label>
+                      <input class="form-control" placeholder="Enter..." [(ngModel)]="inass.Start_time" type="time">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <label class="pull-left">End Time</label>
+                      <input class="form-control" placeholder="Enter..." [(ngModel)]="inass.End_time" type="time">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group">
+                      <label class="pull-left">Max Marks</label>
+                      <input class="form-control" placeholder="Enter..." [(ngModel)]="inass.marks" type="number">
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="form-group pull-right">
+              <button class="button button1 hvr-pop transition" (click)="addExam_papers()">Add
+                Exam</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

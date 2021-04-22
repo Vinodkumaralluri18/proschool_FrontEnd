@@ -1,0 +1,533 @@
+<div>
+  <div class="row-wrapper" [formGroup]="fatherForm">
+    <pro-school-common-input
+      [form]="fatherForm"
+      [control]="'father_name'"
+      [fieldName]="'father name'"
+      [labelTitle]="'Father Name*'"
+      [inputType]="'input'"
+      (onBlurEvent)="onBlur($event)"
+      ></pro-school-common-input>
+    <pro-school-common-input
+      [form]="fatherForm"
+      [control]="'father_contact'"
+      [fieldName]="'father name'"
+      [labelTitle]="'Father Phone*'"
+      [inputType]="'number'"
+      [maxLength]="10"
+      (onBlurEvent)="onBlur($event)"
+      ></pro-school-common-input>
+    <pro-school-common-input
+      [form]="fatherForm"
+      [control]="'father_email'"
+      [fieldName]="'email id'"
+      [labelTitle]="'Father Email'"
+      [inputType]="'email'"
+      (onBlurEvent)="onBlur($event)"
+      ></pro-school-common-input>
+    <pro-school-common-input
+      [form]="fatherForm"
+      [control]="'father_occupation'"
+      [fieldName]="'father occupation'"
+      [labelTitle]="'Father Occupation'"
+      [inputType]="'input'"
+      (onBlurEvent)="onBlur($event)"
+      ></pro-school-common-input>
+  </div>
+
+  <div class="row-wrapper" [formGroup]="motherForm">
+    <pro-school-common-input
+      [form]="motherForm"
+      [control]="'mother_name'"
+      [fieldName]="'mother name'"
+      [labelTitle]="'Mother Name*'"
+      [inputType]="'input'"
+      (onBlurEvent)="onBlur($event)"
+    ></pro-school-common-input>
+    <pro-school-common-input
+      [form]="motherForm"
+      [control]="'mother_contact'"
+      [fieldName]="'mother name'"
+      [labelTitle]="'Mother Phone*'"
+      [inputType]="'number'"
+      [maxLength]="10"
+      (onBlurEvent)="onBlur($event)"
+    ></pro-school-common-input>
+    <pro-school-common-input
+      [form]="motherForm"
+      [control]="'mother_email'"
+      [fieldName]="'email id'"
+      [labelTitle]="'Mother Email'"
+      [inputType]="'email'"
+      (onBlurEvent)="onBlur($event)"
+    ></pro-school-common-input>
+    <pro-school-common-input
+      [form]="motherForm"
+      [control]="'mother_occupation'"
+      [fieldName]="'mother occupation'"
+      [labelTitle]="'Mother Occupation'"
+      [inputType]="'input'"
+      (onBlurEvent)="onBlur($event)"
+    ></pro-school-common-input>
+  </div>
+
+  <span [formGroup]="gaurdianForm">
+    <div class="row-wrapper">
+      <pro-school-common-input
+        [form]="gaurdianForm"
+        [control]="'gaurdian_name'"
+        [fieldName]="'gaurdian name'"
+        [labelTitle]="'Gaurdian Name*'"
+        [inputType]="'input'"
+        (onBlurEvent)="onBlur($event)"
+      ></pro-school-common-input>
+      <pro-school-common-input
+        [form]="gaurdianForm"
+        [control]="'gaurdian_contact'"
+        [fieldName]="'gaurdian name'"
+        [labelTitle]="'Gaurdian Phone*'"
+        [inputType]="'number'"
+        [maxLength]="10"
+        (onBlurEvent)="onBlur($event)"
+      ></pro-school-common-input>
+      <pro-school-common-input
+        [form]="gaurdianForm"
+        [control]="'gaurdian_email'"
+        [fieldName]="'email id'"
+        [labelTitle]="'Gaurdian Email'"
+        [inputType]="'email'"
+        (onBlurEvent)="onBlur($event)"
+      ></pro-school-common-input>
+      <pro-school-common-input
+        [form]="gaurdianForm"
+        [control]="'gaurdian_occupation'"
+        [fieldName]="'gaurdian occupation'"
+        [labelTitle]="'Gaurdian Occupation'"
+        [inputType]="'input'"
+        (onBlurEvent)="onBlur($event)"
+      ></pro-school-common-input>
+    </div>
+
+    <div class="row-wrapper">
+      <pro-school-common-input
+        [form]="gaurdianForm"
+        [control]="'gaurdian_relation'"
+        [fieldName]="'gaurdian relation'"
+        [labelTitle]="'Gaurdian Relation'"
+        [inputType]="'input'"
+      ></pro-school-common-input>
+    </div>
+  </span>
+
+  <div class="main-flex">
+    <div class="col-md-3 flex-1 tab-btn">
+      <div class="btn -cta inactive-tab" (click)="close()">Cancel</div>
+    </div>
+    <div class="tab-btn">
+      <div class="btn -cta active-tab" (click)="get_parentForm(true)">
+        &laquo; Previous
+      </div>
+      <div class="btn -cta active-tab" (click)="get_parentForm()">
+        Next &raquo;
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- comments -->
+<!-- <div [formGroup]="parentForm">
+  <div class="row-wrapper">
+    <div class="col-full-3">
+      <div
+        class="form-group"
+        [ngClass]="{
+          'has-error':
+            studentadmissionForm.get('father_name').errors &&
+            (studentadmissionForm.get('father_name').touched ||
+              studentadmissionForm.get('father_name').dirty)
+        }"
+      >
+        <label class="heading">Father Name*</label>
+        <div>
+          <input
+            type="text"
+            class="inpbox"
+            formControlName="father_name"
+            name="father_name"
+            [(ngModel)]="student.father_name"
+          />
+          <span class="help-block" *ngIf="!is_father_name_valid"
+            >Please enter father name.</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-full-3">
+      <div
+        class="form-group"
+        [ngClass]="{
+          'has-error':
+            studentadmissionForm.get('father_contact').errors &&
+            (studentadmissionForm.get('father_contact').touched ||
+              studentadmissionForm.get('father_contact').dirty)
+        }"
+      >
+        <label class="heading">Father Phone</label>
+        <div>
+          <input
+            type="number"
+            class="inpbox"
+            formControlName="father_contact"
+            [(ngModel)]="student.parents[0].parent_contact"
+            placeholder=""
+            maxlength="10"
+            inputmode="numeric"
+            autocomplete="off"
+            class="form-control"
+            pattern="^\d{10}$"
+            required
+          />
+          <span class="help-block" *ngIf="!is_father_mobile_valid"
+            >Please enter valid contact number.</span
+          >
+          <div
+            *ngIf="
+              studentadmissionForm.get('father_contact').invalid &&
+              studentadmissionForm.get('father_contact').errors &&
+              (studentadmissionForm.get('father_contact').dirty ||
+                studentadmissionForm.get('father_contact').touched)
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="
+                studentadmissionForm.get('father_contact').hasError('pattern')
+              "
+            >
+              Please Enter correct Number
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-full-3">
+      <div class="form-group">
+        <label class="heading">Father Email</label>
+        <input
+          class="inpbox"
+          type="email"
+          [pattern]="emailPattern"
+          formControlName="father_email"
+          [(ngModel)]="student.parents[0].parent_email"
+        />
+        <span class="help-block" *ngIf="!is_father_email_valid"
+          >Please enter valid email id.</span
+        >
+        <small
+          class="text-danger"
+          *ngIf="studentadmissionForm.get('father_email').hasError('pattern')"
+        >
+          Please Enter correct mail
+        </small>
+      </div>
+    </div>
+    <div class="col-full-3">
+      <div class="form-group">
+        <label class="heading">Father Occupation</label>
+        <input
+          class="inpbox"
+          type="text"
+          formControlName="father_occupation"
+          [(ngModel)]="student.parents[0].occupation"
+          [pattern]="unamePattern"
+        />
+        <span class="help-block" *ngIf="!is_father_occ_valid"
+          >Please enter valid occupation.</span
+        >
+        <small
+          class="text-danger"
+          *ngIf="
+            studentadmissionForm.get('father_occupation').hasError('pattern')
+          "
+        >
+          Please Enter only alphabets
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-wrapper">
+    <div class="col-full-3">
+      <div class="form-group">
+        <label class="heading">Mother Name</label>
+        <input
+          class="inpbox"
+          type="text"
+          formControlName="mother_name"
+          [pattern]="unamePattern"
+          [(ngModel)]="student.parents[1].parent_name"
+        />
+        <span class="help-block" *ngIf="!is_mother_name_valid"
+          >Please enter valid mother name.</span
+        >
+        <small
+          class="text-danger"
+          *ngIf="studentadmissionForm.get('mother_name').hasError('pattern')"
+        >
+          Please Enter only alphabets
+        </small>
+      </div>
+    </div>
+    <div class="col-full-3">
+      <div class="form-group">
+        <label class="heading">Mother Phone</label>
+        <input
+          type="number"
+          class="inpbox"
+          formControlName="mother_contact"
+          [(ngModel)]="student.parents[1].parent_contact"
+          placeholder=""
+          maxlength="10"
+          inputmode="numeric"
+          autocomplete="off"
+          class="form-control"
+          pattern="^\d{10}$"
+          required
+        />
+        <span class="help-block" *ngIf="!is_mother_mobile_valid"
+          >Please enter valid contact number.</span
+        >
+        <div
+          *ngIf="
+            studentadmissionForm.get('mother_contact').invalid &&
+            studentadmissionForm.get('mother_contact').errors &&
+            (studentadmissionForm.get('mother_contact').dirty ||
+              studentadmissionForm.get('mother_contact').touched)
+          "
+        >
+          <small
+            class="text-danger"
+            *ngIf="
+              studentadmissionForm.get('mother_contact').hasError('pattern')
+            "
+          >
+            Please Enter correct Number
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="col-full-3">
+      <div class="form-group">
+        <label class="heading">Mother Email</label>
+        <input
+          class="inpbox"
+          type="email"
+          [pattern]="emailPattern"
+          formControlName="mother_email"
+          [(ngModel)]="student.parents[1].parent_email"
+        />
+        <span class="help-block" *ngIf="!is_mother_email_valid"
+          >Please enter valid email id.</span
+        >
+        <small
+          class="text-danger"
+          *ngIf="studentadmissionForm.get('mother_email').hasError('pattern')"
+        >
+          Please Enter correct mail
+        </small>
+      </div>
+    </div>
+    <div class="col-full-3">
+      <div class="form-group">
+        <label class="heading">Mother Occupation</label>
+        <input
+          class="inpbox"
+          type="text"
+          formControlName="mother_occupation"
+          [(ngModel)]="student.parents[1].occupation"
+          [pattern]="unamePattern"
+        />
+        <span class="help-block" *ngIf="!is_mother_occ_valid"
+          >Please enter valid occupation.</span
+        >
+        <small
+          class="text-danger"
+          *ngIf="
+            studentadmissionForm.get('mother_occupation').hasError('pattern')
+          "
+        >
+          Please Enter only alphabets
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-wrapper">
+    <div class="col-full-3">
+      <div class="form-group">
+        <label class="heading">Guardian Name</label>
+        <input
+          class="inpbox"
+          type="text"
+          formControlName="gaurdian_name"
+          [pattern]="unamePattern"
+          [(ngModel)]="student.parents[2].parent_name"
+        />
+        <span class="help-block" *ngIf="!is_guardian_name_valid"
+          >Please enter valid guardian name.</span
+        >
+        <small
+          class="text-danger"
+          *ngIf="studentadmissionForm.get('father_name').hasError('pattern')"
+        >
+          Please Enter only alphabets
+        </small>
+      </div>
+    </div>
+    <div class="col-full-3">
+      <div
+        class="form-group"
+        [ngClass]="{
+          'has-error':
+            studentadmissionForm.get('gaurdian_contact').errors &&
+            (studentadmissionForm.get('gaurdian_contact').touched ||
+              studentadmissionForm.get('gaurdian_contact').dirty)
+        }"
+      >
+        <label class="heading">Guardian Phone</label>
+        <div>
+          <input
+            type="number"
+            class="inpbox"
+            formControlName="gaurdian_contact"
+            [(ngModel)]="student.parents[2].parent_contact"
+            placeholder=""
+            maxlength="10"
+            inputmode="numeric"
+            autocomplete="off"
+            class="form-control"
+            pattern="^\d{10}$"
+            required
+          />
+          <span class="help-block" *ngIf="!is_father_mobile_valid"
+            >Please enter valid contact number.</span
+          >
+          <div
+            *ngIf="
+              studentadmissionForm.get('gaurdian_contact').invalid &&
+              studentadmissionForm.get('gaurdian_contact').errors &&
+              (studentadmissionForm.get('gaurdian_contact').dirty ||
+                studentadmissionForm.get('gaurdian_contact').touched)
+            "
+          >
+            <small
+              class="text-danger"
+              *ngIf="
+                studentadmissionForm.get('gaurdian_contact').hasError('pattern')
+              "
+            >
+              Please Enter correct Number
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-full-3">
+        <div class="form-group">
+          <label class="heading">Guardian Phone</label>
+          <input type="text" class="inpbox" formControlName="gaurdian_contact"
+            [(ngModel)]="student.parents[2].parent_contact" placeholder="" maxlength="10" inputmode="numeric"
+            autocomplete="off"  class="form-control" />
+          <span class="help-block" *ngIf="!is_guardian_mobile_valid">Please enter valid contact number.</span>
+        </div>
+      </div> -->
+<!-- <div class="col-full-3">
+      <div class="form-group">
+        <label class="heading">Guardian Email</label>
+        <input
+          class="inpbox"
+          type="email"
+          formControlName="gaurdian_email"
+          [pattern]="emailPattern"
+          [(ngModel)]="student.parents[2].parent_email"
+        />
+        <span class="help-block" *ngIf="!is_guardian_email_valid"
+          >Please enter valid email id.</span
+        >
+        <small
+          class="text-danger"
+          *ngIf="studentadmissionForm.get('gaurdian_email').hasError('pattern')"
+        >
+          Please Enter correct mail
+        </small>
+      </div>
+    </div>
+    <div class="col-full-3">
+      <div class="form-group">
+        <label class="heading">Guardian Occupation</label>
+        <input
+          class="inpbox"
+          type="text"
+          formControlName="gaurdian_occupation"
+          [pattern]="unamePattern"
+          [(ngModel)]="student.parents[2].occupation"
+        />
+        <span class="help-block" *ngIf="!is_guardian_occ_valid"
+          >Please enter valid occupation.</span
+        >
+        <small
+          class="text-danger"
+          *ngIf="
+            studentadmissionForm.get('gaurdian_occupation').hasError('pattern')
+          "
+        >
+          Please Enter only alphabets
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-wrapper">
+    <div class="col-full-3">
+      <div class="form-group">
+        <label class="heading">Guardian Relation</label>
+        <input
+          class="inpbox"
+          type="text"
+          formControlName="gaurdian_relation"
+          [pattern]="unamePattern"
+          [(ngModel)]="student.parents[2].parent_relation"
+        />
+        <span class="help-block" *ngIf="!is_guardian_relation_valid"
+          >Please enter valid guardian relation.</span
+        >
+        <small
+          class="text-danger"
+          *ngIf="
+            studentadmissionForm.get('gaurdian_relation').hasError('pattern')
+          "
+        >
+          Please Enter only alphabets
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 pull-left tab-btn">
+      <div class="btn -cta inactive-tab" (click)="close()">Cancel</div>
+    </div>
+    <div class="col-md-3 pull-right tab-btn">
+      <div
+        class="btn -cta active-tab"
+        (click)="get_studentForm('studentdetails')"
+      >
+        Previous
+      </div>
+      <div class="btn -cta active-tab" (click)="get_studentForm('address')">
+        Next
+      </div>
+    </div>
+  </div>
+</div> -->

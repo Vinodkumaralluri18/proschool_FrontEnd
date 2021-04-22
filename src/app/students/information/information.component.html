@@ -1,0 +1,78 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-class *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)"
+          (sectionEvent)="receiveSection($event)"></app-class>
+        <app-teacher-class *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)"
+          (sectionEvent)="receiveSection($event)"></app-teacher-class>
+        <div class="dropdown">
+          <button class="dropbtn" (click)="showStatusList = true" (clickOutside)="showStatusList = false">
+            {{status}}
+          </button>
+          <div class="dropdown-content" [hidden]="!showStatusList">
+            <a (click)="status = 'active'; getStudentsByStatus();">Active</a>
+            <a (click)="status = 'inactive'; getStudentsByStatus();">Inactive</a>
+          </div>
+        </div>
+      </div>
+      <div class="_select-or-search">
+        <input type="search" [(ngModel)]="searchText" placeholder="Search for Student">
+      </div>
+    </div>
+    <div class="add_div" *ngIf="user.role === 'admin'">
+      <input id="file-input" type="file" name="file" placeholder="Upload Bulk Data" (change)="studentsUpload($event.target.files)"/>
+      <button class="btn -cta" (click)="addStudent()">Add Student</button>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="students.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Roll</th>
+            <th align="left">Student Name</th>
+            <th align="left" class="mobileview">Father/Guardian Name</th>
+            <th align="left">Class</th>
+            <th align="left">Section</th>
+            <th align="left" class="mobileview">Gender</th>
+            <th align="left" class="mobileview">Roll No</th>
+            <th align="left"  *ngIf="user.role === 'admin'">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let std of students | search : searchText | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}.</span></td>
+            <td align="left"><a
+                routerLink="/main/main/studentprofile/profile/{{std.student_id}}/{{std.section_id}}">{{std.first_name}}
+                {{std.last_name}}</a></td>
+            <td class="mobileview">{{std.father_name}}</td>
+            <td>{{std.school_classes[0].name}}</td>
+            <td>{{std.sections[0].name}}</td>
+            <td class="mobileview">{{std.gender}}</td>
+            <td class="mobileview">{{std.roll_no}}</td>
+            <td class="_actions" *ngIf="user.role === 'admin'">
+              <button class="btn" *ngIf="status === 'active'" (click)="editStudent(std.student_id)"><img
+                  src="../../../assets/images/edit-white.svg" alt="Edit" /></button>
+              <button class="btn" *ngIf="status === 'active'" (click)="deleteConfirmation(std.student_id)"><img
+                  src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+              <button class="btn" *ngIf="status === 'inactive'" (click)="restoreStudent(std.student_id)"><img
+                  src="../../../assets/images/pencil-white-outline.svg" alt="Restore" /></button>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="students.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Students in this Class</h1>
+    </div>
+    <div class="_pagination" *ngIf="students.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index'
+        (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,88 @@
+<div id="main-content">
+
+  <div class="row">
+    <div class="container-fluid" id="buttonId1">
+      <button routerLink="/main/quiz/questions" class="button button2 hvr-pop transition">Questions</button>
+      <button routerLink="/main/quiz/addquestions" class="button button2 hvr-pop transition">Add Questions</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="container-fluid dashboard-content">
+      <div class="card selectcard">
+        <app-chapter (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"
+          (subjectEvent)="receiveSubject($event)" (chapterEvent)="receiveChapter($event)"></app-chapter>
+      </div>
+      <div class="card listcard">
+        <div class="pull-left">
+          <h4>Questions</h4>
+        </div>
+        <form role="form" [formGroup]="questionForm" (ngSubmit)="addQuestions()">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="pull-left">Question</label>
+                <textarea class="form-control" formControlName="question" cols="30" rows="10"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="pull-left">Option-1</label>
+                <input class="form-control" formControlName="option_1" placeholder="Enter..." type="text">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="pull-left">Option-2</label>
+                <input class="form-control" formControlName="option_2" placeholder="Enter..." type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="pull-left">Option-3</label>
+                <input class="form-control" formControlName="option_3" placeholder="Enter..." type="text">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="pull-left">Option-4</label>
+                <input class="form-control" formControlName="option_4" placeholder="Enter..." type="text">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="pull-left">Select Topic</label>
+                <select class="form-control" formControlName="topic">
+                  <option>select...</option>
+                  <option *ngFor="let topic of topics" value="{{topic.topic_id}}">{{topic.topic_name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="pull-left">Answer</label>
+                <select class="form-control" formControlName="answer">
+                  <option value="{{questionForm.value.option_1}}">{{questionForm.value.option_1}}</option>
+                  <option value="{{questionForm.value.option_2}}">{{questionForm.value.option_2}}</option>
+                  <option value="{{questionForm.value.option_3}}">{{questionForm.value.option_3}}</option>
+                  <option value="{{questionForm.value.option_4}}">{{questionForm.value.option_4}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group pull-right">
+              <button type="submit" class="button button1 hvr-pop transition">Add Question</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

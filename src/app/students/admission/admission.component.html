@@ -1,0 +1,99 @@
+<div id="main-content1">
+  <div class="blue-top-bar">
+    <h3>
+      {{title}}
+    </h3>
+    <!-- <a href="#" class="close" role="button">close</a> -->
+  </div>
+  <div class="row-wrapper center-content">
+    <button class="btn -cta" [ngClass]="[studentdetails ? 'active-tab': 'inactive-tab']"
+      (click)="setTabDetails(true, false, false)">Student
+      Details</button>
+    <button class="btn -cta" [ngClass]="[parentdetails ? 'active-tab': 'inactive-tab']"
+      (click)="setTabDetails(false, true, false)">Parent/Guardian
+      Details</button>
+    <button class="btn -cta" [ngClass]="[address ? 'active-tab': 'inactive-tab']"
+      (click)="setTabDetails(false, false, true)">Address</button>
+  </div>
+
+  <form [formGroup]="studentadmissionForm" (submit)="submitStudent()">
+
+    <div *ngIf="studentdetails">
+      <app-student-details
+        [student]="student"
+        [studentForm]="studentadmissionForm.controls.studentForm"
+        (studentDetailsSubmitted) = formSubmitted($event)
+      ></app-student-details>
+    </div>
+
+
+    <div *ngIf="parentdetails">
+      <app-parent-details
+        [student]="student"
+        [fatherForm]="studentadmissionForm.controls.fatherForm"
+        [motherForm]="studentadmissionForm.controls.motherForm"
+        [gaurdianForm]="studentadmissionForm.controls.gaurdianForm"
+        (parentDetailsSubmitted) = formSubmitted($event)
+    ></app-parent-details>
+    </div>
+
+    <div *ngIf="address">
+      <div class="row-wrapper">
+        <div class="col-full-6">
+          <div class="form-group" [ngClass]="{'has-error' : studentadmissionForm.get('cur_address').errors 
+          && (studentadmissionForm.get('cur_address').touched || studentadmissionForm.get('cur_address').dirty)}">
+            <label class="heading">Current Address :</label>
+            <div><textarea formControlName="cur_address" cols="45" rows="5"
+                [value]="student.current_address[0].cur_address" name="cur_address" required
+                >
+           </textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-full-6">
+          <div class="form-group">
+            <label class="heading">Permanent Address :</label>
+            <div><textarea formControlName="perm_address" cols="45" rows="5"
+                [value]="student.permanent_address[0].perm_address"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="row-wrapper">
+        <div class="col-full-6" *ngIf="dialog_type == 'add'">
+          <div class="form-group">
+            <label class="heading">Upload Photo :</label>
+            <input id="file-input-studProfPic" type="file" name="image" (change)="studentProfPic($event.target.files)" />
+            <label>{{studentphoto == '' ? studentphoto : 'No file chosen'}}</label>
+          </div>
+        </div>
+        <div>
+          <img  src="{{studentImagee}}" alt="" class="_pic" width="50">
+        </div>
+      </div> -->
+      <div class="row-wrapper">
+        <div class="col-full-6">
+          <div class="form-group">
+            <label class="heading">Upload Photo :</label>
+            <input id="file-input-studProfPic" type="file" name="image" (change)="studentProfPic($event.target.files)" />
+            <!-- <label>{{studentphoto == '' }}</label> -->
+          </div>
+        </div>
+        <div>
+          <img  src="{{studentImagee}}" alt="" class="_pic" width="50">
+        </div>
+      </div>
+
+      <div class="main-flex">
+        <div class="col-md-3 flex-1">
+          <div class="btn -cta inactive-tab tab-btn" (click)="close()">Cancel</div>
+        </div>
+        <div class="flex-2">
+          <div class="btn -cta active-tab" (click)="setTabDetails(false, true, false)">&laquo; Previous</div>
+          <button class="btn -cta active-tab" type="submit">Save</button>
+        </div>
+      </div>
+    </div>
+
+  </form>

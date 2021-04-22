@@ -1,0 +1,24 @@
+.hor-progress-wrapper {
+    display: flex;
+}
+    
+.hor-progress-track {
+    height: 20px;
+    width: 100px;
+    margin: 0;
+    border-radius: 3px;
+    background-color: #f2f5fe;
+}
+    
+.hor-progress-filled {
+    content: "";
+    height: 100%;
+    display: block;
+    margin-top: auto;
+    background-color: #6186ed;
+    border-radius: 3px 0 0 3px;
+}
+    
+.hor-progress-title{
+    display: inline-block;
+}

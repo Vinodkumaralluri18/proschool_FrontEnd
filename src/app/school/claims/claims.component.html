@@ -1,0 +1,82 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select_div">
+      <div class="btn-bunch">
+        <button class="btn -cta" routerLink="/main/main/admin/expenses">Expenses</button>
+        <button class="btn -cta selected-tab" routerLink="/main/main/admin/claims">Claims</button>
+      </div>
+    </div>
+    <div class="add_div">
+      <button class="btn -cta" (click)="addClaim()">Add Claim</button>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="claims.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th align="left">#</th>
+            <th align="left">Employee</th>
+            <th align="left">Amount</th>
+            <th align="left">Category</th>
+            <th align="left">Claim Date</th>
+            <th align="left">Status</th>
+            <th align="left" *ngIf="user.role === 'admin'"></th>
+            <th align="left">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cl of claims | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{cl.first_name}}</td>
+            <td>{{cl.amount | currency:'INR'}}</td>
+            <td>{{cl.category}}</td>
+            <td>{{cl.date}}</td>
+            <!-- <td *ngIf="user.role === 'admin'">{{cl.claim_status}}</td> -->
+            <td>
+              <span class="_chip -class-running"
+                [ngStyle]="{'background-color': (cl.claim_status === 'Approved') ? '#77c284' : '#d9534f', 'color': 'white' }">
+                {{cl.claim_status}}</span>
+            </td>
+            <td *ngIf="user.role === 'admin' && cl.claim_status == 'pending'">
+              <label class="switch">
+                <input type="checkbox" value="1" [checked]="cl.claim_status !== 'pending'" (click)="update_claim(cl.claim_status, cl.claim_id)" />
+                <span class="slider start round"></span>
+              </label>
+              <!-- <span class="_chip -class-running"
+                [ngStyle]="{'background-color': '#5cb85c', 'color': 'white' }"
+                (click)="update_claim(cl.claim_status, i)">Approve</span> -->
+            </td>
+            <td *ngIf="user.role === 'admin' && cl.claim_status == 'Approved'">
+              <label class="switch">
+                <input type="checkbox" value="1" [checked]="cl.claim_status === 'Approved'" (click)="update_claim(cl.claim_status, cl.claim_id)" />
+                <span class="slider end round"></span>
+              </label>
+              <!-- <span class="_chip -class-running"
+                [ngStyle]="{'background-color': '#d9534f', 'color': 'white' }"
+                (click)="update_claim(cl.claim_status, i)">Unapprove</span> -->
+            </td>
+            <td *ngIf="user.role === 'admin'">
+              <button class="btn -cta btn-list" (click)="rejectConfirmation(cl.claim_id)">Reject</button>
+            </td>
+            <td class="_actions" *ngIf="user.role === 'teacher'">
+              <button class="btn" (click)="editClaim(cl.claim_id)"><img src="../../../assets/images/edit-white.svg"
+                  alt="Edit" /></button>
+              <button class="btn" (click)="deleteConfirmation(cl.claim_id)"><img
+                  src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="claims.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Claims</h1>
+    </div>
+    <div class="_pagination" *ngIf="claims.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

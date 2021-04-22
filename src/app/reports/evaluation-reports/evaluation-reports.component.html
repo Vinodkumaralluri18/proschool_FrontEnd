@@ -1,0 +1,73 @@
+<main class="card mt-20 within-viewport">
+    <section class="page-actions">
+      <div class="_select-or-search">
+        <div class="_select-group">
+          <app-schedule *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (scheduleEvent)="receiveSchedule($event)"></app-schedule>
+          <app-teacher-schedule *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (scheduleEvent)="receiveSchedule($event)"></app-teacher-schedule>
+          <select name="section" [(ngModel)]="selected_schedule" (change)="getEvaluations()" *ngIf="user.role === 'parent'">
+            <option *ngFor="let assp of assessment_patterns[0].assessment" value="{{assp.code}}">{{assp.code}}
+            </option>
+            <option *ngFor="let assp of assessment_patterns[1].assessment" value="{{assp.code}}">{{assp.code}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <button class="btn -cta" routerLink="/main/evaluations/marksList">Exam Reports</button>
+      <button class="btn -cta" routerLink="/main/evaluations/cumulativeMarks">Subject Reports</button>
+      <button class="btn -cta" routerLink="/main/evaluations/addMarks" *ngIf="user.role === 'admin' || user.role === 'teacher'">Add Marks</button>
+    </section>
+    <section class="table-and-pagination -classes-schedule">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th align="left">Student</th>
+              <th align="left" *ngFor="let sub of marks[0].assessments;">{{sub.subject}}</th>
+              <th align="left">Total Marks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let std of marks; let i=index">
+              <td class="_s-no"><span>{{ i + 1 }}</span></td>
+              <td>{{std.student_name}}</td>
+              <!-- <td *ngFor="let mark of std.assessments;">
+                <div class="hor-progress-wrapper">
+                    <div class="hor-progress-track">
+                        <span class="hor-progress-filled" 
+                        [ngStyle]="{'width': (mark.totalMarks / mark.maxMarks * 100) + '%'}"></span>
+                    </div>
+                    <span class="hor-progress-title">{{mark.totalMarks}}</span>
+                </div>
+              </td>
+              <td>
+                <div class="hor-progress-wrapper">
+                    <div class="hor-progress-track">
+                        <span class="hor-progress-filled" 
+                        [ngStyle]="{'width': (std.Percentage) + '%'}"></span>
+                    </div>
+                    <span class="hor-progress-title">{{std.exam_totalMarks}}</span>
+                </div>
+              </td> -->
+              <td *ngFor="let mark of std.assessments;">{{mark.totalMarks}}</td>
+              <td>{{std.exam_totalMarks}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="_pagination">
+        <a href="" class="btn -previous">Previous</a>
+        <a href="" class="btn -current">1</a>
+        <a href="" class="btn">2</a>
+        <a href="" class="btn">3</a>
+        <a href="" class="btn">4</a>
+        <a href="" class="btn">5</a>
+        <a href="" class="btn">6</a>
+        <a href="" class="btn">7</a>
+        <a href="" class="btn">8</a>
+        <a href="" class="btn">9</a>
+        <a href="" class="btn">10</a>
+        <a href="" class="btn -next">Next</a>
+      </div>
+    </section>
+  </main>

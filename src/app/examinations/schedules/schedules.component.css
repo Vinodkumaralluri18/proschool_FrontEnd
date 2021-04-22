@@ -1,0 +1,15 @@
+.class_div {
+    display: inline-flex;
+}
+
+.class_div p {   
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 1px;
+}
+
+.table-and-pagination.-classes-schedule ._chip {
+    background-color: #5E81F4;
+    color: #FFFFFF;
+    margin-left: 5px;
+}

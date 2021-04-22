@@ -1,0 +1,57 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-subject *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (subjectEvent)="receiveSubject($event)"></app-subject>
+        <app-teacher-subject *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (subjectEvent)="receiveSubject($event)"></app-teacher-subject>
+        <input type="date" [(ngModel)]="selected_date" (change)="CT_filterByDate()">
+      </div>
+    </div>
+    <button class="btn -cta" (click)="addClasstest()">Add ClassTest</button>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="classTests.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Class Test</th>
+            <th align="left">Chapter</th>
+            <th align="left">Test Date</th>
+            <th align="left">Max Marks</th>
+            <th></th>
+            <th align="left" *ngIf="user.role === 'admin' || user.role === 'teacher'">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ct of classTests | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{ct.classTest_title}}</td>
+            <td>{{ct.chapter_title}}</td>
+            <td>{{ct.test_date}}</td>
+            <td>{{ct.maxMarks}}</td>
+            <td *ngIf="ct.submission === 'pending'">
+              <button class="btn -cta btn-list" routerLink="/main/main/classtests/CTMarks/add/{{ct.section_id}}/{{ct.subject_id}}/{{ct.classTest_id}}">Add Marks</button>
+            </td>
+            <td *ngIf="ct.submission === 'completed'">
+              <button class="btn -cta btn-list" routerLink="/main/main/classtests/CTMarks/view/{{ct.section_id}}/{{ct.subject_id}}/{{ct.classTest_id}}">View Marks</button>
+            </td>
+            <td class="_actions" *ngIf="user.role === 'admin' || user.role === 'teacher'">
+              <button class="btn" (click)="editClasstest(page_start + i)"><img src="../../../assets/images/edit-white.svg" alt="Edit" /></button>
+              <button class="btn" (click)="deleteConfirmation(ct.classTest_id)"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="classTests.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Classtests for this Subject</h1>
+    </div>
+    <div class="_pagination" *ngIf="classTests.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

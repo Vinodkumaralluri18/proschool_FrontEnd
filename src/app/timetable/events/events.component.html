@@ -1,0 +1,149 @@
+<main class="card mt-20 within-viewport new-events-listing">
+    <div class="month-nav-wrapper">
+        <button class="previous-month-btn" (click)="getPrevious()"><</button>
+        <h2>{{month}} {{year}}</h2>
+        <button class="next-month-btn" (click)="getNext()">></button>
+    </div>
+    <section class="table-container timetable-chart">
+    <table cellspacing="0" class="_task-list">
+      <thead>
+        <tr>          
+          <th align="left">SUN</th>
+          <th align="left">MON</th>
+          <th align="left">TUE</th>
+          <th align="left">WED</th>
+          <th align="left">THU</th>
+          <th align="left">FRI</th>
+          <th align="left">SAT</th>
+        </tr>
+      </thead>
+      <tbody class="calendar">
+        <tr *ngFor="let days of dayslist; let i = index">
+          <td *ngFor="let event of days; let j = index" (click)="getDayEvents(event.day)" [ngClass]="{'special-day schedule-box':event.event_title !== '', 'current-day':event.day === date}">
+            {{event.day}}
+            <button class="plus-btn" (click)="addEvent(event.day)" *ngIf="user.role === 'admin' && event.day !== ''">+</button>
+            <div class="row-event-detail"><span class="value">{{event.event_title}}</span></div>
+            <div class="row-content-detail">
+              <p><span class="heading">Title :</span><span class="value">{{event.event_title}}</span></p>
+              <p><span class="heading">Date :</span><span class="value">{{event.date}}</span></p>
+              <p><span class="heading">Time :</span><span class="value">{{event.start_time}} - {{event.end_time}}</span></p>
+              <p><span class="heading">Description :</span><span class="value">{{event.description}}</span></p>
+              <p><span class="heading">Attendies :</span><span class="value"></span></p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <!-- <tbody>
+        <tr class="_task">
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+        </tr>
+        <tr class="_task">
+          <td>8</td>
+          <td>9</td>
+          <td>10<button class="plus-btn">+</button></td>
+          <td class="special-day schedule-box">
+            11
+            <button class="plus-btn">+</button>
+            <p class="day-special-info">Earth Day Founder's Day</p>
+            <div class="row-content-detail">
+              <p><span class="heading">Title :</span><span class="value">Founder's Day</span></p>
+              <p><span class="heading">Date :</span><span class="value">Thursday 11, November</span></p>
+              <p><span class="heading">Time :</span><span class="value">8:00 AM - 12:00 PM</span></p>
+              <p><span class="heading">Description :</span><span class="value">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit nisi sed sollicitudin pellentesque</span></p>
+            </div>
+          </td>
+          <td>12</td>
+          <td>13</td>
+          <td>14</td>
+        </tr>
+        <tr class="_task">
+          <td class="current-day">15<button class="plus-btn">+</button></td>
+          <td>16</td>
+          <td>17</td>
+          <td>18</td>
+          <td>19</td>
+          <td>20</td>
+          <td>21</td>
+        </tr>
+        <tr class="_task">
+          <td>22</td>
+          <td>23</td>
+          <td class="special-day schedule-box">24
+            <p class="day-special-info">Annual Day</p>
+          </td>
+          <td>25</td>
+          <td>26</td>
+          <td>27</td>
+          <td>28</td>
+        </tr>
+        <tr class="_task">
+          <td>29</td>
+          <td>30</td>
+          <td>31</td>
+          <td>Dec 1</td>
+          <td>Dec 2</td>
+          <td>Dec 3</td>
+          <td>Dec 4</td>
+        </tr>
+        <tr class="_task">
+          <td>Dec 5</td>
+          <td>Dec 6</td>
+          <td>Dec 7</td>
+          <td>Dec 8</td>
+          <td>Dec 9</td>
+          <td>Dec 10</td>
+          <td>Dec 11</td>
+        </tr>
+      </tbody> -->
+    </table>
+  </section>
+
+  <div class="row table-section">
+      <section class="page-actions">
+        <div class="_select-or-search">
+          <h2 *ngIf="!day_events">Events of the Month</h2>
+          <h2 *ngIf="day_events">Events of the Day</h2>
+          <!-- <input type="search" class="search-box" placeholder="Search by title"> -->
+        </div>
+      </section>
+      <section class="table-and-pagination -classes-schedule">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th align="left">Title</th>
+                <th align="left">Type</th>
+                <th align="left">Priority</th>
+                <th align="left">Date</th>
+                <th align="left">Time</th>
+                <th align="left">Description</th>
+                <th align="left" *ngIf="user.role === 'admin'">Action</th>
+              </tr>
+            </thead>
+            <tbody>          
+              <tr *ngFor="let event of event_titles; let i = index">
+                <td class="_s-no"><span>{{i+1}}</span></td>
+                <td>{{event.event_title}}</td>
+                <td>{{event.event_type}}</td>
+                <td>{{event.priority}}</td>
+                <td>{{event.date}}</td>
+                <td>{{event.start_time}} - {{event.end_time}}</td>
+                <td>{{event.description}}</td>
+                <td class="_actions" *ngIf="user.role === 'admin'">
+                  <button class="btn" (click)="editEvent(event.school_event_id)"><img src="../../../assets/images/pencil-white-outline.svg" alt="Edit" /></button>
+                  <button class="btn" (click)="deleteEvent(event.school_event_id)"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+  </div>
+</main>

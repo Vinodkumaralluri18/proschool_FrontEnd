@@ -1,0 +1,79 @@
+<main class="card mt-20 within-viewport new-listing">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="_select_div">
+                    <div class="btn-bunch">
+                        <button class="btn -cta" routerLink="/main/main/admin/examinationPattern">Examination Pattern</button>
+                        <button class="btn -cta selected-tab" routerLink="/main/main/admin/assessmentPattern">Assessment Pattern</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="add_div btn-right">
+                    <button class="btn -cta" (click)="addPattern()">Add Pattern</button>
+                    <button class="btn -cta" (click)="addAssessment_Pattern()">Assessment Pattern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="dropdown dropdown-margin" >
+            <button class="dropbtn" (click)="showClassList = true" (clickOutside)="showClassList = false">
+                  {{!selected_class.name ? 'select class' : selected_class.name}}
+             </button>
+            <div class="dropdown-content" [hidden]="!showClassList">
+                <a *ngFor="let cls of classes" (click)="selected_class = cls; getExamination_Pattern();">{{cls.name}}</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn margin-left" (click)="showExamList = true" (clickOutside)="showExamList = false">
+                  {{!selected_examination_pattern.examination_title ? 'select exam' : selected_examination_pattern.examination_title}}
+             </button>
+            <div class="dropdown-content" [hidden]="!showExamList">
+                <a *ngFor="let exam of examination_patterns" (click)="selected_examination_pattern = exam; getAssessment_Pattern(exam.examination_pattern_id);">{{exam.examination_title}}</a>
+            </div>
+        </div>
+    </div>
+    
+    <section class="table-and-pagination -classes-schedule">
+        <div class="vertical-space3"></div>
+        <div class="table-container" *ngIf="assessment_patterns.length !== 0">
+            <table>
+                <thead>
+                    <tr>
+                        <th align="left">#</th>
+                        <th align="left">Examination</th>
+                        <th align="left">Assessment Title</th>
+                        <th align="left">Assessment Mode</th>
+                        <th align="left">Max Marks</th>
+                        <th align="left" *ngIf="user.role === 'admin'">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let ass of assessment_patterns | pagination: pageNo; let i = index">
+                        <td class="_s-no"><span>{{ page_start + i + 1 }}.</span></td>
+                        <td>{{examination_title}}</td>
+                        <td>{{ass.Assessment}}</td>
+                        <td>{{ass.assessment_mode}}</td>
+                        <td>{{ass.max_marks}}</td>
+                        <td class="_actions" *ngIf="user.role === 'admin'">
+                            <button class="btn" (click)="deleteConfirmation(ass.Assessment, ass.max_marks)"><img
+                                    src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="no-data" *ngIf="assessment_patterns.length === 0">
+            <img src="../../../assets/images/Nodata.png" alt="">
+            <h1 class="no-data-text">No Assessment Patterns Available for this Examination</h1>
+        </div>
+        <div class="_pagination" *ngIf="assessment_patterns.length !== 0">
+            <a class="btn -previous">Previous</a>
+            <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}"
+                *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+            <a class="btn -next">Next</a>
+        </div>
+    </section>
+</main>

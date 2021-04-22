@@ -1,0 +1,258 @@
+<div id="main-content" class="assessment-wrapper new-listing">
+    <div class="row">
+        <div class="menu-bar">
+            <button routerLink="/main/main/studentprofile/profile/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Profile</button>
+            <button routerLink="/main/main/studentprofile/attendance/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Attendance</button>
+            <button routerLink="/main/main/studentprofile/academics/{{student_id}}/{{section_id}}"
+                class="button button2 hvr-pop transition"
+                routerLinkActive="active">Academics</button>
+            <button routerLink="/main/main/studentprofile/assessment/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Assessment</button>
+            <button routerLink="/main/main/studentprofile/fees/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Fee Collection</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="page-content-wrapper">
+            <div class="student-info-wrapper">
+                <div class="student-details-tablist-wrapper">
+                    <section class="student-task-section">
+                        <section class="page-actions">
+                            <div class="dropdown">
+                                <button class="dropbtn" (click)="showSubjectList = true" (clickOutside)="showSubjectList = false" *ngIf="assessment_type !== 'Projectworks'">
+                                    {{!selected_subject ? 'Select Subject' : selected_subject}}
+                                </button>
+                                <h3 *ngIf="assessment_type === 'Projectworks'">
+                                    All Subjects
+                                </h3>
+
+                                <div class="dropdown-content" [hidden]="!showSubjectList" *ngIf="assessment_type !== 'Projectworks'">
+                                    <a (click)="getSubjectAssessments('All');">All Subjects</a>
+                                    <a *ngFor="let sub of assessments[0].subjects"
+                                        (click)="getSubjectAssessments(sub);">{{sub.subject_name}}</a>
+                                </div>
+                            </div>
+                            <div class="_select_div">
+                                <div class="btn-bunch">
+                                    <button class="btn -cta" [ngClass]="{'selected-tab': assessment_type === 'Assignments'}" (click)="select_assessment('Assignments')">Assignments</button>
+                                    <button class="btn -cta" [ngClass]="{'selected-tab': assessment_type === 'Classtests'}"  (click)="select_assessment('Classtests')">Class Tests</button>
+                                    <button class="btn -cta" [ngClass]="{'selected-tab': assessment_type === 'Projectworks'}"  (click)="select_assessment('Projectworks')">Project Works</button>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="table-and-pagination -classes-schedule" *ngIf="allAssessments else allSubjects">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th align="left">Subject</th>
+                                            <th align="left">Total Marks</th>
+                                            <th align="left">Percentage</th>
+                                            <th align="left">Grade</th>
+                                            <th align="left">Graphical Representation</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let sub of assessments[0].subjects; let i = index">
+                                            <td class="_s-no"><span>{{ i + 1 }}</span></td>
+                                            <td>{{sub.subject_name}}</td>
+                                            <td>{{sub.subjectMarks}}</td>
+                                            <td>{{sub.subjectpercentage}} %</td>
+                                            <td>{{sub.grade}}</td>
+                                            <td>
+                                                <div class="hor-progress-wrapper">
+                                                    <div class="hor-progress-track">
+                                                        <span class="hor-progress-filled"
+                                                            [ngStyle]="{'background-color': 
+                                                            (sub.subjectpercentage >= 80) ? '#5CB85C' : 
+                                                            (sub.subjectpercentage < 80 && sub.subjectpercentage >= 60) ? '#E5A900' : 
+                                                            '#F47458', 'width': sub.subjectpercentage + '%', 'color': '#FFFFFF'}">
+                                                            {{sub.subjectMarks}} Marks
+                                                        </span>
+                                                    </div>
+                                                    <span class="hor-progress-title"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                        <ng-template #allSubjects>
+                            <section class="table-and-pagination -classes-schedule">
+                                <div class="table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th align="left">Chapter</th>
+                                                <th align="left">Total Assessments</th>
+                                                <th align="left">Total Marks</th>
+                                                <th align="left">Percentage</th>
+                                                <th align="left">Graphical Representation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let sub of subject_Assessments; let i = index">
+                                                <td class="_s-no"><span>{{ i + 1 }}</span></td>
+                                                <td>{{sub.title}}</td>
+                                                <td>{{sub.totalAssessments}}</td>
+                                                <td>{{sub.totalMarks}}</td>
+                                                <td>{{sub.percentage}} %</td>
+                                                <td>
+                                                    <div class="hor-progress-wrapper">
+                                                        <div class="hor-progress-track">
+                                                            <span class="hor-progress-filled"
+                                                                [ngStyle]="{'background-color': 
+                                                                (sub.percentage >= 80) ? '#5CB85C' : 
+                                                                (sub.percentage < 80 && sub.percentage >= 60) ? '#E5A900' : 
+                                                                '#F47458', 'width': sub.percentage + '%', 'color': '#FFFFFF'}">
+                                                                {{sub.totalMarks}} Marks
+                                                            </span>
+                                                        </div>
+                                                        <span class="hor-progress-title"></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </ng-template>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <main class="card mt-20 within-viewport" style="height: auto;">
+    <div class="page-actions">
+        <section class="student-intro">
+            <img src="/assets/images/student.png">
+            <h4>Vinod Kumar Alluri</h4>
+            <h4>Class X - A</h4>
+            <h4>Roll No : 1</h4>
+
+            <div class="col-wrapper">
+                <button routerLink="/main/studentprofile/profile/{{student_id}}/{{section_id}}"
+                    class="btn -cta active-tab">Profile</button>
+                <button routerLink="/main/studentprofile/attendance/{{student_id}}/{{section_id}}"
+                    class="btn -cta active-tab">Attendance</button>
+                <button routerLink="/main/studentprofile/academics/{{student_id}}/{{section_id}}"
+                    class="btn -cta active-tab">Academics</button>
+                <button routerLink="/main/studentprofile/assessment/{{student_id}}/{{section_id}}"
+                    class="btn -cta active-tab">Assessment</button>
+                <button routerLink="/main/studentprofile/fees/{{student_id}}/{{section_id}}"
+                    class="btn -cta active-tab">Fees</button>
+            </div>
+
+        </section>
+        <section class="student-task-section">
+            <section class="page-actions">
+                <div class="dropdown">
+                    <button class="dropbtn" (click)="showSubjectList = true" (clickOutside)="showSubjectList = false">
+                        {{!selected_subject.subject_name ? 'Select Subject' : selected_subject.subject_name}}
+                    </button>
+                    <div class="dropdown-content" [hidden]="!showSubjectList">
+                        <a (click)="selected_subject.subject_id = 'All'; selected_subject.subject_name = 'All Subjects'; getSubjectAssessments();">All Subjects</a>
+                        <a *ngFor="let sub of assessments[0].subjects"
+                            (click)="selected_subject = sub; getSubjectAssessments();">{{ sub.subject_name}}</a>
+                    </div>
+                </div>
+                <button class="btn -cta" (click)="select_assessment('Assignments')">Assignments</button>
+                <button class="btn -cta" (click)="select_assessment('Classtests')">Class Tests</button>
+                <button class="btn -cta" (click)="select_assessment('Projectworks')">Project Works</button>
+            </section>
+            <section class="table-and-pagination -classes-schedule" *ngIf="allAssessments else allSubjects">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th align="left">Chapter</th>
+                                <th align="left">Total Marks</th>
+                                <th align="left">Percentage</th>
+                                <th align="left">Grade</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let sub of assessments[0].subjects; let i = index">
+                                <td class="_s-no"><span>{{ i + 1 }}</span></td>
+                                <td>{{sub.subject_name}}</td>
+                                <td>{{sub.subjectMarks}}</td>
+                                <td>{{sub.subjectpercentage}} %</td>
+                                <td>{{sub.grade}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="_attendance-box dynamic-bar-graph">
+                    <section role="tabpanel">
+                        <div class="_metrics">
+                            <div *ngFor="let sub of assessments[0].subjects; let i = index">
+                                <div [ngClass] = "{'-total': sub.subjectpercentage >= 80, '-due': (sub.subjectpercentage > 60 && sub.subjectpercentage < 80), '-attend': sub.subjectpercentage <= 60}" class="_metric">
+                                    <div class="_bar">
+                                        <span class="_bar_progress" [ngStyle]="{'height': sub.subjectpercentage +'%'}">
+                                        </span>
+                                    </div>
+                                    <div class="_name">
+                                        <span class="_legend">{{sub.subject_name}}</span>
+                                        {{sub.subjectMarks}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+            <ng-template #allSubjects>
+                <section class="table-and-pagination -classes-schedule">
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th align="left">Chapter</th>
+                                    <th align="left">Total Assessments</th>
+                                    <th align="left">Total Marks</th>
+                                    <th align="left">Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let sub of subject_Assessments; let i = index">
+                                    <td class="_s-no"><span>{{ i + 1 }}</span></td>
+                                    <td>{{sub.title}}</td>
+                                    <td>{{sub.totalAssignments}}</td>
+                                    <td>{{sub.totalMarks}}</td>
+                                    <td>{{sub.percentage}} %</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="_attendance-box dynamic-bar-graph">
+                        <section role="tabpanel">
+                            <div class="_metrics">
+                                <div *ngFor="let sub of subject_Assessments; let i = index">
+                                    <div [ngClass] = "{'-total': sub.percentage > 80, '-due': (sub.percentage > 60 && sub.percentage < 80), '-attend': sub.percentage < 60}" class="_metric">
+                                        <div class="_bar">
+                                            <span class="_bar_progress" [ngStyle]="{'height': sub.percentage +'%'}">
+                                            </span>
+                                        </div>
+                                        <div class="_name">
+                                            <span class="_legend">{{sub.title}}</span>
+                                            {{sub.totalMarks}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </ng-template>
+        </section>
+
+    </div>
+</main> -->

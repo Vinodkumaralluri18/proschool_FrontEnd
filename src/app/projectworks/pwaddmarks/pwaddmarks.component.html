@@ -1,0 +1,40 @@
+<main class="card mt-20 within-viewport new-listing">
+    <section class="page-actions">
+      <div class="_select-or-search">
+        <h2 *ngIf="data_type === 'add'">Add Projectwork Marks</h2>
+        <h2 *ngIf="data_type === 'view'">View Projectwork Marks</h2>
+      </div>
+      <button *ngIf="data_type === 'add'" class="btn -cta" (click)="addProjectwork_marks()">Submit</button>
+    </section>
+    <section class="table-and-pagination -classes-schedule">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th align="left">#</th>
+              <th align="left">Student</th>
+              <th align="left">Roll No</th>
+              <th align="left">Marks Obtained</th>
+              <th align="left" *ngIf="data_type === 'view'">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let stu of students | pagination: pageNo; let i = index">
+              <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+              <td>{{stu.first_name}}</td>
+              <td>{{stu.roll_no}}</td>
+              <td><input class="form-control" placeholder="Enter..." [(ngModel)]="stu.marks" type="number"></td>
+              <td *ngIf="data_type === 'view'">
+                <button class="btn -cta" (click)="editMarks(stu.projectwork_result_id, stu.marks)">Edit Marks</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="_pagination">
+        <a class="btn -previous">Previous</a>
+        <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+        <a class="btn -next">Next</a>
+      </div>
+    </section>
+  </main>

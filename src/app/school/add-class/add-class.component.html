@@ -1,0 +1,91 @@
+<main class="card mt-20 within-viewport new-listing">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="_select_div">
+          <div class="btn-bunch">
+            <button class="btn -cta selected-tab" routerLink="/main/main/admin/addClass">Class</button>
+            <button class="btn -cta" routerLink="/main/main/admin/addSection">Section</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="add_div btn-right">
+          <button class="btn -cta" (click)="addClass()">Add Class</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="dropdown">
+      <button class="dropbtn" (click)="showStatusList = true" (clickOutside)="showStatusList = false">
+        {{status}}
+      </button>
+      <div class="dropdown-content" [hidden]="!showStatusList">
+        <a (click)="status = 'active'; getClassesByStatus()">Active</a>
+        <a (click)=" status = 'inactive';getClassesByStatus()">Inactive</a>
+      </div>
+    </div>
+  </div>
+  <!-- <section class="page-actions">
+    <div class="_select_div">
+      <div class="btn-bunch">
+        <button class="btn -cta selected-tab" routerLink="/main/main/admin/addClass">Class</button>
+        <button class="btn -cta" routerLink="/main/main/admin/addSection">Section</button>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn" (click)="showStatusList = true" (clickOutside)="showStatusList = false">
+          {{status}}
+        </button>
+        <div class="dropdown-content" [hidden]="!showStatusList">
+          <a (click)="status = 'active'; getClassesByStatus()">Active</a>
+          <a (click)=" status = 'inactive';getClassesByStatus()">Inactive</a>
+        </div>
+      </div>
+    </div>
+    <div class="add_div">
+      <button class="btn -cta" (click)="addClass()">Add Class</button>
+    </div>
+  </section> -->
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="classes.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th align="left">#</th>
+            <th align="left">Class Name</th>
+            <th align="left">No.of Sections</th>
+            <th align="left" *ngIf="user.role === 'admin'">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let class of classes | pagination: pageNo; let i = index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}.</span></td>
+            <td>{{class.name}}</td>
+            <td>{{class.sections.length}}</td>
+            <td class="_actions" *ngIf="user.role === 'admin' && class.status === 1">
+              <button class="btn" (click)="editClass(page_start + i)"><img src="../../../assets/images/edit-white.svg"
+                  alt="Edit" /></button>
+              <button class="btn" (click)="deleteClasses(class.class_id)"><img
+                  src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+            </td>
+            <td class="_actions" *ngIf="user.role === 'admin' && class.status === 0">
+              <button class="btn" (click)="restoreClass(class.class_id)"><img
+                  src="../../../assets/images/trash-white.svg" alt="Restore" /></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="classes.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">No Classes Available</h1>
+    </div>
+    <div class="_pagination" *ngIf="classes.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index'
+        (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

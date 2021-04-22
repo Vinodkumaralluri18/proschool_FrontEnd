@@ -1,0 +1,45 @@
+<div id="main-content1" class="new-message-wrapper">
+  <div class="header-wrapper">
+      <p>Add Payment</p>
+      <button class="btn-close" (click)="close()"></button>
+  </div>
+  <form class="form-inline" role="form" [formGroup]="paymentForm" (ngSubmit)="addPayments()">
+      <div class="row-wrapper">
+          <div class="col-full-3">
+            Total Payment:
+          </div>
+          <div class="col-full-6">
+            <input formControlName="payment_toPay" value="{{selected_payments.payment_toPay}}" type="number">
+          </div>
+      </div>
+      <div class="row-wrapper">
+          <div class="col-full-3">
+            Balance Payment:
+          </div>
+          <div class="col-full-6">
+            <input formControlName="balance_payment" value="{{selected_payments.payment_balance}}" type="number">
+          </div>
+      </div>
+      <div class="row-wrapper">
+        <div class="col-full-3">
+          Payment:
+        </div>
+        <div class="col-full-6">
+          <input formControlName="payment" placeholder="Enter Payment" type="number">
+        </div>
+      </div>
+      <div class="row-wrapper">
+        <div class="col-full-3">
+          Date of Payment:
+        </div>
+        <div class="col-full-6">
+          <input formControlName="payment_date" type="date">
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-3 pull-right">
+              <button class="btn -cta active-tab" type="submit">Submit</button>
+          </div>
+      </div>
+  </form>
+</div>

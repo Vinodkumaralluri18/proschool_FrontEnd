@@ -1,0 +1,55 @@
+<div id="main-content1" class="new-message-wrapper">
+    <div class="header-wrapper">
+        <p *ngIf="dialog_type == 'add'">Add ProjectWork</p>
+        <p *ngIf="dialog_type == 'edit'">Add ProjectWork</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form role="form" [formGroup]="projectworkForm" (ngSubmit)="assignProjectwork()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Project Work:
+            </div>
+            <div class="col-full-6">
+                <input value="{{projectwork.project_work}}" formControlName="project_work" type="text">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Max Marks:
+            </div>
+            <div class="col-full-6">
+                <input value="{{projectwork.maxMarks}}" formControlName="maxMarks" type="number">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Assigned Date:
+            </div>
+            <div class="col-full-6">
+                <input value="{{projectwork.assign_date}}" formControlName="assign_date" type="date">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Due Date:
+            </div>
+            <div class="col-full-6">
+                <input value="{{projectwork.due_date}}" formControlName="due_date" type="date">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Description:
+            </div>
+            <div class="col-full-6">
+                <textarea value="{{projectwork.description}}" formControlName="description"
+                placeholder="Enter the Description of the ProjectWork..." cols="50" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

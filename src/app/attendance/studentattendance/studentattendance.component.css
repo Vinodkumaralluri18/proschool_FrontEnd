@@ -1,0 +1,108 @@
+.card1 {
+    background-color: transparent;
+    padding: var(--card-padding);
+}
+.attendance-wrapper .attendance-card-group {
+    padding: 30px 0;
+}
+
+.attprofpic {
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    border: 1px solid transparent;
+    margin: 0px auto 5px;
+    text-align: center;
+}
+
+.attprofpic img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.nameroll{
+    font-size: 12px;
+    font-weight: 900;
+    padding: 0 5px;
+    color:#3E3E3E;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.roll-text {
+    font-size: 12px;
+    color: #a09a9a;
+}
+.attreport{
+    display: flex;
+    width: 100px;
+    margin: 10px auto;
+}
+.attreport .attreportbtn{
+    margin-top: 4px;
+    font-weight: 600;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-left: 8px;
+    /*padding-top: 6px;*/
+    display: table;
+    text-align: center;
+}
+
+.attreport .attreportbtn span {
+    display: table-cell;
+    vertical-align: middle;
+    cursor: pointer;
+}
+/*.attreport .attreportbtn:hover{
+    margin-top: 4px;
+    font-weight: 800;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 8px;
+    padding-top: 6px;
+    cursor: pointer;
+}*/
+.attreport .present{
+    background-color: #ACE0AC;
+    color: #5CB85C;
+}
+.present-select {
+    background-color: #5CB85C;
+    color: #FFFFFF;
+}
+.attreport .absent{
+    background: #E7D1CF;
+    color: #F47458;
+}
+.absent-select{
+    background: #F47458;
+    color: #FFFFFF;
+}
+.attreport .leave{
+    background: #E6E0CF;
+    color: #E5A900;
+}
+.leave-select{
+    background: #E5A900;
+    color: #FFFFFF;
+}
+/* .attreport .present:hover, .present-select{
+    background-color: #5cb85c;
+    border-radius: 20px;
+}
+.attreport .absent:hover, .absent-select{
+    background-color: #d9534f;
+    border-radius: 20px;
+}
+.attreport .leave:hover, .leave-select{
+    background-color: #f0ad4e;
+    border-radius: 20px;
+} */
+
+
+

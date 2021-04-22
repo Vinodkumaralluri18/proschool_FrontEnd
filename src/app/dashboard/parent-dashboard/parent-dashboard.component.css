@@ -1,0 +1,1689 @@
+/* .leftcard {
+    height: 220px;
+    width: 17%;
+    background-color: white;
+    margin-right: 1%;
+    } */
+ 
+/* Small devices (landscape phones, 279px and 575px up) */
+@media (min-width: 279px) and (max-width: 575px){
+    .rightcard {
+        width: 65%;
+        background-color: white;
+        height: 450px;
+    }
+    .leftdiv{
+        width: 100%;
+        margin-right: 1%;
+        margin-bottom: 2%;
+    }
+    .leftdiv1{
+        width: 100%;
+        height: 450px;
+        margin: 0% 0% 2% 0;
+    }
+    .leftbox{
+        width: 50%;
+        background-color: white;
+        padding: 5px;
+    }
+    .rightbox{
+        width: 50%;
+        height: 97%;
+        background-color: white;
+        padding: 5px;
+    }
+    .lefttop{
+        height: 58%;
+        display: flex;
+    }
+    .leftbottom{
+        height: 218px;
+        width: 100%;
+        background-color: white;
+        margin: 2% 0 0 0;
+        padding: 5px 0px 0px 5px;
+    }
+    .righttop {
+        height: 50%;
+        margin: 2% 0 0 0;
+        display: flex;
+    }
+    .rightbottom {
+        height: 100%;
+        width: 100%;
+        background-color: white;
+    }
+    .center-margin {
+        margin-right: 2%;
+    }
+    .rigdiv{
+        width: 100%;
+        background-color: white;
+        height: 100%;
+    }
+    /* classes css */
+    .selcla{ 
+        height: 40px;
+    }    
+    .selcla:hover .leftarrow .fa, .selcla:hover .rightarrow .fa, .selcla:hover .leftarrowsect .fa, .selcla:hover .rightarrowsect .fa{ 
+        display: block;
+    }    
+    .innerselcla{        
+        display: flex;        
+        padding-top: 10px;        
+        width: 100%;    
+    }    
+    .leftarrow, .leftarrowsect{        
+        width: 10%;        
+        cursor: pointer;    
+    }    
+    .rightarrow, .rightarrowsect{        
+        width: 10%;        
+        cursor: pointer;    
+    }    
+    #buttonId2{        
+        margin-top: 3px !important;    
+    }    
+    .scrollclass{        
+        width: 80%;    
+    }    
+    .leftarrow .fa, .rightarrow .fa{        
+        font-size: 20px;        
+        margin: 10px 0 0 0px;        
+        color: #5e81f4;        
+        display: none;    
+    }    
+    .leftarrowsect .fa, .rightarrowsect .fa{        
+        font-size: 18px;        
+        margin: 12px 0 0 0px;        
+        color: #5e81f4;        
+        display: none;    
+    }    
+    .selctedresult{        
+        width: 100%;   
+        height: 420px;       
+        /* margin-top: 15px;    */
+    }    
+    .selctedresult1{
+        width: 100%;
+    }
+    .buttonsect {        
+        font-size: 12px !important;        
+        padding-top: 4px !important;    
+    }
+    .buttonsect1{
+        font-size: 15px !important;
+    }
+    .table-responsive {
+        height: 100%;
+    }
+    table th{
+        font-size: 11px;
+        font-weight: 600;
+        color: #5e81f4;
+    }
+    /* canvas css */
+    .canvas1{
+        width: 300px !important;
+        height: 150px !important;
+        margin-left: -45px;
+    }
+    .canvas2{
+        height: 210px !important;
+    }
+    .basechart{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .basechart1{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    h5 {
+        color: #5e81f4;
+        padding: 0px 0px 6px 12px;
+        font-weight: 900;
+    }
+    .studattn {
+        color: #5e81f4;
+        padding: 0px 0px 6px 12px;
+        font-weight: 900;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+    .att-values{
+        display: flex;
+        width: 100%;
+    }
+    .att-heading{
+        width: 20%;
+        font-weight: 900;
+    }
+    .att-heading1{
+        width: 20%;
+        font-weight: 900;
+        margin-left: 10px;
+    }
+    .studattendtxt p{
+        font-size: 12px;
+        text-align: left;
+        margin-left: 15px;
+    }
+    .progbar{
+        width: 90%;
+    }
+    .progress{
+        margin-left: 12px;
+    }
+    /* button tabs */
+    .btntabs{
+        width: 100%;
+        height: 30px;
+        border-bottom: solid 1px #F5F5F5;
+        display: flex;
+    }
+    .btntab{
+        width: 25%;
+        padding: 7px 0 0 0;
+        color: #5e81f4;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .btntab:hover, .btntab-active{
+        cursor: pointer;
+        background-color: #5e81f4;
+        color: white;
+    }
+    /* calender and time widgets */
+    /* calender */
+    .rigdiv1{
+        width: 100%;
+        background-color: white;
+        height: 100%;
+    }
+    .caltimediv{
+        display: flex;
+        width: 100%;
+        height: 28%;
+        margin-bottom: 2%;
+    }
+    .calenderwid{
+        width: 50%;
+        height: 99%;
+        background-color: #7DCEA0;
+        border-radius: 5px;
+        margin-right: 2%;
+    }
+    .mnth{
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        color: white;
+        padding-top: 10px;
+    }
+    .daydate{
+        font-size: 45px;
+        font-weight: 700;
+        text-align: center;
+        color: white;
+    }
+    .dayyear{
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        color: white;
+    }
+    /* timer */
+    .timewid{
+        width: 48%;
+        height: 70%;
+        background-color: #F1948A;
+        border-radius: 5px;
+        margin-top: 5%;
+    }
+    .timenow{
+        font-size: 35px;
+        font-weight: 600;
+        text-align: center;
+        color: white;
+        padding-top: 20px;
+    }
+    .tabtablehead th{
+        font-size: 12px; 
+    }
+    .tabtabletxt td{
+        font-size: 12px;
+    }
+    .table-responsive td, .table-responsive th {
+        font-size: 12px;
+    }
+    .timecolwdth{
+        width: 105px;
+    }
+
+    /* scroll classes */
+    div.scrollmenu {
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      div.scrollmenu:hover {
+        overflow: auto;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      /* tab notifications */
+      .tabnotification{
+        border-radius: 5px;
+        width: 95%;
+        height: 130px;
+        margin: 10px;
+      }
+      .tnbgclr{
+        background-color: #ffffe6;
+      }
+      .tnbgclr1{
+          background-color: #E6F2FF;
+      }
+      .tnbgclr2{
+        background-color: #ffeee6;
+      }
+      .tnbgclr3{
+        background-color: #eeffe6;
+      }
+      .tabnote{
+        font-size: 12px;
+        font-weight: 600;
+        text-align: left;
+        padding: 10px 20px 0px 20px;
+      }
+      strong{
+          color: cornflowerblue;
+          font-size: 11px;
+      }
+      .tabdis{
+        text-align: left;
+        font-size: 11px;
+        padding: 10px 20px 0px 20px;
+      }
+}
+/* button tabs */    
+.btntabs{       
+     width: 100%;        
+     height: 30px;        
+     border-bottom: solid 1px #F5F5F5;        
+     display: flex;    
+}
+.btntab{        
+    width: 25%;        
+    padding: 5px 0 0 0;        
+    color: #5e81f4;        
+    font-size: 13px;        
+    font-weight: 600;    
+}    
+.btntab:hover, .btntab-active{        
+    cursor: pointer;        
+    background-color: #5e81f4;        
+    color: white;    
+}
+.caltimediv{        
+    display: flex;        
+    width: 100%;        
+    height: 28%;       
+    margin-bottom: 2%;    
+}    
+.calenderwid{        
+    width: 50%;        
+    height: 99%;        
+    background-color: cadetblue;        
+    border-radius: 5px;        
+    margin-right: 2%;    
+}    
+.mnth{        
+    font-size: 18px;        
+    font-weight: 500;       
+    text-align: center;        
+    color: white;        
+    padding-top: 10px;    
+}    
+.daydate{       
+    font-size: 45px;        
+    font-weight: 700;        
+    text-align: center;        
+    color: white;    
+}    
+.dayyear{        
+    font-size: 18px;        
+    font-weight: 500;        
+    text-align: center;        
+    color: white;    
+}    /* timer */    
+.timewid{        
+    width: 48%;        
+    height: 70%;        
+    background-color: orange;        
+    border-radius: 5px;        
+    margin-top: 5%;    
+}    
+.timenow{        
+    font-size: 35px;        
+    font-weight: 600;        
+    text-align: center;       
+     color: white;        
+     padding-top: 20px;    
+}
+
+    /* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767px){
+    .rightcard {
+        width: 65%;
+        background-color: white;
+        height: 450px;
+    }
+    .leftdiv{
+        width: 100%;
+        margin-right: 1%;
+        margin-bottom: 2%;
+    }
+    .leftdiv1{
+        width: 100%;
+        height: 450px;
+        margin: 0% 0% 2% 0;
+    }
+    .leftbox{
+        width: 50%;
+        background-color: white;
+        padding: 5px;
+    }
+    .rightbox{
+        width: 50%;
+        height: 97%;
+        background-color: white;
+        padding: 5px;
+    }
+    .lefttop{
+        height: 58%;
+        display: flex;
+    }
+    .leftbottom{
+        height: 218px;
+        width: 100%;
+        background-color: white;
+        margin: 2% 0 0 0;
+        padding: 5px 0px 0px 5px;
+    }
+    .righttop {
+        height: 50%;
+        margin: 2% 0 0 0;
+        display: flex;
+    }
+    .rightbottom {
+        height: 100%;
+        width: 100%;
+        background-color: white;
+    }
+    .center-margin {
+        margin-right: 2%;
+    }
+    .rigdiv{
+        width: 100%;
+        background-color: white;
+        height: 100%;
+    }
+    /* classes css */
+    .selcla{ 
+        height: 40px;
+    }    
+    .selcla:hover .leftarrow .fa, .selcla:hover .rightarrow .fa, .selcla:hover .leftarrowsect .fa, .selcla:hover .rightarrowsect .fa{ 
+        display: block;
+    }    
+    .innerselcla{        
+        display: flex;        
+        padding-top: 10px;        
+        width: 100%;    
+    }    
+    .leftarrow, .leftarrowsect{        
+        width: 10%;        
+        cursor: pointer;    
+    }    
+    .rightarrow, .rightarrowsect{        
+        width: 10%;        
+        cursor: pointer;    
+    }    
+    #buttonId2{        
+        margin-top: 3px !important;    
+    }    
+    .scrollclass{        
+        width: 80%;    
+    }    
+    .leftarrow .fa, .rightarrow .fa{        
+        font-size: 20px;        
+        margin: 10px 0 0 0px;        
+        color: #5e81f4;        
+        display: none;    
+    }    
+    .leftarrowsect .fa, .rightarrowsect .fa{        
+        font-size: 18px;        
+        margin: 12px 0 0 0px;        
+        color: #5e81f4;        
+        display: none;    
+    }    
+    .selctedresult{        
+        width: 100%;   
+        height: 420px;       
+        /* margin-top: 15px;    */
+    }    
+    .selctedresult1{
+        width: 100%;
+    }
+    .buttonsect {        
+        font-size: 12px !important;        
+        padding-top: 4px !important;    
+    }
+    .buttonsect1{
+        font-size: 15px !important;
+    }
+    .table-responsive {
+        height: 100%;
+    }
+    table th{
+        font-size: 11px;
+        font-weight: 600;
+        color: #5e81f4;
+    }
+    /* canvas css */
+    .canvas1{
+        width: 300px !important;
+        height: 150px !important;
+        margin-left: -45px;
+    }
+    .canvas2{
+        height: 210px !important;
+    }
+    .basechart{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .basechart1{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    h5 {
+        color: #5e81f4;
+        padding: 0px 0px 6px 12px;
+        font-weight: 900;
+    }
+    .studattn {
+        color: #5e81f4;
+        padding: 0px 0px 6px 12px;
+        font-weight: 900;
+        font-size: 12px;
+        margin-top: 5px;
+        margin-left: 10px;
+    }
+    .att-values{
+        display: flex;
+        width: 100%;
+    }
+    .att-heading{
+        width: 20%;
+        font-weight: 900;
+    }
+    .att-heading1{
+        width: 20%;
+        font-weight: 900;
+        margin-left: 10px;
+    }
+    .studattendtxt p{
+        font-size: 12px;
+        text-align: left;
+        margin-left: 15px;
+    }
+    .progbar{
+        width: 90%;
+    }
+    .progress{
+        margin-left: 12px;
+    }
+    /* button tabs */
+    .btntabs{
+        width: 100%;
+        height: 30px;
+        border-bottom: solid 1px #F5F5F5;
+        display: flex;
+    }
+    .btntab{
+        width: 25%;
+        padding: 7px 0 0 0;
+        color: #5e81f4;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .btntab:hover, .btntab-active{
+        cursor: pointer;
+        background-color: #5e81f4;
+        color: white;
+    }
+    /* calender and time widgets */
+    /* calender */
+    .rigdiv1{
+        width: 100%;
+        background-color: white;
+        height: 100%;
+    }
+    .caltimediv{
+        display: flex;
+        width: 100%;
+        height: 28%;
+        margin-bottom: 2%;
+    }
+    .calenderwid{
+        width: 50%;
+        height: 99%;
+        background-color: #7DCEA0;
+        border-radius: 5px;
+        margin-right: 2%;
+    }
+    .mnth{
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        color: white;
+        padding-top: 10px;
+    }
+    .daydate{
+        font-size: 45px;
+        font-weight: 700;
+        text-align: center;
+        color: white;
+    }
+    .dayyear{
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        color: white;
+    }
+    /* timer */
+    .timewid{
+        width: 48%;
+        height: 70%;
+        background-color: #F1948A;
+        border-radius: 5px;
+        margin-top: 5%;
+    }
+    .timenow{
+        font-size: 35px;
+        font-weight: 600;
+        text-align: center;
+        color: white;
+        padding-top: 20px;
+    }
+    .tabtablehead th{
+        font-size: 12px; 
+    }
+    .tabtabletxt td{
+        font-size: 12px;
+    }
+    .table-responsive td, .table-responsive th {
+        font-size: 12px;
+        padding: 10px 0 0 25px;
+    }
+    .timecolwdth{
+        width: 105px;
+    }
+
+    /* scroll classes */
+    div.scrollmenu {
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      div.scrollmenu:hover {
+        overflow: auto;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      /* tab notifications */
+      .tabnotification{
+        border-radius: 5px;
+        width: 95%;
+        height: 130px;
+        margin: 10px;
+      }
+      .tnbgclr{
+        background-color: #ffffe6;
+      }
+      .tnbgclr1{
+          background-color: #E6F2FF;
+      }
+      .tnbgclr2{
+        background-color: #ffeee6;
+      }
+      .tnbgclr3{
+        background-color: #eeffe6;
+      }
+      .tabnote{
+        font-size: 12px;
+        font-weight: 600;
+        text-align: left;
+        padding: 10px 20px 0px 20px;
+      }
+      strong{
+          color: cornflowerblue;
+          font-size: 11px;
+      }
+      .tabdis{
+        text-align: left;
+        font-size: 11px;
+        padding: 10px 20px 0px 20px;
+      }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px){
+    .rightcard {
+        width: 65%;
+        background-color: white;
+        height: 450px;
+    }
+    .leftdiv{
+        width: 100%;
+        margin-right: 1%;
+        margin-bottom: 2%;
+    }
+    .leftdiv1{
+        width: 100%;
+        height: 450px;
+        margin: 0% 0% 2% 0;
+    }
+    .leftbox{
+        width: 50%;
+        background-color: white;
+        padding: 5px;
+    }
+    .rightbox{
+        width: 50%;
+        height: 97%;
+        background-color: white;
+        padding: 5px;
+    }
+    .lefttop{
+        height: 58%;
+        display: flex;
+    }
+    .leftbottom{
+        height: 218px;
+        width: 100%;
+        background-color: white;
+        margin: 2% 0 0 0;
+        padding: 5px 0px 0px 5px;
+    }
+    .righttop {
+        height: 50%;
+        margin: 2% 0 0 0;
+        display: flex;
+    }
+    .rightbottom {
+        height: 100%;
+        width: 100%;
+        background-color: white;
+    }
+    .center-margin {
+        margin-right: 2%;
+    }
+    .rigdiv{
+        width: 100%;
+        background-color: white;
+        height: 100%;
+    }
+    /* classes css */
+    .selcla{ 
+        height: 40px;
+    }    
+    .selcla:hover .leftarrow .fa, .selcla:hover .rightarrow .fa, .selcla:hover .leftarrowsect .fa, .selcla:hover .rightarrowsect .fa{ 
+        display: block;
+    }    
+    .innerselcla{        
+        display: flex;        
+        padding-top: 10px;        
+        width: 100%;    
+    }    
+    .leftarrow, .leftarrowsect{        
+        width: 10%;        
+        cursor: pointer;    
+    }    
+    .rightarrow, .rightarrowsect{        
+        width: 10%;        
+        cursor: pointer;    
+    }    
+    #buttonId2{        
+        margin-top: 3px !important;    
+    }    
+    .scrollclass{        
+        width: 80%;    
+    }    
+    .leftarrow .fa, .rightarrow .fa{        
+        font-size: 20px;        
+        margin: 10px 0 0 0px;        
+        color: #5e81f4;        
+        display: none;    
+    }    
+    .leftarrowsect .fa, .rightarrowsect .fa{        
+        font-size: 18px;        
+        margin: 12px 0 0 0px;        
+        color: #5e81f4;        
+        display: none;    
+    }    
+    .selctedresult{        
+        width: 100%;   
+        height: 420px;       
+        /* margin-top: 15px;    */
+    }    
+    .selctedresult1{
+        width: 100%;
+    }
+    .buttonsect {        
+        font-size: 12px !important;        
+        padding-top: 4px !important;    
+    }
+    .buttonsect1{
+        font-size: 15px !important;
+    }
+    .table-responsive {
+        height: 100%;
+    }
+    table th{
+        font-size: 11px;
+        font-weight: 600;
+        color: #5e81f4;
+    }
+    /* canvas css */
+    .canvas1{
+        width: 300px !important;
+        height: 150px !important;
+        margin-left: -45px;
+    }
+    .canvas2{
+        height: 210px !important;
+    }
+    .basechart{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .basechart1{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    h5 {
+        color: #5e81f4;
+        padding: 0px 0px 6px 12px;
+        font-weight: 900;
+    }
+    .studattn {
+        color: #5e81f4;
+        padding: 0px 0px 6px 12px;
+        font-weight: 900;
+        font-size: 12px;
+        margin-top: 5px;
+        margin-left: 10px;
+    }
+    .att-values{
+        display: flex;
+        width: 100%;
+    }
+    .att-heading{
+        width: 20%;
+        font-weight: 900;
+    }
+    .att-heading1{
+        width: 20%;
+        font-weight: 900;
+        margin-left: 10px;
+    }
+    .studattendtxt p{
+        font-size: 12px;
+        text-align: left;
+        margin-left: 15px;
+    }
+    .progbar{
+        width: 90%;
+    }
+    .progress{
+        margin-left: 12px;
+    }
+    /* button tabs */
+    .btntabs{
+        width: 100%;
+        height: 30px;
+        border-bottom: solid 1px #F5F5F5;
+        display: flex;
+    }
+    .btntab{
+        width: 25%;
+        padding: 7px 0 0 0;
+        color: #5e81f4;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .btntab:hover, .btntab-active{
+        cursor: pointer;
+        background-color: #5e81f4;
+        color: white;
+    }
+    /* calender and time widgets */
+    /* calender */
+    .rigdiv1{
+        width: 100%;
+        background-color: white;
+        height: 100%;
+    }
+    .caltimediv{
+        display: flex;
+        width: 100%;
+        height: 28%;
+        margin-bottom: 2%;
+    }
+    .calenderwid{
+        width: 50%;
+        height: 99%;
+        background-color: #7DCEA0;
+        border-radius: 5px;
+        margin-right: 2%;
+    }
+    .mnth{
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        color: white;
+        padding-top: 10px;
+    }
+    .daydate{
+        font-size: 45px;
+        font-weight: 700;
+        text-align: center;
+        color: white;
+    }
+    .dayyear{
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        color: white;
+    }
+    /* timer */
+    .timewid{
+        width: 48%;
+        height: 70%;
+        background-color: #F1948A;
+        border-radius: 5px;
+        margin-top: 5%;
+    }
+    .timenow{
+        font-size: 35px;
+        font-weight: 600;
+        text-align: center;
+        color: white;
+        padding-top: 20px;
+    }
+    .tabtablehead th{
+        font-size: 12px; 
+    }
+    .tabtabletxt td{
+        font-size: 12px;
+    }
+    .table-responsive td, .table-responsive th {
+        font-size: 12px;
+        padding: 10px 0 0 25px;
+    }
+    .timecolwdth{
+        width: 105px;
+    }
+
+    /* scroll classes */
+    div.scrollmenu {
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      div.scrollmenu:hover {
+        overflow: auto;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      /* tab notifications */
+      .tabnotification{
+        border-radius: 5px;
+        width: 95%;
+        height: 130px;
+        margin: 10px;
+      }
+      .tnbgclr{
+        background-color: #ffffe6;
+      }
+      .tnbgclr1{
+          background-color: #E6F2FF;
+      }
+      .tnbgclr2{
+        background-color: #ffeee6;
+      }
+      .tnbgclr3{
+        background-color: #eeffe6;
+      }
+      .tabnote{
+        font-size: 12px;
+        font-weight: 600;
+        text-align: left;
+        padding: 10px 20px 0px 20px;
+      }
+      strong{
+          color: cornflowerblue;
+          font-size: 11px;
+      }
+      .tabdis{
+        text-align: left;
+        font-size: 11px;
+        padding: 10px 20px 0px 20px;
+      }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199px){
+    .rightcard {
+        width: 65%;
+        background-color: white;
+        height: 450px;
+    }
+    .leftdiv{
+        width: 33%;
+        height: 450px;
+        margin-right: 1%;
+    }
+    .leftdiv1{
+        width: 33%;
+        height: 450px;
+        margin-right: 3px;
+    }
+    .leftbox{
+        width: 49%;
+        height: 100%;
+        background-color: white;
+        padding: 5px;
+    }
+    .rightbox{
+        width: 50%;
+        height: 97%;
+        background-color: white;
+        padding: 5px;
+    }
+    .lefttop{
+        height: 50%;
+        display: flex;
+    }
+    .leftbottom{
+        height: 218px;
+        width: 100%;
+        background-color: white;
+        margin: 2% 0 0 0;
+        padding: 5px 0px 0px 5px;
+    }
+    .righttop {
+        height: 50%;
+        margin: 2% 0 0 0;
+        display: flex;
+    }
+    .rightbottom {
+        /* height: 100%; */
+        width: 100%;
+        background-color: white;
+    }
+    .center-margin {
+        margin-right: 2%;
+    }
+    .rigdiv{
+        height: 450px;
+        width: 100%;
+        background-color: white;
+    }
+    /* classes css */
+    .selcla{ 
+        height: 40px;
+    }    
+    .selcla:hover .leftarrow .fa, .selcla:hover .rightarrow .fa, .selcla:hover .leftarrowsect .fa, .selcla:hover .rightarrowsect .fa{ 
+        display: block;
+    }    
+    .innerselcla{        
+        display: flex;        
+        padding-top: 10px;        
+        width: 100%;    
+    }    
+    .leftarrow, .leftarrowsect{        
+        width: 10%;        
+        cursor: pointer;    
+    }    
+    .rightarrow, .rightarrowsect{        
+        width: 10%;        
+        cursor: pointer;    
+    }    
+    #buttonId2{        
+        margin-top: 3px !important;    
+    }    
+    .scrollclass{        
+        width: 80%;    
+    }    
+    .leftarrow .fa, .rightarrow .fa{        
+        font-size: 20px;        
+        margin: 10px 0 0 0px;        
+        color: #5e81f4;        
+        display: none;    
+    }    
+    .leftarrowsect .fa, .rightarrowsect .fa{        
+        font-size: 18px;        
+        margin: 12px 0 0 0px;        
+        color: #5e81f4;        
+        display: none;    
+    }    
+    .selctedresult{        
+        width: 100%;          
+        /* margin-top: 15px;    */
+    }    
+    .selctedresult1{
+        width: 100%;
+    }
+    .buttonsect {        
+        font-size: 12px !important;        
+        padding-top: 4px !important;    
+    }
+    .buttonsect1{
+        font-size: 15px !important;
+    }
+    .table-responsive {
+        height: 100%;
+    }
+
+    /* canvas css */
+    .canvas1{
+        width: 300px !important;
+        height: 150px !important;
+        margin-left: -45px;
+    }
+    .canvas2{
+        height: 210px !important;
+    }
+    .basechart{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .basechart1{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .studattn {
+        color: #5e81f4;
+        padding: 0px 0px 6px 12px;
+        font-weight: 900;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+    .att-values{
+        display: flex;
+        width: 100%;
+    }
+    .att-heading{
+        width: 20%;
+        font-weight: 900;
+    }
+    .att-heading1{
+        width: 20%;
+        font-weight: 900;
+        margin-left: 10px;
+    }
+    .studattendtxt p{
+        font-size: 11px;
+        text-align: left;
+        margin-left: 15px;
+    }
+    .progbar{
+        width: 90%;
+    }
+    .progress{
+        margin-left: 12px;
+    }
+    /* button tabs */
+    .btntabs{
+        width: 100%;
+        height: 30px;
+        border-bottom: solid 1px #F5F5F5;
+        display: flex;
+    }
+    .btntab{
+        width: 25%;
+        padding: 7px 0 0 0;
+        color: #5e81f4;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .btntab:hover, .btntab-active{
+        cursor: pointer;
+        background-color: #5e81f4;
+        color: white;
+    }
+    /* calender and time widgets */
+    /* calender */
+    .rigdiv1{
+        width: 100%;
+        background-color: white;
+        height: 100%;
+    }
+    .caltimediv{
+        display: flex;
+        width: 100%;
+        height: 28%;
+        margin-bottom: 2%;
+    }
+    .calenderwid{
+        width: 50%;
+        height: 99%;
+        background-color: #7DCEA0;
+        border-radius: 5px;
+        margin-right: 2%;
+    }
+    .mnth{
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        color: white;
+        padding-top: 10px;
+    }
+    .daydate{
+        font-size: 45px;
+        font-weight: 700;
+        text-align: center;
+        color: white;
+    }
+    .dayyear{
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        color: white;
+    }
+    /* timer */
+    .timewid{
+        width: 48%;
+        height: 70%;
+        background-color: #F1948A;
+        border-radius: 5px;
+        margin-top: 5%;
+    }
+    .timenow{
+        font-size: 35px;
+        font-weight: 600;
+        text-align: center;
+        color: white;
+        padding-top: 20px;
+    }
+    .tabtablehead th{
+        font-size: 12px; 
+    }
+    .tabtabletxt td{
+        font-size: 12px;
+    }
+    .table-responsive th {
+        font-size: 11px;
+        color: #5e81f4;
+    }
+    .table-responsive td {
+        font-size: 11px;
+    }
+    .timecolwdth{
+        width: 105px;
+    }
+
+    /* scroll classes */
+    div.scrollmenu {
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      div.scrollmenu:hover {
+        overflow: auto;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      /* tab notifications */
+      .tabnotification{
+        border-radius: 5px;
+        width: 95%;
+        height: 90px;
+        margin: 10px;
+      }
+      .tnbgclr{
+        background-color: #ffffe6;
+      }
+      .tnbgclr1{
+          background-color: #E6F2FF;
+      }
+      .tnbgclr2{
+        background-color: #ffeee6;
+      }
+      .tnbgclr3{
+        background-color: #eeffe6;
+      }
+      .tabnote{
+        font-size: 12px;
+        font-weight: 600;
+        text-align: left;
+        padding: 10px 20px 0px 20px;
+      }
+      strong{
+          color: cornflowerblue;
+          font-size: 11px;
+      }
+      .tabdis{
+        text-align: left;
+        font-size: 11px;
+        padding: 10px 20px 0px 20px;
+      }
+
+      /* select dropdown */
+      select {
+        width: 140px;
+        height: 24px;
+        padding: 3px 4px 4px 15px;
+        margin-left: 50px;
+        border-radius:4px;
+        box-shadow: 2px 2px 8px #999;
+        background: #eee;
+        color: #5e81f4;
+        border: none;
+        outline: none;
+        display: inline-block;
+        -webkit-appearance:none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        }
+        label {
+        position: relative;
+        }
+        label:after {
+        content:'<>';
+        font: 11px "Consolas", monospace;
+        color: #666;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        right: 8px; 
+        top:2px;
+        padding: 0 0 2px;
+        border-bottom: 1px solid #ddd;
+        position: absolute;
+        pointer-events: none;
+        }
+        label:before {
+        content: '';
+        right: 6px; 
+        top:0px;
+        width: 20px; 
+        height: 20px;
+        background: #eee;
+        position: absolute;
+        pointer-events: none;
+        display: block;
+        }
+        
+        .ngx-charts-bar-vertical{
+            font-size: 11px !important;
+        }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .rightcard {
+        width: 65%;
+        background-color: white;
+        height: 450px;
+    }
+    .leftdiv{
+        width: 33%;
+        height: 450px;
+        margin-right: 1%;
+    }
+    .leftdiv1{
+        width: 33%;
+        height: 450px;
+        margin-right: 3px;
+    }
+    .leftbox{
+        width: 49%;
+        height: 100%;
+        background-color: white;
+        padding: 5px;
+    }
+    .rightbox{
+        width: 50%;
+        height: 97%;
+        background-color: white;
+        padding: 5px;
+    }
+    .lefttop{
+        height: 50%;
+        display: flex;
+    }
+    .leftbottom{
+        height: 218px;
+        width: 100%;
+        background-color: white;
+        margin: 2% 0 0 0;
+        padding: 5px 0px 0px 5px;
+    }
+    .righttop {
+        height: 50%;
+        margin: 2% 0 0 0;
+        display: flex;
+    }
+    .rightbottom {
+        /* height: 100%; */
+        width: 100%;
+        background-color: white;
+    }
+    .center-margin {
+        margin-right: 2%;
+    }
+    .rigdiv{
+        height: 450px;
+        width: 100%;
+        background-color: white;
+    }
+    /* classes css */
+    .selcla{ 
+        height: 40px;
+    }    
+    .selcla:hover .leftarrow .fa, .selcla:hover .rightarrow .fa, .selcla:hover .leftarrowsect .fa, .selcla:hover .rightarrowsect .fa{ 
+        display: block;
+    }    
+    .innerselcla{        
+        display: flex;        
+        padding-top: 10px;        
+        width: 100%;    
+    }    
+    .leftarrow, .leftarrowsect{        
+        width: 10%;        
+        cursor: pointer;    
+    }    
+    .rightarrow, .rightarrowsect{        
+        width: 10%;        
+        cursor: pointer;    
+    }    
+    #buttonId2{        
+        margin-top: 3px !important;    
+    }    
+    .scrollclass{        
+        width: 80%;    
+    }    
+    .leftarrow .fa, .rightarrow .fa{        
+        font-size: 20px;        
+        margin: 10px 0 0 0px;        
+        color: #5e81f4;        
+        display: none;    
+    }    
+    .leftarrowsect .fa, .rightarrowsect .fa{        
+        font-size: 18px;        
+        margin: 12px 0 0 0px;        
+        color: #5e81f4;        
+        display: none;    
+    }    
+    .selctedresult{        
+        width: 100%;          
+        /* margin-top: 15px;    */
+    }    
+    .selctedresult1{
+        width: 100%;
+    }
+    .buttonsect {        
+        font-size: 12px !important;        
+        padding-top: 4px !important;    
+    }
+    .buttonsect1{
+        font-size: 15px !important;
+    }
+    .table-responsive {
+        height: 100%;
+    }
+
+    /* canvas css */
+    .canvas1{
+        width: 300px !important;
+        height: 150px !important;
+        margin-left: -45px;
+    }
+    .canvas2{
+        height: 210px !important;
+    }
+    .basechart{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .basechart1{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .studattn {
+        color: #5e81f4;
+        padding: 0px 0px 6px 12px;
+        font-weight: 900;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+    .att-values{
+        display: flex;
+        width: 100%;
+    }
+    .att-heading{
+        width: 20%;
+        font-weight: 900;
+    }
+    .att-heading1{
+        width: 20%;
+        font-weight: 900;
+        margin-left: 10px;
+    }
+    .studattendtxt p{
+        font-size: 11px;
+        text-align: left;
+        margin-left: 15px;
+    }
+    .progbar{
+        width: 90%;
+    }
+    .progress{
+        margin-left: 12px;
+    }
+    /* button tabs */
+    .btntabs{
+        width: 100%;
+        height: 30px;
+        border-bottom: solid 1px #F5F5F5;
+        display: flex;
+    }
+    .btntab{
+        width: 25%;
+        padding: 7px 0 0 0;
+        color: #5e81f4;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .btntab:hover, .btntab-active{
+        cursor: pointer;
+        background-color: #5e81f4;
+        color: white;
+    }
+    /* calender and time widgets */
+    /* calender */
+    .rigdiv1{
+        width: 100%;
+        background-color: white;
+        height: 100%;
+    }
+    .caltimediv{
+        display: flex;
+        width: 100%;
+        height: 28%;
+        margin-bottom: 2%;
+    }
+    .calenderwid{
+        width: 50%;
+        height: 99%;
+        background-color: #7DCEA0;
+        border-radius: 5px;
+        margin-right: 2%;
+    }
+    .mnth{
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        color: white;
+        padding-top: 10px;
+    }
+    .daydate{
+        font-size: 45px;
+        font-weight: 700;
+        text-align: center;
+        color: white;
+    }
+    .dayyear{
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+        color: white;
+    }
+    /* timer */
+    .timewid{
+        width: 48%;
+        height: 70%;
+        background-color: #F1948A;
+        border-radius: 5px;
+        margin-top: 5%;
+    }
+    .timenow{
+        font-size: 35px;
+        font-weight: 600;
+        text-align: center;
+        color: white;
+        padding-top: 20px;
+    }
+    .tabtablehead th{
+        font-size: 12px; 
+    }
+    .tabtabletxt td{
+        font-size: 12px;
+    }
+    .table-responsive th {
+        font-size: 11px;
+        color: #5e81f4;
+    }
+    .table-responsive td {
+        font-size: 11px;
+    }
+    .timecolwdth{
+        width: 105px;
+    }
+
+    /* scroll classes */
+    div.scrollmenu {
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      div.scrollmenu:hover {
+        overflow: auto;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+
+      /* tab notifications */
+      .tabnotification{
+        border-radius: 5px;
+        width: 95%;
+        height: 90px;
+        margin: 10px;
+      }
+      .tnbgclr{
+        background-color: #ffffe6;
+      }
+      .tnbgclr1{
+          background-color: #E6F2FF;
+      }
+      .tnbgclr2{
+        background-color: #ffeee6;
+      }
+      .tnbgclr3{
+        background-color: #eeffe6;
+      }
+      .tabnote{
+        font-size: 12px;
+        font-weight: 600;
+        text-align: left;
+        padding: 10px 20px 0px 20px;
+      }
+      strong{
+          color: cornflowerblue;
+          font-size: 11px;
+      }
+      .tabdis{
+        text-align: left;
+        font-size: 11px;
+        padding: 10px 20px 0px 20px;
+      }
+
+      /* select dropdown */
+      select {
+        width: 140px;
+        height: 24px;
+        padding: 3px 4px 4px 15px;
+        margin-left: 50px;
+        border-radius:4px;
+        box-shadow: 2px 2px 8px #999;
+        background: #eee;
+        color: #5e81f4;
+        border: none;
+        outline: none;
+        display: inline-block;
+        -webkit-appearance:none;
+        -moz-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        }
+        label {
+        position: relative;
+        }
+        label:after {
+        content:'<>';
+        font: 11px "Consolas", monospace;
+        color: #666;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        right: 8px; 
+        top:2px;
+        padding: 0 0 2px;
+        border-bottom: 1px solid #ddd;
+        position: absolute;
+        pointer-events: none;
+        }
+        label:before {
+        content: '';
+        right: 6px; 
+        top:0px;
+        width: 20px; 
+        height: 20px;
+        background: #eee;
+        position: absolute;
+        pointer-events: none;
+        display: block;
+        }
+        
+        .ngx-charts-bar-vertical{
+            font-size: 11px !important;
+        }
+}

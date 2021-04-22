@@ -1,0 +1,12 @@
+input:checked + .slider.start {
+    background-color: #e56761;
+}
+
+.slider.start {
+    background-color: #e56761;
+    border: 1px solid #e56761;
+}
+
+input + .slider.start:before {
+    background-color: #FFFFFF;
+}

@@ -1,0 +1,22 @@
+<div id="main-content1" class="new-message-wrapper">
+    <div class="header-wrapper">
+        <p *ngIf="dialog_type == 'add'">Add Topic</p>
+        <p *ngIf="dialog_type == 'edit'">Add Topic</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form role="form" [formGroup]="topicForm" (ngSubmit)="submitTopic()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Topic Name:
+            </div>
+            <div class="col-full-6">
+                <input class="form-control" value="{{topic.topic_name}}" formControlName="topic_name" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

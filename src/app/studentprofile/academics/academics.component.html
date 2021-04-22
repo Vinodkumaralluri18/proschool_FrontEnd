@@ -1,0 +1,125 @@
+<div id="main-content" class="academic-wrapper new-listing">
+    <div class="row">
+        <div class="menu-bar">
+            <button routerLink="/main/main/studentprofile/profile/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Profile</button>
+            <button routerLink="/main/main/studentprofile/attendance/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Attendance</button>
+            <button routerLink="/main/main/studentprofile/academics/{{student_id}}/{{section_id}}"
+                class="button button2 hvr-pop transition"
+                routerLinkActive="active">Academics</button>
+            <button routerLink="/main/main/studentprofile/assessment/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Assessment</button>
+            <button routerLink="/main/main/studentprofile/fees/{{student_id}}/{{section_id}}"
+                routerLinkActive="active">Fee Collection</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="page-content-wrapper">
+            <div class="student-info-wrapper">
+                <div class="student-details-tablist-wrapper">
+                    <section class="student-task-section">
+                        <section class="page-actions">
+                            <div class="dropdown">
+                                <button class="dropbtn" (click)="showExamList = true" (clickOutside)="showExamList = false">
+                                    {{!selected_exam ? 'select Examination' : selected_exam}}
+                                </button>
+                                <div class="dropdown-content" [hidden]="!showExamList">
+                                    <a (click)="selected_exam = 'All'; getExamAcademics();">All Examinations</a>
+                                    <a *ngFor="let exam of academics"
+                                        (click)="selected_exam = exam.exam_title; getExamAcademics();">{{ exam.exam_title}}</a>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="table-and-pagination -classes-schedule" *ngIf="allExams else allSubjects">
+                            <div class="table-container">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th align="left">Examination</th>
+                                            <th align="left">Marks</th>
+                                            <th align="left">Percentage</th>
+                                            <th align="left">Grade</th>
+                                            <th align="left">GPA</th>
+                                            <th align="left">Graphical Representation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let exam of academics; let i = index">
+                                            <td class="_s-no"><span>{{ i + 1 }}</span></td>
+                                            <td>{{exam.exam_title}}</td>
+                                            <td>{{exam.totalAllMarks}}</td>
+                                            <td>{{exam.percentage}} %</td>
+                                            <td>{{exam.Grade}}</td>
+                                            <td>{{exam.GPA}}</td>
+                                            <td>
+                                                <div class="hor-progress-wrapper">
+                                                    <div class="hor-progress-track">
+                                                        <span class="hor-progress-filled"
+                                                            [ngStyle]="{'background-color': 
+                                                            (exam.percentage >= 80) ? '#5CB85C' : 
+                                                            (exam.percentage < 80 && exam.percentage >= 60) ? '#E5A900' : 
+                                                            '#F47458', 'width': exam.percentage + '%', 'color': '#FFFFFF'}">
+                                                            {{exam.totalAllMarks}} Marks
+                                                        </span>
+                                                    </div>
+                                                    <span class="hor-progress-title"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+            
+                        <ng-template #allSubjects>
+                            <section class="table-and-pagination -classes-schedule">
+                                <div class="table-container">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th align="left">Examination</th>
+                                                <th align="left">Marks</th>
+                                                <th align="left">Percentage</th>
+                                                <th align="left">Grade</th>
+                                                <th align="left">GPA</th>
+                                                <th align="left">Graphical Representation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let sub of subjectMarks; let i = index">
+                                                <td class="_s-no"><span>{{ i + 1 }}</span></td>
+                                                <td>{{sub.subject_name}}</td>
+                                                <td>{{sub.total_marks}}</td>
+                                                <td>{{sub.percentage}} %</td>
+                                                <td>{{sub.grade}}</td>
+                                                <td>{{sub.gpa}}</td>
+                                                <td>
+                                                    <div class="hor-progress-wrapper">
+                                                        <div class="hor-progress-track">
+                                                            <span class="hor-progress-filled"
+                                                                [ngStyle]="{'background-color': 
+                                                                (sub.percentage >= 80) ? '#5CB85C' : 
+                                                                (sub.percentage < 80 && sub.percentage >= 60) ? '#E5A900' : 
+                                                                '#F47458', 'width': sub.percentage + '%', 'color': '#FFFFFF'}">
+                                                                {{sub.total_marks}} Marks
+                                                            </span>
+                                                        </div>
+                                                        <span class="hor-progress-title"></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </ng-template>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type === 'subject'">
+    <div class="header-wrapper">
+        <p *ngIf="dialog_type == 'add'">Add Class Schedule</p>
+        <p *ngIf="dialog_type == 'edit'">Edit Class Schedule</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form class="form-inline" role="form" [formGroup]="timetableForm" (ngSubmit)="submitTimetable()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Subject:
+            </div>
+            <div class="col-full-6">
+                <select formControlName="subject_id" [value]="selected_schedule.subject_id" (change)="getSelected_subject()">
+                    <option>select...</option>
+                    <option *ngFor="let sub of subjects" value="{{sub.subject_id}}">{{sub.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Subject Teacher:
+            </div>
+            <div class="col-full-6">
+                <select formControlName="teacher_id" [value]="selected_schedule.teacher_id">
+                    <option>select...</option>
+                    <option *ngFor="let tch of teachers" value="{{tch.teacher_id}}">{{tch.teacher_name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type === 'timeslot'">
+    <div class="header-wrapper">
+        <p *ngIf="dialog_type == 'add'">Add Timeslot</p>
+        <p *ngIf="dialog_type == 'edit'">Edit Timeslot</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form class="form-inline" role="form" [formGroup]="timingsForm" (ngSubmit)="submitTimings()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Session:
+            </div>
+            <div class="col-full-6">
+                <input formControlName="session" value="{{selected_session.session}}" type="text">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Start Time:
+            </div>
+            <div class="col-full-6">
+                <input formControlName="start_time" value="{{selected_session.start_time}}" type="time">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                End Time:
+            </div>
+            <div class="col-full-6">
+                <input formControlName="end_time" value="{{selected_session.end_time}}" type="time">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,51 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-subject *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (subjectEvent)="receiveSubject($event)"></app-subject>
+        <app-teacher-subject *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (subjectEvent)="receiveSubject($event)"></app-teacher-subject>
+        <select name="standard" formControlName="selected_subject" *ngIf="user.role === 'parent'" (change)="getChapters()">
+          <option *ngFor="let sub of subjects" value="{{sub.subject_id}}">{{sub.name}}</option>
+        </select>
+      </div>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="chapters.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Chapter</th>
+            <th align="left">Start Date</th>
+            <th align="left">End Date</th>
+            <th align="left">No.of Days</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let chap of chapters | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{chap.title}}</td>
+            <td *ngIf="user.role === 'admin' || user.role === 'teacher'"><input [(ngModel)]="chap.start_date" type="date"></td>
+            <td *ngIf="user.role === 'parent'">{{chap.start_date}}</td>
+            <td *ngIf="user.role === 'admin' || user.role === 'teacher'"><input [(ngModel)]="chap.end_date" (change)="getDays(i)" type="date"></td>
+            <td *ngIf="user.role === 'parent'">{{chap.end_date}}</td>
+            <td>{{chap.days}} Days</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="float_right" *ngIf="user.role === 'admin' || user.role === 'teacher'">
+        <button class="btn -cta" (click)="addPlanner()" *ngIf="user.role === 'admin' || user.role === 'teacher'">Submit</button>
+      </div>
+    </div>
+    <div class="no-data" *ngIf="chapters.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Chapters for this Subject</h1>
+    </div>
+    <div class="_pagination" *ngIf="chapters.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

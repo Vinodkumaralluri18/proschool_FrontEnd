@@ -1,0 +1,143 @@
+<main _ngcontent-tvu-c4="" class="card mt-20 within-viewport school-details-part" style="height: auto;">
+  
+  <div class="row">
+    <h1 class="main-title">School Information</h1>
+  </div>
+  <div class="vertical-space4"></div>
+  <div class="row">
+    <div class="col-md-4 ">
+      <div class="avatar"><label for="file-input"><img class="img-circle" src="../../../assets/images/camera.svg" width="50"></label><input id="file-input" type="file" name="image" (change)="profileProgress($event.target.files)" #file /></div> 
+      <img src="{{employeeservice.schoolprofileImage}}" width="304" height="236" />
+    </div>
+    <div class="vertical-space2"></div>
+    <div class="col-md-8 ">
+      <div class="clearfix"></div>
+      <div class="row">
+        <h4>School Details</h4>
+        <button class="school-details-edit-btn" (click)="editSchoolDetails()" *ngIf="user.role === 'admin'">Edit</button>
+      </div>
+      <div class="vertical-space2"></div>
+      <div class="clearfix"></div>
+      <div class="col-md-12">
+        <div class="col-md-6 col-xs-12 school-details">
+          <div class="col-md-3 col-xs-6 "><p class="school-details-label">Name:</p></div>
+          <div class="col-md-3 col-xs-6 right"><p class="school-details-value">{{schoolprofile.name}}</p></div>
+        </div>
+
+        <div class="col-md-6 col-xs-12 school-details">
+          <div class="col-md-3 col-xs-6"> <p class="school-details-label">Medium:</p></div>
+          <div class="col-md-3  col-xs-6 right"><p class="school-details-value">{{schoolprofile.medium}}</p></div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="col-md-6 school-details">
+          <div class="col-md-3 col-xs-6"><p class="school-details-label">Timings:</p></div>
+          <div class="col-md-3 col-xs-6 right"><p class="school-details-value">{{schoolprofile.timings}}</p></div>
+        </div>
+
+        <div class="col-md-6 school-details">
+          <div class="col-md-3 col-xs-6"><p class="school-details-label">Classes:</p></div>
+          <div class="col-md-3 col-xs-6 right"><p class="school-details-value">{{schoolprofile.class_from}}</p></div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="col-md-6 school-details">
+          <div class="col-md-3 col-xs-6"><p class="school-details-label">Affliation:</p></div>
+          <div class="col-md-3 col-xs-6 right"> <p class="school-details-value">{{schoolprofile.affiliation}}</p></div>
+        </div>
+
+        <div class="col-md-6 school-details">
+          <div class="col-md-3 col-xs-6"><p class="school-details-label">ECA:</p></div>
+          <div class="col-md-3  col-xs-6 right"><p class="school-details-value">{{schoolprofile.extra_curricular_activites}}</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vertial-space1"></div>
+  <div class="row"><p class="school-desc">{{schoolprofile.about}}</p></div>
+</main>
+
+<div class="vertical-space4"></div>
+<div class="clearfix"></div>
+
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-5 profile-card" >
+      <div class="clearfix"></div>
+      <div class="vertical-space4"></div>
+      <div class="row">
+        <div class="col-md-6 col-xs-6 left" ><h5  class="sub-header">Management Details</h5></div>
+        <div  class="col-md-6 col-xs-6 right" style="align-content: right;text-align: end;">
+        <button  class="btn profile-btn" (click)="editManagementDetails()" *ngIf="user.role === 'admin'"><i class="fa fa-pencil" style="padding:5px;"></i>EDIT</button>
+        </div>
+      </div>
+     
+     <div class="vertical-space4"></div>
+     <div class="col-md-12 school-details">
+        <div class="col-md-6 col-xs-6"><p class="school-details-label">Founder:</p></div>
+        <div class="col-md-6 col-xs-6 right"> <p class="school-details-value">{{schoolprofile.founder}}</p></div>
+    </div>
+    <div class="col-md-12 school-details">
+      <div class="col-md-6 col-xs-6"><p class="school-details-label">Chairman:</p></div>
+      <div class="col-md-6 col-xs-6 right"> <p class="school-details-value">{{schoolprofile.chairman}}</p></div>
+    </div>
+    <div class="col-md-12 school-details">
+      <div class="col-md-6 col-xs-6"><p class="school-details-label">Co-ordinator:</p></div>
+      <div class="col-md-6 col-xs-6 right"> <p class="school-details-value">{{schoolprofile.coordinator}}</p></div>
+    </div>
+    <div class="col-md-12 school-details">
+      <div class="col-md-6 col-xs-6"><p class="school-details-label">Principal:</p></div>
+      <div class="col-md-6 col-xs-6 right"> <p class="school-details-value">{{schoolprofile.principal}}</p></div>
+    </div>
+    <div class="col-md-12 school-details">
+      <div class="col-md-6 col-xs-6"><p class="school-details-label">Vice Principal:</p></div>
+      <div class="col-md-6 col-xs-6 right"> <p class="school-details-value">{{schoolprofile.vice_principal}}</p></div>
+    </div>
+    <div class="col-md-12 school-details">
+      <div class="col-md-6 col-xs-6"><p class="school-details-label">Established:</p></div>
+      <div class="col-md-6 col-xs-6 right"> <p class="school-details-value">{{schoolprofile.est_on}}</p></div>
+    </div>
+    
+    </div>
+    <div class="col-md-2"></div>
+    <div class="col-md-5 profile-card contact-card" >
+      <div class="clearfix"></div>
+      <div class="vertical-space4"></div>
+      <div class="row">
+        <div class="col-md-6 col-xs-6 left" ><h5  class="sub-header">Contact Details</h5></div>
+        <div  class="col-md-6 col-xs-6 right" style="align-content: right;text-align: end;">
+        <button  class="btn profile-btn" (click)="editContactDetails()" *ngIf="user.role === 'admin'"><i class="fa fa-pencil" style="padding:5px;"></i>EDIT</button>
+        </div>
+      </div>
+     <div class="vertical-space4"></div>
+     <div class="col-md-12 school-details">
+        <div class="col-md-6 col-xs-6"><p class="school-details-label">Address:</p></div>
+        <div class="col-md-6 col-xs-6 right"> <p class="school-details-value">{{schoolprofile.address}}</p></div>
+    </div>
+    <div class="col-md-12 school-details">
+      <div class="col-md-6 col-xs-6"><p class="school-details-label">Contact No:</p></div>
+      <div class="col-md-6 col-xs-6 right"> <p class="school-details-value">{{schoolprofile.phone}}</p></div>
+    </div>
+    <div class="col-md-12 school-details">
+      <div class="col-md-6 col-xs-6"><p class="school-details-label">Alternate Phone No:</p></div>
+      <div class="col-md-6 col-xs-6 right"> <p class="school-details-value">{{schoolprofile.alternate_phone}}</p></div>
+    </div>
+    <div class="col-md-12 school-details">
+      <div class="col-md-6 col-xs-6"><p class="school-details-label">Website:</p></div>
+      <div class="col-md-6 col-xs-6 right "> <p class="school-details-value">{{schoolprofile.website}}</p></div>
+    </div>
+    <div class="col-md-12 school-details">
+      <div class="col-md-6 col-xs-6"><p class="school-details-label">Email:</p></div>
+      <div class="col-md-6 col-xs-6 right "> <p class="school-details-value">{{schoolprofile.email}}</p></div>
+    </div>
+    </div>
+  
+    
+  
+    <div class="verticl-space4"></div>
+  </div>
+  
+</div>
+

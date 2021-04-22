@@ -1,0 +1,55 @@
+<main class="card mt-20 within-viewport">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <form class="searchForm" [formGroup]="stationsForm" (ngSubmit)="addStation()">
+          <input formControlName="station_name" placeholder="Enter..." type="text">
+          <input formControlName="station_code" placeholder="Enter..." type="text">
+          <input formControlName="station_geo_location" placeholder="Enter..." type="text">
+          <button type="submit" class="btn -cta">Add Station</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Station Name</th>
+            <th align="left">Station Code</th>
+            <th align="left">Geo-Location</th>
+            <th align="left">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let st of stations; let i=index">
+            <td class="_s-no"><span>{{ i + 1 }}</span></td>
+            <td>{{st.station_name}}</td>
+            <td>{{st.station_code}}</td>
+            <td>{{st.station_geo_location}}</td>
+            <td class="_actions" *ngIf="user.role === 'admin'">
+              <button class="btn" (click)="editStation(i)"><img src="../../../assets/images/edit-white.svg" alt="Edit" /></button>
+              <button class="btn" (click)="deleteStation(st.station_id)"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="_pagination">
+      <a href="" class="btn -previous">Previous</a>
+      <a href="" class="btn -current">1</a>
+      <a href="" class="btn">2</a>
+      <a href="" class="btn">3</a>
+      <a href="" class="btn">4</a>
+      <a href="" class="btn">5</a>
+      <a href="" class="btn">6</a>
+      <a href="" class="btn">7</a>
+      <a href="" class="btn">8</a>
+      <a href="" class="btn">9</a>
+      <a href="" class="btn">10</a>
+      <a href="" class="btn -next">Next</a>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,73 @@
+<div id="main-content">
+  <div class="row" *ngIf="user.role === 'admin'">
+    <div class="container-fluid" id="buttonId1">
+      <button routerLink="/main/transportation/routes" class="button button2 hvr-pop transition"><i
+          class="fa fa-calendar-plus-o" aria-hidden="true"></i>Add Bus Route</button>
+      <button routerLink="/main/transportation/addroute" class="button button2 hvr-pop transition"><i
+          class="fa fa-calendar-check-o" aria-hidden="true"></i>Add Stations to Bus Route</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="container-fluid dashboard-content">
+      <div class="card selectcard">
+        <form class="searchForm" [formGroup]="addBusrouteForm" (ngSubmit)="addBusroute()">
+          <div class="form-group">
+            <label class="pull-left">Route</label>
+            <select class="form-control" formControlName="bus_route_id" (change)="getBusroute(); ">
+              <option>select...</option>
+              <option *ngFor="let route of routes" value="{{route.bus_route_id}}">{{route.route_title}}</option>
+            </select>
+          </div>
+          <div class="form-group" *ngIf="user.role === 'admin'">
+            <label class="pull-left">Station</label>
+            <select class="form-control" formControlName="station_id">
+              <option>select...</option>
+              <option *ngFor="let st of stations" value="{{st.station_id}}">{{st.station_name}}</option>
+            </select>
+          </div>
+          <div class="form-group" *ngIf="user.role === 'admin'">
+            <label class="pull-left">Pickup Time</label>
+            <input class="form-control" formControlName="pickup_time" placeholder="Enter..." type="time">
+          </div>
+          <div class="form-group" *ngIf="user.role === 'admin'">
+            <label class="pull-left">Dropping Time</label>
+            <input class="form-control" formControlName="drop_time" placeholder="Enter..." type="time">
+          </div>
+          <div class="form-group pull-right" *ngIf="user.role === 'admin'">
+            <button type="submit" class="button button1 hvr-pop transition">Add Station</button>
+          </div>
+        </form>
+      </div>
+      <div class="card listcard">
+        <div class="searchForm">
+          <div class="table-responsive">
+            <table style="width:100%;">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Station</th>
+                  <th>Pic-up Time</th>
+                  <th>Drop Time</th>
+                  <th *ngIf="user.role === 'admin'">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let route of busroutes; let i = index;">
+                  <td>{{i+1}}</td>
+                  <td>{{route.station_id}}</td>
+                  <td>{{route.pickup_time}}</td>
+                  <td>{{route.drop_time}}</td>
+                  <td *ngIf="user.role === 'admin'">
+                      <button class="btn btn-default btn-xs" (click)="deleteBusroute(route.bus_route_id)"><img
+                          src="../../../assets/img/images/trashcan.png" width="16" height="16" alt=""></button>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

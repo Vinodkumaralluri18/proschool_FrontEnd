@@ -1,0 +1,118 @@
+<div class="login">
+
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form" [formGroup]="rigisterForm" (ngSubmit)="register()">
+
+                <div class="login100-form-title p-b-34 p-t-27">
+                    <img src="../../assets/images/high-school.png" width="80px" height="80px"
+                        style="top:0px;left:180px; position: relative;">
+                    <img src="../../assets/images/proSchool.png" width="300px" height="120px"
+                        style="top:60px;left:0px; position: relative;">
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="wrap-input100 form-group" [ngClass]="{'has-error' : rigisterForm.get('name').errors 
+                            && (rigisterForm.get('name').touched || rigisterForm.get('name').dirty)}">
+                            <input class="input100" type="text" formControlName="name" placeholder="School Name">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                            <span class="help-block" *ngIf="rigisterForm.get('name').errors 
+          && (rigisterForm.get('name').touched || rigisterForm.get('name').dirty)">
+                                <span *ngIf="rigisterForm.get('name').errors.required">
+                                    School Name is required
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="wrap-input100 form-group" [ngClass]="{'has-error' : rigisterForm.get('email').errors 
+                            && (rigisterForm.get('email').touched || rigisterForm.get('email').dirty)}">
+                            <input class="input100" type="email" formControlName="email" placeholder="School Email">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                            <span class="help-block" *ngIf="rigisterForm.get('email').errors 
+          && (rigisterForm.get('email').touched || rigisterForm.get('email').dirty)">
+                                <span *ngIf="rigisterForm.get('email').errors.required">
+                                    School Email is required
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="wrap-input100 form-group" [ngClass]="{'has-error' : rigisterForm.get('phone').errors 
+                            && (rigisterForm.get('phone').touched || rigisterForm.get('phone').dirty)}">
+                            <input class="input100" type="number" formControlName="phone"
+                                placeholder="School Contact Number">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                            <span class="help-block" *ngIf="rigisterForm.get('phone').errors 
+          && (rigisterForm.get('phone').touched || rigisterForm.get('phone').dirty)">
+                                <span *ngIf="rigisterForm.get('phone').errors.required">
+                                    Contact Number is required
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="wrap-input100">
+                            <input class="input100" type="text" formControlName="branches"
+                                placeholder="Number of Branches">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                            <span class="help-block" *ngIf="rigisterForm.get('branches').errors 
+                            && (rigisterForm.get('branches').touched || rigisterForm.get('branches').dirty)">
+                                <span *ngIf="rigisterForm.get('branches').errors.required">
+                                    Branches is required
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="wrap-input100">
+                            <input class="input100" type="text" formControlName="website" placeholder="School Website">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="wrap-input100 form-group" [ngClass]="{'has-error' : rigisterForm.get('address').errors 
+                            && (rigisterForm.get('address').touched || rigisterForm.get('address').dirty)}">
+                            <textarea class="input100" formControlName="address"
+                                placeholder="School Address"></textarea>
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                            <span class="help-block" *ngIf="rigisterForm.get('address').errors 
+          && (rigisterForm.get('address').touched || rigisterForm.get('address').dirty)">
+                                <span *ngIf="rigisterForm.get('address').errors.required">
+                                    School Address required
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="wrap-input100">
+                            <input class="input100" type="file">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                    </div>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">
+                        Register
+                    </button>
+                    <button (click)="loginPage()" class="login100-form-btn" style="margin-left: 20px;">
+                        Go to Login Page
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

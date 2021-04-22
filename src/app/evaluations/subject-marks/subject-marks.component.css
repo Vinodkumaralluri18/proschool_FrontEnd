@@ -1,0 +1,37 @@
+.schedule_status {
+    margin-left: 30%;
+    margin-top: 20%;
+}
+
+.hor-progress-wrapper {
+    display: flex;
+}
+    
+.hor-progress-track {
+    height: 20px;
+    width: 700px;
+    margin: 0;
+    border-radius: 10px;
+    background-color: #F0F3F8;
+}
+    
+.hor-progress-filled {
+    content: "";
+    height: 100%;
+    display: block;
+    margin-top: auto;
+    background-color: #6186ed;
+    border-radius: 10px;
+}
+    
+.hor-progress-title{
+    display: inline-block;
+}
+
+._progress {
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    width: 70px;
+}
+

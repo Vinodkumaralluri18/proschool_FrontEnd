@@ -1,0 +1,11 @@
+.container {
+    text-align: center;
+}
+.event-center {
+    display: inline-block;
+}
+.noevents{
+    font-size: 15px;
+    font-weight: 700;
+    text-align: right;
+}

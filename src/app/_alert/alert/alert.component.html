@@ -1,0 +1,29 @@
+<!-- <div class="container" *ngIf = "!confirm_status">
+    <p class="alert-center">{{message}}</p>
+    <div class="form-group">
+        <button (click)="close()" class="button button1 hvr-pop transition">Ok</button>
+    </div>
+</div>
+
+<div class="container" *ngIf = "confirm_status">
+    <p class="alert-center">{{message}}</p>
+    <div class="form-group">
+        <button (click)="confirmation()" class="button button1 hvr-pop transition">Ok</button>
+        <button (click)="close()" class="button button1 hvr-pop transition">Cancel</button>
+    </div>
+</div> -->
+
+<div class="alert-wrapper" *ngIf="confirm_status">
+	<img src="../../../assets/images/alert-check-circle.svg">
+	<h1 class="alert-msg">{{message}}</h1>
+	<div class="small-underline"></div>
+    <button class="btn -cta active-tab" (click)="confirmation()">OK</button>
+    <button class="btn -cta active-tab" (click)="close()">Cancel</button>
+</div>
+
+<div class="alert-wrapper" *ngIf="!confirm_status">
+	<img src="../../../assets/images/alert-check-circle.svg">
+	<h1 class="alert-msg">{{message}}</h1>
+	<div class="small-underline"></div>
+	<button class="btn -cta active-tab" (click)="close()">OK</button>
+</div>

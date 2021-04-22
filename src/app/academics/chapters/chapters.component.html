@@ -1,0 +1,82 @@
+<main class="card mt-20 within-viewport new-listing">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-subject *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (subjectEvent)="receiveSubject($event)"></app-subject>
+        <app-teacher-subject *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (subjectEvent)="receiveSubject($event)"></app-teacher-subject>
+      </div>
+    </div>
+    <div class="add_div" *ngIf="user.role === 'admin'">
+      <input id="file-input" type="file" name="file" placeholder="Upload Bulk Data" (change)="chaptersUpload($event.target.files)"/>
+      <button class="btn -cta" (click)="addchapter()">Add Chapter</button>
+    </div>
+  </section>
+  <section class="table-and-pagination -classes-schedule">
+    <div class="table-container" *ngIf="chapters.length !== 0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th align="left">Chapter Name</th>
+            <th align="left">Chapter Code</th>
+            <th align="left">Total Topics</th>
+            <th align="left">Completed Topics</th>
+            <!-- <th align="left">Start</th>
+            <th align="left">End</th> -->
+            <th align="left">Status</th>
+            <th></th>
+            <th align="left" *ngIf="user.role === 'admin'">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let chap of chapters | pagination: pageNo; let i=index">
+            <td class="_s-no"><span>{{ page_start + i + 1 }}</span></td>
+            <td>{{chap.title}}</td>
+            <td>{{chap.chapter_code}}</td>
+            <td>{{chap.no_of_topics}}</td>
+            <td>{{chap.completed_topics}}</td>
+            <!-- <td>
+              <label class="switch">
+                <input type="checkbox" value="1" [checked]="chap.start_check" [disabled]="chap.start_disable"
+                  (click)="updateChapter('started', chap.lession_id, i)" />
+                <span class="slider start round"></span>
+              </label>
+            </td> -->
+            <!-- <td>
+              <label class="switch">
+                  <input type="checkbox" value="1" [checked]="chap.end_check" [disabled]="chap.end_disable"
+                  (click)="updateChapter('completed', chap.lession_id, i)" />
+                  <span class="slider end round"></span>
+              </label>
+            </td> -->
+            <td>
+              <div class="_chip -class-running" [ngStyle]="{'background-color': chap.lession_status === 'Pending' ? '#d9534f' : chap.lession_status === 'In Progress' ? '#6186ed' : chap.lession_status === 'Completed' ? '#5cb85c' : '#6186ed' , 'color': '#FFFFFF' }">{{chap.lession_status}}</div>
+            </td>
+            <td (click)="View(i, 'teaching')">
+              <div class="hor-progress-wrapper">
+                  <div class="hor-progress-track">
+                      <span class="hor-progress-filled" 
+                      [ngStyle]="{'width': chap.completion_percentage + '%', 'background-color': '#5cb85c' }"></span>
+                  </div>
+                  <span class="hor-progress-title">{{chap.completion_percentage}} %</span>
+              </div>
+            </td>
+            <td class="_actions" *ngIf="user.role === 'admin'">
+              <button class="btn" (click)="editchapter(page_start + i)"><img src="../../../assets/images/edit-white.svg" alt="Edit" /></button>
+              <button class="btn" (click)="deleteConfirmation(chap.lession_id)"><img src="../../../assets/images/trash-white.svg" alt="Delete" /></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="no-data" *ngIf="chapters.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Chapters for this Subject</h1>
+    </div>
+    <div class="_pagination" *ngIf="chapters.length !== 0">
+      <a class="btn -previous" (click)="previousPage()">Previous</a>
+      <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}" *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+      <a class="btn -next" (click)="nextPage()">Next</a>
+    </div>
+  </section>
+</main>

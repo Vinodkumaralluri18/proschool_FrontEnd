@@ -1,0 +1,40 @@
+<div id="main-content">
+
+    <div class="row">
+        <div class="container-fluid" id="buttonId1">
+            <button routerLink="/main/reports/evaluationreports" class="button button2 hvr-bounce-in transition">Report By
+                Exam</button>
+            <button routerLink="/main/reports/subjectreports" class="button button2 hvr-bounce-in transition">Report By
+                Subject</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="container-fluid dashboard-content">
+            <div class="card selectcard">
+                <app-schedule (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (scheduleEvent)="receiveSchedule($event)"></app-schedule>
+              
+                <div class="searchForm">
+                    <div class="form-group">
+                        <label class="pull-left">Subject</label>
+                        <select class="form-control" [(ngModel)]="selected_subject" (change)="get_chart($event)">
+                            <option>select...</option>
+                            <option *ngFor="let sub of subjects; let i = index" value="{{sub.subject_id}}">{{sub.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card listcard">
+                <div class="pull-left">
+                    <h4>Add Marks</h4>
+                </div>
+                <div class="searchForm">
+                    <canvas baseChart [data]="chartData" [labels]="chartLabels" [options]="chartOptions"
+                        [legend]="chartLegend" [chartType]="chartType"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

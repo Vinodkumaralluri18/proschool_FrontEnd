@@ -1,0 +1,29 @@
+<form role="form" [formGroup]="paymentForm" (ngSubmit)="editPayment()">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 id="heading">Edit Payment</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="pull-left">Payment Paid</label>
+                <input class="form-control" value="{{payments.payment}}" formControlName="payment"
+                    placeholder="Enter..." type="number">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label class="pull-left">Payment Date</label>
+                <input class="form-control" value="{{payments.payment_date}}" formControlName="payment_date"
+                    placeholder="Enter..." type="date">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="button button1 hvr-pop transition pull-right">Submit</button>
+        <div (click)="close()" class="button button1 hvr-pop transition pull-left">Close</div>
+    </div>
+</form>

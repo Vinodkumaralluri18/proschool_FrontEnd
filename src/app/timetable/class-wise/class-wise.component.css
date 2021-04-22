@@ -1,0 +1,335 @@
+.dropbtn {
+    background-color: #E9EEF7;
+}
+
+table tr:first-child th:first-child {
+    border-top-left-radius: 20px;
+}
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 20px;
+}
+table{
+    width: 100%;
+}
+thead{
+    background-color: #F9FAFC;
+}
+.timetable{
+    padding: 15px 15px;
+}
+.timetable th{
+    padding: 10px 0px 10px 20px;
+}
+.tablehead{
+    padding: 10px;
+}
+.trdivider{
+    border-bottom: solid 2px #F9FAFC;
+}
+.trdivider td{
+    padding: 20px 20px;
+}
+.imgDiv{
+    display: flex;
+}
+.imgDiv img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+}
+.text{
+    padding-left: 10px;
+}
+.headtext{
+    font-size: 12px;
+    font-weight: bold;
+}
+.subtext{
+    font-size: 10px;
+    color: grey;
+}
+.subtexth{
+    font-size: 12px;
+    color: grey;
+}
+.timebtn{
+    padding: 5px;
+    background-color: #FDEFEB;
+    border-radius: 4px;
+    text-align: center;
+}
+.bclr{
+    background-color: #F8F9FB;
+}
+.sbclr{
+    background-color: #E9F6FF;
+    margin-bottom: 2px;
+}
+.txt{
+    font-size: 12px;
+    font-weight: 600;
+}
+td{
+    width: 50px;
+}
+
+.timetable-chart {
+    margin: 30px 0;
+}
+
+.timetable-chart table {
+    border-collapse: inherit;
+}
+
+.timetable-chart table tr:first-child th:first-child {
+    border-top-left-radius: 0px;
+    
+}
+
+.timetable-chart table tr:first-child th:last-child { 
+    border-top-right-radius: 0px;
+}
+
+.timetable-chart thead th {
+    color: #888;
+    text-align: center;
+}
+
+.timetable-chart thead th,
+.timetable-chart tbody td {
+    border: 1px solid #eee;
+    padding: 10px;
+    position: relative;
+}
+
+.timetable-chart tbody tr:first-child > td {
+    padding-top: 10px;
+}
+
+td.time-specifiation span {
+    font-weight: 600;
+    display: inline-block;
+    width: 100px;
+}
+
+.edit-time-row-btn {
+    position: absolute;
+    right: 10px;
+    font-size: 14px;
+    color: #888;
+}
+
+.edit-time-row-btn:before {
+    content: url('../../../assets/images/edit-pencil.svg');
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.subject-spec, .class-section-spec {
+    margin: 0;
+}
+
+.row-content-title {
+    color: #888;
+    font-size: 11px;
+    font-weight: 400;
+    display: block;
+}
+
+.row-content-value {
+    color: #000;
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+}
+
+.row-content-detail {
+    position: absolute;
+    visibility: hidden;
+    height: 250px;
+    width: 200px;
+    background: #fff;
+    top: 101%;
+    left: 0;
+    z-index: 90;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 30px 1px rgba(224,224,224,1);
+    -moz-box-shadow: 0px 0px 30px 1px rgba(224,224,224,1);
+    box-shadow: 0px 0px 30px 1px rgba(224,224,224,1);
+}
+
+.row-content-detail p {
+    margin: 10px;
+}
+
+.row-content-detail-title {
+    margin: 0 !important;
+    padding: 10px;
+    color: #888;
+    border-bottom: 0.5px solid #888;
+}
+
+.teacher-spec {
+    padding: 10px;
+}
+
+.teacher-spec-text {
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
+}
+
+.teacher-img-wrapper {
+    height: 50px;
+    display: inline-block;
+    width: 50px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.teacher-img-wrapper img {
+    width: 100%;
+}
+
+.delete-schedule-btn {
+    float: right;
+    font-size: 12px;
+    color: red;
+    outline: none;
+}
+
+.delete-schedule-btn:before {
+    content: url('../../../assets/images/trash-red.svg');
+    margin-right: 5px;
+    display: inline-block;
+}
+
+td.time-specifiation {
+    width: 150px;
+}
+
+.schedule-box,
+.empty-schedule-box {
+    cursor: pointer;
+    width: 130px;
+}
+
+td.schedule-box:hover:before,
+td.empty-schedule-box:hover:before {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 15px solid #5E81F4;
+    border-right: 15px solid transparent;
+    display: inline-block;
+    top: 0;
+    left: 0;
+    content: " ";
+}
+
+.schedule-box:hover .row-content-detail {
+    visibility: visible;
+}
+
+.empty-schedule-box {
+    text-align: center;
+}
+
+.empty-schedule-box button {
+    /* border: 1px solid #5E81F4; */
+    font-size: 15px;
+    border-radius: 5px;
+    color: #5E81F4;
+    background-color: #fff;
+}
+
+.empty-schedule-box button:first-child:hover {
+    color: #FFFFFF;
+    background-color: #5E81F4;
+}
+
+.empty-schedule-box button:first-child {
+    margin-bottom: 5px;
+    border: 1px solid #5E81F4;
+    color: #5E81F4;
+}
+
+.empty-schedule-box button:nth-child(2) {
+    border: 1px solid #e56761;
+    color: #e56761;
+}
+
+.empty-schedule-box button:nth-child(2):hover {
+    color: #FFFFFF;
+    background-color: #e56761;
+}
+
+main.card.mt-20.within-viewport {
+    height: auto;
+}
+
+.last-row-time-specifiation {
+    font-weight: 600;
+    position: relative;
+}
+
+.last-row-time-specifiation p {
+    margin: 0;
+}
+
+.last-row-timestamp {
+    display: inline-block;
+    padding: 3px;
+    color: #000;
+    font-weight: 600;
+    border: 1px solid #888;
+    border-radius: 3px;
+    line-height: 13px;
+    font-size: 13px;
+    width: 40px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.blue-arrow {
+    color: #5E81F4;
+}
+
+.last-row-save-btn {
+    position: absolute;
+    right: 5px;
+    top: 35%;
+    width: 45px;
+    height: 20px;
+    font-size: 12px;
+    border-radius: 10px;
+    color: #fff;
+    background-color: #5E81F4;
+}
+
+.hollow-btn, 
+.solid-btn {
+    height: 35px;
+    border: 1px solid #5E81F4;
+    color: #5E81F4;
+    font-size: 14px;
+    border-radius: 18px;
+    padding: 5px 20px;
+    margin-right: 20px;
+}
+
+.solid-btn {
+    color: #fff !important;
+    background-color: #5E81F4 !important;
+    width: 100px;
+    font-weight: 600;
+}
+
+.btn-plus-icon:before {
+    display: inline-block;
+    content: url('../../../assets/images/plus.svg');
+    height: 18px;
+    vertical-align: text-bottom;
+}

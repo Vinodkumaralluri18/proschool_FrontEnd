@@ -1,0 +1,121 @@
+<div class="header-content">
+  <div class="page-title-and-time">
+    <div class="_page-title">{{selectActiveModule()}}</div>
+    <div class="_time"><!-- Monday, 21 April 2020, 12:21 PM -->
+      {{weekday[today.getDay()]}}, {{today.getDate()}} {{months[today.getMonth()]}} {{today.getFullYear()}}, 
+      {{now}} 
+    </div>
+  </div>
+  <div class="account">
+    <button type="button" class="_actions-trigger" aria-expanded="false">
+      <img src="../../../assets/images/man2.jpg" alt="Your account">
+    </button>
+    <div class="_profile-and-actions">
+      <div class="_profile">
+        <img *ngIf="user.role === 'teacher'" src="{{employeeservice.profileImage}}" alt="" class="_pic" (click) = "goToProfile('teacher')">
+        <img *ngIf="user.role === 'admin'" src="{{employeeservice.schoolprofileImage}}" alt="" class="_pic" (click) = "goToProfile('admin')">
+        <div *ngIf="user.role === 'teacher'" class="_name">{{employeeservice.profile_name}}</div>
+        <div *ngIf="user.role === 'admin'" class="_name">{{employeeservice.schoolprofile_name}}</div>
+      </div>
+      <div class="_actions">
+        <a class="_item" (click)="viewMailBox = !viewMailBox; viewNotifications = false;">
+          <span class="_icon">
+            <img src="../../../assets/images/message-square@3x.png" alt="Messages">
+          </span>
+          <span class="message-count-bubble" *ngIf="unread_messages > 0">{{unread_messages}}</span>
+          <span class="_text">Messages</span>
+        </a>
+        <a class="_item" (click)="viewNotifications = !viewNotifications; viewMailBox = false;">
+          <span class="_icon">
+            <img src="../../../assets/images/bell@3x.png" alt="Notifications">
+          </span>
+          <span class="notification-count-bubble" *ngIf="unread_notifications > 0">{{unread_notifications}}</span>
+          <span class="_text">Notifications</span>
+        </a>
+        <a href="" class="_item" (click)="logout()">
+          <span class="_icon">
+            <img src="../../../assets/images/log-out@3x.png" alt="Logout">
+          </span>
+          <span class="_text">Logout</span>
+        </a>
+
+        <div class="notification-box-wrapper" *ngIf="viewNotifications">
+          <div class="notification" *ngFor="let not of notifications; let i = index">
+            <div (click)="openNotification(i); ">
+              <div class="notification-icon"><img src="{{url + not.employeeImage}}"></div>
+              <p class="notification-timespan">{{not.notification_by}}</p>
+              <a class="notification-title">{{not.subject}}</a>
+            </div>
+          </div>
+          <!-- <div class="notification red-alert">
+            <div class="notification-icon"><img src="../../../assets/images/alert-triangle-red.svg"></div>
+            <p class="notification-timespan">4 Feb, 2020</p>
+            <a class="notification-title">In bread to of the future.</a>
+          </div>
+          <div class="notification green-alert ">
+            <div class="notification-icon"><img src="../../../assets/images/alert-circle-green.svg"></div>
+            <p class="notification-timespan">Today</p>
+            <a class="notification-title">The although systems.</a>
+          </div>
+          <div class="notification red-alert">
+            <div class="notification-icon"><img src="../../../assets/images/alert-triangle-red.svg"></div>
+            <p class="notification-timespan">4 Feb, 2020</p>
+            <a class="notification-title">Name respective notch.</a>
+          </div>
+          <div class="notification">
+            <div class="notification-icon"><img src="../../../assets/images/man2.jpg"></div>
+            <p class="notification-timespan">Yesterday</p>
+            <a class="notification-title">John smith sent you a file to the on your drive.</a>
+          </div>
+          <div class="notification red-alert">
+            <div class="notification-icon"><img src="../../../assets/images/alert-triangle-red.svg"></div>
+            <p class="notification-timespan">4 Feb, 2020</p>
+            <a class="notification-title">Name respective notch.</a>
+          </div> -->
+          <button class="notification-view-all-btn" routerLink='/main/main/admin/notifications'>See All Notification</button>
+        </div>
+
+        <div class="mail-box-wrapper" *ngIf="viewMailBox">
+          <div class="mail sender-online" *ngFor="let msg of messages; let j = index" (click)="openMessage(j)">
+            <div class="mail-sender-icon"><img src="../../../assets/images/man2.jpg"></div>
+            <p class="mail-sender-name">{{msg.sender_name}}</p>
+            <p class="mail-content"><span class="you-sender-title">You:&nbsp;</span>{{msg.message}}</p>
+            <button class="mail-reply-btn">Reply</button>
+          </div>
+          <!-- <div class="mail">
+            <div class="mail-sender-icon"><img src="../../../assets/images/man2.jpg"></div>
+            <p class="mail-sender-name">Carley</p>
+            <p class="mail-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi u.</p>
+            <button class="mail-reply-btn">Reply</button>
+          </div>
+          <div class="mail">
+            <div class="mail-sender-icon"><img src="../../../assets/images/man2.jpg"></div>
+            <p class="mail-sender-name">Annalise</p>
+            <p class="mail-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi u.</p>
+            <button class="mail-reply-btn">Reply</button>
+          </div>
+          <div class="mail">
+            <div class="mail-sender-icon"><img src="../../../assets/images/man2.jpg"></div>
+            <p class="mail-sender-name">Stephanie</p>
+            <p class="mail-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi u.</p>
+            <button class="mail-reply-btn">Reply</button>
+          </div>
+          <div class="mail">
+            <div class="mail-sender-icon"><img src="../../../assets/images/man2.jpg"></div>
+            <p class="mail-sender-name">Milton</p>
+            <p class="mail-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi u.</p>
+            <button class="mail-reply-btn">Reply</button>
+          </div>
+          <div class="mail">
+            <div class="mail-sender-icon"><img src="../../../assets/images/man2.jpg"></div>
+            <p class="mail-sender-name">Cassidy</p>
+            <p class="mail-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi u.</p>
+            <button class="mail-reply-btn">Reply</button>
+          </div> -->
+          <button class="message-view-all-btn" routerLink='/main/main/admin/messages'>See All Messages</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

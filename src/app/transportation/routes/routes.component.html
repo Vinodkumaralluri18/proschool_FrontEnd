@@ -1,0 +1,65 @@
+<div id="main-content">
+  <div class="row" *ngIf="user.role === 'admin'">
+    <div class="container-fluid" id="buttonId1">
+      <button routerLink="/main/transportation/routes" class="button button2 hvr-pop transition"><i
+          class="fa fa-calendar-plus-o" aria-hidden="true"></i>Add Bus Route</button>
+      <button routerLink="/main/transportation/addroute" class="button button2 hvr-pop transition"><i
+          class="fa fa-calendar-check-o" aria-hidden="true"></i>Add Stations to Bus Route</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="container-fluid dashboard-content">
+      <div class="card selectcard">
+        <form class="searchForm" [formGroup]="routeForm" (ngSubmit)="addRoute()">
+          <div class="form-group">
+            <label class="pull-left">Route Title</label>
+            <input class="form-control" formControlName="route_title" placeholder="Enter..." type="text">
+          </div>
+          <div class="form-group">
+            <label class="pull-left">Vehicle</label>
+            <select class="form-control" formControlName="vehicle_number">
+              <option>select...</option>
+              <option *ngFor="let veh of vehicles" value="{{veh.vehicle_number}}">{{veh.vehicle_name}}</option>
+            </select>
+          </div>
+          <div class="form-group pull-right">
+            <button type="submit" class="button button1 hvr-pop transition">Add Bus Route</button>
+          </div>
+        </form>
+      </div>
+      <div class="card listcard">
+        <div class="searchForm">
+          <div class="table-responsive">
+            <table style="width:100%;">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Route Title</th>
+                  <th>Vehicle Code</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let route of collection.routes| paginate: config; let i=index">
+                  <td>{{ (config.currentPage - 1) * config.itemsPerPage + i +1 }}</td>
+                  <td>{{route.route_title}}</td>
+                  <td>{{route.vehicle_number}}</td>
+                  <td>
+                        <div class="pattrenED">
+                          <div><i class="fa fa-pencil-square" aria-hidden="true" (click)="editRoute(i)"></i></div>
+                          <div><i class="fa fa-trash" aria-hidden="true" (click)="deleteRoute(route.bus_route_id)"></i></div>
+                        </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="paginationdiv">
+              <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

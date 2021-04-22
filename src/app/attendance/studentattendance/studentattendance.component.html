@@ -1,0 +1,62 @@
+<main id="main-content" class="card1 mt-20 within-viewport attendance-wrapper">
+  
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <!-- <app-subject *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (subjectEvent)="receiveSubject($event)"></app-subject>
+        <app-teacher-subject *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)" (subjectEvent)="receiveSubject($event)"></app-teacher-subject> -->
+        
+        <app-class *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-class>
+        <app-teacher-class *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-teacher-class>
+        <div class="dropdown">
+          <input type="date" [(ngModel)]="date" (change)="getDate()">
+        </div>
+        <div class="dropdown" >
+          <button class="dropbtn" (click)="showSubjectList = true" (clickOutside)="showSubjectList = false">
+              {{!selected_subject.subject_name ? 'select subject' : selected_subject.subject_name}}
+          </button>
+          <div class="dropdown-content" [hidden]="!showSubjectList">
+            <a *ngFor="let sub of subjects; let i = index"
+            (click)="selected_subject = sub; get_sub()">{{sub.subject_name}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button (click)="addAttendance()" class="btn -cta">Submit</button>
+  </section>
+
+  <section class="table-and-pagination -classes-schedule">
+    <div class="attendance-filter-group" *ngIf="students.length !== 0">
+      <button type="submit" class="btn-attendance-filter bg-green"
+        (click)="allAttendance('Present')">Present</button>
+      <button type="submit" class="btn-attendance-filter bg-red"
+        (click)="allAttendance('Absent')">Absent</button>
+      <button type="submit" class="btn-attendance-filter bg-yellow" (click)="allAttendance('On Leave')">On
+        Leave</button>
+    </div>
+
+    <div class="attendance-card-group" *ngIf="students.length !== 0">
+      <div class="attendance-student-card" *ngFor="let std of students; let i = index;">
+        <div class="attprofpic">
+          <img src="{{url + std.studentImage.imageSrc}}" alt="">
+        </div>
+        <div>
+          <div class="nameroll">{{std.first_name}} {{std.last_name}}</div>
+          <div class="nameroll roll-text">Roll no: {{std.roll_no}}</div>
+        </div>
+        <div class="attreport">
+          <div class="attreportbtn" (click)="submit(i, 'Present')"
+            [ngClass]="{'present-select': std.status === 'Present', 'present': std.status !== 'Present'}"><span>P</span></div>
+          <div class="attreportbtn" (click)="submit(i, 'Absent')"
+            [ngClass]="{'absent-select': std.status === 'Absent', 'absent': std.status !== 'Absent'}"><span>A</span></div>
+          <div class="attreportbtn" (click)="submit(i, 'On Leave')"
+            [ngClass]="{'leave-select': std.status === 'On Leave', 'leave': std.status !== 'On Leave'}"><span>L</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="no-data" *ngIf="students.length === 0">
+      <img src="../../../assets/images/Nodata.png" alt="">
+      <h1 class="no-data-text">There are No Students in this Class</h1>
+    </div>
+  </section>
+</main>

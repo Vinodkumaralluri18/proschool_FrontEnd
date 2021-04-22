@@ -1,0 +1,17 @@
+<form class="searchForm" [formGroup]="routeForm" (ngSubmit)="submitRoute()">
+    <div class="form-group">
+        <label class="pull-left">Route Title</label>
+        <input class="form-control" value="{{route.route_title}}" formControlName="route_title" placeholder="Enter..." type="text">
+    </div>
+    <div class="form-group">
+        <label class="pull-left">Vehicle</label>
+        <select class="form-control" formControlName="vehicle_number">
+            <option>select...</option>
+            <option *ngFor="let veh of vehicles" value="{{veh.vehicle_number}}">{{veh.vehicle_name}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="button button1 hvr-pop transition pull-right">Submit</button>
+        <div (click)="close()" class="button button1 hvr-pop transition pull-left">Close</div>
+    </div>
+</form>

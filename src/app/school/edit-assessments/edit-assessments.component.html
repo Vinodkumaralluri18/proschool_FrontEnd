@@ -1,0 +1,177 @@
+<div *ngIf="dialog_type === 'examination_pattern'">
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h3 class="add_notice_heading" *ngIf="submit_type === 'add'">Add Examination Pattern</h3>
+    <h3 class="add_notice_heading" *ngIf="submit_type === 'edit'">Edit Examination Pattern</h3>
+    <form class="scroll dialog_content" role="form" [formGroup]="exampatternForm" (ngSubmit)="submitExampattern()">
+        <div class="col-md-12">
+            <div class="col-md-12 col-xs-12">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="add-notice-label_name" for="school-name-input">Assessment Type :</label>
+                            <select class="form-control add_notice_input" formControlName="assessment_type"
+                                [value]="examination_pattern.assessment_type">
+                                <option>select...</option>
+                                <option value="Formattive/Submittive">Formattive/Submittive</option>
+                                <option value="Units/Semesters">Units/Semesters</option>
+                                <option value="Internals/Externals">Internals/Externals</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <label class="add-notice-label_name" for="nexamination_title">Examination Title :</label>
+                        <input class="form-control add_notice_input" type="text" id="examination_title"
+                            value="{{examination_pattern.examination_title}}" formControlName="examination_title">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div class="form-group">
+                            <label class="add-notice-label_name" for="no_of_assessments">No of Assessments :</label>
+                            <input type="text" class="form-control add_notice_input" id="no_of_assessments"
+                                value="{{examination_pattern.no_of_assessments}}" formControlName="no_of_assessments">
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6 col-xs-12">
+                        <div class="form-group" *ngIf="submit_type == 'edit'">
+                            <label class="add-notice-label_name" for="no_of_assessments">No of Assessments :</label>
+                            <input type="text" class="form-control add_notice_input" id="no_of_assessments"
+                                value="{{examination_pattern.no_of_assessments}}" formControlName="no_of_assessments"
+                                disabled>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-md-12 col-xs-12">
+                <div class="row">
+                    <div class="col-md-12 col-xs-12" *ngIf="submit_type == 'add'">
+                        <label class="add-notice-label_name" for="nexamination_title">Select Classes :</label>
+                        <ng-multiselect-dropdown [data]="classes" formControlName="classes"
+                            [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="vertical-space3"></div>
+            <div class="row center">
+                <div class="col-md-3 pull-right">
+                    <button class="btn -cta active-tab" type="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+
+<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type === 'assessment_pattern'">
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+    <!-- <div class="row">
+        <div class="col-full-3">
+            <select [(ngModel)]="assp.assessment_mode">
+                <option>select...</option>
+                <option value="Online">Online</option>
+                <option value="Written">Written</option>
+                <option value="Oral">Oral</option>
+            </select>
+        </div>
+    </div> -->
+
+    <div class="row" *ngFor="let assp of assessment_patterns">
+        <div class="col-md-12 col-xs-12">
+            <!-- <div class="col-md-3 col-xs-12">
+                <label class="add-notice-label_name mobile-view-visible" for="no_of_assessments">Assessment Title :</label>
+                <input type="text" class="form-control add_notice_input" id="no_of_assessments" value="{{assp.Assesment}}"
+                            formControlName="no_of_assessments">
+            </div> -->
+            <div class="col-md-3 col-xs-12">
+                <label class="add-notice-label_name mobile-view-visible" for="no_of_assessments">Assessment Title
+                    :</label>
+                <input type="text" class="inpbox" [(ngModel)]="assp.Assessment">
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <label class="add-notice-label_name mobile-view-visible" for="no_of_assessments">Assesment Mode
+                    :</label>
+                <select [(ngModel)]="assp.assessment_mode">
+                    <option>select...</option>
+                    <option value="Online">Online</option>
+                    <option value="Written">Written</option>
+                    <option value="Oral">Oral</option>
+                </select>
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <label class="add-notice-label_name mobile-view-visible" for="no_of_assessments">Max Marks :</label>
+                <input type="number" class="inpbox" [(ngModel)]="assp.max_marks">
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="vertical-space3"></div>
+
+    </div>
+
+    <div class="row">
+        <!-- <div class="col-md-3 col-xs-6">
+            <button class="btn -cta active-tab" (click)="addAssessment()">Add New</button>
+        </div> -->
+        <div class="col-md-3 col-xs-6 pull-right">
+            <button class="btn -cta active-tab" type="submit" (click)="submitAssessmentpattern()">Submit</button>
+        </div>
+    </div>
+</div>
+
+<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type === 'pattern'">
+    <div class="header-wrapper">
+        <p *ngIf="submit_type === 'add'">Add Assessment Pattern</p>
+        <p *ngIf="submit_type === 'edit'">Edit Assessment Pattern</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form class="form-inline" role="form" [formGroup]="asspatternForm" (ngSubmit)="addPattern()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Assessment Title :
+            </div>
+            <div class="col-full-6">
+                <input type="text" class="inpbox" formControlName="Assessment">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Assessment Mode :
+            </div>
+            <div class="col-full-6">
+                <select formControlName="assessment_mode">
+                    <option>select...</option>
+                    <option value="Online">Online</option>
+                    <option value="Written">Written</option>
+                    <option value="Oral">Oral</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Max Marks :
+            </div>
+            <div class="col-full-6">
+                <input type="number" class="inpbox" formControlName="max_marks">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

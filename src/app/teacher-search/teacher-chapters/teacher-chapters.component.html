@@ -1,0 +1,52 @@
+<!-- <select name="standard" [(ngModel)]="selected_class" (change)="getTeacherSections()">
+    <option *ngFor="let cls of classes" value="{{cls.class_id}}">{{cls.name}}</option>
+</select>
+<select name="section" [(ngModel)]="selected_section" (change)="getTeacherSubjects()">
+    <option *ngFor="let sec of class_sections; let i = index" value="{{sec.section_id}}">{{sec.name}}</option>
+</select>
+<select name="section" [(ngModel)]="selected_subject" (change)="getChapters()">
+    <option *ngFor="let sub of subjects; let i = index" value="{{sub.subject_id}}">{{sub.name}}</option>
+</select>
+<select name="section" [(ngModel)]="selected_chapter" (change)="get_sub()">
+    <option *ngFor="let ch of chapters; let i = index" value="{{ch.lession_id}}">{{ch.title}}</option>
+</select> -->
+
+<div class="dropdown" >
+	<button class="dropbtn" (click)="showClassList = true" (clickOutside)="showClassList = false">
+  		{{!selected_class.name ? 'select class' : selected_class.name}}
+ 	</button>
+	<div class="dropdown-content" [hidden]="!showClassList">
+		<a *ngFor="let cls of classes"
+		(click)="selected_class = cls; getTeacherSections();">{{cls.name}}</a>
+	</div>
+</div>
+
+<div class="dropdown" >
+	<button class="dropbtn" (click)="showSectionList = true" (clickOutside)="showSectionList = false">
+  		{{!selected_section.name ? 'select section' : selected_section.name}}
+	</button>
+	<div class="dropdown-content" [hidden]="!showSectionList">
+		<a *ngFor="let sec of class_sections; let i = index"
+		(click)="selected_section = sec; getTeacherSubjects()">{{sec.name}}</a>
+	</div>
+</div>
+
+<div class="dropdown" >
+	<button class="dropbtn" (click)="showSubjectList = true" (clickOutside)="showSubjectList = false">
+  		{{!selected_subject.name ? 'select subject' : selected_subject.name}}
+	</button>
+	<div class="dropdown-content" [hidden]="!showSubjectList">
+		<a *ngFor="let sub of subjects; let i = index"
+		(click)="selected_subject = sub; getChapters();">{{sub.name}}</a>
+	</div>
+</div>
+
+<div class="dropdown" >
+	<button class="dropbtn" (click)="showChapterList = true" (clickOutside)="showChapterList = false">
+  		{{!selected_chapter.title ? 'select chapter' : selected_chapter.title}}
+	</button>
+	<div class="dropdown-content" [hidden]="!showChapterList">
+		<a *ngFor="let ch of chapters; let i = index"
+		(click)="selected_chapter = ch; get_sub();">{{ch.title}}</a>
+	</div>
+</div>

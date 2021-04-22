@@ -1,0 +1,84 @@
+<main class="card mt-20 within-viewport new-listing">
+    <section class="page-actions">
+        <div class="_select-or-search">
+            <div class="_select-group">
+                <app-class *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)"
+                    (sectionEvent)="receiveSection($event)"></app-class>
+            </div>
+            <input type="search" class="search-box" [(ngModel)]="searchText" placeholder="Search for Student">
+        </div>
+        <!-- <div class="add_div">
+            <button class="btn -cta" (click)="addStudent()">Add Student</button>
+        </div> -->
+
+    </section>
+    <section class="table-and-pagination -classes-schedule">
+        <div class="table-container" *ngIf="students.length !== 0">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Roll</th>
+                        <th align="left">Student Name</th>
+                        <th align="left">Father/Guardian Name</th>
+                        <th align="left">Roll No</th>
+                        <th align="left">Payment Mode</th>
+                        <th align="left" *ngIf="user.role === 'admin'">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let std of students | search : searchText | pagination: pageNo; let i=index">
+                        <td class="_s-no"><span>{{ page_start + i + 1 }}.</span></td>
+                        <td align="left"><a
+                                routerLink="/main/main/studentprofile/profile/{{std.student_id}}/{{std.section_id}}">{{std.first_name}}
+                                {{std.last_name}}</a></td>
+                        <td>{{std.father_name}}</td>
+                        <td>{{std.roll_no}}</td>
+                        <td>
+                            <!-- <select class="form-control" [(ngModel)]="std.payment_mode">
+                                <option>select...</option>
+                                <option *ngFor="let fee of fee_installments" value="{{fee.installment_type}}">
+                                    {{fee.installment_type}}</option>
+                            </select> -->
+
+                            <select class="form-control" [(ngModel)]="std.payment_mode">
+                                <option value="termwise">Termwise</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="quarterly">Quarterly</option>
+                                <option value="halfyearly">Halfyearly</option>
+                                <option value="annually">Annually</option>
+                            </select>
+                            <button class="btn -cta btn-list"
+                                (click)="addPaymentMode(std.student_id, std.payment_mode, std.phone, std.email)">Submit</button>
+                        </td>
+                        <!-- <td>
+                            <div class="dropdown">
+                                <button class="dropbtn" (click)="showPaymentList = true" (clickOutside)="showPaymentList = false">
+                                    {{!std.payment_mode ? 'select Mode' : std.payment_mode}}
+                                </button>
+                                <div class="dropdown-content" [hidden]="!showPaymentList">
+                                    <a (click)="std.payment_mode = 'termwise';">Termwise</a>
+                                    <a (click)="std.payment_mode = 'monthly';">Monthly</a>
+                                    <a (click)="std.payment_mode = 'quarterly';">Quarterly</a>
+                                    <a (click)="std.payment_mode = 'halfyearly';">Halfyearly</a>
+                                    <a (click)="std.payment_mode = 'annually';">Annually</a>
+                                </div>
+                            </div>
+                        </td> -->
+                        <td><button class="btn -cta btn-list" routerLink="/main/main/fee/collectfee/{{std.student_id}}">Student Fee</button></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="no-data" *ngIf="students.length === 0">
+            <img src="../../../assets/images/Nodata.png" alt="">
+            <h1 class="no-data-text">There are No Students for this Class</h1>
+          </div>
+        <div class="_pagination" *ngIf="students.length !== 0">
+            <a class="btn -previous" (click)="previousPage()">Previous</a>
+            <a class="btn" [ngClass]="{'-current': pageNo === (i+1)}"
+                *ngFor='let page of page_counter(pages) ;let i = index' (click)="pageChange(i+1)">{{i+1}}</a>
+            <a class="btn -next" (click)="nextPage()">Next</a>
+        </div>
+    </section>
+</main>

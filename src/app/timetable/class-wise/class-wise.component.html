@@ -1,0 +1,84 @@
+<main class="card mt-20 within-viewport">
+  <section class="page-actions">
+    <div class="_select-or-search">
+      <div class="_select-group">
+        <app-class *ngIf="user.role === 'admin'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-class>
+        <app-teacher-class *ngIf="user.role === 'teacher'" (classEvent)="receiveClass($event)" (sectionEvent)="receiveSection($event)"></app-teacher-class>
+      </div>
+    </div>
+    <div class="add_div">
+    </div>
+  </section>
+
+
+  <section class="table-container timetable-chart">
+    <table cellspacing="0" class="_task-list">
+      <thead>
+        <tr>
+          <th></th>
+          <th align="left">Mon</th>
+          <th align="left">Tue</th>
+          <th align="left">Wed</th>
+          <th align="left">Thu</th>
+          <th align="left">Fri</th>
+          <th align="left">Sat</th>
+          <th align="left">Sun</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="_task" *ngFor="let schedule of timetable; let i = index">
+          <td class="time-specifiation">
+            <span>{{schedule.start_time}} - {{schedule.end_time}}</span>
+            <button class="edit-time-row-btn" (click)="editTimeslot(i)" *ngIf="user.role === 'admin'">Edit</button>
+          </td>
+          <td *ngFor="let tim of schedule.schedule; let j = index">
+            <div class="schedule-box" *ngIf="tim.name !== 'No Data'">
+              <p class="subject-spec">
+                <span class="row-content-value">{{tim.name}}</span>
+              </p>
+              <p class="class-section-spec">
+                <span class="row-content-value">{{tim.teacher_name}}</span>
+              </p>
+
+              <div class="row-content-detail">
+                <p class="row-content-detail-title">More details</p>
+                <p>
+                  <span class="row-content-title">Subject</span>
+                  <span class="row-content-value">{{tim.name}}</span>
+                </p>
+
+                <div class="teacher-spec">
+                  <span class="teacher-img-wrapper"><img src="{{url + tim.employee_image}}"></span>
+                  <p class="teacher-spec-text">
+                    <span class="row-content-title">Teacher</span>
+                    <span class="row-content-value">{{tim.teacher_name}}</span>
+                  </p>
+                </div>
+
+                <button class="delete-schedule-btn" *ngIf="user.role === 'admin'" (click)="deleteSchedule(tim.timetable_id)">Delete Schedule</button>
+              </div>
+            </div>
+            <!-- <div class="empty-schedule-box" *ngIf="tim.name !== 'No Data' && tim.room_no === 'Holiday'">
+              <div class="holiday-schedule-wrapper">
+                <button>Holiday</button>
+              </div>
+            </div> -->
+            <div class="empty-schedule-box" *ngIf="tim.name === 'No Data'">
+              <div class="add-in-empty-schedule-wrapper">
+                <button (click)="addSchedule(i, j)" *ngIf="user.role === 'admin'">Add Subject</button>
+                <!-- <button (click)="markHoliday(i, j)" *ngIf="user.role === 'admin'">Mark Holiday</button> -->
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <div class="btn-row">
+    <button class="hollow-btn pull-left btn-plus-icon" (click)="addtimeslot()" *ngIf="user.role === 'admin'">Add time slot</button>
+    <!-- <div class="pull-right" *ngIf="user.role === 'admin'">
+      <button class="hollow-btn"><b>Apply for all week</b></button>
+      <button class="solid-btn">Save</button>
+    </div> -->
+  </div>
+</main>

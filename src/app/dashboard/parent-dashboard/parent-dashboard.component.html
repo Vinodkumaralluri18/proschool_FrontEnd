@@ -1,0 +1,190 @@
+<div id="main-content">
+
+  <div class="row">
+    <div class="container-fluid dashboard-content">
+      <!-- col 1 -->
+      <div class="leftdiv">
+        <div class="rigdiv1 card">
+          <div class="btntabs">
+            <div class="btntab" (click)="select_tab('tasks_tab')" [ngClass]="{'btntab-active':tasks_tab === true}">Tasks
+            </div>
+            <div class="btntab" (click)="select_tab('events_tab')" [ngClass]="{'btntab-active':events_tab === true}">
+              Events</div>
+            <div class="btntab" (click)="select_tab('notice_tab')" [ngClass]="{'btntab-active':notice_tab === true}">
+              Notice</div>
+            <div class="btntab" (click)="select_tab('feedback_back')"
+              [ngClass]="{'btntab-active':feedback_back === true}">Feedback</div>
+          </div>
+          <div>
+            <div class="selctedresult">
+              <div class="table-responsive">
+                <div *ngIf="tasks_tab" class="scrollonhover">
+                  <div class="tabnotification tnbgclr">
+                    <div class="tabnote">Note Title</div>
+                    <div class="tabdis"><strong>02 Feb 2020 &nbsp;</strong> Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Aenean maximus facilisis nisl eget
+                      lobortis. Proin in massa nec mauris tincidunt luctus eget eget nulla.
+                    </div>
+                  </div>
+                  <div class="tabnotification tnbgclr1">
+                    <div class="tabnote">Note Title</div>
+                    <div class="tabdis"><strong>02 Feb 2020 &nbsp;</strong> Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Aenean maximus facilisis nisl eget
+                      lobortis. Proin in massa nec mauris tincidunt luctus eget eget nulla.
+                    </div>
+                  </div>
+                  <div class="tabnotification tnbgclr2">
+                    <div class="tabnote">Note Title</div>
+                    <div class="tabdis"><strong>02 Feb 2020 &nbsp;</strong> Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Aenean maximus facilisis nisl eget
+                      lobortis. Proin in massa nec mauris tincidunt luctus eget eget nulla.
+                    </div>
+                  </div>
+                  <div class="tabnotification tnbgclr3">
+                    <div class="tabnote">Note Title</div>
+                    <div class="tabdis"><strong>02 Feb 2020 &nbsp;</strong> Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Aenean maximus facilisis nisl eget
+                      lobortis. Proin in massa nec mauris tincidunt luctus eget eget nulla.
+                    </div>
+                  </div>
+                  <div class="tabnotification tnbgclr">
+                    <div class="tabnote">Note Title</div>
+                    <div class="tabdis"><strong>02 Feb 2020 &nbsp;</strong> Lorem ipsum dolor sit amet, consectetur
+                      adipiscing elit. Aenean maximus facilisis nisl eget
+                      lobortis. Proin in massa nec mauris tincidunt luctus eget eget nulla.
+                    </div>
+                  </div>
+                </div>
+                <table style="width:100%;" *ngIf="events_tab">
+                  <thead>
+                    <tr class="tabtablehead">
+                      <th>#</th>
+                      <th>Event</th>
+                      <th>Time</th>
+                      <th>Location</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let event of events; let i = index" class="tabtabletxt">
+                      <td>{{i+1}}</td>
+                      <td>{{event.event_title}}</td>
+                      <td>{{event.time}}</td>
+                      <td>{{event.location}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table style="width:100%;" *ngIf="notice_tab">
+
+
+                </table>
+                <table style="width:100%;" *ngIf="feedback_back">
+                  <thead>
+                    <tr class="tabtablehead">
+                      <th>#</th>
+                      <th>subject</th>
+                      <th>Time</th>
+                      <th>Location</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let fb of Feedback; let i = index" class="tabtabletxt">
+
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- col 2 -->
+      <div class="leftdiv">
+        <!-- col1 top -->
+        <div class="lefttop">
+          <!-- col1 topleft box -->
+          <div class="leftbox card scrollonhover1">
+            <!-- <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="pull-left">Month</label>
+                  <select class="form-control" [(ngModel)]="selected_month" (change)="getStudentAttendance()">
+                    <option>select...</option>
+                    <option value="all">All Months</option>
+                    <option *ngFor="let month of months; let i = index" value="{{i}}">{{month}}</option>
+                  </select>
+                </div>
+              </div>
+            </div> -->
+            <h5 class="studattn pull-left">Attendance [ {{monthName}} ]</h5>
+            <div class="ngxcharts" align="center">
+              <ngx-charts-pie-chart [view]="view_classAttendance" [scheme]="AttcolorScheme" [results]="stdAtt_data" [gradient]="gradient"
+                [legend]="showLegend" [legendPosition]="legendPosition" [doughnut]="isDoughnut">
+              </ngx-charts-pie-chart>
+            </div>
+          </div>
+          <!-- col1 topright box -->
+          <div class="leftbox card scrollonhover1">
+            <h5 class="studattn pull-left">Fees Collection</h5>
+            <div class="ngxcharts" align="center">
+              <ngx-charts-bar-horizontal [view]="view_classAttendance" [scheme]="FeecolorScheme" [results]="stdfee_data" [gradient]="gradient"
+                [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel">
+              </ngx-charts-bar-horizontal>
+              <!-- <ngx-charts-pie-chart [view]="view_classAttendance" [scheme]="colorScheme" [results]="stdfee_data" [gradient]="gradient"
+                [legend]="showLegend" [legendPosition]="legendPosition" [doughnut]="isDoughnut">
+              </ngx-charts-pie-chart> -->
+            </div>
+          </div>
+        </div>
+        <!-- col1 bottom box -->
+        <div class="leftbottom card">
+          <!-- col 3 left top box-->
+          <h5 class="studattn pull-left">Academics</h5>
+          <!-- <div class="chart">
+            <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+            [legend]="chartLegend" [chartType]="chartType"></canvas>
+          </div> -->
+
+          <div class="ngxcharts" align="center">
+            <ngx-charts-bar-vertical [view]="view_fee" [scheme]="AcademicscolorScheme" [results]="stdacad_data" [gradient]="gradient"
+              [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel">
+            </ngx-charts-bar-vertical>
+          </div>
+        </div>
+      </div>
+      <!-- col 3 -->
+      <div class="leftdiv">
+        <!-- col 3 bottom box-->
+        <div class="rightbottom card">
+          <div class="rigdiv card">
+            <div class="selctedresult">
+              <div class="table-responsive scrollonhover">
+                <table style="width:100%;">
+                  <thead>
+                    <tr>
+                      <th class="timecolwdth">Timings</th>
+                      <th>Subject</th>
+                      <th>Teacher</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let sch of section_schedule; let i = index">
+                      <td>{{sch.start_time}}-{{sch.end_time}}</td>
+                      <td [ngStyle]="{'background-color' : (sch.class_name == 'Break') ? '#d9534f' : '#FFF', 'color': (sch.class_name == 'Break') ? '#FFF' : 'black'}">{{sch.subject_name}}</td>
+                      <td
+                        [ngStyle]="{'background-color': (sch.employee_attendance == 'Present') ? '#5cb85c' : (sch.employee_attendance == 'Absent') ? '#d9534f' : (sch.employee_attendance == 'On Leave') ? '#f0ad4e' : '#FFF', 'color': (sch.employee_attendance == 'Present' || sch.employee_attendance == 'Absent' || sch.employee_attendance == 'On Leave') ? '#FFF' : 'black' }">
+                        {{sch.teacher_name}}</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

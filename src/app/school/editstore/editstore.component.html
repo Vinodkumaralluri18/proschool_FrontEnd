@@ -1,0 +1,337 @@
+<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type == 'material'">
+    <div class="header-wrapper">
+        <p *ngIf="submit_type === 'add'">Add Material</p>
+        <p *ngIf="submit_type === 'edit'">Edit Material</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form class="form-inline" role="form" [formGroup]="materialForm" (ngSubmit)="submitMaterial()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Material Name :
+            </div>
+            <div class="col-full-6">
+                <input class="inpbox" value="{{materials.material}}" formControlName="material" type="text">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Category :
+            </div>
+            <div class="col-full-6">
+                <input class="inpbox" value="{{materials.category}}" formControlName="category" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type == 'vendor'">
+    <div class="header-wrapper">
+        <p *ngIf="submit_type === 'add'">Add Vendor</p>
+        <p *ngIf="submit_type === 'edit'">Edit Vendor</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form class="form-inline" role="form" [formGroup]="vendorForm" (ngSubmit)="submitVendor()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Vendor Name :
+            </div>
+            <div class="col-full-6">
+                <input class="inpbox" value="{{vendors.vendor_name}}" formControlName="vendor_name" type="text">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Material :
+            </div>
+            <div class="col-full-6">
+                <select class="form-control" formControlName="material" [value]="vendors.material">
+                    <option>select...</option>
+                    <option *ngFor="let mat of materialslist" value="{{mat.material_id}}">{{mat.material}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Email :
+            </div>
+            <div class="col-full-3">
+                <input class="inpbox" value="{{vendors.email}}" formControlName="email" placeholder="Enter..." type="email">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Contact No* :
+            </div>
+            <div class="col-full-3">
+                <input class="inpbox" value="{{vendors.contact_no}}" formControlName="contact_no" placeholder="Enter..."
+                type="number">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Location :
+            </div>
+            <div class="col-full-3">
+                <input class="inpbox" value="{{vendors.location}}" formControlName="location" type="text">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Address :
+            </div>
+            <div class="col-full-3">
+                <textarea value="{{vendors.address}}" formControlName="address" placeholder="Enter..." cols="50"
+                rows="5"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type == 'material-in'">
+    <div class="header-wrapper">
+        <p *ngIf="submit_type === 'add'">Add Material-In</p>
+        <p *ngIf="submit_type === 'edit'">Edit Material-In</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form class="form-inline" role="form" [formGroup]="materialInForm" (ngSubmit)="submitMaterialIn()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Material : 
+            </div>
+            <div class="col-full-6" *ngIf="submit_type === 'edit'">
+                {{materialsIn.material}}
+            </div>
+            <div class="col-full-6" *ngIf="submit_type === 'add'">
+                <select formControlName="material" [value]="materialsIn.material_id">
+                    <option>select...</option>
+                    <option *ngFor="let mat of materialslist" value="{{mat.material_id}}">{{mat.material}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Vendor : 
+            </div>
+            <div class="col-full-6">
+                <select formControlName="vendor" [value]="materialsIn.vendor_id">
+                    <option>select...</option>
+                    <option *ngFor="let ven of vendorslist" value="{{ven.vendor_id}}">{{ven.vendor_name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                No of Units : 
+            </div>
+            <div class="col-full-6">
+                <input value="{{materialsIn.no_of_units}}" formControlName="no_of_units" type="number">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Price : 
+            </div>
+            <div class="col-full-6">
+                <input value="{{materialsIn.price}}" formControlName="price" type="number">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Purchased Date : 
+            </div>
+            <div class="col-full-6">
+                <input value="{{materialsIn.purchased_date}}" formControlName="purchased_date" type="date">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Payment DueDate : 
+            </div>
+            <div class="col-full-6">
+                <input value="{{materialsIn.payment_dueDate}}" formControlName="payment_duedate" type="date">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+        <!-- <div class="pop_content">
+            <div class="row_content">
+                <div class="column_content column_content_left" *ngIf="submit_type === 'edit'">
+                    <h4>Material: </h4>
+                    {{materialsIn.material}}
+                </div>
+                <div class="column_content column_content_left" *ngIf="submit_type === 'add'">
+                    <h4>Material: </h4>
+                    <select formControlName="material" [value]="materialsIn.material_id">
+                        <option>select...</option>
+                        <option *ngFor="let mat of materialslist" value="{{mat.material_id}}">{{mat.material}}</option>
+                    </select>
+                </div>
+                <div class="column_content">
+                    <h4>Vendor: </h4>
+                    <select formControlName="vendor" [value]="materialsIn.vendor_id">
+                        <option>select...</option>
+                        <option *ngFor="let ven of vendorslist" value="{{ven.vendor_id}}">{{ven.vendor_name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row_content">
+                <div class="column_content column_content_left">
+                    <h4>No of Units: </h4>
+                    <input value="{{materialsIn.no_of_units}}" formControlName="no_of_units" type="number">
+                </div>
+                <div class="column_content">
+                    <h4>Price: </h4>
+                    <input value="{{materialsIn.price}}" formControlName="price" type="number">
+                </div>
+            </div>
+            <div class="row_content">
+                <div class="column_content column_content_left">
+                    <h4>Purchased Date: </h4>
+                    <input value="{{materialsIn.purchased_date}}" formControlName="purchased_date" type="date">
+                </div>
+                <div class="column_content">
+                    <h4>Payment DueDate: </h4>
+                    <input value="{{materialsIn.payment_dueDate}}" formControlName="payment_duedate" type="date">
+                </div>
+            </div>
+            <div class="row_content">
+                <div class="button_left">
+                    <button type="submit" class="btn -cta">Submit</button>
+                </div>
+                <div (click)="close()" class="btn -cancel">Cancel</div>
+            </div>
+        </div> -->
+    </form>
+</div>
+
+<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type == 'material-out'">
+    <div class="header-wrapper">
+        <p *ngIf="submit_type === 'add'">Add Material-Out</p>
+        <p *ngIf="submit_type === 'edit'">Edit Material-Out</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form class="form-inline" role="form" [formGroup]="materialOutForm" (ngSubmit)="submitMaterialOut()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Material : 
+            </div>
+            <div class="col-full-6" *ngIf="submit_type === 'edit'">
+                {{materialsOut.material}}
+            </div>
+            <div class="col-full-6" *ngIf="submit_type === 'add'">
+                <select formControlName="material" [value]="materialsOut.material_id">
+                    <option>select...</option>
+                    <option *ngFor="let mat of materialslist" value="{{mat.material_id}}">{{mat.material}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Employee Type : 
+            </div>
+            <div class="col-full-6">
+                <select formControlName="employee_type" [value]="materialsOut.employee_type" (change)="get_selectedemployees()">
+                    <option>select...</option>
+                    <option value="teaching">Teaching</option>
+                    <option value="non-teaching">Non-Teaching</option>
+                    <option value="administrative">Administrative</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Receiver : 
+            </div>
+            <div class="col-full-6">
+                <select formControlName="receiver" [value]="materialsOut.employee_id">
+                    <option>select...</option>
+                    <option *ngFor="let emp of employees" value="{{emp.employee_id}}">{{emp.first_name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                No of Units : 
+            </div>
+            <div class="col-full-6">
+                <input value="{{materialsOut.no_of_units}}" formControlName="no_of_units" type="number">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Received Date : 
+            </div>
+            <div class="col-full-6">
+                <input value="{{materialsOut.received_date}}" formControlName="received_date" type="date">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+        <!-- <div class="pop_content">
+            <div class="row_content">
+                <div class="column_content column_content_left" *ngIf="submit_type === 'edit'">
+                    <h4>Material: </h4>
+                    {{materialsOut.material}}
+                </div>
+                <div class="column_content column_content_left" *ngIf="submit_type === 'add'">
+                    <h4>Material: </h4>
+                    <select formControlName="material" [value]="materialsOut.material_id">
+                        <option>select...</option>
+                        <option *ngFor="let mat of materialslist" value="{{mat.material_id}}">{{mat.material}}</option>
+                    </select>
+                </div>
+                <div class="column_content">
+                    <h4>Employee Type: </h4>
+                    <select formControlName="employee_type" [value]="materialsOut.employee_type"
+                        (change)="get_selectedemployees()">
+                        <option>select...</option>
+                        <option value="teaching">Teaching</option>
+                        <option value="non-teaching">Non-Teaching</option>
+                        <option value="administrative">Administrative</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row_content">
+                <div class="column_content column_content_left">
+                    <h4>Receiver: </h4>
+                    <select formControlName="receiver" [value]="materialsOut.employee_id">
+                        <option>select...</option>
+                        <option *ngFor="let emp of employees" value="{{emp.employee_id}}">{{emp.first_name}}</option>
+                    </select>
+                </div>
+                <div class="column_content">
+                    <h4>No of Units: </h4>
+                    <input value="{{materialsOut.no_of_units}}" formControlName="no_of_units" type="number">
+                </div>
+            </div>
+            <div class="row_content">
+                <div class="column_content column_content_left">
+                    <h4>Received Date: </h4>
+                    <input value="{{materialsOut.received_date}}" formControlName="received_date" type="date">
+                </div>
+            </div>
+            <div class="row_content">
+                <div class="button_left">
+                    <button type="submit" class="btn -cta">Submit</button>
+                </div>
+                <div (click)="close()" class="btn -cancel">Cancel</div>
+            </div>
+        </div> -->
+    </form>
+</div>

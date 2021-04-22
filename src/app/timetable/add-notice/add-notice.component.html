@@ -1,0 +1,113 @@
+<div *ngIf="dialog_type === 'action'">
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="vertical-space3"></div>
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6 action-list">
+            <ul class="list-group">
+                <li class="list-group-item justify-content-between list-group-item-color" >
+                    <span><i class="fa fa-edit fa-icon-color"></i></span>
+                    EDIT
+                    
+                </li>
+                <li class="list-group-item justify-content-between  list-group-item-color" >
+                    <span><i class="fa fa-trash fa-icon-color"></i></span>
+                    DELETE
+                </li>
+                <li class="list-group-item justify-content-between   list-group-item-color" >
+                    <span><i class="fa fa-eye fa-icon-color"></i></span>
+                    VIEW
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div  *ngIf="dialog_type === 'view'">
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    <h3 class="add_notice_heading" >{{selected_notice.school_name}}</h3>
+    <h2 class="add_notice_heading">Notice</h2>
+    <p class="view_notice_doi">Date of issue: &nbsp;&nbsp; {{selected_notice.date_of_issue}}</p>
+    <div class="vertical-space2"></div>
+    <h3 class="add_notice_heading" >{{selected_notice.title}}</h3>
+    <!-- <h4 class="add-notice-subject">{{selected_notice.title}}</h4> -->
+    <p class="notice-text">{{selected_notice.body}}
+    </p>
+    <div class="vertical-space2"></div>
+        <p class="view_notice_doi">Authorised Signatory Name:</p>
+        <p class="view_notice_doi">{{selected_notice.issuing_Authority}}</p>
+    
+</div>
+
+<div *ngIf="dialog_type === 'add' || dialog_type === 'edit'" >
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    <h3 class="add_notice_heading" *ngIf="dialog_type === 'add'">Add New Notice</h3>
+    <h3 class="add_notice_heading" *ngIf="dialog_type === 'edit'">Edit Notice</h3>
+    <form class="scroll" [formGroup]="noticeForm" (ngSubmit)="submitNotice()">
+        <div class="vertical-space4"></div>
+        <div class="row">
+              <div class="form-group col-md-6">
+                <label class="add-notice-label_name" for="school-name-input">Name of the issuing Authority :</label>
+                <input class="form-control add_notice_input" type="text" id="school-name-input" formControlName="issuing_Authority"
+                value="{{selected_notice.issuing_Authority}}">
+              </div>
+
+              <div class="form-group col-md-6">
+                <label class="add-notice-label_name" for="notice-title-input">Title:</label>
+                <input  class="form-control add_notice_input" type="text" id="notice-title-input" formControlName="title" value="{{selected_notice.title}}">
+              </div>
+        </div>
+        <div class="vertical-space2"></div>
+        <div class="row">
+          <div class="form-group col-md-12 col-sm-6">
+            <label class="add-notice-label_name" for="notice-text-input">Body:</label>
+            <textarea class="form-control add_notice_input" rows="10" cols="100"  id="notice-text-input" formControlName="body" value="{{selected_notice.body}}"></textarea>
+          </div>
+        </div>
+        
+        <div class="vertical-space2"></div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="signatory-name-input">Priority:</label>
+                <select class="form-control" formControlName="priority">
+                <option>Select...</option>
+                    <option [defaultSelected]="selected_notice.priority === 'High'" value="High">High</option>
+                    <option [defaultSelected]="selected_notice.priority === 'Medium'" value="Medium">Medium</option>
+                    <option [defaultSelected]="selected_notice.priority === 'Low'" value="Low">Low</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label class="add-notice-label_name" for="date-input">Date of Issue:</label>
+              <input  class="form-control add_notice_input" type="date" id="date-input" formControlName="date_of_issue"
+              value="{{selected_notice.date_of_issue}}">
+            </div>
+      </div>
+
+      <div class="vertical-space2"></div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="add-notice-label_name">Pinned status</label>
+                <select class="form-control" formControlName="pin_status">
+                    <option>Select...</option>
+                    <option [defaultSelected]="selected_notice.pin_status === 'pinned'" value="High">Pinned</option>
+                    <option [defaultSelected]="selected_notice.pin_status === 'unpinned'" value="Medium">Unpinned</option>
+                </select>
+              </div>
+
+            <div class="form-group col-md-6">
+              <label class="add-notice-label_name" for="pin_enddate">Pin End date:</label>
+              <input  class="form-control add_notice_input" type="date" id="date-input" formControlName="pin_enddate" value="{{selected_notice.pin_enddate}}">
+            </div>
+            <div class="pull-right">
+            <button type="submit" class="btn-primary btn-lg">Publish</button>
+            </div>
+      </div>
+      </form>
+</div>
+

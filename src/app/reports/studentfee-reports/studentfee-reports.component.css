@@ -1,0 +1,68 @@
+#list-heading {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#list-heading button {
+    padding: 5px 5px;
+    margin: 0px 0px 0px 10px;
+}
+
+#marks-list {
+    margin: 15px 0px 0px 20px;
+}
+
+/* New CSS -AmrutaDev */
+
+
+.horizontal-bars-wrapper {
+	width: 85%;
+}
+
+.hor-progress-track {
+    height: 12px;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+}
+
+.hor-progress-track.blue-fill {
+	background-color: #f2f5fe;
+}
+
+.hor-progress-track.green-fill {
+	background-color: #EEFCF3;
+}
+
+.hor-progress-track.red-fill {
+	background-color:#FDF1F2;
+}
+
+.hor-progress-filled {
+    content: "";
+    height: 100%;
+    display: block;
+    margin-top: auto;
+   
+    border-radius: 0px 5px 5px 0px;
+}
+
+.blue-fill .hor-progress-filled {
+	 background-color: #6186ed;
+}
+
+.green-fill .hor-progress-filled {
+	 background-color: #77C284;
+}
+
+.red-fill .hor-progress-filled {
+	 background-color: #E56862;
+}
+
+.fee-report-page .tbody tr:first-child > td {
+	padding-top: 20px !important;
+}
+
+.fee-report-page tbody tr > td {
+    padding: 15px 10px;
+}

@@ -1,0 +1,46 @@
+<div id="main-content1" class="new-message-wrapper">
+    <div class="header-wrapper">
+        <p *ngIf="dialog_type == 'add'">Add Examination Schedule</p>
+        <p *ngIf="dialog_type == 'edit'">Edit Examination Schedule</p>
+        <button class="btn-close" (click)="close()"></button>
+    </div>
+    <form role="form" [formGroup]="scheduleForm" (ngSubmit)="editExam_schedules()">
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Examinations:
+            </div>
+            <div class="col-full-6">
+                <select formControlName="unique_code" [value]="schedule.exam_title" (change)="getSchedule(i)">
+                    <option *ngFor="let assp of examinations; let i = index" value="{{assp.unique_code}}">{{assp.examination_title}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3" id="class_chip">
+                <div *ngFor="let cl of selected_examination.classes"><span class="_chip">{{cl.name}}</span></div>
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                Start Date:
+            </div>
+            <div class="col-full-6">
+                <input value="{{schedule.from_date}}" formControlName="from_date" placeholder="Enter..." type="date">
+            </div>
+        </div>
+        <div class="row-wrapper">
+            <div class="col-full-3">
+                End Date:
+            </div>
+            <div class="col-full-6">
+                <input value="{{schedule.end_date}}" formControlName="end_date" placeholder="Enter..." type="date">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 pull-right">
+                <button class="btn -cta active-tab" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
