@@ -57,11 +57,20 @@
     </div>
   </div>
   <div>
-    <img src="{{ employeeImagee }}" alt="" class="_pic" width="50" />
+    <img src="{{ employeeImage }}" alt="" class="_pic" width="50" />
   </div>
 </div>
 
-<div>
+<div class="main-flex">
+  <div class="col-md-3 flex-1">
+    <div class="btn -cta inactive-tab tab-btn" (click)="close()">Cancel</div>
+  </div>
+  <div class="flex-2">
+    <div class="btn -cta active-tab" (click)="employeeActionButton(true)">&laquo; Previous</div>
+    <button class="btn -cta active-tab" type="submit" (click)="employeeActionButton(false)">Save</button>
+  </div>
+</div>
+<!-- <div>
   <div class="col-md-3 pull-left tab-btn">
     <div class="btn -cta inactive-tab" (click)="close()">Close</div>
     <div
@@ -74,4 +83,4 @@
   <div class="col-md-3 pull-right tab-btn">
     <button class="btn -cta active-tab" type="submit">Submit</button>
   </div>
-</div>
+</div> -->

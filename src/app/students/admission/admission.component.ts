@@ -15,6 +15,9 @@ import { appConfig } from 'src/app/app.config';
 })
 export class AdmissionComponent implements OnInit {
   unamePattern = '^[a-zA-Z ]*$'; 
+  alphaNumericPattern = "^[a-zA-Z0-9]*$";
+  numericPattern = "^[0-9]*$";
+  alphaPattern = "^[a-zA-Z]*$";
   emailPattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
   classes = [];
   sections = [];
@@ -118,8 +121,8 @@ export class AdmissionComponent implements OnInit {
   studentadmissionForm: FormGroup = this.fb.group({
     // studentForm
     studentForm : this.fb.group({
-      admission_no: ['', Validators.required],
-      roll_no: ['', Validators.required],
+      admission_no: ['', [Validators.required, Validators.pattern(this.alphaNumericPattern)]],
+      roll_no: ['', [Validators.required, Validators.pattern(this.numericPattern)]],
       first_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       last_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       gender: ['', Validators.required],
@@ -127,7 +130,7 @@ export class AdmissionComponent implements OnInit {
       category: ['', Validators.required],
       nationality: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       phone: ['', [Validators.required, Validators.pattern('[0-9]\\d{9}')]],
-      aadhar_no: ['', Validators.required],
+      aadhar_no: ['', [Validators.required, Validators.pattern(this.numericPattern)]],
       blood_group: [''],
       admission_date: ['', Validators.required],
     }),

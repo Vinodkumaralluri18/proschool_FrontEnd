@@ -22,7 +22,10 @@ export class AdmissionComponent implements OnInit {
   employeeaddress: boolean = false;
   profilepic;
   documents;
-
+  alphaNumericPattern = "^[a-zA-Z0-9]*$";
+  numericPattern = "^[0-9]*$";
+  alphaPattern = "^[a-zA-Z]*$";
+  emailPattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
   joined_on = new FormControl(new Date);
   date_of_birth = new FormControl(new Date);
 
@@ -60,12 +63,12 @@ export class AdmissionComponent implements OnInit {
       joined_on: ["", Validators.required],
       dob: ["", Validators.required],
       gender: ["", Validators.required],
-      blood_group: ["", Validators.required],
+      blood_group: [""],
       marital_status: ["", Validators.required],
       job_category: ["", Validators.required],
-      passport_no: [""],
-      aadhar_no: [""],
-      pan_no: [""],
+      passport_no: ["", Validators.pattern(this.alphaNumericPattern)],
+      aadhar_no: ["", Validators.pattern(this.numericPattern)],
+      pan_no: ["", Validators.pattern(this.alphaNumericPattern)],
       // not used
       experience: [""],
       basic_pay: [""],
@@ -124,6 +127,23 @@ export class AdmissionComponent implements OnInit {
     }
   }
 
+  addressFormSubmitted(event) {
+    if (event.type === "close") {
+      return this.close();
+    } else if (event.type === "prev") {
+      this.setTabDetails(true, false);
+    } else if (event.type === "next") {
+      if (!this.employeeadmissionForm.controls.admissionForm.valid) {
+        return this.showValidationMsg(
+          this.employeeadmissionForm.controls.admissionForm as FormGroup
+        );
+      }
+      this.setTabDetails(false, true);
+    } else if (event.type === "save") {
+      this.submitEmployee()
+    }
+  }
+
   onFileSelect(event) {
     console.log(event.target.files[0]);
     const file = event.target.files[0];
@@ -135,8 +155,6 @@ export class AdmissionComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  is_step_one_valid: boolean = true;
-  is_step_two_valid: boolean = true;
 
   setTabDetails(personal, address) {
     // this.stepTwoVerification();
@@ -171,8 +189,9 @@ export class AdmissionComponent implements OnInit {
 
   submitEmployee() {
     this.employeeadmissionForm.value.employee_id = this.employee.employee_id;
+    const employeeDetails = {...this.employeeadmissionForm.controls.admissionForm.value, ...this.employeeadmissionForm.controls.addressForm.value}
     if (this.dialog_type == 'add') {
-      this.service.addEmployeeadmission(this.employeeadmissionForm.value)
+      this.service.addEmployeeadmission(employeeDetails)
       .subscribe(
         res => {
           console.log(res)
@@ -189,7 +208,7 @@ export class AdmissionComponent implements OnInit {
         }
       )
     } else if (this.dialog_type == 'edit') {
-      this.service.editEmployee(this.employeeadmissionForm.value, this.employee.employee_id)
+      this.service.editEmployee(employeeDetails, this.employee.employee_id)
         .subscribe(
           res => { 
             if(res == true) {

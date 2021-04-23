@@ -9,8 +9,19 @@ import { FormGroup } from "@angular/forms";
 export class EmployeeAddressComponent implements OnInit {
   @Input() employeeAddressForm: FormGroup;
   @Input() employee: any;
+  @Input() employeeImage: string;
   @Output() employeeDetailsSubmitted = new EventEmitter();
   constructor() {}
 
   ngOnInit() {}
+
+  employeeActionButton(actionType: boolean) {
+    if (actionType) {
+      return this.employeeDetailsSubmitted.emit({ type: "prev" });
+    }
+    this.employeeDetailsSubmitted.emit({ type: "save" });
+  }
+  close() {
+    this.employeeDetailsSubmitted.emit({ type: "close" });
+  }
 }

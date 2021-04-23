@@ -29,12 +29,12 @@ export class EmployeeAdmissionComponent implements OnInit {
     if (this.employeeForm.valid) {
       this.employeeDetailsSubmitted.emit({
         form: this.employeeForm,
-        type: "student",
+        type: "next",
       });
     }
   }
   close() {
-    this.employeeDetailsSubmitted.emit("close");
+    this.employeeDetailsSubmitted.emit({ type: "close" });
   }
   showValidationMsg(formGroup: FormGroup) {
     for (const key in formGroup.controls) {

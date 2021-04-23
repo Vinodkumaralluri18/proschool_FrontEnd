@@ -20,13 +20,15 @@
     <pro-school-employee-admission
       [employee]="employee"
       [employeeForm]="employeeadmissionForm.controls.admissionForm"
-      (employeeDetailsSubmitted)="get_employeeForm($event)"
+      (employeeDetailsSubmitted)="addressFormSubmitted($event)"
     ></pro-school-employee-admission>
   </div>
   <div *ngIf="employeeaddress">
     <pro-school-employee-address
       [employee]="employee"
+      [employeeImage]="employeeImagee"
       [employeeAddressForm]="employeeadmissionForm.controls.addressForm"
+      (employeeDetailsSubmitted)="addressFormSubmitted($event)"
     ></pro-school-employee-address>
   </div>
 
