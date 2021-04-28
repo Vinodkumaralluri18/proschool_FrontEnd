@@ -1,0 +1,16 @@
+input {
+  width: 100% !important;
+}
+.row-wrapper > pro-school-common-input,
+.col-full-3 {
+  width: 20%;
+  margin: 0px 2%;
+}
+.main-flex {
+  display: flex;
+  justify-content: space-between;
+}
+.col-full-address > pro-school-common-input {
+  width: 40%;
+  margin: 0 8% 0 2%;
+}

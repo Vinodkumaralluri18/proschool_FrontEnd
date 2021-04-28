@@ -1,0 +1,35 @@
+{
+   "admission_no":"1234", // s.f
+   "first_name":"Sriram",// s.f
+   "category":"OBC",// s.f
+   "blood_group":"A+",// s.f
+   "roll_no":1,// s.f
+   "last_name":"Girish",// s.f
+   "nationality":"indian",// s.f
+   "admission_date":"2/2/08",// s.f
+   "class_id":"S9-CL1",
+   "gender":"Male",// s.f
+   "phone":"7777777778",// s.f
+   "bus_route_id":"BUS-RTE-3",
+   "section_id":"S9-CL1-SE2",
+   "dob":"04//04/2012",// s.f
+   "aadhar_no":"1",// s.f
+   "email":"sriram@gmail.com",// s.f
+   "father_name":"Mukund",
+   "mother_name":"swetha",
+   "gaurdian_name":"Ashok",
+   "gaurdian_relation":"Uncle",
+   "father_contact":"7777777897",
+   "mother_contact":"8745691236",
+   "gaurdian_contact":"3698466654",
+   "father_email":"vinodkumar@gmail.com",
+   "mother_email":"",
+   "gaurdian_email":"",
+   "father_occupation":"",
+   "mother_occupation":"",
+   "gaurdian_occupation":"",
+   "cur_address":"",// normal form
+   "perm_address":"",// normal form
+   "file":"",// normal form
+   "student_id":"ST2"
+}

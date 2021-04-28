@@ -10,11 +10,15 @@ import { EmployeesRoutingModule } from './employees-routing.module';
 import { InformationComponent } from './information/information.component';
 import { AdmissionComponent } from './admission/admission.component';
 import { MatDatepickerModule, MatInputModule, MatNativeDateModule } from '@angular/material';
+import { EmployeeAdmissionComponent } from './admission/employee-admission/employee-admission.component';
+import { EmployeeAddressComponent } from './admission/employee-address/employee-address.component';
+import { ProSchoolCommonModule } from '../common/common.module';
 
 @NgModule({
-  declarations: [InformationComponent, AdmissionComponent],
+  declarations: [InformationComponent, AdmissionComponent, EmployeeAdmissionComponent, EmployeeAddressComponent],
   imports: [
     CommonModule,
+    ProSchoolCommonModule,
     EmployeesRoutingModule,
     FormsModule,
     ReactiveFormsModule,

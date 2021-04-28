@@ -3,30 +3,35 @@
   *ngIf="control && control.errors && (control.dirty || control.touched)"
 >
   <span class="help-block" *ngIf="control.errors.required"
-    >Please enter valid {{fieldName}}.</span
+    >Please enter valid {{ fieldName }}.</span
   >
   <span class="help-block" *ngIf="control.errors.pattern"
-    >Please enter correct {{fieldName}}.</span
+    >Please enter correct {{ fieldName }}.</span
   >
-  <!-- <div *ngIf="control.errors.required">
-    <small>This field is required</small>
-  </div>
-  <div *ngIf="control.errors.unique">
-    <small>{{ control.errors.unique }}</small>
-  </div>
-  <div *ngIf="controbl.errors.lessThen">
-    <small>{{ control.errors.lessThen }}</small>
-  </div>
-  <div *ngIf="control.errors.greaterThan">
-    <small>{{ control.errors.greaterThan }}</small>
-  </div>
-  <div *ngIf="control.errors.email">
-    <small>{{ control.errors.email }}</small>
-  </div>
-  <div *ngIf="control.errors.mobile">
-    <small>{{ control.errors.mobile }}</small>
-  </div>
-  <div *ngIf="control.errors.confirmPassword">
-    <small>{{ control.errors.confirmPassword }}</small>
-  </div> -->
 </div>
+<div class="text-danger">
+  <span class="help-block" *ngIf="customError"
+    >Please enter valid {{ fieldName }}.</span
+  >
+</div>
+<!-- <div *ngIf="control.errors.required">
+  <small>This field is required</small>
+</div>
+<div *ngIf="control.errors.unique">
+  <small>{{ control.errors.unique }}</small>
+</div>
+<div *ngIf="controbl.errors.lessThen">
+  <small>{{ control.errors.lessThen }}</small>
+</div>
+<div *ngIf="control.errors.greaterThan">
+  <small>{{ control.errors.greaterThan }}</small>
+</div>
+<div *ngIf="control.errors.email">
+  <small>{{ control.errors.email }}</small>
+</div>
+<div *ngIf="control.errors.mobile">
+  <small>{{ control.errors.mobile }}</small>
+</div>
+<div *ngIf="control.errors.confirmPassword">
+  <small>{{ control.errors.confirmPassword }}</small>
+</div> -->

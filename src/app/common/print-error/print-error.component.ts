@@ -10,5 +10,7 @@ export class PrintErrorComponent {
   control: any;
   @Input("fieldName")
   fieldName: string = 'Input';
+  @Input("customError")
+  customError: boolean = false;
   constructor() {}
 }

@@ -1,0 +1,86 @@
+<div class="row-wrapper">
+  <pro-school-common-input
+    [form]="employeeAddressForm"
+    [control]="'state'"
+    [fieldName]="'State'"
+    [labelTitle]="'State'"
+    [inputType]="'input'"
+  ></pro-school-common-input>
+  <pro-school-common-input
+    [form]="employeeAddressForm"
+    [control]="'country'"
+    [fieldName]="'Country'"
+    [labelTitle]="'Country'"
+    [inputType]="'input'"
+  ></pro-school-common-input>
+  <pro-school-common-input
+    [form]="employeeAddressForm"
+    [control]="'postal_code'"
+    [fieldName]="'Postal Code'"
+    [labelTitle]="'Postal Code'"
+    [inputType]="'number'"
+  ></pro-school-common-input>
+  <pro-school-common-input
+    [form]="employeeAddressForm"
+    [control]="'qualification'"
+    [fieldName]="'Qualification'"
+    [labelTitle]="'Qualification'"
+    [inputType]="'input'"
+  ></pro-school-common-input>
+</div>
+<div class="row-wrapper col-full-address">
+  <pro-school-common-input
+    [form]="employeeAddressForm"
+    [control]="'cur_address'"
+    [fieldName]="'Current Address'"
+    [labelTitle]="'Current Address'"
+    [inputType]="'textArea'"
+  ></pro-school-common-input>
+  <pro-school-common-input
+    [form]="employeeAddressForm"
+    [control]="'perm_address'"
+    [fieldName]="'Permanent Address'"
+    [labelTitle]="'Permanent Address'"
+    [inputType]="'textArea'"
+  ></pro-school-common-input>
+</div>
+<div class="row-wrapper">
+  <div class="col-full-6">
+    <div class="form-group">
+      <label class="heading">Upload Photo :</label>
+      <input
+        id="file-input-studProfPic"
+        type="file"
+        name="image"
+        (change)="employeeProfPic($event.target.files)"
+      />
+    </div>
+  </div>
+  <div>
+    <img src="{{ employeeImage }}" alt="" class="_pic" width="50" />
+  </div>
+</div>
+
+<div class="main-flex">
+  <div class="col-md-3 flex-1">
+    <div class="btn -cta inactive-tab tab-btn" (click)="close()">Cancel</div>
+  </div>
+  <div class="flex-2">
+    <div class="btn -cta active-tab" (click)="employeeActionButton(true)">&laquo; Previous</div>
+    <button class="btn -cta active-tab" type="submit" (click)="employeeActionButton(false)">Save</button>
+  </div>
+</div>
+<!-- <div>
+  <div class="col-md-3 pull-left tab-btn">
+    <div class="btn -cta inactive-tab" (click)="close()">Close</div>
+    <div
+      class="btn -cta inactive-tab"
+      (click)="get_employeeForm('singleemployeedetails')"
+    >
+      Previous
+    </div>
+  </div>
+  <div class="col-md-3 pull-right tab-btn">
+    <button class="btn -cta active-tab" type="submit">Submit</button>
+  </div>
+</div> -->

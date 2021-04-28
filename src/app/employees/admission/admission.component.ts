@@ -22,15 +22,12 @@ export class AdmissionComponent implements OnInit {
   employeeaddress: boolean = false;
   profilepic;
   documents;
-
+  alphaNumericPattern = "^[a-zA-Z0-9]*$";
+  numericPattern = "^[0-9]*$";
+  alphaPattern = "^[a-zA-Z]*$";
+  emailPattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
   joined_on = new FormControl(new Date);
   date_of_birth = new FormControl(new Date);
-
-  showTitleList: boolean = false;
-  showGenderList: boolean = false;
-  showBloodGroupList: boolean = false;
-  showMaritalStatusList: boolean = false;
-  showJobCategoryList: boolean = false;
 
   employee: any = {}
   employeeImagee;
@@ -45,7 +42,6 @@ export class AdmissionComponent implements OnInit {
 
     this.dialog_type = data.dialog_type;
     if(this.dialog_type === 'edit') {
-      debugger;
       this.employee = data.employee;
       this.employeeImage = this.employee.employeeImage
       this.employeeImagee = this.url + '/image/' + this.employee.employeeImage["filename"]
@@ -56,68 +52,95 @@ export class AdmissionComponent implements OnInit {
   }
 
   employeeadmissionForm: FormGroup = this.fb.group({
-    title: ['', Validators.required],
-    employee_code: ['', Validators.required],
-    dob: ['', Validators.required],
-    blood_group: ['', Validators.required],
-    first_name: ['', Validators.required],
-    designation: ['', Validators.required],
-    gender: ['', Validators.required],
-    marital_status: ['', Validators.required],
-    last_name: ['', Validators.required],
+    admissionForm: this.fb.group({
+      title: ["", Validators.required],
+      first_name: ["", Validators.required],
+      last_name: ["", Validators.required],
+      phone: ["", [Validators.required, Validators.pattern("[0-9]\\d{9}")]],
+      employee_code: ["", Validators.required],
+      designation: [""],
+      email: [""],
+      joined_on: ["", Validators.required],
+      dob: ["", Validators.required],
+      gender: ["", Validators.required],
+      blood_group: [""],
+      marital_status: ["", Validators.required],
+      job_category: ["", Validators.required],
+      passport_no: ["", Validators.pattern(this.alphaNumericPattern)],
+      aadhar_no: ["", Validators.pattern(this.numericPattern)],
+      pan_no: ["", Validators.pattern(this.alphaNumericPattern)],
+      // not used
+      experience: [""],
+      basic_pay: [""],
+      salary_band: [""],
+      spoken_languages: [""],
+    }),
     //bus_route_id: ['', Validators.required],
-    email: ['', Validators.required],
-    experience: ['', Validators.required],
-    basic_pay: ['', Validators.required],
-    phone: ['', Validators.required],
-    joined_on: ['', Validators.required],
-    salary_band: ['', Validators.required],
-    perm_address: ['', Validators.required],
-    cur_address: ['', Validators.required],
-    state: ['', Validators.required],
-    aadhar_no: ['', Validators.required],
-    qualification: ['', Validators.required],
-    country: ['', Validators.required],
-    pan_no: ['', Validators.required],
-    job_category: ['', Validators.required],
-    postal_code: ['', Validators.required],
-    passport_no: ['', Validators.required],
-    spoken_languages: ['', Validators.required],
-    employeeImage: ['', Validators.required],
+    // address form
+    addressForm: this.fb.group({
+      state: [""],
+      country: [""],
+      postal_code: [""],
+      qualification: [""],
+      perm_address: [""],
+      cur_address: [""],
+      employeeImage: [""],
+    }),
   });
 
   ngOnInit() {
-    if(this.dialog_type === 'edit') {
-      this.employeeadmissionForm.patchValue({
+    if (this.dialog_type === "edit") {
+      this.employeeadmissionForm.controls.admissionForm.patchValue({
         title: this.employee.title,
-        employee_code: this.employee.employee_code,
-        dob: this.employee.dob,
-        blood_group: this.employee.blood_group,
         first_name: this.employee.first_name,
-        designation: this.employee.designation,
-        gender: this.employee.gender,
-        marital_status: this.employee.marital_status,
         last_name: this.employee.last_name,
-        //bus_route_id: ['', Validators.required],
+        phone: this.employee.phone,
+        employee_code: this.employee.employee_code,
+        designation: this.employee.designation,
         email: this.employee.email,
+        joined_on: this.employee.joined_on,
+        dob: this.employee.dob,
+        gender: this.employee.gender,
+        blood_group: this.employee.blood_group,
+        marital_status: this.employee.marital_status,
+        job_category: this.employee.job_category,
+        passport_no: this.employee.passport_no,
+        aadhar_no: this.employee.aadhar_no,
+        pan_no: this.employee.pan_no,
+        // not used
+        //bus_route_id: ['', Validators.required],
         experience: this.employee.experience,
         basic_pay: this.employee.basic_pay,
-        phone: this.employee.phone,
-        joined_on: this.employee.joined_on,
         salary_band: this.employee.salary_band,
+        spoken_languages: this.employee.spoken_languages,
+        //
+      });
+      this.employeeadmissionForm.controls.addressForm.patchValue({
+        state: this.employee.state,
+        country: this.employee.country,
+        postal_code: this.employee.postal_code,
+        qualification: this.employee.qualification,
         perm_address: this.employee.permanent_address[0].perm_address,
         cur_address: this.employee.current_address[0].cur_address,
-        state: this.employee.state,
-        aadhar_no: this.employee.aadhar_no,
-        qualification: this.employee.qualification,
-        country: this.employee.country,
-        pan_no: this.employee.pan_no,
-        job_category: this.employee.job_category,
-        postal_code: this.employee.postal_code,
-        passport_no: this.employee.passport_no,
-        spoken_languages: this.employee.spoken_languages,
-        employeeImage : this.employee.employeephoto
-      })
+        employeeImage: this.employee.employeephoto,
+      });
+    }
+  }
+
+  addressFormSubmitted(event) {
+    if (event.type === "close") {
+      return this.close();
+    } else if (event.type === "prev") {
+      this.setTabDetails(true, false);
+    } else if (event.type === "next") {
+      if (!this.employeeadmissionForm.controls.admissionForm.valid) {
+        return this.showValidationMsg(
+          this.employeeadmissionForm.controls.admissionForm as FormGroup
+        );
+      }
+      this.setTabDetails(false, true);
+    } else if (event.type === "save") {
+      this.submitEmployee()
     }
   }
 
@@ -132,31 +155,30 @@ export class AdmissionComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  is_step_one_valid: boolean = true;
-  is_step_two_valid: boolean = true;
 
-  get_employeeForm(select) {
-    if(select === 'singleemployeedetails') {
-      console.log('Hello-2')
-      // this.stepTwoVerification();
-      if (this.is_step_two_valid) {
-        this.singleemployeedetails = true;
-        this.employeeaddress = false;
-      } else {
-        return true;
-      }
-    } else if(select === 'employeeaddress') {
-      console.log('Hello-1')
-      this.stepOneVerification();
-      if (this.is_step_one_valid) {
-        this.singleemployeedetails = false;
-        this.employeeaddress = true;
-      } else {
-        return true;
+  setTabDetails(personal, address) {
+    // this.stepTwoVerification();
+    if(address && !this.employeeadmissionForm.controls.admissionForm.valid) {
+      this.showValidationMsg(
+        this.employeeadmissionForm.controls.admissionForm as FormGroup
+      );
+      return;
+    }
+    this.singleemployeedetails = personal;
+    this.employeeaddress = address;
+  }
+  showValidationMsg(formGroup: FormGroup) {
+    for (const key in formGroup.controls) {
+      if (formGroup.controls.hasOwnProperty(key)) {
+        const control: FormControl = <FormControl>formGroup.controls[key];
+        if (Object.keys(control).includes("controls")) {
+          const formGroupChild: FormGroup = <FormGroup>formGroup.controls[key];
+          this.showValidationMsg(formGroupChild);
+        }
+        control.markAsTouched();
       }
     }
   }
-
   employeeProfPic(fileImg: any){
     this.profilepic = fileImg[0];
   }
@@ -167,8 +189,9 @@ export class AdmissionComponent implements OnInit {
 
   submitEmployee() {
     this.employeeadmissionForm.value.employee_id = this.employee.employee_id;
+    const employeeDetails = {...this.employeeadmissionForm.controls.admissionForm.value, ...this.employeeadmissionForm.controls.addressForm.value}
     if (this.dialog_type == 'add') {
-      this.service.addEmployeeadmission(this.employeeadmissionForm.value)
+      this.service.addEmployeeadmission(employeeDetails)
       .subscribe(
         res => {
           console.log(res)
@@ -185,7 +208,7 @@ export class AdmissionComponent implements OnInit {
         }
       )
     } else if (this.dialog_type == 'edit') {
-      this.service.editEmployee(this.employeeadmissionForm.value, this.employee.employee_id)
+      this.service.editEmployee(employeeDetails, this.employee.employee_id)
         .subscribe(
           res => { 
             if(res == true) {
@@ -234,186 +257,6 @@ export class AdmissionComponent implements OnInit {
         }
       }
     )
-  }
-
-  is_title_valid: boolean = true;
-  is_employee_code_valid: boolean = true;
-  is_dob_valid: boolean = true;
-  is_first_name_valid: boolean = true;
-  is_gender_valid: boolean = true;
-  is_marital_status_valid: boolean = true;
-  is_last_name_valid: boolean = true;
-  is_phone_valid: boolean = true;
-  is_joined_on_valid: boolean = true;
-  is_perm_address_valid: boolean = true;
-  is_cur_address_valid: boolean = true;
-  is_aadhar_no_valid: boolean = true;
-  is_job_category_valid: boolean = true;
-
-  validateDate(date, dateName) {
-    var input = date;
-    var re = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
-    // var is_date_valid = re.test(date);
-    var is_date_valid = true;
-    var dateArray = date.split("-");
-
-    if(date.length > 1){
-      is_date_valid = true;
-    }else{
-      is_date_valid = false;
-    }
-
-    if (is_date_valid) {
-      console.log(dateArray[0]);
-      console.log(dateArray[1]);
-      console.log(dateArray[2]);
-      if (parseInt(dateArray[2]) > 31 || parseInt(dateArray[2]) < 1 || (parseInt(dateArray[1]) === 2
-        && parseInt(dateArray[2]) > 29) || parseInt(dateArray[1]) > 12 || parseInt(dateArray[1]) < 1) {
-        is_date_valid = false;
-      } else {
-        is_date_valid = true;
-      }
-      console.log(is_date_valid)
-    }
-
-    switch (dateName) {
-      case "dob":
-        this.is_dob_valid = is_date_valid;
-        console.log(this.is_dob_valid)
-        break;
-
-      case "joined_on":
-        this.is_joined_on_valid = is_date_valid;
-        console.log(this.is_joined_on_valid)
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  addSlashToDOB(e) {
-    if (e.keyCode != 8) {
-      if (this.employeeadmissionForm.value.dob.length == 2) {
-        this.employeeadmissionForm.value.dob = this.employeeadmissionForm.value.dob + "/";
-      } else if (this.employeeadmissionForm.value.dob.length == 5) {
-        this.employeeadmissionForm.value.dob = this.employeeadmissionForm.value.dob + "/";
-      } else {
-        return true;
-      }
-    }
-    return true;
-  }
-
-  addSlashToDOfjoined(e) {
-    if (e.keyCode != 8) {
-      if (this.employeeadmissionForm.value.joined_on.length == 2) {
-        this.employeeadmissionForm.value.joined_on = this.employeeadmissionForm.value.joined_on + "/";
-      } else if (this.employeeadmissionForm.value.joined_on.length == 5) {
-        this.employeeadmissionForm.value.joined_on = this.employeeadmissionForm.value.joined_on + "/";
-      } else {
-        return true;
-      }
-    }
-    return true;
-  }
-
-  isMobileValid(person) {
-    var re = /^[6789]\d{9}$/;
-    switch (person) {
-      case "employee":
-        this.is_phone_valid = re.test(this.employeeadmissionForm.value.phone);
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  validateText(textString, stringName) {
-    var re = /^([a-zA-Z]+\s)*[a-zA-Z]+$/i;
-    switch (stringName) {
-
-      case "first_name":
-        this.is_first_name_valid = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "last_name":
-        this.is_last_name_valid = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "cur_address":
-        this.is_cur_address_valid = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      case "perm_address":
-        this.is_perm_address_valid = re.test(textString.replace(/\s/g, ''));
-        break;
-
-      default:
-        // code...
-        break;
-    }
-  }
-
-  validateDropdown(dropDownName) {
-    switch (dropDownName) {
-
-      case "title":
-        this.is_title_valid = this.employeeadmissionForm.value.title == '' ? false : true;
-        break;
-
-      case "gender":
-        this.is_gender_valid = this.employeeadmissionForm.value.gender == '' ? false : true;
-        break;
-
-      case "marital_status":
-        this.is_marital_status_valid = this.employeeadmissionForm.value.marital_status == '' ? false : true;
-        break;
-
-      case "job_category":
-        this.is_job_category_valid = this.employeeadmissionForm.value.job_category == '' ? false : true;
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  stepOneVerification() {
-
-    this.is_employee_code_valid = this.employeeadmissionForm.value.employee_code == '' ? false : true;
-    // this.is_aadhar_no_valid = this.employeeadmissionForm.value.aadhar_no == '' ? false : true;
-
-    this.validateText(this.employeeadmissionForm.value.first_name, 'first_name');
-    this.validateText(this.employeeadmissionForm.value.last_name, 'last_name');
-
-    this.validateDropdown('title');
-    this.validateDropdown('gender');
-    this.validateDropdown('marital_status');
-    this.validateDropdown('job_category');
-
-    this.validateDate(this.employeeadmissionForm.value.dob, 'dob');
-    this.validateDate(this.employeeadmissionForm.value.joined_on, 'joined_on');
-
-    this.isMobileValid('employee');
-
-    if (this.is_employee_code_valid && this.is_first_name_valid && this.is_last_name_valid && this.is_gender_valid && this.is_marital_status_valid 
-      && this.is_phone_valid && this.is_dob_valid && this.is_joined_on_valid && this.is_job_category_valid) {
-      this.is_step_one_valid = true;
-    } else {
-      this.is_step_one_valid = false;
-    }
-  }
-
-  stepTwoVerification() {
-    this.validateText(this.employeeadmissionForm.value.cur_address, 'cur_address');
-    this.validateText(this.employeeadmissionForm.value.perm_address, 'perm_address');
-    // if () {
-    //   this.is_step_two_valid = true;
-    // } else {
-    //   this.is_step_two_valid = true;
-    // }
   }
 
   openAlert(message) {

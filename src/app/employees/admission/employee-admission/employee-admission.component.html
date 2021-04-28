@@ -1,0 +1,156 @@
+<div [formGroup]="employeeForm">
+  <div class="row-wrapper">
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'title'"
+      [options]="titleOptions"
+      [fieldName]="'Title'"
+      [labelTitle]="'Title*'"
+      [inputType]="'DropDown'"
+    >
+    </pro-school-common-input>
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'first_name'"
+      [fieldName]="'first name'"
+      [labelTitle]="'First Name*'"
+      [inputType]="'input'"
+    ></pro-school-common-input>
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'last_name'"
+      [fieldName]="'last name'"
+      [labelTitle]="'Surname*'"
+      [inputType]="'input'"
+    ></pro-school-common-input>
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'phone'"
+      [fieldName]="'Phone Number'"
+      [labelTitle]="'Phone Number*'"
+      [inputType]="'number'"
+      [maxLength]="10"
+    ></pro-school-common-input>
+  </div>
+
+  <div class="row-wrapper">
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'employee_code'"
+      [fieldName]="'Employee Code'"
+      [labelTitle]="'Employee Code*'"
+      [inputType]="'input'"
+    ></pro-school-common-input>
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'designation'"
+      [fieldName]="'Designation'"
+      [labelTitle]="'Designation'"
+      [inputType]="'input'"
+    ></pro-school-common-input>
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'email'"
+      [fieldName]="'email id'"
+      [labelTitle]="'Email'"
+      [inputType]="'email'"
+    ></pro-school-common-input>
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'joined_on'"
+      [fieldName]="'Joining Date'"
+      [labelTitle]="'Date of Joining*'"
+      [inputType]="'date'"
+    >
+    </pro-school-common-input>
+  </div>
+
+  <div class="row-wrapper">
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'dob'"
+      [fieldName]="'Date of Birth'"
+      [labelTitle]="'Date of Birth*'"
+      [inputType]="'date'"
+    >
+    </pro-school-common-input>
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'gender'"
+      [options]="genderOptions"
+      [fieldName]="'gender'"
+      [labelTitle]="'Gender*'"
+      [inputType]="'DropDown'"
+    >
+    </pro-school-common-input>
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'blood_group'"
+      [options]="bloodGroupOptions"
+      [fieldName]="'Blood Group'"
+      [labelTitle]="'Blood Group'"
+      [inputType]="'DropDown'"
+    >
+    </pro-school-common-input>
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'marital_status'"
+      [options]="maritalOptions"
+      [fieldName]="'Marital Status'"
+      [labelTitle]="'Marital Status*'"
+      [inputType]="'DropDown'"
+    >
+    </pro-school-common-input>
+  </div>
+
+  <div class="row-wrapper">
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'job_category'"
+      [options]="employeeTypeOptions"
+      [fieldName]="'Job Category'"
+      [labelTitle]="'Employee Type*'"
+      [inputType]="'DropDown'"
+    >
+    </pro-school-common-input>
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'passport_no'"
+      [fieldName]="'Passport No'"
+      [labelTitle]="'Passport No'"
+      [inputType]="'input'"
+    ></pro-school-common-input>
+    
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'aadhar_no'"
+      [fieldName]="'Aadhaar No'"
+      [labelTitle]="'Aadhaar No'"
+      [inputType]="'number'"
+    ></pro-school-common-input>
+    
+    <pro-school-common-input
+      [form]="employeeForm"
+      [control]="'pan_no'"
+      [fieldName]="'Pan No No'"
+      [labelTitle]="'Pan No No'"
+      [inputType]="'input'"
+    ></pro-school-common-input>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 pull-left tab-btn">
+      <div class="btn -cta inactive-tab" (click)="close()">Close</div>
+      <!-- <button class="button button1 hvr-pop transition" (click)="get_employeeForm('employeedetails')">Previous</button> -->
+    </div>
+    <div class="col-md-3 pull-right tab-btn">
+      <div
+        class="btn -cta active-tab"
+        (click)="submitEmployeeAdmissionForm()"
+      >
+        Next
+      </div>
+    </div>
+  </div>
+</div>
