@@ -367,6 +367,10 @@ export class AdmissionComponent implements OnInit {
             this.alert_message = "Profile Pic Not Uploaded";
             this.openAlert(this.alert_message)
           }
+        },
+        (err) => {
+          this.alert_message = "Profile Pic Not Uploaded";
+          this.openAlert(this.alert_message)
         }
       )
   }

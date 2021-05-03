@@ -286,14 +286,6 @@ input.login-fields:before {
   background-color: transparent;
 }
 
-.help-block {
-    visibility: visible;
-    font-size: 11px;
-    color: red;
-    opacity: 0.7;
-    display: inline-block;
-    line-height: 11px;
-}
 
 .login-btn {
   background: #5E81F4;

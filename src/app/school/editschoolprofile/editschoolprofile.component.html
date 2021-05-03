@@ -221,8 +221,12 @@
         <div class="vertical-space4"></div>
         <div class="row">
               <div class="form-group col-md-6">
-                <label class="edit-profile-label_name" for="school-name-input">Name:</label>
-                <input class="form-control edit_profile_input" type="text" id="school-name-input" value="{{schoolprofile.name}}" formControlName="name">
+                <label class="edit-profile-label_name" for="school-name-input">Name *</label>
+                <input class="form-control edit_profile_input" type="text" id="school-name-input" formControlName="name">
+                <app-print-error
+                    [control]="schooldetailsForm.get('name')"
+                    [fieldName]="'School Name'"
+                ></app-print-error>
               </div>
 
               <div class="form-group col-md-6">
@@ -263,7 +267,7 @@
       </form>
 </div>
 
-<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type === 'managementDetails'">
+<div id="main-content1" class="new-message-wrapper" *ngIf="dialog_type === 'managementDetails' && !loading">
     <button type="button" class="close" aria-label="Close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -273,7 +277,7 @@
         <div class="row">
               <div class="form-group col-md-12">
                 <label class="edit-profile-label_name" for="founder">Founder:</label>
-                <input class="form-control edit_profile_input" type="text" id="founder" value="{{schoolprofile.founder}}" formControlName="name">
+                <input class="form-control edit_profile_input" type="text" id="founder" formControlName="founder">
               </div>
         </div>
 
@@ -281,7 +285,7 @@
         <div class="row">
             <div class="form-group col-md-12">
                 <label class="edit-profile-label_name" for="chairman">Chairman:</label>
-                <input class="form-control edit_profile_input" type="text" id="chairman" value="{{schoolprofile.chairman}}" formControlName="chairman" >
+                <input class="form-control edit_profile_input" type="text" id="chairman" formControlName="chairman" >
             </div>
         </div>
 
@@ -289,7 +293,7 @@
         <div class="row">
             <div class="form-group col-md-12">
                 <label class="edit-profile-label_name" for="coordinator">Coordinator:</label>
-                <input class="form-control edit_profile_input" type="text" id="coordinator" value="{{schoolprofile.coordinator}}" formControlName="coordinator" >
+                <input class="form-control edit_profile_input" type="text" id="coordinator" formControlName="coordinator" >
             </div>
         </div>
 

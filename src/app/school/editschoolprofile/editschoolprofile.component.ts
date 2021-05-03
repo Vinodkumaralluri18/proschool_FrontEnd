@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ServicesService } from '../../services.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -25,9 +25,10 @@ export class EditschoolprofileComponent implements OnInit {
   contactdetails: any;
 
   schoolprofile: any;
+  alphaNumericPattern = "[-_ a-zA-Z0-9]+$";
 
   schooldetailsForm: FormGroup = this.fb.group({
-    name: '',
+    name: ['', [Validators.required, Validators.pattern(this.alphaNumericPattern)]],
     medium: '',
     timings: '',
     class_from: '',
@@ -62,9 +63,10 @@ export class EditschoolprofileComponent implements OnInit {
     this.schoolprofile = data.schoolprofile;
     this.dialog_type = data.dialog_type;
   }
-
+  loading: boolean = false;
   ngOnInit() {
     console.log(this.dialog_type)
+    this.loading = true;
     if(this.dialog_type === 'schoolDetails') {
       this.schooldetailsForm.patchValue({
         name: this.schoolprofile.name,
@@ -83,6 +85,7 @@ export class EditschoolprofileComponent implements OnInit {
         coordinator: this.schoolprofile.coordinator,
         est_on: this.schoolprofile.est_on,
       })
+      this.loading = false;
     } else if(this.dialog_type === 'contactDetails') {
       this.contactdetailsForm.patchValue({
         address: this.schoolprofile.address,
@@ -95,21 +98,37 @@ export class EditschoolprofileComponent implements OnInit {
   }
 
   schoolSubmit() {
-    this.service.editSchoolDetails(this.schooldetailsForm.value, this.schoolprofile.school_id)
-      .subscribe(
-        res => {
-          if (res == true) {
-            this.dialogRef.close(this.schooldetailsForm.value);
-            this.alert_message = "School Details Edited Successfully";
-            this.openAlert(this.alert_message)
-          } else {
-            this.alert_message = "School Details Not Edited";
-            this.openAlert(this.alert_message)
+    if(this.schooldetailsForm.valid) {
+      this.service.editSchoolDetails(this.schooldetailsForm.value, this.schoolprofile.school_id)
+        .subscribe(
+          res => {
+            if (res == true) {
+              this.dialogRef.close(this.schooldetailsForm.value);
+              this.alert_message = "School Details Edited Successfully";
+              this.openAlert(this.alert_message)
+            } else {
+              this.alert_message = "School Details Not Edited";
+              this.openAlert(this.alert_message)
+            }
           }
-        }
-      )
+        )
+    } else {
+      this.showValidationMsg(this.schooldetailsForm)
+    }
   }
   
+  showValidationMsg(formGroup: FormGroup) {
+    for (const key in formGroup.controls) {
+      if (formGroup.controls.hasOwnProperty(key)) {
+        const control: FormControl = <FormControl>formGroup.controls[key];
+        if (Object.keys(control).includes("controls")) {
+          const formGroupChild: FormGroup = <FormGroup>formGroup.controls[key];
+          this.showValidationMsg(formGroupChild);
+        }
+        control.markAsTouched();
+      }
+    }
+  }
   
   managementSubmit() {
     this.service.editSchool_managementDetails(this.managementdetailsForm.value, this.schoolprofile.school_id)

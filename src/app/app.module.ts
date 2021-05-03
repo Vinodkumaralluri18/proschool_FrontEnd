@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-import { CountdownTimerModule } from 'angular-countdown-timer';
+// import { CountdownTimerModule } from 'angular-countdown-timer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +17,10 @@ import { EventlistsComponent } from './_alert/events/events.component';
 import { VirtualboardComponent } from './virtualboard/virtualboard.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { ProSchoolCommonModule } from './common/common.module';
+import { JwtInterceptor } from './_interceptors/auth.interceptors';
+import { IsSignedInGuard } from './_guards/isLoggedIn.gaurd';
+import { AuthguardGuard } from './_guards/authguard.guard';
 
 @NgModule({
   declarations: [
@@ -39,12 +43,21 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     ReactiveFormsModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    CountdownTimerModule.forRoot()
+    // CountdownTimerModule.forRoot(),
+    ProSchoolCommonModule,
   ],
   exports: [
   ],
   entryComponents: [AlertComponent, EventlistsComponent],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+    IsSignedInGuard,
+    AuthguardGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

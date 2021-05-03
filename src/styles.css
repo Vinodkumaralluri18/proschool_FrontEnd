@@ -1135,9 +1135,9 @@ float: right;
 }
 
 .dropdown {
-  position: block;
+  position: relative;
   height:35px;
-  display: contents;
+  display: inline-block;
   margin: 5px;
 }
 
@@ -1157,7 +1157,7 @@ float: right;
   height: 35px;
   border-radius: 5px;
   text-transform: capitalize;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .dropdown-content {
@@ -1201,7 +1201,7 @@ float: right;
   -webkit-transform: rotate(45deg);
   position: absolute;
   right: 10px;
-  top: 12px;
+  top: 16px;
   content: "";
   pointer-events: none;
 }

@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from "@angular/forms";
 
 export class CommonInputComponent {
   @Output() onBlurEvent = new EventEmitter();
-  @Input("control") control: FormControl;
+  @Input("control") control: FormControl | string | any;
   private _form: FormGroup;
   @Input()
   set form(value: FormGroup) {
