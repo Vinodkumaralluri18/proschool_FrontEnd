@@ -9,15 +9,22 @@
 
             <form class="login100-form validate-form" [formGroup]="loginForm" (ngSubmit)="login()">
                 <input class="login-fields" type="email" id="loginEmailId" formControlName="email" placeholder="Username">
-                <span class="help-block" *ngIf="!is_email_valid">Please enter user name</span>
-
+                <app-print-error
+                    [control]="loginForm.get('email')"
+                    [fieldName]="'user name'"
+                ></app-print-error>
                 <div class="space-row"></div>
 
                 <input class="login-fields" type="password" id="loginPassword" formControlName="password" placeholder="Password">
-                <span class="help-block" *ngIf="!is_password_valid">Please enter password</span>
-
+                <app-print-error
+                    [control]="loginForm.get('password')"
+                    [fieldName]="'password'"
+                ></app-print-error>
                 <div class="space-row"></div>
-                <span class="help-block" *ngIf="loading">Please enter valid Login Credentials</span>
+                <app-print-error
+                    [customError]="loginForm.valid && wrongUserNameOrPassword"
+                    [fieldName]="'Login Credentials'"
+                ></app-print-error>
 
                 <button type="submit" class="login-btn">
                     sign in

@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AlertComponent } from '../../_alert/alert/alert.component';
 import { EditrouteComponent } from '../editroute/editroute.component';
 import { TransportationService } from '../../_services/transportation.service';
+import { AuthenticationServiceService } from 'src/app/_services/authentication-service.service';
 
 @Component({
   selector: 'app-routes',
@@ -13,8 +14,9 @@ import { TransportationService } from '../../_services/transportation.service';
 export class RoutesComponent implements OnInit {
   config: any;
   collection = { count: '', routes: [] };
-
-  constructor(private service: TransportationService, private fb: FormBuilder, public dialog: MatDialog) {
+  user: any;
+  constructor(private service: TransportationService, private fb: FormBuilder, public dialog: MatDialog,
+    private authenticationServiceService: AuthenticationServiceService) {
     this.config = {
       itemsPerPage: 5,
       currentPage: 1,
@@ -23,6 +25,7 @@ export class RoutesComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.user = this.authenticationServiceService.userValue;
     this.getRoute();
     this.getVehicles();
   }

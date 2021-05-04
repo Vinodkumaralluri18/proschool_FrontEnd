@@ -12,9 +12,12 @@ export class EmployeeAddressComponent implements OnInit {
   @Input() employeeImage: string;
   @Output() employeeDetailsSubmitted = new EventEmitter();
   constructor() {}
+  profilepic;
 
   ngOnInit() {}
-
+  employeeProfPic(fileImg: any){
+    this.profilepic = fileImg[0];
+  }
   employeeActionButton(actionType: boolean) {
     if (actionType) {
       return this.employeeDetailsSubmitted.emit({ type: "prev" });

@@ -246,13 +246,9 @@ export class HeaderComponent implements OnInit {
 	}
 
 	logout() {
+		this.authenticationservice.setUserValue(null);
 		localStorage.removeItem('currentUser');
-		// this.authenticationservice.logout(this.log_id)
-		// 	.subscribe(
-		// 		res => {
-		// 			console.log(res)
-		// 		}
-		// 	)
+		localStorage.setItem('logged_in', null);
 	}
 
 	// getChat() {

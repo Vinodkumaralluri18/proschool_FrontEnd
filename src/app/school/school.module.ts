@@ -41,6 +41,7 @@ import { ExaminationPatternComponent } from './examination-pattern/examination-p
 import { EditAssessmentsComponent } from './edit-assessments/edit-assessments.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { TaskdetailsComponent } from './taskdetails/taskdetails.component';
+import { ProSchoolCommonModule } from '../common/common.module';
 
 @NgModule({
   declarations: [ProfileComponent, AddClassComponent, TimingsComponent, PatternsComponent, ParentinfoComponent, EmployeeinfoComponent, TasksComponent, AddtasksComponent, VendorsComponent, MaterialComponent, MaterialInComponent, MaterialOutComponent, ExpensesComponent, PaymentsComponent, AddpaymentsComponent, ClaimsComponent, EditclassComponent, EditstoreComponent, EditpaymentsComponent, EditexpensesComponent, PendingTasksComponent, EditschoolprofileComponent, CommunicationsComponent, AddMessageComponent, OpenMessageComponent, PaymentsListComponent, AddSectionComponent, AssessmentPatternComponent, ExaminationPatternComponent, EditAssessmentsComponent, NotificationsComponent, TaskdetailsComponent],
@@ -54,7 +55,8 @@ import { TaskdetailsComponent } from './taskdetails/taskdetails.component';
     PipesModule,
     DirectivesModule,
     MatDatepickerModule, MatInputModule, MatNativeDateModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    ProSchoolCommonModule,
   ],
   entryComponents: [EditclassComponent, EditstoreComponent, EditpaymentsComponent, EditexpensesComponent, AddtasksComponent, EditschoolprofileComponent, AddMessageComponent, OpenMessageComponent, PaymentsListComponent, EditAssessmentsComponent, TaskdetailsComponent]
 })

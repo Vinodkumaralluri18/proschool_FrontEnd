@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderService } from '../../_services/header.service';
 import { AlertComponent } from '../../_alert/alert/alert.component';
-import { User } from '../../_models/user';
+import { User, UserRole } from '../../_models/user';
 
 @Component({
   selector: 'app-notifications',
@@ -52,14 +52,14 @@ export class NotificationsComponent implements OnInit {
   } 
 
   getNotifications() {
-    if(this.user.role = 'admin') {
+    if(this.user.role = UserRole.PARENT) {
       this.service.getAdminNotifications()
       .subscribe(
         res => { this.notifications = this.all_notifications = res.notifications, 
           console.log(res) 
         }
       )
-    } else if(this.user.role = 'employee') {
+    } else if(this.user.role = UserRole.EMPLOYEE) {
       this.service.getNotifications()
       .subscribe(
         res => { this.notifications = this.all_notifications = res.notifications, 
