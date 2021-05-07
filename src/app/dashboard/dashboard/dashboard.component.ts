@@ -118,7 +118,7 @@ export class DashboardComponent implements OnInit {
   public classAca_data: any;
 
   private months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
+  public feesLoading;
   ngOnInit() {
     console.log(appConfig.activities)
     this.user = JSON.parse(localStorage.getItem('currentUser'));
@@ -134,6 +134,7 @@ export class DashboardComponent implements OnInit {
       console.log({'attendance': this.attendance_data})
       this.getPayments();
       this.getExpenses();
+      this.feesLoading = true;
       this.getFeeCollection();
     } else if (this.user.role === "teacher") {
       this.getClassTeacher_class();
@@ -326,6 +327,7 @@ export class DashboardComponent implements OnInit {
     this.service.getFeeCollection()
       .subscribe(
         res => { 
+          this.feesLoading = false
           if(this.selected_class === 'all') {
             this.fees = res
           } else {
@@ -333,7 +335,9 @@ export class DashboardComponent implements OnInit {
           }
           // this.fees = res, this.viewFees() 
         }
-      )
+      ), (err) => {
+        this.feesLoading = false
+      }
   }
 
   getClasses() {
