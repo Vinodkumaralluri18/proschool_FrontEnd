@@ -19,9 +19,11 @@ export class JwtInterceptor implements HttpInterceptor {
                 this.router.navigate(['/login']);
             }
             if (isLoggedIn) {
-                request = request.clone({
-                    setHeaders: { Authorization: `Bearer ${user.token}` }
-                });
+                // commenting bcoz of cors issues
+                
+                // request = request.clone({
+                //     setHeaders: { Authorization: `Bearer ${user.token}` }
+                // });
             }
         }
         return next.handle(request);
