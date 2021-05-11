@@ -10,6 +10,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { TaskdetailsComponent} from '../../school/taskdetails/taskdetails.component';
 import { Router } from "@angular/router";
 import { appConfig } from '../../app.config';
+import { AlertComponent } from 'src/app/_alert/alert/alert.component';
 
 @Component({
 	selector: 'app-header',
@@ -245,11 +246,37 @@ export class HeaderComponent implements OnInit {
 		this.employeeservice.profileImage = this.url + '/image/' + this.employee_details.employeeImage.filename;
 	}
 
-	logout() {
-		this.authenticationservice.setUserValue(null);
-		localStorage.removeItem('currentUser');
-		localStorage.setItem('logged_in', null);
+	logout($event) {
+		$event.preventDefault();
+		// this.openAlert("Are you sure to delete the Assignment", true)
+		this.openAlert("Are you sure you want to Logout now?", true)
 	}
+
+	openAlert(alert_message, status) {
+		const alertConfig = new MatDialogConfig();
+	
+		alertConfig.autoFocus = true;
+		alertConfig.width = '40%';
+	
+		alertConfig.data = {
+		  message: alert_message,
+		  confirm_status: status,
+		};
+	
+		const alertRef = this.dialog.open(AlertComponent, alertConfig);
+	
+		alertRef.afterClosed().subscribe(
+		  data => {
+			console.log("Dialog output:", data)
+			if(data === true) {
+				this.authenticationservice.setUserValue(null);
+				localStorage.removeItem('currentUser');
+				localStorage.setItem('logged_in', null);
+				window.location.reload();
+			}
+		  }
+		)
+	  }
 
 	// getChat() {
 	// 	this.service.getChat()

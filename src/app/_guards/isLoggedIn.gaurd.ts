@@ -20,7 +20,8 @@ export class IsSignedInGuard implements CanActivate {
   ): boolean {
     const user = this.authService.userValue;
     if (user && user.role) {
-      this.router.navigate(["/main/main"]); // or home
+      this.router.navigate(["/"]); // or home
+      window.location.reload();
       return false;
     }
     return true;

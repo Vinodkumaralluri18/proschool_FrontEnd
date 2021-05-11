@@ -136,6 +136,7 @@ export class AdmissionComponent implements OnInit {
     }),
     // parentGroup
     fatherForm:this.fb.group({
+      primary_parent: ['', Validators.required],
       father_name: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       father_contact: ['', Validators.required],
       father_email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],

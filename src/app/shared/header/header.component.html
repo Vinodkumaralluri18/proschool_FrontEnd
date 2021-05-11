@@ -32,7 +32,7 @@
           <span class="notification-count-bubble" *ngIf="unread_notifications > 0">{{unread_notifications}}</span>
           <span class="_text">Notifications</span>
         </a>
-        <a href="" class="_item" (click)="logout()">
+        <a href="" class="_item" (click)="logout($event)">
           <span class="_icon">
             <img src="../../../assets/images/log-out@3x.png" alt="Logout">
           </span>
