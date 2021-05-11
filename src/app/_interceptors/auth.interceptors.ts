@@ -16,14 +16,23 @@ export class JwtInterceptor implements HttpInterceptor {
         const re = /signin/gi;
         if (request.url.search(re) === -1 ) { 
             if(this.checkForTokenExpired(user.token, request.url)) {
+                localStorage.clear();
                 this.router.navigate(['/login']);
             }
             if (isLoggedIn) {
                 // commenting bcoz of cors issues
-                
+
                 // request = request.clone({
-                //     setHeaders: { Authorization: `Bearer ${user.token}` }
+                //     setHeaders: {
+                //         //  Authorization: `Bearer ${user.token}` ,
+                //          'Access-Control-Allow-Origin':'*',
+                //          'Access-Control-Allow-Header':'Content-Type',
+                //          'Content-Type': 'application/json',
+                //          'Access-Control-Allow-Methods':'GET, POST, OPTIONS',
+                //     }
                 // });
+                // console.log({request})
+
             }
         }
         return next.handle(request);

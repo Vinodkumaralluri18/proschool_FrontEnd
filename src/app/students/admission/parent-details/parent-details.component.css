@@ -9,3 +9,11 @@ input {
   display: flex;
   justify-content: space-between;
 }
+.primary-parent {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.primary-parent > pro-school-common-input {
+  width: 40%;   
+}

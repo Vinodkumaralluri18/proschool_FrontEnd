@@ -1,4 +1,14 @@
 <div>
+  <div class="primary-parent" [formGroup]="fatherForm">
+    <pro-school-common-input
+    [form]="fatherForm"
+    [control]="'primary_parent'"
+    [options]="primaryParentOptions"
+    [fieldName]="'primary parent'"
+    [labelTitle]="'Primary Parent*'"
+    [inputType]="'DropDown'"
+  ></pro-school-common-input>
+  </div>
   <div class="row-wrapper" [formGroup]="fatherForm">
     <pro-school-common-input
       [form]="fatherForm"
@@ -7,7 +17,7 @@
       [labelTitle]="'Father Name*'"
       [inputType]="'input'"
       (onBlurEvent)="onBlur($event)"
-      ></pro-school-common-input>
+    ></pro-school-common-input>
     <pro-school-common-input
       [form]="fatherForm"
       [control]="'father_contact'"
@@ -16,7 +26,7 @@
       [inputType]="'number'"
       [maxLength]="10"
       (onBlurEvent)="onBlur($event)"
-      ></pro-school-common-input>
+    ></pro-school-common-input>
     <pro-school-common-input
       [form]="fatherForm"
       [control]="'father_email'"
@@ -24,7 +34,7 @@
       [labelTitle]="'Father Email'"
       [inputType]="'email'"
       (onBlurEvent)="onBlur($event)"
-      ></pro-school-common-input>
+    ></pro-school-common-input>
     <pro-school-common-input
       [form]="fatherForm"
       [control]="'father_occupation'"
@@ -32,7 +42,7 @@
       [labelTitle]="'Father Occupation'"
       [inputType]="'input'"
       (onBlurEvent)="onBlur($event)"
-      ></pro-school-common-input>
+    ></pro-school-common-input>
   </div>
 
   <div class="row-wrapper" [formGroup]="motherForm">

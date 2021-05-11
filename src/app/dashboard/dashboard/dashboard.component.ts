@@ -99,11 +99,7 @@ export class DashboardComponent implements OnInit {
   private payments = {};
   private expenses = {};
   private finances = {}
-  private fees = {
-    "totalFees": '',
-    "paidFees": '',
-    "balanceFees": '',
-  };
+  public fees;
 
   private class_schedule = [];
   private section_schedule = [];

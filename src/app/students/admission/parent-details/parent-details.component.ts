@@ -52,6 +52,12 @@ export class ParentDetailsComponent {
     }
     if(inValidForm.length) return this.showValidationMsg(inValidForm[0]);
   }
+  primaryParentOptions = [
+    { value: "", viewValue: "--Select--" },
+    { value: "father", viewValue: "Father" },
+    { value: "mother", viewValue: "Mother" },
+    { value: "guardian", viewValue: "Guardian" }
+  ];
   emitOutput() {
     if (this.fatherForm.valid || this.motherForm.valid || this.gaurdianForm.valid) {
       this.parentDetailsSubmitted.emit({
