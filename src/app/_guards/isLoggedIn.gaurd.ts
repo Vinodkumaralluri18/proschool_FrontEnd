@@ -20,8 +20,14 @@ export class IsSignedInGuard implements CanActivate {
   ): boolean {
     const user = this.authService.userValue;
     if (user && user.role) {
-      this.router.navigate(["/"]); // or home
-      window.location.reload();
+      if (user.role === 'admin') {
+        this.router.navigate(['/main/main']);
+      } else if (user.role === 'teacher') {
+        this.router.navigate(['/main/main/dashboard/teacherdashboard'])
+      } else if (user.role === 'parent') {
+        this.router.navigate(['/main/main/dashboard/parentdashboard'])
+      }
+      // window.location.reload();
       return false;
     }
     return true;
