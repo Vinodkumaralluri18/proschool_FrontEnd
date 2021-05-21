@@ -16,7 +16,7 @@ export class MessageService {
   private school_id = appConfig.school_id;
   private role = appConfig.role;
   private token = appConfig.token;
-
+  private employees: any[];
   // private chat_url = 'http://localhost:4005';
   private chat_url = 'http://13.126.140.230:4005';
   private employee_id = appConfig.employee_id;
@@ -25,6 +25,10 @@ export class MessageService {
   constructor(private http: HttpClient) {
     this.socket = io(this.chat_url);
     this.chat_socket = io(this.chat_url + '/' + 'chat')
+  }
+
+  getStudenDetails(student_id): Observable<any> {
+    return this.http.get<any>(this.url + '/student_details/' + student_id);
   }
 
   getInbox(sent_to): Observable<any> {
@@ -44,10 +48,10 @@ export class MessageService {
     return this.http.get<any>(this.url + '/parentInbox_messages/' + sent_to + '/' + this.role + '/' + class_id + '/' + section_id + '/' + this.school_id);
   }
 
-  messageStatus(chat_id, data): Observable<any> {
-    console.log(chat_id)
-    return this.http.put<any>(this.url + '/chatmessage_status/' + chat_id, data)
-  }
+  // messageStatus(chat_id, data): Observable<any> {
+  //   console.log(chat_id)
+  //   return this.http.put<any>(this.url + '/chatmessage_status/' + chat_id, data)
+  // }
 
   sendReply(reply_model, chat_id): Observable<any> {
     var data = {
@@ -58,7 +62,7 @@ export class MessageService {
 
   // Chat Messages
   getChatMessages(sent_to): Observable<any> {
-    return this.http.get<any>(this.chat_url + '/getChats/' + this.school_id);
+    return this.http.get<any>(this.chat_url + '/api/getChats/' + this.school_id);
   }
 
   getRealTimeMessages = () => {
@@ -86,8 +90,8 @@ export class MessageService {
     return this.chat_socket.emit('send_message', message)
   }
 
-  // messageStatus(data): Observable<any> {
-  //   return this.chat_socket.emit('read_messages', data)
-  // }
+  messageStatus(data): Observable<any> {
+    return this.chat_socket.emit('read_messages', data)
+  }
 
 }
