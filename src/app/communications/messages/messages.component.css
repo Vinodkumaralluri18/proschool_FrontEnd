@@ -9,12 +9,13 @@
 
 .mail-setcion-wrapper {
 	display: flex;
-    height: inherit;
+    height: 80vh;
 }
 
 .mails-list-wrapper {
     width: 600px;
-    background: #FAFAFE;
+    border-right: 1.5px solid rgb(224 224 224 / 60%);
+    /* background: #FAFAFE; */
     height: inherit;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
@@ -32,10 +33,20 @@
 .search-box {
 	background: #FFFFFF;
     border: none;
-    padding: 16px 20px;
+    padding: 35px 0px 15px 25px;
     width: -webkit-fill-available;
     height: 30px;
     position: relative;
+}
+
+.flex-message-header-left {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.message-header {
+    height: 54px;
 }
 
 .search-box:after {
@@ -242,34 +253,48 @@ button.box-selection-btn.selected {
 }
 
 .compose-btn {
-    height: 40px;
-    background: #5E81F4;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     color: #fff;
-    width: 100%;
-    font-size: 16px;
+    width: 150px;
+    height: 48px;
+    left: 1689px;
+    top: 194px;
+    background: #6382ED;
     border-radius: 2px;
-    position: relative;
-    font-weight: 600;
+}
+.compose-text {
+    margin : 0 0 2px -7px;
 }
 
 .compose-btn:before {
-	content: url('../../../assets/images/plus_white.svg');
+	/* content: url('../../../assets/images/plus_white.svg');
 	height: 24px;
 	width: 24px;
     vertical-align: -webkit-baseline-middle;
     position: absolute;
-    left: 90%;
+    left: 90%; */
 }
 
 
 .mail-content {
     position: relative;
-    padding: 40px 40px 60px 60px;
+    padding: 40px 40px 0px 40px;
     height: inherit;
 }
 
 .mail-body-wrapper {
-    height: 90%;
+    height: 85%;
+}
+.text-area-container {
+    position: relative
+}
+
+.send-button-icon {
+    position: absolute; 
+    top: 33%;
+    right: 7%;
 }
 
 .mail-body-icon {
@@ -288,11 +313,15 @@ span.mail-body-from-name {
     line-height: 50px;
     vertical-align: top;
     text-transform: capitalize;
-    display: inline-block;
-    padding: 0 20px;
-    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 13px 0px 0px 20px;
     color: #000000;
     font-weight: 600;
+    width: 100%;
+    color: #5E81F4;
+    font-size: 24px;
+    border-bottom: 1px solid rgb(224 224 224 / 60%);
 }
 
 .mail-body-day {
@@ -327,9 +356,37 @@ p.mail-body-subject {
 
 .mail-box {
     display: grid;
-    height: 93%;
+    height: 100%;
     margin-top: 20px;
     overflow: auto;
+}
+._tab-group button.selected-tab {
+    background-color: #fff;
+    color: #5E81F4;
+}
+.message-tab {
+    color: #A6A6A6;
+    background-color: #F0F3F8;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf;
 }
 
 @media (min-width:1349px){ 
@@ -340,31 +397,118 @@ p.mail-body-subject {
       }
 }
 
-p.mail-body {
+.mail-body {
+    background: #D9D9D9;
+    color: #000;
+    font-size: 14px;
+    margin: 10px 0px 0px 20px;
+    float: left;
+    padding: 10px 10px 10px 5px;
+    border-radius: 7px;
+    max-width: fit-content;
+    margin-right: 20%;
+    position: relative;
+}
+.mail-body:after {
+    bottom: 30%;
+    left: 1%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #D9D9D9;
+    border-width: 15px;
+    margin-left: -15px;
+}
+
+.mail-body2 {
     color: #FFFFFF;
     background-color: #5E81F4;
     font-size: 14px;
-    margin: 10px 0;
-    float: left;
-    border-radius: 5px;
-    padding: 10px;
+    margin: 10px 20px 0px 0px;
+    float: right;
+    border-radius: 7px;
+    padding: 10px 10px 10px 5px;
+    position: relative;
     max-width: fit-content;
+    margin-left: 20%;
+}
+.mail-body2:after {
+    bottom: 30%;
+    right: 1%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #5E81F4;
+    border-width: 15px;
+    margin-right: -15px;
+}
+.time {
+    font-size: 12px;
+    line-height: 12px;
+    float: right;
+    margin: 0px -1px 0px 0px;
+}
+.message-tab {
+    width: 38%;
+    height: 63px;
+    border-bottom: 1px solid rgb(224 224 224 / 60%);
+    font-size: 20px;
+}
+._tab-group {
+    display: flex;
+    background-color: #F0F3F8;
+}
+.message-text {
+    margin: 0px 0px 3px 3px;
+}
+.overlap-text {
+    z-index: 1;
+    position: relative;
+}
+/* .message-time {
+    font-size: 12px;
+    line-height: 12px;
+    float: right;
+} */
+.message-time {
+    color: #A3A3A3;
+}
+.first-message {
+    max-width: 100px;
+    width: 100px;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+    overflow: hidden;
 }
 
-p.mail-body2 {
-    color: #FFFFFF;
-    background-color: #888;
-    font-size: 14px;
-    margin: 10px 0;
-    float: right;
+.textarea-chat {
+    width: 100%;
+    border: none;
+    padding: 7px 50px 7px 20px;
+    font: 14px/22px "Lato", Arial, sans-serif;
+    margin-bottom: 10px;
     border-radius: 5px;
-    padding: 10px;
-    max-width: fit-content;
-}
+    resize: none;
+    background: white;
+    border-top: 1.5px solid rgb(224 224 224 / 60%);
+  }
+  .textarea-chat::placeholder {
+    color: #A3A3A3;
+    font-size: 14px;
+    line-height: 60px;
+    text-align:center;
+  }
 
 .mail-body-reply-btn {
     padding: 20px 0;
     width: 100%;
+    height: 100px;
     border-top: 1px solid #888;
     color: #888;
     font-size: 13px;
@@ -380,9 +524,15 @@ p.mail-body2 {
 	top: 15px;
     right: 40px;
 }
-
+.send-button-icon {
+    
+}
 .mail-list {
+    background: #FAFAFE;
 	scrollbar-width: thin; scrollbar-color: #d8e1ff transparent;
+}
+.search-icon {
+    margin-right: 10px;
 }
 
 .mail-list::-webkit-scrollbar {
@@ -407,4 +557,9 @@ p.mail-body2 {
 .reply-div {
     display: flex;
     margin-right: 35px;
+    border: none;
+    height: 100px;
+}
+.reply-input {
+    height: 100px
 }
