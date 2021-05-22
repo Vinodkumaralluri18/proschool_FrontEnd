@@ -28,6 +28,7 @@ export class AdmissionComponent implements OnInit {
   emailPattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
   joined_on = new FormControl(new Date);
   date_of_birth = new FormControl(new Date);
+  title: string = 'Add Employee';
 
   employee: any = {}
   employeeImagee;
@@ -90,6 +91,7 @@ export class AdmissionComponent implements OnInit {
 
   ngOnInit() {
     if (this.dialog_type === "edit") {
+      this.title = 'Edit Employee';
       this.employeeadmissionForm.controls.admissionForm.patchValue({
         title: this.employee.title,
         first_name: this.employee.first_name,
@@ -180,7 +182,7 @@ export class AdmissionComponent implements OnInit {
     }
   }
   employeeProfPic(fileImg: any){
-    this.profilepic = fileImg[0];
+    this.profilepic = fileImg;
   }
 
   employeeDocuments(fileDocs: any){
@@ -199,8 +201,8 @@ export class AdmissionComponent implements OnInit {
             this.dialogRef.close();
             this.alert_message = "Employee Added Successfully";
             this.openAlert(this.alert_message);
-            this.onSubmitPic(res.id);
-            // this.onSubmitDoc(res.id);
+              this.onSubmitPic(this.employee.employee_id);
+              // this.onSubmitDoc(res.id);
           } else {
             this.alert_message = "Employee Not Added";
             this.openAlert(this.alert_message)
@@ -214,6 +216,7 @@ export class AdmissionComponent implements OnInit {
             if(res == true) {
               this.dialogRef.close();
               this.alert_message = "Employee Edited Successfully";
+              this.onSubmitPic(this.employee.employee_id);
               this.openAlert(this.alert_message)
             } else {
               this.alert_message = "Employee Not Edited";
