@@ -199,6 +199,7 @@ export class AdmissionComponent implements OnInit {
     });
     this.studentadmissionForm.controls.fatherForm.patchValue({
       father_name: this.student.parents[0].parent_name,
+      primary_parent: this.student.primary_parent,
       father_contact:this.student.parents[0].parent_contact,
       father_email:this.student.parents[0].parent_email,
       father_occupation:this.student.parents[0].occupation,
