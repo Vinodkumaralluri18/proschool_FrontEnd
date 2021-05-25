@@ -44,7 +44,7 @@
           && (studentadmissionForm.get('cur_address').touched || studentadmissionForm.get('cur_address').dirty)}">
             <label class="heading">Current Address :</label>
             <div><textarea formControlName="cur_address" cols="45" rows="5"
-                [value]="student.current_address[0].cur_address" name="cur_address" required
+                 name="cur_address" required
                 >
            </textarea>
             </div>
@@ -54,7 +54,7 @@
           <div class="form-group">
             <label class="heading">Permanent Address :</label>
             <div><textarea formControlName="perm_address" cols="45" rows="5"
-                [value]="student.permanent_address[0].perm_address"></textarea>
+                ></textarea>
             </div>
           </div>
         </div>

@@ -217,6 +217,10 @@ export class AdmissionComponent implements OnInit {
       gaurdian_occupation:this.student.parents[2].occupation,
       gaurdian_relation:this.student.parents[2].parent_relation,
     });
+    this.studentadmissionForm.patchValue({
+      perm_address: this.student.permanent_address[0].perm_address,
+      cur_address: this.student.current_address[0].cur_address
+    })
     console.log({studentadmissionForm: this.studentadmissionForm})
     console.log({parentForm: this.studentadmissionForm})
   }
