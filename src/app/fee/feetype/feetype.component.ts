@@ -72,9 +72,10 @@ export class FeetypeComponent implements OnInit {
     .subscribe(
       res => { 
         if(res == true) {
-          this.getFeeTypes();
           this.alert_message = "FeeType Added Successfully";
-          this.openAlert(this.alert_message, false)
+          this.openAlert(this.alert_message, false);
+          this.fee_types.push({fee_type : this.feetypeForm.value})
+          this.getFeeTypes();
         } else {
           this.alert_message = "FeeType Not Added";
           this.openAlert(this.alert_message, false)

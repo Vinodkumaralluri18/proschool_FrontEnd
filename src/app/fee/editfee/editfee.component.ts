@@ -232,7 +232,7 @@ export class EditfeeComponent implements OnInit {
           if(res == true) {
             this.alert_message = "FeeStructure Added Successfully";
             this.openAlert(this.alert_message);
-            this.dialogRef.close("Hello-1");
+            this.dialogRef.close({form:this.feeStructureForm.value});
           } else {
             this.alert_message = "FeeStructure Not Added";
             this.openAlert(this.alert_message)
@@ -246,7 +246,7 @@ export class EditfeeComponent implements OnInit {
             if(res == true) {
               this.alert_message = "FeeStructure Edited Successfully";
               this.openAlert(this.alert_message);
-              this.dialogRef.close();
+              this.dialogRef.close({form: this.feeStructureForm.value, feeStructureId: this.fee_structure.fee_structure_id});
             } else {
               this.alert_message = "FeeStructure Edited Successfully";
               this.openAlert(this.alert_message)
