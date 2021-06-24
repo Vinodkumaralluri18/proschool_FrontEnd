@@ -19,34 +19,34 @@ export class TeacherDashboardComponent implements OnInit {
   private day;
   private date;
   private month;
-  private monthName;
+  public monthName;
   private year;
   private time;
   private current_date
 
-  private schedule_tab = true;
-  private tasks_tab = false;
-  private events_tab = false;
-  private claims_tab = false;
+  public schedule_tab = true;
+  public tasks_tab = false;
+  public events_tab = false;
+  public claims_tab = false;
 
-  private classTeacher:any = {};
-  private section_attendance = [];
-  private employeeAttendance = [];
-  private employeeSchedule = [];
-  private classSchedule = [];
+  public classTeacher:any = {};
+  public section_attendance: any = [];
+  public employeeAttendance: any = [];
+  public employeeSchedule: any = [];
+  private classSchedule: any = [];
 
-  private tab_view = [];
-  private tasks = [];
-  private events = [];
-  private noticeboard = [];
-  private claims = [];
+  private tab_view: any = [];
+  private tasks: any = [];
+  private events: any = [];
+  private noticeboard: any = [];
+  private claims: any = [];
 
-  private classes = [];
-  private sections = [];
+  private classes: any = [];
+  private sections: any = [];
   private selected_class;
   private selected_section;
 
-  private fees:any = {};
+  public fees:any = {};
 
   private months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 

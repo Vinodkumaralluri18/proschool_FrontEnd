@@ -12,7 +12,7 @@ import { User } from '../../_models/user';
   styleUrls: ['./information.component.css']
 })
 export class InformationComponent implements OnInit {
-
+  searchText = ''
   constructor(private service: EmployeesService, public dialog: MatDialog) {}
 
   user: User;

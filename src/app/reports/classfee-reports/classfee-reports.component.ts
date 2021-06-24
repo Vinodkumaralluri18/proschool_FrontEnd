@@ -14,6 +14,8 @@ export class ClassfeeReportsComponent implements OnInit {
   constructor(private service: ServicesService, public dialog: MatDialog) {}
 
   pageNo: number = 1;
+  showTermList: boolean = false;
+  showTypeList: boolean = false;
   page_start: number = 0;
   page_counter = Array;
   pages: number = 10;

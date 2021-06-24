@@ -35,7 +35,7 @@ export class AttendanceComponent implements OnInit {
   dummy_days = new Date(this.currentYear, this.selected_month.value + 1, 1).getDay();
   alert_message: string;
   attendance = [];
-  attendance_data = {};
+  attendance_data: any = {};
   j;
 
   daylist = [];

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-patterns',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patterns.component.css']
 })
 export class PatternsComponent implements OnInit {
-
+  classForm: FormGroup;
   constructor() { }
   ngOnInit() {
+  }
+  addClass() {
+    
   }
 }

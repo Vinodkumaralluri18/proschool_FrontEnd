@@ -32,11 +32,11 @@ export class AttendanceComponent implements OnInit {
   dummy_days = new Date(this.currentYear, this.selected_month.value + 1, 1).getDay();
   alert_message: string;
   attendance: any = [];
-  attendance_data= {};
+  attendance_data:any = {};
 
-  daylist = [];
-  chunked_data = [];
-  dayslist = [];
+  daylist:any = [];
+  chunked_data:any = [];
+  dayslist:any = [];
 
   chunk(array, size) {
     this.dayslist = [];

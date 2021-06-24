@@ -12,7 +12,7 @@ import { User } from '../../_models/user';
 })
 export class VehiclesComponent implements OnInit {
   config: any;
-  collection = { count: '', vehicles: [] };
+  collection: any = { count: '', vehicles: [] };
 
   constructor(private service: TransportationService, public dialog: MatDialog) {
     this.config = {

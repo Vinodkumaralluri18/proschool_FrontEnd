@@ -13,7 +13,7 @@ import { EditfeeComponent } from '../editfee/editfee.component';
 export class ClassFeeComponent implements OnInit {
 
   constructor(private service: ServicesService, private feeservice: FeeService, public dialog: MatDialog) { }
-
+  showClassList = false;
   pageNo: number = 1;
   page_start: number = 0;
   page_counter = Array;

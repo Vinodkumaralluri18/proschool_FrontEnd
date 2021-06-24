@@ -16,7 +16,7 @@ export class HeaderService {
   private token = appConfig.token;
 
   // private socket_url = 'http://localhost:4005';
-  private socket_url = 'http://13.126.140.230:4005';
+  private socket_url = 'http://api.proschool.in';
   private notification_socket;
   private message_socket;
   private chat_socket;

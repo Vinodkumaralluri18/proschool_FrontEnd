@@ -13,7 +13,7 @@ export class NotificationsComponent implements OnInit {
   user: User;
   notifications = [];
   all_notifications = [];
-
+  showStatusList = false;
   pageNo: number = 1;
   page_start: number = 0;
   page_counter = Array;
@@ -52,14 +52,14 @@ export class NotificationsComponent implements OnInit {
   } 
 
   getNotifications() {
-    if(this.user.role = UserRole.PARENT) {
+    if(this.user.role ===  UserRole.ADMIN) {
       this.service.getAdminNotifications()
       .subscribe(
         res => { this.notifications = this.all_notifications = res.notifications, 
           console.log(res) 
         }
       )
-    } else if(this.user.role = UserRole.EMPLOYEE) {
+    } else if(this.user.role ===  UserRole.EMPLOYEE) {
       this.service.getNotifications()
       .subscribe(
         res => { this.notifications = this.all_notifications = res.notifications, 

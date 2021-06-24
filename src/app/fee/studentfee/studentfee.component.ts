@@ -16,6 +16,7 @@ export class StudentfeeComponent implements OnInit {
   constructor(private service: StudentsService, private feeservice: FeeService, public dialog: MatDialog) {}
 
   user: User;
+  searchText = '';
 
   pageNo: number = 1;
   page_start: number = 0;

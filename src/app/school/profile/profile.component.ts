@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
   schoolprofile: any = {};
 
   constructor(private service : ServicesService, public dialog: MatDialog, private fb: FormBuilder, private http: HttpClient,
-            private employeeservice : EmployeesService) { }
+            public employeeservice : EmployeesService) { }
 
   ngOnInit() { 
     this.user = JSON.parse(localStorage.getItem('currentUser'));

@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   private year;
   private time;
   private current_date;
-  private selectedTab: string = 'tasks';
+  public selectedTab: string = 'tasks';
   i;
 
   private tasks_tab = true;
@@ -38,11 +38,11 @@ export class DashboardComponent implements OnInit {
   private noticeboard = [];
   private feedbacks = [];
 
-  private classes = [];
-  private sections = [];
-  private selected_class = 'all';
-  private selected_section;
-  private class_teacher;
+  public classes = [];
+  public sections = [];
+  public selected_class = 'all';
+  public selected_section;
+  public class_teacher;
   private selected_month: any = 'all';
 
   private class_attendance = {
@@ -89,20 +89,20 @@ export class DashboardComponent implements OnInit {
 
   private classEvaluation = [];
 
-  private studentAttendance = {};
-  private employeeAttendance = {};
-  private attendance_data = {}
+  private studentAttendance: any = {};
+  private employeeAttendance: any = {};
+  public attendance_data: any = {}
 
   std_attendance: boolean = true;
   payments_data: boolean = true;
 
-  private payments = {};
-  private expenses = {};
-  private finances = {}
+  private payments: any = {};
+  private expenses: any = {};
+  public finances: any = {}
   public fees;
 
   private class_schedule = [];
-  private section_schedule = [];
+  public section_schedule = [];
 
   view_fee = [400, 180];
   view_classAttendance = [220, 150]
