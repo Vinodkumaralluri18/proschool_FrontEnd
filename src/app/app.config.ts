@@ -1,8 +1,8 @@
 export const appConfig = {
-    apiUrl: 'http://api.proschool.in/api',
+    apiUrl: 'https://api.proschool.in/api',
     // apiUrl: 'http://localhost:4005/api',
 
-    // authenticationUrl: 'http://api.proschool.in',
+    // authenticationUrl: 'https://api.proschool.in',
     // authenticationUrl: 'http://localhost:4005/api',
 
     role: JSON.parse(localStorage.getItem('currentUser')).role,

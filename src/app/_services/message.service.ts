@@ -18,7 +18,7 @@ export class MessageService {
   private token = appConfig.token;
   private employees: any[];
   // private chat_url = 'http://localhost:4005';
-  private chat_url = 'http://api.proschool.in';
+  private chat_url = 'https://api.proschool.in';
   private employee_id = appConfig.employee_id;
   empty_data = {}
 
