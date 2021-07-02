@@ -15,7 +15,7 @@ import { User } from '../../_models/user';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private service: EmployeesService, public dialog: MatDialog, private route: ActivatedRoute, private services: ServicesService) { }
+  constructor(public service: EmployeesService, public dialog: MatDialog, private route: ActivatedRoute, private services: ServicesService) { }
 
   user: User;
 
@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
   addrPannel: boolean = false;
 
   employee_id = this.route.snapshot.paramMap.get('id');
-  employee_details = {
+  employee_details: any = {
     employee_id: '',
     first_name:'',
     employeeImage:{

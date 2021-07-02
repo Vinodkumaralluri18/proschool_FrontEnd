@@ -70,7 +70,7 @@ export class EditschedulesComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  getSchedule(i) {
+  getSchedule() {
     this.selected_examination = this.examinations.filter(data => parseInt(data.unique_code) === parseInt(this.scheduleForm.value.unique_code))[0];
     console.log(this.selected_examination)
   }

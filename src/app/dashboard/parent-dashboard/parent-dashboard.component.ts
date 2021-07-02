@@ -18,22 +18,22 @@ export class ParentDashboardComponent implements OnInit {
   private day;
   private date;
   private month;
-  private monthName;
+  public monthName;
   private year;
   private time;
   private current_date;
   i;
 
-  private tasks_tab = true;
-  private events_tab = false;
-  private notice_tab = false;
-  private feedback_back = false;
+  public tasks_tab: any = true;
+  public events_tab: any = false;
+  public notice_tab: any = false;
+  public feedback_back: any = false;
   
-  private tab_view = [];
-  private tasks = [];
-  private events = [];
-  private noticeboard = [];
-  private feedbacks = [];
+  public tab_view: any = [];
+  public tasks: any = [];
+  public events: any = [];
+  public noticeboard: any = [];
+  public feedbacks: any = [];
 
   private selected_month = new Date().getMonth();
   private student_attendance = {
@@ -59,7 +59,7 @@ export class ParentDashboardComponent implements OnInit {
   };
   private student_academics = [];
   private class_schedule = [];
-  private section_schedule = [];
+  public section_schedule = [];
 
   view_fee = [400, 160];
   view_classAttendance = [220, 150]
@@ -68,6 +68,9 @@ export class ParentDashboardComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = false;
+  // xAxisLabel = false;
+  // xAxisLabel = false;
+  // yAxisLabel = false;
   showYAxisLabel = false;
   FeexAxisLabel: any;
   FeeyAxisLabel: any;
@@ -210,8 +213,8 @@ export class ParentDashboardComponent implements OnInit {
       )
   }
 
+  isDoughnut: boolean = false;
   viewStudentAttendance() {
-    const isDoughnut: boolean = false;
     const legendPosition: string = 'below';
     this.showLegend = false;
     this.AttcolorScheme = {

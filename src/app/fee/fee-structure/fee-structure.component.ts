@@ -12,7 +12,13 @@ import { EditfeeComponent } from '../editfee/editfee.component';
 })
 export class FeeStructureComponent implements OnInit {
 
-  constructor(private service: ServicesService, private feeservice: FeeService, public dialog: MatDialog) { }
+  constructor(private service: ServicesService, private feeservice: FeeService, public dialog: MatDialog) {
+    dialog.afterAllClosed
+    .subscribe((res) => {
+      this.getFeeStructure();
+    }
+  );
+   }
 
   pageNo: number = 1;
   page_start: number = 0;
@@ -154,14 +160,22 @@ export class FeeStructureComponent implements OnInit {
       submit_type: submit_type,
     };
 
-    const dialogRef = this.dialog.open(EditfeeComponent, dialogConfig);
-
+    const dialogRef = this.dialog.open(EditfeeComponent, dialogConfig)
     dialogRef.afterClosed().subscribe(
       data => {
-        console.log("Dialog output:", data),
-        console.log(data),
-        this.getFeeStructure();
-      }
+        if(data) {
+          console.log("Dialog output:", data),
+          console.log(data);
+          if(submit_type == 'edit') {
+            var foundIndex = this.fee_structure.findIndex(x => x.id == data.feeStructureId);
+            this.fee_structure[foundIndex] = data.form;
+          } else if(submit_type == 'add') {
+            debugger
+            this.fee_structure.push(data.form)
+          }
+          this.getFeeStructure();
+        }
+        }
     );
   }
 

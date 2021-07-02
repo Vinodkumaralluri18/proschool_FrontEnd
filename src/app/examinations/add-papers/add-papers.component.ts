@@ -87,7 +87,7 @@ export class AddPapersComponent implements OnInit {
     this.subject_papers = this.exam_papers.filter( res => res.subject_id === this.selected_subject)[0];
   } 
 
-  // addExam_papers() {
+  addExam_papers() {
   //   console.log(this.inner_assessments)
   //   if(this.selected_subject == undefined || this.selected_subject == '') {
   //     this.alert_message = "Please Select Subject";
@@ -107,7 +107,7 @@ export class AddPapersComponent implements OnInit {
   //       }
   //     )
   //   }    
-  // }
+  }
 
   openAlert(alert_message) {
     const alertConfig = new MatDialogConfig();

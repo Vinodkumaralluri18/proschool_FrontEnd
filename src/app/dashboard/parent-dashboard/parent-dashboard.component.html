@@ -118,7 +118,7 @@
             <h5 class="studattn pull-left">Attendance [ {{monthName}} ]</h5>
             <div class="ngxcharts" align="center">
               <ngx-charts-pie-chart [view]="view_classAttendance" [scheme]="AttcolorScheme" [results]="stdAtt_data" [gradient]="gradient"
-                [legend]="showLegend" [legendPosition]="legendPosition" [doughnut]="isDoughnut">
+                [legend]="showLegend" [legendPosition]="'below'" [doughnut]="isDoughnut">
               </ngx-charts-pie-chart>
             </div>
           </div>
@@ -128,7 +128,7 @@
             <div class="ngxcharts" align="center">
               <ngx-charts-bar-horizontal [view]="view_classAttendance" [scheme]="FeecolorScheme" [results]="stdfee_data" [gradient]="gradient"
                 [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
-                [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel">
+                [showYAxisLabel]="showYAxisLabel">
               </ngx-charts-bar-horizontal>
               <!-- <ngx-charts-pie-chart [view]="view_classAttendance" [scheme]="colorScheme" [results]="stdfee_data" [gradient]="gradient"
                 [legend]="showLegend" [legendPosition]="legendPosition" [doughnut]="isDoughnut">
@@ -148,7 +148,7 @@
           <div class="ngxcharts" align="center">
             <ngx-charts-bar-vertical [view]="view_fee" [scheme]="AcademicscolorScheme" [results]="stdacad_data" [gradient]="gradient"
               [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel">
+              [showYAxisLabel]="showYAxisLabel">
             </ngx-charts-bar-vertical>
           </div>
         </div>

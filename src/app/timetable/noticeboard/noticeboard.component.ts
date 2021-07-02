@@ -23,7 +23,7 @@ export class NoticeboardComponent implements OnInit {
   dialog_type: string;
   alert_message: string;
   user: User;
-
+  searchText = '';
   selected_notice: any;
   notices = [];
 
@@ -79,21 +79,21 @@ export class NoticeboardComponent implements OnInit {
     this.openDialog(this.selected_notice, this.dialog_type)
   }
 
-  viewNotice(i) {
+  viewNotice(i = 0) {
     this.selected_notice = this.notices[i];
     this.dialog_type = 'view';
     this.openDialog(this.selected_notice, this.dialog_type)
     this.closebutton.nativeElement.click();
   }
 
-  editNotice(i) {
+  editNotice(i = 0) {
     this.selected_notice = this.notices[i];
     this.dialog_type = 'edit';
     this.openDialog(this.selected_notice, this.dialog_type)
     this.closebutton.nativeElement.click();
   }
 
-  deleteNotice(announcement_id) {
+  deleteNotice(announcement_id = 0) {
 
     this.closebutton.nativeElement.click();
     this.service.deleteNotice(announcement_id)

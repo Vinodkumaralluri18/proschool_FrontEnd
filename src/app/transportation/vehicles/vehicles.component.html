@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let st of stations; let i=index">
+          <tr *ngFor="let st of collection.stations; let i=index">
             <td class="_s-no"><span>{{ i + 1 }}</span></td>
             <td>{{st.station_name}}</td>
             <td>{{st.station_code}}</td>

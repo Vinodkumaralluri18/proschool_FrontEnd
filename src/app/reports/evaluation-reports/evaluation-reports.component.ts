@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServicesService } from '../../services.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AlertComponent } from '../../_alert/alert/alert.component';
+import { AuthenticationServiceService } from 'src/app/_services/authentication-service.service';
 
 @Component({
   selector: 'app-evaluation-reports',
@@ -10,9 +11,12 @@ import { AlertComponent } from '../../_alert/alert/alert.component';
 })
 export class EvaluationReportsComponent implements OnInit {
 
-  constructor(private service: ServicesService, public dialog: MatDialog) { }
+  constructor(private service: ServicesService, public dialog: MatDialog, private authenticationServiceService: AuthenticationServiceService) { }
 
+  marks: any = '';
+  user: any = null;
   ngOnInit() {
+    this.user = this.authenticationServiceService.userValue;
     this.getassessment_patterns();
   }
 

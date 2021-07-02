@@ -18,7 +18,8 @@ export class AddSectionComponent implements OnInit {
   page_start: number = 0;
   page_counter = Array;
   pages: number = 10;
-
+  showClassList: boolean = false;
+  showStatusList: boolean = false;
   user: User;
 
   ngOnInit() {

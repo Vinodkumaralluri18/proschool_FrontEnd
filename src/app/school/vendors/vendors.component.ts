@@ -64,7 +64,7 @@ export class VendorsComponent implements OnInit {
       )
   }
 
-  addVendor(i) {
+  addVendor() {
     this.selected_vendor = '';
     this.dialog_type = 'vendor';
     this.submit_type = 'add';

@@ -130,7 +130,7 @@ export class AdmissionComponent implements OnInit {
       category: ['', Validators.required],
       nationality: ['', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]],
       phone: ['', [Validators.required, Validators.pattern('[0-9]\\d{9}')]],
-      aadhar_no: ['', [Validators.required, Validators.pattern(this.numericPattern)]],
+      aadhar_no: ['', [Validators.required, Validators.pattern('[0-9]\\d{11}')]],
       blood_group: [''],
       admission_date: ['', Validators.required],
     }),

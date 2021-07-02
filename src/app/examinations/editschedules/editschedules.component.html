@@ -10,7 +10,7 @@
                 Examinations:
             </div>
             <div class="col-full-6">
-                <select formControlName="unique_code" [value]="schedule.exam_title" (change)="getSchedule(i)">
+                <select formControlName="unique_code" [value]="schedule.exam_title" (change)="getSchedule()">
                     <option *ngFor="let assp of examinations; let i = index" value="{{assp.unique_code}}">{{assp.examination_title}}
                     </option>
                 </select>

@@ -19,7 +19,7 @@ export class AuthenticationServiceService {
   }
   
   // private url = appConfig.authenticationUrl;
-  private url ='http://13.126.140.230:4005';
+  private url ='https://api.proschool.in';
   // private url ='http://localhost:4005';
 
   login(dataValue: string): Observable<any> {

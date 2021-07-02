@@ -16,7 +16,7 @@ export class InformationComponent implements OnInit {
   constructor(private service: StudentsService, public dialog: MatDialog) {}
     
   user: User;
-
+  searchText = ''
   pageNo: number = 1;
   page_start: number = 0;
   page_counter = Array;

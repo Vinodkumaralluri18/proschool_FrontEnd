@@ -26,8 +26,8 @@ export class EventsComponent implements OnInit {
   selectedMonth = this.currentMonth;
   selectedYear = this.currentYear;
   private monthNumber;
-  private month = this.Months[this.currentMonth];
-  private year = this.currentDate.getFullYear();
+  public month = this.Months[this.currentMonth];
+  public year = this.currentDate.getFullYear();
   private date = this.currentDate.getDate();
   days: Number = new Date(this.year, this.selectedMonth + 1, 0).getDate();
   dummy_days = new Date(this.year, this.selectedMonth, 1).getDay();

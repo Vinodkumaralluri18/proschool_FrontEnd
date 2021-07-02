@@ -15,6 +15,7 @@ export class AddMarksComponent implements OnInit {
 
   constructor(private service: ServicesService, private fb: FormBuilder, public dialog: MatDialog) {}
 
+  searchText = ''
   pageNo: number = 1;
   page_start: number = 0;
   page_counter = Array;
@@ -72,6 +73,9 @@ export class AddMarksComponent implements OnInit {
     }
   } 
 
+  addExam_papers() {
+    // this.service.addExam_papers()
+  }
   previousPage() {
     if(this.pageNo > 1) {
       this.pageNo--;

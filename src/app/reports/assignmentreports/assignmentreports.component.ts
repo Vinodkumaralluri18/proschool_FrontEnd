@@ -16,7 +16,7 @@ export class AssignmentreportsComponent implements OnInit {
   constructor(private service: ServicesService, public dialog: MatDialog) {}
     
   user: User;
-
+  searchText = '';
   pageNo: number = 1;
   page_start: number = 0;
   page_counter = Array;
